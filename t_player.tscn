@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3jiytq77lu5n"]
+
+[ext_resource type="Script" path="res://TPlayer.cs" id="1_oh2eb"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3howa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtau3"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2979, 2.93974, 0)
+motion_mode = 1
+script = ExtResource("1_oh2eb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_3howa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vtau3")
