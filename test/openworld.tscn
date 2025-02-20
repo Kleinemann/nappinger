@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3f1mukfh50q6"]
 
-[ext_resource type="PackedScene" uid="uid://bnsjp1acva3pt" path="res://test/Chunk.tscn" id="1_wosji"]
+[ext_resource type="Script" path="res://test/Map.cs" id="2_56hap"]
 [ext_resource type="PackedScene" uid="uid://b3jiytq77lu5n" path="res://t_player.tscn" id="2_iu5vo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1slen"]
@@ -32,10 +32,10 @@ environment = SubResource("Environment_sc0n7")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.156434, 0.987688, 0, -0.987688, 0.156434, -10, 50, 0)
 
-[node name="Mesh" parent="." instance=ExtResource("1_wosji")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-
-[node name="Mesh2" parent="." instance=ExtResource("1_wosji")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_iu5vo")]
+
+[node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("2_56hap")
+ChunkWidth = 1
+ChunkHeigth = 1
+Player = NodePath("../CharacterBody3D")

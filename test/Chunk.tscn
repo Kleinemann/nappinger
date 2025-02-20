@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnsjp1acva3pt"]
+[gd_scene load_steps=3 format=3 uid="uid://bnsjp1acva3pt"]
+
+[ext_resource type="Script" path="res://test/Chunk.cs" id="1_mx5p1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ijeor"]
-size = Vector2(10, 10)
+size = Vector2(1, 1)
 
 [node name="Mesh" type="MeshInstance3D"]
 mesh = SubResource("PlaneMesh_ijeor")
+script = ExtResource("1_mx5p1")
