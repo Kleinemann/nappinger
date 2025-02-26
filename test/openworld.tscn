@@ -36,6 +36,4 @@ transform = Transform3D(1, 0, 0, 0, 0.156434, 0.987688, 0, -0.987688, 0.156434, 
 
 [node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("2_56hap")
-ChunkWidth = 1
-ChunkHeigth = 1
 Player = NodePath("../CharacterBody3D")
