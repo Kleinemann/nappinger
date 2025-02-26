@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
+  "WorkspaceRootPath": "C:\\Worspace_Godot\\nappinger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\test\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\test\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,24 +28,23 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Chunk.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\test\\Chunk.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Chunk.cs",
               "RelativeDocumentMoniker": "test\\Chunk.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\test\\Chunk.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Chunk.cs",
               "RelativeToolTip": "test\\Chunk.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T06:00:16.476Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T06:00:16.476Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Map.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\test\\Map.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
               "RelativeDocumentMoniker": "test\\Map.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\test\\Map.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
               "RelativeToolTip": "test\\Map.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwD0AAAAAAAAA",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwDkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-20T11:50:09.746Z",
               "EditorCaption": ""
@@ -54,14 +53,13 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "TPlayer.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\TPlayer.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\TPlayer.cs",
               "RelativeDocumentMoniker": "TPlayer.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\TPlayer.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\TPlayer.cs",
               "RelativeToolTip": "TPlayer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T13:55:36.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-19T13:55:36.105Z"
             }
           ]
         }

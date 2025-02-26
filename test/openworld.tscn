@@ -33,6 +33,7 @@ environment = SubResource("Environment_sc0n7")
 transform = Transform3D(1, 0, 0, 0, 0.156434, 0.987688, 0, -0.987688, 0.156434, -10, 50, 0)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_iu5vo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
 
 [node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("2_56hap")

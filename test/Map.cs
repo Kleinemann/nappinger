@@ -13,9 +13,9 @@ public partial class Map : Node3D
     [Export]
     public int ChunkRange = 3;
     [Export]    
-	public int ChunkWidth = 5;
+	public int ChunkWidth = 6;
     [Export]
-    public int ChunkHeigth = 5;
+    public int ChunkHeigth = 6;
 	[Export]
 	public TPlayer Player;
 
@@ -49,7 +49,7 @@ public partial class Map : Node3D
                 return c;
         }
 
-        return CreateChunk(cPos);
+        return CreateChunk(pos);
     }
 
     Chunk CreateChunk(Vector3 pos)
@@ -57,7 +57,25 @@ public partial class Map : Node3D
         PackedScene scene = (PackedScene)ResourceLoader.Load("res://test/Chunk.tscn");
         Chunk chunk = scene.Instantiate<Chunk>();
 
-        chunk.Position = ChunkPos(pos);
+        Vector3 cPos = ChunkPos(pos);
+
+        
+        float posX = cPos.X * ChunkWidth;
+        float posZ = cPos.Z * ChunkHeigth;
+
+        /*
+        if (cPos.X < 0)
+            posX -= (ChunkWidth / 2);
+        if(cPos.X > 0)
+            posX += (ChunkWidth / 2);
+        
+        if (cPos.Z < 0)
+            posZ -= (ChunkHeigth / 2);
+        if (cPos.Z > 0)
+            posZ += (ChunkHeigth / 2);
+        */
+        
+        chunk.Position = new Vector3((int)posX, 0, (int)posZ);
         chunk.Scale = new Vector3(ChunkWidth, 1, ChunkHeigth);
 
         Chunks.Add(chunk);
@@ -77,6 +95,7 @@ public partial class Map : Node3D
 
 	void UpdateChunks()
 	{
+        CurrentChunk = GetChunk(Player.Position);
         /*
         foreach (Chunk chunk in Chunks.Values)
             chunk.ChunkState = Chunk.ChunkStateEnum.REMOVE;
@@ -113,13 +132,12 @@ public partial class Map : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        /*
-        Vector2I o = new Vector2I(((int)Player.Position.X), ((int)Player.Position.Z));
-        if (o != off)
+        Vector3 cPos = ChunkPos(CurrentChunk.Position);
+
+        Vector3 pPos = ChunkPos(Player.Position);
+        if (cPos != pPos)
         {
-            off = o;
             UpdateChunks();
         }
-        */
     }
 }
