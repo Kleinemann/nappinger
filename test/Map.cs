@@ -19,19 +19,17 @@ public partial class Map : Node3D
 	[Export]
 	public TPlayer Player;
 
-    public Vector2I off;
-
     public static Map _Map;
 
-    public Array<Chunk> Chunks = new Array<Chunk>();
-    public Chunk CurrentChunk;
+    public Dictionary<Vector2I, Chunk> Chunks = new Dictionary<Vector2I, Chunk>();
+    public Vector2I CurrentChunkPos;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         _Map = this;
 
-        CurrentChunk = GetChunk(Player.Position);
+        UpdateChunks();
 	}
 
     void UpdateMap()
@@ -39,86 +37,57 @@ public partial class Map : Node3D
 
     }
 
-    Chunk GetChunk(Vector3 pos)
+    Chunk GetChunk(Vector2I pos)
     {
-        Vector3 cPos = ChunkPos(pos);
-
-        foreach(Chunk c in Chunks)
-        {
-            if (c.Position == cPos)
-                return c;
-        }
+        if(Chunks.ContainsKey(pos))
+            return Chunks[pos];
 
         return CreateChunk(pos);
     }
 
-    Chunk CreateChunk(Vector3 pos)
+    Chunk CreateChunk(Vector2I p)
     {
         PackedScene scene = (PackedScene)ResourceLoader.Load("res://test/Chunk.tscn");
         Chunk chunk = scene.Instantiate<Chunk>();
 
-        Vector3 cPos = ChunkPos(pos);
+        float posX = p.X * ChunkWidth;
+        float posZ = p.Y * ChunkHeigth;
 
-        
-        float posX = cPos.X * ChunkWidth;
-        float posZ = cPos.Z * ChunkHeigth;
-
-        /*
-        if (cPos.X < 0)
-            posX -= (ChunkWidth / 2);
-        if(cPos.X > 0)
-            posX += (ChunkWidth / 2);
-        
-        if (cPos.Z < 0)
-            posZ -= (ChunkHeigth / 2);
-        if (cPos.Z > 0)
-            posZ += (ChunkHeigth / 2);
-        */
-        
         chunk.Position = new Vector3((int)posX, 0, (int)posZ);
         chunk.Scale = new Vector3(ChunkWidth, 1, ChunkHeigth);
 
-        Chunks.Add(chunk);
+        Chunks.Add(p, chunk);
         AddChild(chunk);
 
         return chunk;
     }
 
-    Vector3 ChunkPos(Vector3 pos) 
+    Vector2I ChunkPos(Vector3 pos) 
     {
-        float x = (int)pos.X / ChunkWidth;
-        float z = (int)pos.Z / ChunkHeigth;
-        Vector3 cPos = new Vector3(x, 0, z);
+        int x = (int)pos.X / ChunkWidth;
+        int z = (int)pos.Z / ChunkHeigth;
+        Vector2I cPos = new Vector2I(x, z);
 
         return cPos;
     }
 
 	void UpdateChunks()
 	{
-        CurrentChunk = GetChunk(Player.Position);
-        /*
+        CurrentChunkPos = ChunkPos(Player.Position); ;
+
         foreach (Chunk chunk in Chunks.Values)
             chunk.ChunkState = Chunk.ChunkStateEnum.REMOVE;
 
-        for (int x = off.X - ChunkRange; x <= off.X + ChunkRange; x++)
+        for (int x = CurrentChunkPos.X - ChunkRange; x <= CurrentChunkPos.X + ChunkRange; x++)
         {
-            for (int y = off.Y - ChunkRange; y <= off.Y + ChunkRange; y++)
+            for (int y = CurrentChunkPos.Y - ChunkRange; y <= CurrentChunkPos.Y + ChunkRange; y++)
             {
                 Vector2I pos = new Vector2I(x, y);
-                if (Chunks.ContainsKey(pos))
-                    Chunks[pos].ChunkState = Chunk.ChunkStateEnum.NONE;
-
-                else
-                {
-                    PackedScene scene = (PackedScene)ResourceLoader.Load("res://test/Chunk.tscn");
-                    Chunk chunk = scene.Instantiate<Chunk>();
-
-                    chunk.Position = new Vector3(pos.X, 0, pos.Y);
-                    Chunks.Add(pos, chunk);
-                    AddChild(chunk);
-                }
+                Chunk c = GetChunk(pos);
+                c.ChunkState = Chunk.ChunkStateEnum.NONE;
             }
         }
+
 
         var cRem = Chunks.Where(c => c.Value.ChunkState == Chunk.ChunkStateEnum.REMOVE);
         foreach (var c in cRem)
@@ -126,16 +95,13 @@ public partial class Map : Node3D
             Chunks.Remove(c.Key);
             c.Value.QueueFree();
         }
-        */
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        Vector3 cPos = ChunkPos(CurrentChunk.Position);
-
-        Vector3 pPos = ChunkPos(Player.Position);
-        if (cPos != pPos)
+        Vector2I pPos = ChunkPos(Player.Position);
+        if (CurrentChunkPos != pPos)
         {
             UpdateChunks();
         }
