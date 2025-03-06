@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+//using System.Collections.Generic;
 
 public partial class Map : Node3D
 {
@@ -13,10 +14,12 @@ public partial class Map : Node3D
     [Export]
     public int ChunkRange = 3;
     [Export]    
-	public int ChunkWidth = 6;
+	public int ChunkWidth = 4;
     [Export]
-    public int ChunkHeigth = 6;
-	[Export]
+    public int ChunkHeigth = 4;
+    [Export]
+    public int ChunkResolution = 2;
+    [Export]
 	public TPlayer Player;
 
     public static Map _Map;
@@ -71,29 +74,34 @@ public partial class Map : Node3D
         return cPos;
     }
 
-	void UpdateChunks()
-	{
-        CurrentChunkPos = ChunkPos(Player.Position); ;
+    void UpdateChunks()
+    {
+        CurrentChunkPos = ChunkPos(Player.Position);
 
-        foreach (Chunk chunk in Chunks.Values)
-            chunk.ChunkState = Chunk.ChunkStateEnum.REMOVE;
+        Array<Vector2I> tmp = new Array<Vector2I>();
+        tmp.AddRange(Chunks.Keys);
 
         for (int x = CurrentChunkPos.X - ChunkRange; x <= CurrentChunkPos.X + ChunkRange; x++)
         {
             for (int y = CurrentChunkPos.Y - ChunkRange; y <= CurrentChunkPos.Y + ChunkRange; y++)
             {
                 Vector2I pos = new Vector2I(x, y);
-                Chunk c = GetChunk(pos);
-                c.ChunkState = Chunk.ChunkStateEnum.NONE;
+
+                if (tmp.Contains(pos))
+                {
+                    tmp.Remove(pos);
+                }
+                else
+                {
+                    Chunk c = CreateChunk(pos);
+                }
             }
         }
 
-
-        var cRem = Chunks.Where(c => c.Value.ChunkState == Chunk.ChunkStateEnum.REMOVE);
-        foreach (var c in cRem)
+        foreach(Vector2I v in tmp) 
         {
-            Chunks.Remove(c.Key);
-            c.Value.QueueFree();
+            Chunks[v].QueueFree();
+            Chunks.Remove(v);
         }
     }
 
