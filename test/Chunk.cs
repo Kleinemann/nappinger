@@ -30,20 +30,38 @@ public partial class Chunk : Node3D
         MeshDataTool data = new MeshDataTool();
         surface.CreateFrom(plane, 0);
 
+        ArrayMesh arrayPlane = surface.Commit();
+        data.CreateFromSurface(arrayPlane, 0);
+
+        int verCount = data.GetVertexCount();
+        for(int i = 0; i < verCount; i++) 
+        {
+            Vector3 vertex = data.GetVertex(i);
+            float y = GetNoise(vertex.X, vertex.Z);
+            vertex.Y = y;
+            data.SetVertex(i, vertex);
+        }
+
+        arrayPlane.ClearSurfaces();
+        data.CommitToSurface(arrayPlane);
+        surface.Begin(Godot.Mesh.PrimitiveType.Triangles);
+        surface.CreateFrom(arrayPlane, 0);
+        surface.GenerateNormals();
 
 
         Mesh = new MeshInstance3D();
         Mesh.Mesh = surface.Commit();
-
-
-
-
-
         Mesh.CreateTrimeshCollision();
         Mesh.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
-
         Mesh.AddToGroup("NacSource");
-
         AddChild(Mesh);
+    }
+
+    float GetNoise(float x, float z)
+    {
+        Vector3 offset = Position;
+
+        float value = map.Noise.GetNoise2D(x + offset.X, z + offset.Z) * 10;
+        return value;
     }
 }

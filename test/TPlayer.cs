@@ -3,8 +3,11 @@ using System;
 
 public partial class TPlayer : CharacterBody3D
 {
-	public const float Speed = 10.0f;
+	public const float Speed = 20.0f;
 	public const float JumpVelocity = 1f;
+
+	[Export]
+	Camera3D Camera;
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -41,5 +44,11 @@ public partial class TPlayer : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		if(Camera != null)
+		{
+			Vector3 cPos = new Vector3(Position.X, 50, Position.Z);
+			Camera.Position = cPos;
+		}
 	}
 }

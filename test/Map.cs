@@ -15,13 +15,13 @@ public partial class Map : Node3D
     public FastNoiseLite Noise = new FastNoiseLite();
 
     [Export]
-    public int ChunkRange = 3;
+    public int ChunkRange = 2;
     [Export]    
-	public int ChunkWidth = 4;
+	public int ChunkWidth = 16;
     [Export]
-    public int ChunkHeigth = 4;
+    public int ChunkHeigth = 16;
     [Export]
-    public int ChunkResolution = 2;
+    public int ChunkResolution = 1;
     [Export]
 	public TPlayer Player;
 
@@ -61,7 +61,6 @@ public partial class Map : Node3D
         float posZ = p.Y * ChunkHeigth;
 
         chunk.Position = new Vector3((int)posX, 0, (int)posZ);
-        chunk.Scale = new Vector3(ChunkWidth, 1, ChunkHeigth);
 
         Chunks.Add(p, chunk);
         AddChild(chunk);

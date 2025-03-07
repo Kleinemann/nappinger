@@ -4,6 +4,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>BDV</ActiveDebugProfile>
+    <ActiveDebugProfile>Profil "1"</ActiveDebugProfile>
   </PropertyGroup>
 </Project>
