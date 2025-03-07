@@ -3,7 +3,7 @@ using System;
 
 public partial class TPlayer : CharacterBody3D
 {
-	public const float Speed = 5.0f;
+	public const float Speed = 10.0f;
 	public const float JumpVelocity = 1f;
 
 	public override void _PhysicsProcess(double delta)

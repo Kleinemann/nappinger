@@ -12,6 +12,9 @@ public partial class Map : Node3D
 	[Export]
 	public int Seed = 3;
     [Export]
+    public FastNoiseLite Noise = new FastNoiseLite();
+
+    [Export]
     public int ChunkRange = 3;
     [Export]    
 	public int ChunkWidth = 4;
@@ -21,6 +24,7 @@ public partial class Map : Node3D
     public int ChunkResolution = 2;
     [Export]
 	public TPlayer Player;
+
 
     public static Map _Map;
 

@@ -7,7 +7,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtau3"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2979, 2.93974, 0)
 motion_mode = 1
 script = ExtResource("1_oh2eb")
 
