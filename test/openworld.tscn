@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c3f1mukfh50q6"]
 
-[ext_resource type="Script" path="res://test/Map.cs" id="2_56hap"]
+[ext_resource type="Script" uid="uid://cn1ks1t25bmwi" path="res://test/Map.cs" id="2_56hap"]
 [ext_resource type="PackedScene" uid="uid://b3jiytq77lu5n" path="res://test/t_player.tscn" id="2_iu5vo"]
 [ext_resource type="PackedScene" uid="uid://bynxdby5xve0d" path="res://test/npc.tscn" id="3_h3v3d"]
 
@@ -37,9 +37,8 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 1)
 Camera = NodePath("../Camera3D")
 
-[node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Map" type="Node3D" parent="."]
 script = ExtResource("2_56hap")
-Player = NodePath("../CharacterBody3D")
 
 [node name="NPC" parent="." instance=ExtResource("3_h3v3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73, 1, 2)

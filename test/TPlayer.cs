@@ -8,24 +8,24 @@ public partial class TPlayer : CharacterBody3D
 
 	[Export]
 	Camera3D Camera;
+	[Export]
+	Boolean CameraIsTop;
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
-		if (Input.IsActionPressed("ui_c"))
-		{
-			velocity.Y = JumpVelocity * -Speed;
-        }
+		velocity.Y = JumpVelocity * -Speed/5;
+
 		// Handle Jump.
-		else if (Input.IsActionPressed("ui_accept"))
+		if (Input.IsActionPressed("ui_accept"))
 		{
 			velocity.Y = JumpVelocity * Speed;
 		}
 		else
 		{
-            velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
+            velocity.Y += Mathf.MoveToward(Velocity.Y, 0, Speed);
         }
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
@@ -45,10 +45,24 @@ public partial class TPlayer : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 
-		if(Camera != null)
+        if (Input.IsActionPressed("ui_v"))
+            CameraIsTop = !CameraIsTop;
+
+        if (Camera != null)
 		{
-			Vector3 cPos = new Vector3(Position.X, 50, Position.Z);
-			Camera.Position = cPos;
-		}
+			if (CameraIsTop)
+			{
+				Vector3 cPos = new Vector3(Position.X, 50, Position.Z);
+                Camera.Position = cPos;
+				Camera.Rotation = new Vector3(Mathf.DegToRad(-90), 0, 0);
+            }
+			else
+			{
+                Vector3 cPos = new Vector3(Position.X, Position.Y + 5, Position.Z + 3);
+                Camera.Rotation = new Vector3(Mathf.DegToRad(-25), 0, 0);
+                Camera.Position = cPos;
+            }
+
+        }
 	}
 }

@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Worspace_Godot\\nappinger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\chunk_bak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\chunk_bak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Worspace_Godot\\nappinger\\Chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\tplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\test\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:test\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,53 +35,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Chunk_BAK.cs",
-              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Chunk_BAK.cs",
-              "RelativeDocumentMoniker": "test\\Chunk_BAK.cs",
-              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Chunk_BAK.cs",
-              "RelativeToolTip": "test\\Chunk_BAK.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Title": "World.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\World.cs",
+              "RelativeDocumentMoniker": "World.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\World.cs",
+              "RelativeToolTip": "World.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAqwIUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T08:22:26.173Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Chunk.cs",
-              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\Chunk.cs",
-              "RelativeDocumentMoniker": "Chunk.cs",
-              "ToolTip": "C:\\Worspace_Godot\\nappinger\\Chunk.cs",
-              "RelativeToolTip": "Chunk.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T08:22:14.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Map.cs",
-              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
-              "RelativeDocumentMoniker": "test\\Map.cs",
-              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
-              "RelativeToolTip": "test\\Map.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwDUAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T11:50:09.746Z",
+              "WhenOpened": "2025-06-04T07:50:37.453Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "TPlayer.cs",
-              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\TPlayer.cs",
-              "RelativeDocumentMoniker": "TPlayer.cs",
-              "ToolTip": "C:\\Worspace_Godot\\nappinger\\TPlayer.cs",
-              "RelativeToolTip": "TPlayer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\TPlayer.cs",
+              "RelativeDocumentMoniker": "test\\TPlayer.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\TPlayer.cs",
+              "RelativeToolTip": "test\\TPlayer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T13:55:36.105Z"
+              "WhenOpened": "2025-05-07T06:10:20.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Chunk.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Chunk.cs",
+              "RelativeDocumentMoniker": "test\\Chunk.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Chunk.cs",
+              "RelativeToolTip": "test\\Chunk.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T07:51:17.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Npc.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Npc.cs",
+              "RelativeDocumentMoniker": "test\\Npc.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Npc.cs",
+              "RelativeToolTip": "test\\Npc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T09:04:54.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Map.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
+              "RelativeDocumentMoniker": "test\\Map.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\test\\Map.cs",
+              "RelativeToolTip": "test\\Map.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAuwFQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:50:09.746Z"
             }
           ]
         }

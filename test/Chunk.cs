@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data;
 
 public partial class Chunk : Node3D
 {
@@ -9,59 +10,81 @@ public partial class Chunk : Node3D
 
     public ChunkStateEnum ChunkState = ChunkStateEnum.NEW;
 
-    MeshInstance3D Mesh;
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Generata();
+        Generate();
     }
 
-    void Generata()
+    void Generate()
     {
-        PlaneMesh plane = new PlaneMesh();
-        plane.Size = new Vector2(map.ChunkWidth, map.ChunkHeigth);
-        plane.SubdivideDepth = map.ChunkHeigth * map.ChunkResolution;
-        plane.SubdivideWidth = map.ChunkWidth * map.ChunkResolution;
+        PlaneMesh planeMesh = new PlaneMesh();
+        planeMesh.Size = new Vector2(map.ChunkWidth, map.ChunkHeigth);
+        planeMesh.SubdivideDepth = map.ChunkHeigth * map.ChunkResolution;
+        planeMesh.SubdivideWidth = map.ChunkWidth * map.ChunkResolution;
+        planeMesh.Material = GD.Load<ShaderMaterial>("res://test/Materials/TerrainMaterial.tres");
 
-        plane.Material = GD.Load<OrmMaterial3D>("res://test/terrain.tres");
-
-        var surface = new SurfaceTool();
+        SurfaceTool surface = new SurfaceTool();
         MeshDataTool data = new MeshDataTool();
-        surface.CreateFrom(plane, 0);
+        surface.CreateFrom(planeMesh, 0);
 
         ArrayMesh arrayPlane = surface.Commit();
         data.CreateFromSurface(arrayPlane, 0);
 
-        int verCount = data.GetVertexCount();
-        for(int i = 0; i < verCount; i++) 
+        for(int i = 0; i < data.GetVertexCount(); i++)
         {
             Vector3 vertex = data.GetVertex(i);
-            float y = GetNoise(vertex.X, vertex.Z);
-            vertex.Y = y;
+            vertex.Y = GetNoise(vertex.X, vertex.Z);
             data.SetVertex(i, vertex);
+            data.SetVertexColor(i, getColor(vertex.Y));
         }
 
         arrayPlane.ClearSurfaces();
+        
         data.CommitToSurface(arrayPlane);
-        surface.Begin(Godot.Mesh.PrimitiveType.Triangles);
+        surface.Begin(Mesh.PrimitiveType.Triangles);
         surface.CreateFrom(arrayPlane, 0);
         surface.GenerateNormals();
 
+        MeshInstance3D mesh = new MeshInstance3D();
+        mesh.Mesh = surface.Commit();
+        mesh.CreateTrimeshCollision();
+        mesh.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
+        mesh.AddToGroup("NavSource");
+        AddChild(mesh);
+    }
 
-        Mesh = new MeshInstance3D();
-        Mesh.Mesh = surface.Commit();
-        Mesh.CreateTrimeshCollision();
-        Mesh.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
-        Mesh.AddToGroup("NacSource");
-        AddChild(Mesh);
+
+    void AddItems()
+    {
+
+    }
+
+ 
+
+    Color getColor(float high)
+    {
+        Color c;
+        Random rand = new Random();
+        int i = rand.Next(0, 3);
+
+        switch (i)
+        {
+            case 0: c = Colors.WhiteSmoke; break;
+            case 1: c = Colors.Yellow; break;
+            case 2: c = Colors.LightBlue; break;
+            case 3: c = Colors.LightCoral; break;
+            default: c = Colors.Black; break;
+        }
+
+        return c;
     }
 
     float GetNoise(float x, float z)
     {
         Vector3 offset = Position;
 
-        float value = map.Noise.GetNoise2D(x + offset.X, z + offset.Z) * 10;
+        float value = map.Noise.GetNoise2D(x + offset.X, z + offset.Z) * map.VertexMulti;
         return value;
     }
 }

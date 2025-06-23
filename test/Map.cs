@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 //using System.Collections.Generic;
 
+//[Tool]
 public partial class Map : Node3D
 {
 	[Export]
@@ -15,13 +16,15 @@ public partial class Map : Node3D
     public FastNoiseLite Noise = new FastNoiseLite();
 
     [Export]
-    public int ChunkRange = 2;
+    public int ChunkRange = 3;
     [Export]    
 	public int ChunkWidth = 16;
     [Export]
     public int ChunkHeigth = 16;
     [Export]
     public int ChunkResolution = 1;
+    [Export]
+    public int VertexMulti = 10;
     [Export]
 	public TPlayer Player;
 
