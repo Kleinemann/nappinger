@@ -102,9 +102,160 @@ public partial class World : Node2D
         return new Vector2I((int)pos.X / ChunkWidth, (int)pos.Y / ChunkHeigth);
     }
 
+    class Tile
+    {
+        public float Max;
+        public float Min;
+
+        public Vector2I[] points = new Vector2I[4];
+        public int[] IDs = new int[4];
+
+        public int CountIds
+        {
+            get
+            {
+
+                return IDs.Count(n => n == TerrainFront);
+            }
+        }
+
+
+        public Tile(int x, int y)
+        {
+            points[0] = new Vector2I(x * 2, y * 2);
+            points[1] = new Vector2I(x * 2 + 1, y * 2);
+            points[2] = new Vector2I(x * 2, y * 2 + 1);
+            points[3] = new Vector2I(x * 2 + 1, y * 2 + 1);
+        }
+
+        public int TerrainFront
+        {
+            get
+            {
+                return ValueToID(Max);
+            }
+        }
+
+        public int TerrainBack
+        {
+            get
+            {
+                return ValueToID(Min);
+            }
+        }
+
+        public int ValueToID(float value)
+        {
+            if (value > 0.2)
+                return 2; //grass
+            else if (value > 0)
+                return 1; // sand
+            else
+                return 0; // water
+        }
+        
+
+        public Vector2I AtlasPos
+        {
+            get
+            {
+                int id = TerrainFront;
+
+                Vector2I offset = new Vector2I(TerrainBack * 4, TerrainFront * 4);
+
+                Vector2I atlas = Vector2I.Zero;
+                switch(CountIds)
+                {
+                    case 1:
+                        if (IDs[0] == id)
+                            atlas = new Vector2I(3, 3);
+                        else if (IDs[1] == id)
+                            atlas = new Vector2I(0, 2);
+                        else if (IDs[2] == id)
+                            atlas = new Vector2I(0, 0);
+                        else if (IDs[3] == id)
+                            atlas = new Vector2I(1, 3);
+                        break;
+
+                    case 2:
+                        if (IDs[0] == id)
+                        {
+                            if (IDs[1] == id)
+                                atlas = new Vector2I(1, 2);
+                            else if (IDs[2] == id)
+                                atlas = new Vector2I(3, 2);
+                            else if (IDs[3] == id)
+                                atlas = new Vector2I(0, 1);
+                        }
+
+                        else if (IDs[2] == id)
+                        {
+                            if (IDs[1] == id)
+                                atlas = new Vector2I(0, 2);
+                            else if (IDs[3] == id)
+                                atlas = new Vector2I(3, 0);
+                        }
+
+                        else if (IDs[1] == id && IDs[3] == id)
+                            atlas = new Vector2I(1, 0);
+
+                        break;
+
+                    case 3:
+                        if (IDs[0] != id)
+                            atlas = new Vector2I(1, 1);
+                        else if (IDs[1] != id)
+                            atlas = new Vector2I(2, 0);
+                        else if (IDs[2] != id)
+                            atlas = new Vector2I(1, 1);
+                        else if (IDs[3] != id)
+                            atlas = new Vector2I(3, 1);
+                        break;
+
+                    case 4:
+                        atlas = new Vector2I(2, 1);
+                        break;
+                    default:
+                        atlas = new Vector2I(0, 3);
+                        break;
+                        
+                }
+
+                return atlas + offset;
+            }
+        }
+    }
+
 
     void UpdateChunks()
     {
+        for(int x = 0; x <= ChunkWidth*10;x++)
+        {
+            for(int y = 0;y <= ChunkHeigth*10;y++)
+            {
+                Tile t = new Tile(x, y);
+                float min = float.MaxValue;
+                float max = float.MinValue;
+                for(int i  = 0; i < t.points.Length; i++) 
+                {
+                    Vector2I p = t.points[i];
+                    float value = GetNoise(p);
+                    t.IDs[i] = t.ValueToID(value);
+
+                    if(value < min) 
+                        min = value;
+
+                    if(value > max) 
+                        max = value;
+                }
+                t.Max = max;
+                t.Min = min;
+
+                Ground.SetCell(new Vector2I(x, y), 0, t.AtlasPos);
+            }
+        }
+
+        /*
         Array<Vector2I> waterTiles = new Array<Vector2I>();
         Array<Vector2I> grasTiles = new Array<Vector2I>();
         Array<Vector2I> sandTiles = new Array<Vector2I>();
@@ -131,7 +282,7 @@ public partial class World : Node2D
                 }
             }
         }
-
+        */
         //Ground.SetCellsTerrainConnect(sandTiles, 0, 1);
         //Ground.SetCellsTerrainConnect(grasTiles, 0, 2);
 
@@ -158,6 +309,7 @@ public partial class World : Node2D
 
     void UpdateChunk(Vector2I offset)
     {
+        /*
         GD.Print($"Updating Chunk offset {offset.ToString()}");
 
         int waterID = 0;
@@ -185,7 +337,7 @@ public partial class World : Node2D
                 Water.SetCell(pos, waterID, new Vector2I(9, 2));
             }
         }
-
+        */
         /*
         for (int x = -1; x <= ChunkWidth + 1; x++)
         {
@@ -198,8 +350,8 @@ public partial class World : Node2D
             }
         }*/
 
-        Ground.SetCellsTerrainConnect(sandTiles, 0, sandID);
-        Ground.SetCellsTerrainConnect(grasTiles, 0, grassID);
+        //Ground.SetCellsTerrainConnect(sandTiles, 0, sandID);
+        //Ground.SetCellsTerrainConnect(grasTiles, 0, grassID);
     }
 
 
