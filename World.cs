@@ -1,13 +1,42 @@
 using Godot;
-using Godot.Collections;
 using System;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using static TileType;
+
+public enum TileType
+{
+    Water,
+    Grass,
+    Dirt
+}
 
 [Tool]
 public partial class World : Node2D
 {
+    #region Variables
+
+
+    readonly Dictionary<Tuple<TileType, TileType, TileType, TileType>, Vector2I> neighboursToAtlasCoord = new() {
+        {new (Grass, Grass, Grass, Grass), new Vector2I(2, 1)}, // All corners
+        {new (Dirt, Dirt, Dirt, Grass), new Vector2I(1, 3)}, // Outer bottom-right corner
+        {new (Dirt, Dirt, Grass, Dirt), new Vector2I(0, 0)}, // Outer bottom-left corner
+        {new (Dirt, Grass, Dirt, Dirt), new Vector2I(0, 2)}, // Outer top-right corner
+        {new (Grass, Dirt, Dirt, Dirt), new Vector2I(3, 3)}, // Outer top-left corner
+        {new (Dirt, Grass, Dirt, Grass), new Vector2I(1, 0)}, // Right edge
+        {new (Grass, Dirt, Grass, Dirt), new Vector2I(3, 2)}, // Left edge
+        {new (Dirt, Dirt, Grass, Grass), new Vector2I(3, 0)}, // Bottom edge
+        {new (Grass, Grass, Dirt, Dirt), new Vector2I(1, 2)}, // Top edge
+        {new (Dirt, Grass, Grass, Grass), new Vector2I(1, 1)}, // Inner bottom-right corner
+        {new (Grass, Dirt, Grass, Grass), new Vector2I(2, 0)}, // Inner bottom-left corner
+        {new (Grass, Grass, Dirt, Grass), new Vector2I(2, 2)}, // Inner top-right corner
+        {new (Grass, Grass, Grass, Dirt), new Vector2I(3, 1)}, // Inner top-left corner
+        {new (Dirt, Grass, Grass, Dirt), new Vector2I(2, 3)}, // Bottom-left top-right corners
+        {new (Grass, Dirt, Dirt, Grass), new Vector2I(0, 1)}, // Top-left down-right corners
+		{new (Dirt, Dirt, Dirt, Dirt), new Vector2I(0, 3)}, // No corners
+    };
+
+
+
     [Export]
     public int Seed
     {
@@ -28,10 +57,10 @@ public partial class World : Node2D
     int ChunkRange = 0;
 
     [Export]
-    int ChunkWidth = 4;
+    int ChunkWidth = 16;
 
     [Export]
-    int ChunkHeigth = 4;
+    int ChunkHeigth = 16;
 
     [Export]
     public bool Generate
@@ -39,7 +68,7 @@ public partial class World : Node2D
         get => false;
         set
         {
-            UpdateChunks();
+            RefreshValues();
         }
     }
 
@@ -68,28 +97,36 @@ public partial class World : Node2D
         }
     }
 
-    public override void _Ready()
+    TileMapLayer _groundDisplay = null;
+    TileMapLayer GroundDisplay
     {
-        UpdateChunks();
+        get
+        {
+            if (_groundDisplay == null)
+                _groundDisplay = GetNode<TileMapLayer>("tilemap/groundDisplay");
+
+            return _groundDisplay;
+        }
     }
 
-    void CleanChunks()
-    {
-        for (int x = 0; x <= ChunkWidth; x++)
-        {
-            for (int y = 0; y <= ChunkHeigth; y++)
-            {
-                if(Ground == null)
-                    return;
 
-                Ground.EraseCell(new Vector2I(x, y));
-            }
-        }
+    readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
+
+
+    float MAX = float.MinValue; 
+
+
+    #endregion
+
+    #region Controlls
+    public override void _Ready()
+    {
+        RefreshValues();
     }
 
     void RefreshValues()
     {
-        if(Ground == null || Water == null)
+        if(Noise == null || Ground == null || Water == null)
         {
             GD.PrintErr("TileMapLayer not found, cannot refresh values.");
             return;
@@ -97,131 +134,18 @@ public partial class World : Node2D
         UpdateChunks();
     }
 
-    Vector2I PosToChunk(Vector2 pos)
+    #endregion
+
+    #region Chunks
+
+    void CleanChunks()
     {
-        return new Vector2I((int)pos.X / ChunkWidth, (int)pos.Y / ChunkHeigth);
-    }
-
-    class Tile
-    {
-        public float Max;
-        public float Min;
-
-        public Vector2I[] points = new Vector2I[4];
-        public int[] IDs = new int[4];
-
-        public int CountIds
+        for (int x = -1; x <= ChunkWidth+1; x++)
         {
-            get
+            for (int y = -1; y <= ChunkHeigth+1; y++)
             {
-
-                return IDs.Count(n => n == TerrainFront);
-            }
-        }
-
-
-        public Tile(int x, int y)
-        {
-            points[0] = new Vector2I(x * 2, y * 2);
-            points[1] = new Vector2I(x * 2 + 1, y * 2);
-            points[2] = new Vector2I(x * 2, y * 2 + 1);
-            points[3] = new Vector2I(x * 2 + 1, y * 2 + 1);
-        }
-
-        public int TerrainFront
-        {
-            get
-            {
-                return ValueToID(Max);
-            }
-        }
-
-        public int TerrainBack
-        {
-            get
-            {
-                return ValueToID(Min);
-            }
-        }
-
-        public int ValueToID(float value)
-        {
-            if (value > 0.2)
-                return 2; //grass
-            else if (value > 0)
-                return 1; // sand
-            else
-                return 0; // water
-        }
-        
-
-        public Vector2I AtlasPos
-        {
-            get
-            {
-                int id = TerrainFront;
-
-                Vector2I offset = new Vector2I(TerrainBack * 4, TerrainFront * 4);
-
-                Vector2I atlas = Vector2I.Zero;
-                switch(CountIds)
-                {
-                    case 1:
-                        if (IDs[0] == id)
-                            atlas = new Vector2I(3, 3);
-                        else if (IDs[1] == id)
-                            atlas = new Vector2I(0, 2);
-                        else if (IDs[2] == id)
-                            atlas = new Vector2I(0, 0);
-                        else if (IDs[3] == id)
-                            atlas = new Vector2I(1, 3);
-                        break;
-
-                    case 2:
-                        if (IDs[0] == id)
-                        {
-                            if (IDs[1] == id)
-                                atlas = new Vector2I(1, 2);
-                            else if (IDs[2] == id)
-                                atlas = new Vector2I(3, 2);
-                            else if (IDs[3] == id)
-                                atlas = new Vector2I(0, 1);
-                        }
-
-                        else if (IDs[2] == id)
-                        {
-                            if (IDs[1] == id)
-                                atlas = new Vector2I(0, 2);
-                            else if (IDs[3] == id)
-                                atlas = new Vector2I(3, 0);
-                        }
-
-                        else if (IDs[1] == id && IDs[3] == id)
-                            atlas = new Vector2I(1, 0);
-
-                        break;
-
-                    case 3:
-                        if (IDs[0] != id)
-                            atlas = new Vector2I(1, 1);
-                        else if (IDs[1] != id)
-                            atlas = new Vector2I(2, 0);
-                        else if (IDs[2] != id)
-                            atlas = new Vector2I(1, 1);
-                        else if (IDs[3] != id)
-                            atlas = new Vector2I(3, 1);
-                        break;
-
-                    case 4:
-                        atlas = new Vector2I(2, 1);
-                        break;
-                    default:
-                        atlas = new Vector2I(0, 3);
-                        break;
-                        
-                }
-
-                return atlas + offset;
+                Water.SetCell(new Vector2I(x, y), 0, new Vector2I(2, 1));
+                GroundDisplay.EraseCell(new Vector2I(x, y));
             }
         }
     }
@@ -229,135 +153,91 @@ public partial class World : Node2D
 
     void UpdateChunks()
     {
-        for(int x = 0; x <= ChunkWidth*10;x++)
-        {
-            for(int y = 0;y <= ChunkHeigth*10;y++)
-            {
-                Tile t = new Tile(x, y);
-                float min = float.MaxValue;
-                float max = float.MinValue;
-                for(int i  = 0; i < t.points.Length; i++) 
-                {
-                    Vector2I p = t.points[i];
-                    float value = GetNoise(p);
-                    t.IDs[i] = t.ValueToID(value);
+        CleanChunks();
 
-                    if(value < min) 
-                        min = value;
-
-                    if(value > max) 
-                        max = value;
-                }
-                t.Max = max;
-                t.Min = min;
-
-                Ground.SetCell(new Vector2I(x, y), 0, t.AtlasPos);
-            }
-        }
-
-        /*
-        Array<Vector2I> waterTiles = new Array<Vector2I>();
-        Array<Vector2I> grasTiles = new Array<Vector2I>();
-        Array<Vector2I> sandTiles = new Array<Vector2I>();
-
-
-        for (int x = 0; x <= 32; x++)
-        {
-            for (int y = 0; y <= 32; y++)
-            {
-                float z = GetNoise(new Vector2I(x, y));
-                Vector2I pos = new Vector2I(x, y);
-                Water.SetCell(pos, 0, new Vector2I(2,1)); // Set water tile at position
-
-                if(z > 0)
-                {
-                    if (z > 0.2)
-                    {
-                        Ground.SetCell(pos, 1, new Vector2I(2, 5));
-                        //grasTiles.Add(pos);
-                    }
-                    else
-                        Ground.SetCell(pos, 2, new Vector2I(2,9));
-                    //sandTiles.Add(pos);
-                }
-            }
-        }
-        */
-        //Ground.SetCellsTerrainConnect(sandTiles, 0, 1);
-        //Ground.SetCellsTerrainConnect(grasTiles, 0, 2);
-
-        /*
-        Sprite2D sprite = GetNode<Sprite2D>("player");
-
-        Vector2 pos = sprite.GlobalPosition;
-
-        Vector2I chunkPos = PosToChunk(pos);
-
-        GD.Print($"Updating Chunks  around Pos: {pos.ToString()}");
-
-        for(int x = chunkPos.X - ChunkRange; x <= chunkPos.X + ChunkRange; x++)
-        {
-            for (int y = chunkPos.Y - ChunkRange; y <= chunkPos.Y + ChunkRange; y++)
-            {                
-                Vector2I offset = new Vector2I(x, y);
-                UpdateChunk(chunkPos);
-            }
-        }
-        */
+        UpdateChunk(new Vector2I(0, 0));
     }
 
 
     void UpdateChunk(Vector2I offset)
     {
-        /*
-        GD.Print($"Updating Chunk offset {offset.ToString()}");
-
-        int waterID = 0;
-        int sandID = 1;
-        int grassID = 2;
-
-        Array<Vector2I> waterTiles = new Array<Vector2I>();
-        Array<Vector2I> grasTiles = new Array<Vector2I>();
-        Array<Vector2I> sandTiles = new Array<Vector2I>();
-
         for (int x = 0; x <= ChunkWidth; x++)
         {
             for (int y = 0; y <= ChunkHeigth; y++)
             {
-                Vector2I pos = new Vector2I(x + offset.X, y + offset.Y);
-                float value = GetNoise(pos);
-
-                if (value > 0)
-                {
-                    if (value > 0.2)
-                        grasTiles.Add(pos);
-
-                    sandTiles.Add(pos);
-                }
-                Water.SetCell(pos, waterID, new Vector2I(9, 2));
+                SetDisplayTile(new Vector2I(x, y));
             }
         }
-        */
-        /*
-        for (int x = -1; x <= ChunkWidth + 1; x++)
-        {
-            for (int y = -1; y <= ChunkHeigth + 1; y++)
-            {
-                if (x == -1 || x == ChunkWidth + 1 || y == -1 || y == ChunkHeigth + 1)
-                {
-                    sandTiles.Add(new Vector2I(x, y));
-                }
-            }
-        }*/
+    }
 
-        //Ground.SetCellsTerrainConnect(sandTiles, 0, sandID);
-        //Ground.SetCellsTerrainConnect(grasTiles, 0, grassID);
+    void SetDisplayTile(Vector2I pos)
+    {
+        for(int i =0; i < NEIGHBOURS.Length; i++)
+        {
+            Vector2I newPos = pos + NEIGHBOURS[i];
+            Vector2I atlasPos = CalculateDisplayTile(newPos);
+
+            if (atlasPos == new Vector2I(-1, -1))
+                return;
+
+            TileType tileType = GetWorldTile(pos);
+            if (tileType == TileType.Grass)
+                atlasPos.Y += 8; // Adjust for grass tiles in the atlas
+
+            if (tileType == TileType.Dirt)
+                atlasPos.Y += 4; // Adjust for dirt tiles in the atlas
+
+            GroundDisplay.SetCell(newPos, 0, atlasPos);
+        }
+    }
+
+    Vector2I CalculateDisplayTile(Vector2I coords)
+    {
+        TileType botRight = GetWorldTile(coords - NEIGHBOURS[0]);
+        TileType botLeft = GetWorldTile(coords - NEIGHBOURS[1]);
+        TileType topRight = GetWorldTile(coords - NEIGHBOURS[2]);
+        TileType topLeft = GetWorldTile(coords - NEIGHBOURS[3]);
+
+        Tuple<TileType, TileType, TileType, TileType> key = new(topLeft, topRight, botLeft, botRight);
+        if(!neighboursToAtlasCoord.ContainsKey(key))
+        {
+            return new Vector2I(-1, -1); // Default tile if not found
+        }
+        var n = neighboursToAtlasCoord[key];
+        //GD.Print(n);
+        return n;
     }
 
 
+    TileType GetWorldTile(Vector2I pos)
+    {
+        float value = GetNoise(pos);
+
+        GD.Print(value);
+
+        if (value > 0)
+            return TileType.Grass;
+        else
+            return TileType.Dirt;
+        /*
+        if (value > 0.2)
+            return TileType.Grass;
+
+        if (value > 0.0)
+            return TileType.Dirt;
+        */
+        return TileType.Water;
+    }
+
+    Vector2I PosToChunk(Vector2 pos)
+    {
+        return new Vector2I((int)pos.X / ChunkWidth, (int)pos.Y / ChunkHeigth);
+    }
 
     float GetNoise(Vector2I pos)
     {
         return Noise.GetNoise2D(pos.X, pos.Y);
     }
+
+    #endregion
 }
