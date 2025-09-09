@@ -20,16 +20,34 @@ public partial class DualTilemap : Node2D
 
     public void setTile(Vector2I pos, Vector2I coord, TileType tileType)
     {
+        
+        WorldLayer.SetCell(pos, 0, coord);
+
         foreach (Vector2I ce in GetNeigbours(pos))
         {
-            OffsetLayer.SetCell(ce, 0, coord);
+            RefreshOffset(ce);
+            //OffsetLayer.SetCell(ce, 0, coord);
         }
+    }
+
+    public void RefreshOffset(Vector2I pos) 
+    {
+        //TileType botRight = 
+
+        //OffsetLayer.SetCell(ce, 0, coord);
+    }
+
+    public TileType GetTileType(Vector2I pos)
+    {
+        //WorldLayer.g
+        return TileType.WATER;
     }
 
     public Vector2I[] GetNeigbours(Vector2I pos)
     {
         Vector2I[] posN = new Vector2I[4];
         var index = 0;
+
         foreach (Vector2I n in NEIGHBOURS)
         {
             posN[index++] = pos + n;
@@ -64,7 +82,6 @@ public partial class DualTilemap : Node2D
                 atlasCord = new Vector2I(2, 1);
             }
 
-            WorldLayer.SetMeta("Tile", (int)type);
             setTile(coords, atlasCord, type);
         }
     }
