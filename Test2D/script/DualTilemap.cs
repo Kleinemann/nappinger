@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Reflection.Emit;
 
 public partial class DualTilemap : Node2D
 {
+    List<Vector2I> values = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9) };
     TileMapLayer OffsetLayer;
     TileMapLayer WorldLayer;
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
@@ -32,7 +34,15 @@ public partial class DualTilemap : Node2D
 
     public void RefreshOffset(Vector2I pos) 
     {
-        //TileType botRight = 
+        Vector2I v1 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[0]);
+        Vector2I v2 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[1]);
+        Vector2I v3 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[2]);
+        Vector2I v4 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[3]);
+
+        int a = values.IndexOf(v1);
+        int b = values.IndexOf(v2);
+        int c = values.IndexOf(v3);
+        int d = values.IndexOf(v4);
 
         //OffsetLayer.SetCell(ce, 0, coord);
     }
@@ -75,7 +85,7 @@ public partial class DualTilemap : Node2D
             else if (mouseEvent.ButtonIndex == MouseButton.Right)
             {
                 atlasCord = new Vector2I(2, 9);
-                type = TileType.WATER;
+                type = TileType.GRASS;
             }
             else if(mouseEvent.ButtonIndex == MouseButton.Middle)
             {
