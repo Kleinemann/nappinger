@@ -25,26 +25,59 @@ public partial class DualTilemap : Node2D
         
         WorldLayer.SetCell(pos, 0, coord);
 
-        foreach (Vector2I ce in GetNeigbours(pos))
-        {
-            RefreshOffset(ce);
-            //OffsetLayer.SetCell(ce, 0, coord);
-        }
+        Vector2I newPos = pos + NEIGHBOURS[0];
+        GD.Print("-" + newPos);
+        RefreshOffset(newPos);
+        
+        //foreach (Vector2I ce in GetNeigbours(pos))
+        //{
+        //RefreshOffset(ce);
+        //OffsetLayer.SetCell(ce, 0, coord);
+        //OffsetLayer.SetCell(ce, 0, new Vector2I(2,1));
+        //}
     }
 
-    public void RefreshOffset(Vector2I pos) 
+    public void RefreshOffset(Vector2I pos)
     {
         Vector2I v1 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[0]);
         Vector2I v2 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[1]);
         Vector2I v3 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[2]);
         Vector2I v4 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[3]);
 
+        GD.Print("--" + v1);
+        GD.Print("--" + v2);
+        GD.Print("--" + v3);
+        GD.Print("--" + v4);
+
         int a = values.IndexOf(v1);
         int b = values.IndexOf(v2);
         int c = values.IndexOf(v3);
         int d = values.IndexOf(v4);
 
-        //OffsetLayer.SetCell(ce, 0, coord);
+        int max = Math.Max(Math.Max(a, b), Math.Max(c, d));
+        int min = Math.Min(Math.Min(a, b), Math.Min(c, d));
+
+        Dictionary<Tuple<int, int, int, int>, Vector2I> neighboursToAtlasCoord = new()
+        {
+            {new (max, max, max, max), new Vector2I(2, 1)}, // All corners
+            {new (min, min, min, max), new Vector2I(1, 3)}, // Outer bottom-right corner
+            {new (min, min, max, min), new Vector2I(0, 0)}, // Outer bottom-left corner
+            {new (min, max, min, min), new Vector2I(0, 2)}, // Outer top-right corner
+            {new (max, min, min, min), new Vector2I(3, 3)}, // Outer top-left corner
+            {new (min, max, min, max), new Vector2I(1, 0)}, // Right edge
+            {new (max, min, max, min), new Vector2I(3, 2)}, // Left edge
+            {new (min, min, max, max), new Vector2I(3, 0)}, // Bottom edge
+            {new (max, max, min, min), new Vector2I(1, 2)}, // Top edge
+            {new (min, max, max, max), new Vector2I(1, 1)}, // Inner bottom-right corner
+            {new (max, min, max, max), new Vector2I(2, 0)}, // Inner bottom-left corner
+            {new (max, max, min, max), new Vector2I(2, 2)}, // Inner top-right corner
+            {new (max, max, max, min), new Vector2I(3, 1)}, // Inner top-left corner
+            {new (min, max, max, min), new Vector2I(2, 3)}, // Bottom-left top-right corners
+            {new (max, min, min, max), new Vector2I(0, 1)}, // Top-left down-right corners
+		    {new (min, min, min, min), new Vector2I(0, 3)}, // No corners
+        };
+
+        OffsetLayer.SetCell(pos, 0, neighboursToAtlasCoord[new(a, b, c, d)]);
     }
 
     public TileType GetTileType(Vector2I pos)
