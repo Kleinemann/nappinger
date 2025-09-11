@@ -1,3 +1,41 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
+# Godot-specific
+.import/
+export.cfg
+export_presets.cfg
+*.godot
+*.mono/
+
+# Visual Studio-specific
+.vs/
+*.user
+*.suo
+*.cache
+*.pdb
+*.obj
+*.log
+*.tlog
+*.idb
+*.ipch
+*.aps
+*.ncb
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# Build output
+bin/
+obj/
+Debug/
+Release/
+*.exe
+*.dll
+
+# NuGet packages
+*.nupkg
+packages/
+*.snk
+
+# Others
+*.tmp
+*.bak
+*.swp
