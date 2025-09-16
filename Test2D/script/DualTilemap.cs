@@ -12,7 +12,7 @@ public partial class DualTilemap : Node2D
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
 
 
-    public enum TileType { WATER, SAND, GRASS };
+    public enum TileType { NONE, WATER, SAND, GRASS };
 
     public override void _Ready()
     {
@@ -22,18 +22,11 @@ public partial class DualTilemap : Node2D
 
     public void setTile(Vector2I pos, Vector2I coord, TileType tileType)
     {
-        
         WorldLayer.SetCell(pos, 0, coord);
-
-        //Vector2I newPos = pos + NEIGHBOURS[0];
-        //GD.Print("-" + newPos);
-        //RefreshOffset(newPos);
         
         foreach (Vector2I ce in GetNeigbours(pos))
         {
             RefreshOffset(ce);
-        //OffsetLayer.SetCell(ce, 0, coord);
-        //OffsetLayer.SetCell(ce, 0, new Vector2I(2,1));
         }
     }
 
@@ -54,23 +47,7 @@ public partial class DualTilemap : Node2D
         GD.Print("--" + m3 + " => " + v3);
         GD.Print("--" + m4 + " => " + v4);
 
-        //OffsetLayer.SetCell(m1, 0, new Vector2I(2,1));
-        //OffsetLayer.SetCell(m2, 0, new Vector2I(2, 5));
-        //OffsetLayer.SetCell(m3, 0, new Vector2I(2, 9));
-        //OffsetLayer.SetCell(m4, 0, new Vector2I(2, 1));
 
-        /*
-
-        Vector2I v1 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[0]);
-        Vector2I v2 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[1]);
-        Vector2I v3 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[2]);
-        Vector2I v4 = WorldLayer.GetCellAtlasCoords(pos + NEIGHBOURS[3]);
-
-        GD.Print("--" + v1);
-        GD.Print("--" + v2);
-        GD.Print("--" + v3);
-        GD.Print("--" + v4);
-        */
         int a = values.IndexOf(v1);
         int b = values.IndexOf(v2);
         int c = values.IndexOf(v3);
@@ -153,34 +130,37 @@ public partial class DualTilemap : Node2D
         return posN;
     }
 
-
     public override void _Input(InputEvent @event)
     {
-        if(@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
+        Vector2I atlasCord = Vector2I.Zero;
+        TileType type = TileType.WATER;
+
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            Vector2 mousePos = GetViewport().GetMousePosition();
-            Vector2I coords = WorldLayer.LocalToMap(mousePos);
-            Vector2I atlasCord = Vector2I.Zero;
-            TileType type = TileType.WATER;
-
-            GD.Print(coords);
-
-            if(mouseEvent.ButtonIndex == MouseButton.Left)
-            {
-                atlasCord = new Vector2I(2, 5);
-                type = TileType.SAND;
-            }
-            else if (mouseEvent.ButtonIndex == MouseButton.Right)
-            {
-                atlasCord = new Vector2I(2, 9);
-                type = TileType.GRASS;
-            }
-            else if(mouseEvent.ButtonIndex == MouseButton.Middle)
-            {
-                atlasCord = new Vector2I(2, 1);
-            }
-
-            setTile(coords, atlasCord, type);
+            atlasCord = new Vector2I(2, 5);
+            type = TileType.SAND;
         }
+        else if (Input.IsMouseButtonPressed(MouseButton.Right))
+        {
+            atlasCord = new Vector2I(2, 9);
+            type = TileType.GRASS;
+        }
+        else if (Input.IsMouseButtonPressed(MouseButton.Middle))
+        {
+            atlasCord = new Vector2I(2, 1);
+        }
+        else
+        {
+            return;
+        }
+
+        Vector2 mousePos = GetViewport().GetMousePosition();
+        Vector2I coords = WorldLayer.LocalToMap(mousePos);
+
+        GD.Print(coords);
+
+
+        if (WorldLayer.GetCellAtlasCoords(coords) != atlasCord)
+            setTile(coords, atlasCord, type);
     }
 }
