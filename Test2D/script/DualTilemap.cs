@@ -6,10 +6,30 @@ using System.Reflection.Emit;
 
 public partial class DualTilemap : Node2D
 {
-    List<Vector2I> values = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9) };
     TileMapLayer OffsetLayer;
     TileMapLayer WorldLayer;
+
+    readonly List<Vector2I> BaseTiles = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9) };
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
+    readonly Dictionary<Tuple<int, int, int, int>, Vector2I> NeighboursToAtlasCoord = new()
+    {
+        {new (1, 1, 1, 1), new Vector2I(2, 1)}, // All corners
+        {new (0, 0, 0, 1), new Vector2I(1, 3)}, // Outer bottom-right corner
+        {new (0, 0, 1, 0), new Vector2I(0, 0)}, // Outer bottom-left corner
+        {new (0, 1, 0, 0), new Vector2I(0, 2)}, // Outer top-right corner
+        {new (1, 0, 0, 0), new Vector2I(3, 3)}, // Outer top-left corner
+        {new (0, 1, 0, 1), new Vector2I(1, 0)}, // Right edge
+        {new (1, 0, 1, 0), new Vector2I(3, 2)}, // Left edge
+        {new (0, 0, 1, 1), new Vector2I(3, 0)}, // Bottom edge
+        {new (1, 1, 0, 0), new Vector2I(1, 2)}, // Top edge
+        {new (0, 1, 1, 1), new Vector2I(1, 1)}, // Inner bottom-right corner
+        {new (1, 0, 1, 1), new Vector2I(2, 0)}, // Inner bottom-left corner
+        {new (1, 1, 0, 1), new Vector2I(2, 2)}, // Inner top-right corner
+        {new (1, 1, 1, 0), new Vector2I(3, 1)}, // Inner top-left corner
+        {new (0, 1, 1, 0), new Vector2I(2, 3)}, // Bottom-left top-right corners
+        {new (1, 0, 0, 1), new Vector2I(0, 1)}, // Top-left down-right corners
+		{new (0, 0, 0, 0), new Vector2I(0, 3)}, // No corners
+    };
 
 
     public enum TileType { NONE, WATER, SAND, GRASS };
@@ -20,10 +40,12 @@ public partial class DualTilemap : Node2D
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
     }
 
-    public void setTile(Vector2I pos, Vector2I coord, TileType tileType)
+    public void setTile(Vector2I pos, TileType tileType)
     {
+        Vector2I coord = BaseTiles[(int)tileType];
+
         WorldLayer.SetCell(pos, 0, coord);
-        
+
         foreach (Vector2I ce in GetNeigbours(pos))
         {
             RefreshOffset(ce);
@@ -32,81 +54,49 @@ public partial class DualTilemap : Node2D
 
     public void RefreshOffset(Vector2I pos)
     {
-        Vector2I m4 = pos - NEIGHBOURS[0];
-        Vector2I m3 = pos - NEIGHBOURS[1];
-        Vector2I m2 = pos - NEIGHBOURS[2];
-        Vector2I m1 = pos - NEIGHBOURS[3];
+        Vector2I[] nPos = new Vector2I[4];
+        Vector2I[] nCoords = new Vector2I[4];
+        int[] nIndex = new int[4];
 
-        Vector2I v1 = WorldLayer.GetCellAtlasCoords(m1);
-        Vector2I v2 = WorldLayer.GetCellAtlasCoords(m2);
-        Vector2I v3 = WorldLayer.GetCellAtlasCoords(m3);
-        Vector2I v4 = WorldLayer.GetCellAtlasCoords(m4);
+        int max = 0;
 
-        GD.Print("--" + m1 + " => " + v1);
-        GD.Print("--" + m2 + " => " + v2);
-        GD.Print("--" + m3 + " => " + v3);
-        GD.Print("--" + m4 + " => " + v4);
+        for (int i = 0; i < 4; i++)
+        {
+            nPos[i] = pos - NEIGHBOURS[3 - i]; //Desc, bacause of direction
+            nCoords[i] = WorldLayer.GetCellAtlasCoords(nPos[i]);
+            nIndex[i] = BaseTiles.IndexOf(nCoords[i]);
 
+            if(nIndex[i] > max)
+                max = nIndex[i];
+        }
 
-        int a = values.IndexOf(v1);
-        int b = values.IndexOf(v2);
-        int c = values.IndexOf(v3);
-        int d = values.IndexOf(v4);
-
-        int max = Math.Max(Math.Max(a, b), Math.Max(c, d));
         int min = max - 1;
 
-        if (a != max) a = min;
-        if (b != max) b = min;
-        if (c != max) c = min;
-        if (d != max) d = min;
-
+        //Calc offset for Atlas Coords
         Vector2I offset = Vector2I.Zero;
+        if (max > 1)
+            offset.Y = (max - 1) * 4;
 
-        if (max == 2)
-            offset += new Vector2I(0, 4);
-
-        if (max == 3)
-            offset += new Vector2I(0, 8);
+        if (min > 1)
+            offset.X = (min - 1) * 4;
 
 
-        if(min == 2)
-            offset += new Vector2I(4, 0);
-
-        if (min == 3)
-            offset += new Vector2I(8, 0);
-
+        // convert for the tuple
         Vector2I coord;
+        for (var i = 0; i < 4; i++)
+        {
+            nIndex[i] = nIndex[i] == max ? 1 : 0;
+        }
 
+        // get the atlas coords
         if (min == max)
         {
             coord = new Vector2I(2, 1);
         }
         else
         {
-            Dictionary<Tuple<int, int, int, int>, Vector2I> neighboursToAtlasCoord = new()
-            {
-                {new (max, max, max, max), new Vector2I(2, 1)}, // All corners
-                {new (min, min, min, max), new Vector2I(1, 3)}, // Outer bottom-right corner
-                {new (min, min, max, min), new Vector2I(0, 0)}, // Outer bottom-left corner
-                {new (min, max, min, min), new Vector2I(0, 2)}, // Outer top-right corner
-                {new (max, min, min, min), new Vector2I(3, 3)}, // Outer top-left corner
-                {new (min, max, min, max), new Vector2I(1, 0)}, // Right edge
-                {new (max, min, max, min), new Vector2I(3, 2)}, // Left edge
-                {new (min, min, max, max), new Vector2I(3, 0)}, // Bottom edge
-                {new (max, max, min, min), new Vector2I(1, 2)}, // Top edge
-                {new (min, max, max, max), new Vector2I(1, 1)}, // Inner bottom-right corner
-                {new (max, min, max, max), new Vector2I(2, 0)}, // Inner bottom-left corner
-                {new (max, max, min, max), new Vector2I(2, 2)}, // Inner top-right corner
-                {new (max, max, max, min), new Vector2I(3, 1)}, // Inner top-left corner
-                {new (min, max, max, min), new Vector2I(2, 3)}, // Bottom-left top-right corners
-                {new (max, min, min, max), new Vector2I(0, 1)}, // Top-left down-right corners
-		        {new (min, min, min, min), new Vector2I(0, 3)}, // No corners
-            };
-
-           coord = neighboursToAtlasCoord[new(a, b, c, d)];
+            coord = NeighboursToAtlasCoord[new(nIndex[0], nIndex[1], nIndex[2], nIndex[3])];
         }
-        GD.Print("--- " + coord);
 
         OffsetLayer.SetCell(pos, 0, coord + offset);
        
@@ -114,8 +104,10 @@ public partial class DualTilemap : Node2D
 
     public TileType GetTileType(Vector2I pos)
     {
-        //WorldLayer.g
-        return TileType.WATER;
+        int index = BaseTiles.IndexOf(WorldLayer.GetCellAtlasCoords(pos));
+        Array values = Enum.GetValues(typeof(TileType));
+        TileType t = (TileType)values.GetValue(index);
+        return t;
     }
 
     public Vector2I[] GetNeigbours(Vector2I pos)
@@ -137,17 +129,15 @@ public partial class DualTilemap : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            atlasCord = new Vector2I(2, 5);
             type = TileType.SAND;
         }
         else if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
-            atlasCord = new Vector2I(2, 9);
             type = TileType.GRASS;
         }
         else if (Input.IsMouseButtonPressed(MouseButton.Middle))
         {
-            atlasCord = new Vector2I(2, 1);
+            type = TileType.WATER;
         }
         else
         {
@@ -155,12 +145,10 @@ public partial class DualTilemap : Node2D
         }
 
         Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector2I coords = WorldLayer.LocalToMap(mousePos);
+        Vector2I pos = WorldLayer.LocalToMap(mousePos);
 
-        GD.Print(coords);
-
-
-        if (WorldLayer.GetCellAtlasCoords(coords) != atlasCord)
-            setTile(coords, atlasCord, type);
+        //Nur  ndern wenn es sich ver ndert hat
+        if(GetTileType(pos) != type)
+            setTile(pos, type);
     }
 }
