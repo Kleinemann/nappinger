@@ -102,12 +102,18 @@ public partial class DualTilemap : Node2D
        
     }
 
-    public TileType GetTileType(Vector2I pos)
+    public TileType GetTileType(int index)
     {
-        int index = BaseTiles.IndexOf(WorldLayer.GetCellAtlasCoords(pos));
         Array values = Enum.GetValues(typeof(TileType));
         TileType t = (TileType)values.GetValue(index);
         return t;
+    }
+
+
+    public TileType GetTileType(Vector2I pos)
+    {
+        int index = BaseTiles.IndexOf(WorldLayer.GetCellAtlasCoords(pos));
+        return GetTileType(index);
     }
 
     public Vector2I[] GetNeigbours(Vector2I pos)
