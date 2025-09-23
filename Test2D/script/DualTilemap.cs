@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Reflection.Emit;
+using System.Threading;
 
 public partial class DualTilemap : Node2D
 {
@@ -11,6 +12,7 @@ public partial class DualTilemap : Node2D
 
     readonly List<Vector2I> BaseTiles = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9) };
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
+    readonly Vector2I[] NEIGHBOURS_AROUND = new Vector2I[] { new(-1, 0), new(1, 0), new(0, -1), new(0, 1) };
     readonly Dictionary<Tuple<int, int, int, int>, Vector2I> NeighboursToAtlasCoord = new()
     {
         {new (1, 1, 1, 1), new Vector2I(2, 1)}, // All corners
@@ -43,12 +45,28 @@ public partial class DualTilemap : Node2D
     public void setTile(Vector2I pos, TileType tileType)
     {
         Vector2I coord = BaseTiles[(int)tileType];
-
         WorldLayer.SetCell(pos, 0, coord);
 
-        foreach (Vector2I ce in GetNeigbours(pos))
+        //fixing Neigbours first
+        foreach (Vector2I offset in NEIGHBOURS_AROUND)
         {
-            RefreshOffset(ce);
+            Vector2I nPos = pos + offset;
+
+            GD.Print(pos + " => " + nPos);
+            int t = (int)tileType;
+            int tN = (int)GetTileType(WorldLayer.GetCellAtlasCoords(nPos));
+
+            if ((tN + 1) < t)
+            {
+                GD.Print(t + " => " + tN);
+                Vector2I newCoord = (BaseTiles[t - 1]);
+                WorldLayer.SetCell(nPos, 0, newCoord);
+            }
+        }
+
+        foreach (Vector2I ce in GetNeigbours(pos))
+        {            
+            //RefreshOffset(ce);
         }
     }
 
