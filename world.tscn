@@ -163,5 +163,6 @@ position = Vector2(-8, -6)
 tile_set = SubResource("TileSet_dwbse")
 
 [node name="WorldGrid" type="TileMapLayer" parent="Tilemap"]
+visible = false
 modulate = Color(1, 1, 1, 0.462745)
 tile_set = SubResource("TileSet_dwbse")
