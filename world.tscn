@@ -158,8 +158,9 @@ resource_name = "Tiles"
 
 [node name="World" type="Node2D"]
 
-[node name="Tilemap" type="Node2D" parent="."]
+[node name="Tilemap" type="Node2D" parent="." node_paths=PackedStringArray("Checkboxes")]
 script = ExtResource("1_tlwt5")
+Checkboxes = [NodePath("../UI/Control/ColorRect/HBoxContainer/CheckBox1"), NodePath("../UI/Control/ColorRect/HBoxContainer/CheckBox2"), NodePath("../UI/Control/ColorRect/HBoxContainer/CheckBox3"), NodePath("../UI/Control/ColorRect/HBoxContainer/CheckBox4"), NodePath("../UI/Control/ColorRect/HBoxContainer/CheckBox5")]
 
 [node name="OffsetGrid" type="TileMapLayer" parent="Tilemap"]
 position = Vector2(-8, -6)
@@ -194,7 +195,7 @@ layout_mode = 1
 offset_right = 350.0
 offset_bottom = 31.0
 
-[node name="CheckBox" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+[node name="CheckBox1" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_fj7yv")
 text = "None"
@@ -213,9 +214,15 @@ text = "sand"
 [node name="CheckBox4" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_fj7yv")
-text = "dirt"
+text = "grass"
 
 [node name="CheckBox5" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_fj7yv")
-text = "snow"
+text = "dirt"
+
+[connection signal="pressed" from="UI/Control/ColorRect/HBoxContainer/CheckBox1" to="Tilemap" method="ChangeTileType"]
+[connection signal="pressed" from="UI/Control/ColorRect/HBoxContainer/CheckBox2" to="Tilemap" method="ChangeTileType"]
+[connection signal="pressed" from="UI/Control/ColorRect/HBoxContainer/CheckBox3" to="Tilemap" method="ChangeTileType"]
+[connection signal="pressed" from="UI/Control/ColorRect/HBoxContainer/CheckBox4" to="Tilemap" method="ChangeTileType"]
+[connection signal="pressed" from="UI/Control/ColorRect/HBoxContainer/CheckBox5" to="Tilemap" method="ChangeTileType"]

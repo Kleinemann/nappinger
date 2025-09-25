@@ -1,12 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Reflection.Emit;
-using System.Threading;
 
 public partial class DualTilemap : Node2D
 {
+    [Export]
+    public Button[] Checkboxes;
+
     TileMapLayer OffsetLayer;
     TileMapLayer WorldLayer;
 
@@ -38,10 +38,23 @@ public partial class DualTilemap : Node2D
     public TileType SelectedTileType;
 
 
+    public void ChangeTileType()
+    {
+        for (int i = 0; i < Checkboxes.Length; i++)
+        {
+            if (Checkboxes[i].ButtonPressed)
+            {
+                SelectedTileType = GetTileType(i);
+                return;
+            }
+        }
+    }
+
     public override void _Ready()
     {
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
+        ChangeTileType();
     }
 
     public void setTile(Vector2I pos, TileType tileType)
@@ -148,30 +161,17 @@ public partial class DualTilemap : Node2D
     public override void _UnhandledInput(InputEvent @event)
     {
         Vector2I atlasCord = Vector2I.Zero;
-        TileType type = TileType.WATER;
+        TileType type = SelectedTileType;
 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            type = TileType.SAND;
-        }
-        else if (Input.IsMouseButtonPressed(MouseButton.Right))
-        {
-            type = TileType.GRASS;
-        }
-        else if (Input.IsMouseButtonPressed(MouseButton.Middle))
-        {
-            type = TileType.WATER;
-        }
-        else
-        {
-            return;
-        }
 
-        Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector2I pos = WorldLayer.LocalToMap(mousePos);
+            Vector2 mousePos = GetViewport().GetMousePosition();
+            Vector2I pos = WorldLayer.LocalToMap(mousePos);
 
-        //Nur aendern wenn es sich veraendert hat
-        if (GetTileType(pos) != type)
-            setTile(pos, type);
+            //Nur aendern wenn es sich veraendert hat
+            if (GetTileType(pos) != type)
+                setTile(pos, type);
+        }
     }
 }
