@@ -35,6 +35,8 @@ public partial class DualTilemap : Node2D
 
 
     public enum TileType { NONE, WATER, SAND, GRASS };
+    public TileType SelectedTileType;
+
 
     public override void _Ready()
     {
@@ -44,10 +46,6 @@ public partial class DualTilemap : Node2D
 
     public void setTile(Vector2I pos, TileType tileType)
     {
-        //Vector2I v = WorldLayer.GetCellAtlasCoords(pos);
-        //TileType tt = GetTileType(v);
-        //GD.Print(v + " => " + tt);
-
         Vector2I coord = BaseTiles[(int)tileType];
         WorldLayer.SetCell(pos, 0, coord);
 
@@ -56,17 +54,13 @@ public partial class DualTilemap : Node2D
         {
             Vector2I nPos = pos + offset;
 
-            //GD.Print(pos + " => " + nPos);
             int t = (int)tileType;
             int tN = (int)GetTileType(nPos);
 
             if ((tN + 1) < t)
-            {
-                //GD.Print(t + " => " + tN);
-                //Vector2I newCoord = (BaseTiles[t - 1]);
-                //WorldLayer.SetCell(nPos, 0, newCoord);
                 setTile(nPos, GetTileType(t - 1));
-            }
+            if((t + 1) < tN)
+                setTile(nPos, GetTileType(t + 1));
         }
 
         foreach (Vector2I ce in GetNeigbours(pos))
@@ -151,7 +145,7 @@ public partial class DualTilemap : Node2D
         return posN;
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         Vector2I atlasCord = Vector2I.Zero;
         TileType type = TileType.WATER;
@@ -177,7 +171,7 @@ public partial class DualTilemap : Node2D
         Vector2I pos = WorldLayer.LocalToMap(mousePos);
 
         //Nur aendern wenn es sich veraendert hat
-        if(GetTileType(pos) != type)
+        if (GetTileType(pos) != type)
             setTile(pos, type);
     }
 }

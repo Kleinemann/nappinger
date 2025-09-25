@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2c3773bdklmd"]
+[gd_scene load_steps=6 format=3 uid="uid://2c3773bdklmd"]
 
 [ext_resource type="Script" uid="uid://bluhm731wg05x" path="res://Test2D/script/DualTilemap.cs" id="1_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://f7ukxkb8us46" path="res://Test2D/tiles/water.png" id="2_tlwt5"]
@@ -153,6 +153,9 @@ texture = ExtResource("2_tlwt5")
 [sub_resource type="TileSet" id="TileSet_dwbse"]
 sources/0 = SubResource("TileSetAtlasSource_tlwt5")
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_fj7yv"]
+resource_name = "Tiles"
+
 [node name="World" type="Node2D"]
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -166,3 +169,53 @@ tile_set = SubResource("TileSet_dwbse")
 visible = false
 modulate = Color(1, 1, 1, 0.462745)
 tile_set = SubResource("TileSet_dwbse")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+color = Color(0.756863, 0.298039, 0.25098, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/ColorRect"]
+layout_mode = 1
+offset_right = 350.0
+offset_bottom = 31.0
+
+[node name="CheckBox" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_fj7yv")
+text = "None"
+
+[node name="CheckBox2" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_fj7yv")
+text = "water"
+
+[node name="CheckBox3" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_fj7yv")
+text = "sand"
+
+[node name="CheckBox4" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_fj7yv")
+text = "dirt"
+
+[node name="CheckBox5" type="CheckBox" parent="UI/Control/ColorRect/HBoxContainer"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_fj7yv")
+text = "snow"
