@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5jx44cylnjqm"
-path="res://.godot/imported/grass_tileset.png-3be7cb5012911fd1bfd3ab4b0866e6f7.ctex"
+uid="uid://boryfp0mvm2rf"
+path="res://.godot/imported/roguelikeChar_transparent.png-4c57334ef9ac52ea558d5825a8df02d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Test2D/tiles/grass_tileset.png"
-dest_files=["res://.godot/imported/grass_tileset.png-3be7cb5012911fd1bfd3ab4b0866e6f7.ctex"]
+source_file="res://Test2D/tiles/roguelikeChar_transparent.png"
+dest_files=["res://.godot/imported/roguelikeChar_transparent.png-4c57334ef9ac52ea558d5825a8df02d9.ctex"]
 
 [params]
 

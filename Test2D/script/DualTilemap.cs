@@ -7,10 +7,13 @@ public partial class DualTilemap : Node2D
     [Export]
     public Button[] Checkboxes;
 
-    TileMapLayer OffsetLayer;
-    TileMapLayer WorldLayer;
+    [Export]
+    public Node2D Player;
 
-    readonly List<Vector2I> BaseTiles = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9) };
+    public TileMapLayer OffsetLayer;
+    public TileMapLayer WorldLayer;
+
+    readonly List<Vector2I> BaseTiles = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(2, 5), new Vector2I(2, 9), new Vector2I(2, 13) };
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
     readonly Vector2I[] NEIGHBOURS_AROUND = new Vector2I[] { new(-1, 0), new(1, 0), new(0, -1), new(0, 1), new(-1, -1), new(1, 1), new(1, -1), new(-1, 1) };
     readonly Dictionary<Tuple<int, int, int, int>, Vector2I> NeighboursToAtlasCoord = new()
@@ -34,7 +37,7 @@ public partial class DualTilemap : Node2D
     };
 
 
-    public enum TileType { NONE, WATER, SAND, GRASS };
+    public enum TileType { NONE, WATER, SAND, GRASS, DIRT};
     public TileType SelectedTileType;
 
 
@@ -55,6 +58,15 @@ public partial class DualTilemap : Node2D
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
         ChangeTileType();
+    }
+
+    public void CleanTile(Vector2I pos)
+    {
+        WorldLayer.EraseCell(pos);
+        foreach (Vector2I ce in GetNeigbours(pos))
+        {
+            OffsetLayer.EraseCell(ce);
+        }
     }
 
     public void setTile(Vector2I pos, TileType tileType)
@@ -165,13 +177,33 @@ public partial class DualTilemap : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-
             Vector2 mousePos = GetViewport().GetMousePosition();
             Vector2I pos = WorldLayer.LocalToMap(mousePos);
 
             //Nur aendern wenn es sich veraendert hat
             if (GetTileType(pos) != type)
                 setTile(pos, type);
+        }
+
+        if(Input.IsKeyPressed(Key.Up))
+        {
+            Player.Position += new Vector2(0, -16);
+            World.Instance.UpdateMap();
+        }
+        if (Input.IsKeyPressed(Key.Down))
+        {
+            Player.Position += new Vector2(0, 16);
+            World.Instance.UpdateMap();
+        }
+        if (Input.IsKeyPressed(Key.Left))
+        {
+            Player.Position += new Vector2(-16, 0);
+            World.Instance.UpdateMap();
+        }
+        if (Input.IsKeyPressed(Key.Right))
+        {
+            Player.Position += new Vector2(16, 0);
+            World.Instance.UpdateMap();
         }
     }
 }
