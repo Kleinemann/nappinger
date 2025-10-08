@@ -17,11 +17,12 @@ public partial class World : Node2D
     public static World Instance;
 
     DualTilemap map;
-
+    public TileMapLayer plants;
     public override void _Ready()
     {
         Instance = this;
         map = GetNode<DualTilemap>("Tilemap");
+        plants = GetNode<TileMapLayer>("Plants");
         UpdateMap();
     }
 
@@ -92,7 +93,12 @@ public partial class World : Node2D
                     else if (n < 0.1f)
                         map.setTile(newPos, DualTilemap.TileType.SAND);
                     else if (n < 0.4f)
+                    {
                         map.setTile(newPos, DualTilemap.TileType.GRASS);
+                        if(n > 0.2f && n < 0.3f)
+                            plants.SetCell(newPos, 0, new Vector2I((int)GD.RandRange(0, 3), 0));
+
+                    }
                     else
                         map.setTile(newPos, DualTilemap.TileType.DIRT);
                 }
