@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class WorlMap : Node2D
 {
@@ -15,8 +16,16 @@ public partial class WorlMap : Node2D
 
     WorldMain World => WorldMain.Instance;
 
+    List<Chunk> Chunks = new List<Chunk>();
+
     public override void _Ready()
     {
-        
+        UpdateMap();
+    }
+
+    public void UpdateMap()
+    {
+        Vector2 pos = World.Camera.Position;
+
     }
 }
