@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3322irhb3pmu"]
+
+[ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
+[ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
+[ext_resource type="Script" uid="uid://bg57tk5c0giu3" path="res://scripts/WorldMain.cs" id="1_tgi5o"]
+[ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/CameraScroll.cs" id="2_1wgjs"]
+[ext_resource type="Texture2D" uid="uid://dfo3w2dan4dt" path="res://assets/icon.svg" id="3_7ps7e"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_tgi5o")
+
+[node name="DualTileMap" type="Node2D" parent="."]
+script = ExtResource("1_7ps7e")
+
+[node name="OffsetGrid" type="TileMapLayer" parent="DualTileMap"]
+tile_set = ExtResource("1_o2lsi")
+
+[node name="WorldGrid" type="TileMapLayer" parent="DualTileMap"]
+tile_set = ExtResource("1_o2lsi")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 326)
+zoom = Vector2(2, 2)
+script = ExtResource("2_1wgjs")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(613, 274)
+scale = Vector2(0.423619, 0.356308)
+texture = ExtResource("3_7ps7e")
