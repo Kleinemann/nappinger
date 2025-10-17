@@ -7,11 +7,13 @@ public partial class WorldMain : Node2D
 
     public Camera2D Camera;
 
-    public WorlMap Map;
+    public WorldMap Map;
 
     public override void _Ready()
     {
         Instance = this;
+        Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<Camera2D>("Camera2D");
+        Map.UpdateMap();
     }
 }

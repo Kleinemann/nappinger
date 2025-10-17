@@ -1,8 +1,9 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Transactions;
 
-public partial class WorlMap : Node2D
+public partial class WorldMap : Node2D
 {
     public FastNoiseLite Noise = new FastNoiseLite()
     {
@@ -15,19 +16,57 @@ public partial class WorlMap : Node2D
     public TileMapLayer WorldLayer;
 
     WorldMain World => WorldMain.Instance;
-
+    int ChunkRange => Chunk.ChunkRange;
+    Vector2I CurrentChunk = Vector2I.MinValue;
     Dictionary<Vector2I, Chunk> Chunks = new Dictionary<Vector2I, Chunk>();
 
     public override void _Ready()
     {
-        UpdateMap();
     }
 
     public void UpdateMap()
     {
         Vector2I pos = (Vector2I)World.Camera.Position;
+        GD.Print("########## MAP UPDATE ##########");
+        GD.Print("POS: " + pos);
         Vector2I ChunkCoord = PosToChunk(pos);
-        GD.Print(ChunkCoord);
+        GD.Print("CHUNK: " + pos);
+
+        if(ChunkCoord == CurrentChunk)
+        {
+            GD.Print("SAME CHUNK - NO UPDATE");
+            return;
+        }
+
+        Array<Vector2I> chunksTmp = new Array<Vector2I>();
+
+        for (int x = ChunkCoord.X - ChunkRange; x <= ChunkCoord.X + ChunkRange; x++)
+        {
+            for(int y = ChunkCoord.Y - ChunkRange; y <= ChunkCoord.Y + ChunkRange; y++)
+            {
+                Vector2I coord = new Vector2I(x, y);
+                chunksTmp.Add(coord);
+            }
+        }
+
+        foreach(Vector2I coordRem in Chunks.Keys)
+        {
+            GD.Print("Remove Chunk: " + coordRem);
+            Chunks.Remove(coordRem);
+        }
+
+        foreach(Vector2I c in chunksTmp)
+        {
+            if (!Chunks.ContainsKey(c))
+            {
+                GD.Print("Add Chunk: " + c);
+                Chunks.Add(c, new Chunk(c));
+            }
+            else
+            {
+                GD.Print("Keep Chunk: " + c);
+            }
+        }
     }
 
     Vector2I PosToChunk(Vector2I pos)
