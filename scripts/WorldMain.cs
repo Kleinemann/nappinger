@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using static DualTilemap;
 
 public partial class WorldMain : Node2D
 {
@@ -14,6 +15,15 @@ public partial class WorldMain : Node2D
         Instance = this;
         Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<Camera2D>("Camera2D");
-        Map.UpdateMap();
+        //Map.UpdateMap();
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            Vector2 mousePos = GetViewport().GetMousePosition();
+            Map.UpdateMap();
+        }
     }
 }

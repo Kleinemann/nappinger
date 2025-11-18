@@ -10,6 +10,7 @@ public partial class CameraScroll : Camera2D
 
     public override void _Input(InputEvent @event)
     {
+        return;
         if(@event is InputEventMouseButton mbe)
         {
             if(mbe.IsPressed())
@@ -42,6 +43,7 @@ public partial class CameraScroll : Camera2D
 
     public override void _Process(double delta)
     {
+        return;
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector2 moveVector = Vector2.Zero;
         if (mousePos.X <= EdgeMargin)
@@ -54,6 +56,11 @@ public partial class CameraScroll : Camera2D
         else if(mousePos.Y >= UnZoomedViewportSize.Y - EdgeMargin)
             moveVector.Y = CameraSpeed * (float)delta;
 
+        if(moveVector == Vector2.Zero)
+            return;
+
         Position += moveVector;
+
+        //WorldMain.Instance.Map.UpdateMap();
     }
 }

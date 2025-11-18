@@ -22,16 +22,24 @@ public partial class WorldMap : Node2D
 
     public override void _Ready()
     {
+        OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
+        WorldLayer = GetNode<TileMapLayer>("WorldGrid");
     }
 
     public void UpdateMap()
     {
-        Vector2I pos = (Vector2I)World.Camera.Position;
+        //Vector2I pos = (Vector2I)World.Camera.Position;
+        Vector2 mousePos = GetViewport().GetMousePosition();
+        Vector2I pos = WorldLayer.LocalToMap(mousePos);
+
         GD.Print("########## MAP UPDATE ##########");
         GD.Print("POS: " + pos);
         Vector2I ChunkCoord = PosToChunk(pos);
-        GD.Print("CHUNK: " + pos);
+        GD.Print("CHUNK: " + ChunkCoord);
 
+        Chunk c = new Chunk(ChunkCoord);
+        c.Paint();
+        /*
         if(ChunkCoord == CurrentChunk)
         {
             GD.Print("SAME CHUNK - NO UPDATE");
@@ -67,6 +75,7 @@ public partial class WorldMap : Node2D
                 GD.Print("Keep Chunk: " + c);
             }
         }
+        */
     }
 
     Vector2I PosToChunk(Vector2I pos)

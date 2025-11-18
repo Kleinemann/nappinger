@@ -18,6 +18,6 @@ tile_set = ExtResource("1_o2lsi")
 tile_set = ExtResource("1_o2lsi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(574, 326)
+position = Vector2(255, 129)
 zoom = Vector2(2, 2)
 script = ExtResource("2_1wgjs")
