@@ -28,9 +28,9 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
-        //Vector2I pos = (Vector2I)World.Camera.Position;
+        Vector2I posCamera = (Vector2I)World.Camera.Position;
         Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector2I pos = WorldLayer.LocalToMap(mousePos);
+        Vector2I pos = WorldLayer.LocalToMap(mousePos + posCamera);
 
         GD.Print("########## MAP UPDATE ##########");
         GD.Print("POS: " + pos);
