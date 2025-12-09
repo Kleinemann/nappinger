@@ -37,8 +37,9 @@ public partial class WorldMap : Node2D
         Vector2I ChunkCoord = PosToChunk(pos);
         GD.Print("CHUNK: " + ChunkCoord);
 
-        Chunk c = new Chunk(ChunkCoord);
-        c.Paint();
+        //Chunk c = new Chunk(ChunkCoord);
+        //c.Paint();
+
         /*
         if(ChunkCoord == CurrentChunk)
         {
@@ -80,6 +81,6 @@ public partial class WorldMap : Node2D
 
     Vector2I PosToChunk(Vector2I pos)
     {
-        return new Vector2I(pos.X / Chunk.ChunkSize, pos.Y / Chunk.ChunkSize);
+        return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize) );
     }
 }
