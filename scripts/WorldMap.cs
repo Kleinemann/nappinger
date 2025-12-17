@@ -28,14 +28,27 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
-        Vector2I posCamera = (Vector2I)World.Camera.Position;
+        Vector2I cMouse = GetMouseCoords();
+        GD.Print("Mouse POS: " + cMouse + " Chunk: " + GetChunkCoords(cMouse));
+
+        /*
+        Vector2 cameraPos = World.Camera.Position - World.Camera.GetViewportRect().Size / 2;
         Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector2I pos = WorldLayer.LocalToMap(mousePos + posCamera);
+
+        
+        Vector2I kCamera = WorldLayer.LocalToMap(cameraPos);
+        Vector2I kMouse = WorldLayer.LocalToMap(mousePos);
 
         GD.Print("########## MAP UPDATE ##########");
-        GD.Print("POS: " + pos);
-        Vector2I ChunkCoord = PosToChunk(pos);
-        GD.Print("CHUNK: " + ChunkCoord);
+        GD.Print("Camera POS: " + cameraPos + " COORD: " + kCamera);
+        GD.Print("Mouse POS: " + mousePos + " COORD: " + kMouse);
+
+        Vector2I totalPos = kMouse + kCamera;
+        Vector2I ChunkCoord = PosToChunk(kMouse + kCamera);
+        GD.Print("Total: " + totalPos + " CHUNK: " + ChunkCoord);
+        */
+
+
 
         //Chunk c = new Chunk(ChunkCoord);
         //c.Paint();
@@ -79,8 +92,16 @@ public partial class WorldMap : Node2D
         */
     }
 
-    Vector2I PosToChunk(Vector2I pos)
+    Vector2I GetMouseCoords()
+    {   
+        Vector2 gMouse = GetGlobalMousePosition();
+        Vector2 lMouse = ToLocal(gMouse);
+        return WorldLayer.LocalToMap(lMouse);
+    }
+
+
+    Vector2I GetChunkCoords(Vector2I pos)
     {
-        return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize) );
+        return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize));
     }
 }

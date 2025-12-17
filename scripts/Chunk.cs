@@ -20,13 +20,18 @@ public partial class Chunk : GodotObject
 
     public void Paint()
     {
+        //WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(Coords.X, Coords.Y), 0, new Vector2I(5, 3));
+
+        
         int halfchunsize = ChunkSize / 2;
-        Vector2I start = Coords * ChunkSize - new Vector2I(halfchunsize, halfchunsize);
-        Vector2I end = Coords * ChunkSize + new Vector2I(halfchunsize-1, halfchunsize-1);
+        //Vector2I start = Coords * ChunkSize - new Vector2I(halfchunsize, halfchunsize);
+        //Vector2I end = Coords * ChunkSize + new Vector2I(halfchunsize-1, halfchunsize-1);
+        Vector2I start = Coords * ChunkSize;
+        Vector2I end = start + new Vector2I(ChunkSize-1, ChunkSize-1);
 
         //WorldMain.Instance.Map.WorldLayer.SetCell(Coords * halfchunsize, 0, new Vector2I(5, 3));
 
-        for(var x = start.X; x <= end.X; x++)
+        for (var x = start.X; x <= end.X; x++)
         {
             WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(x, start.Y), 0, new Vector2I(5, 3));
             WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(x, end.Y), 0, new Vector2I(5, 3));
