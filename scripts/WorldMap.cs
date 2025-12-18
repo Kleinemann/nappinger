@@ -102,6 +102,9 @@ public partial class WorldMap : Node2D
 
     Vector2I GetChunkCoords(Vector2I pos)
     {
-        return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize));
+        Vector2I negativFix = new Vector2I(0, 0);
+        if(pos.X < 0) negativFix.X = -1;
+        if(pos.Y < 0) negativFix.Y = -1;
+        return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize)) + negativFix;
     }
 }

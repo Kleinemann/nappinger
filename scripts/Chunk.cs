@@ -26,7 +26,7 @@ public partial class Chunk : GodotObject
         int halfchunsize = ChunkSize / 2;
         //Vector2I start = Coords * ChunkSize - new Vector2I(halfchunsize, halfchunsize);
         //Vector2I end = Coords * ChunkSize + new Vector2I(halfchunsize-1, halfchunsize-1);
-        Vector2I start = Coords * ChunkSize;
+        Vector2I start = (Coords * ChunkSize);
         Vector2I end = start + new Vector2I(ChunkSize-1, ChunkSize-1);
 
         //WorldMain.Instance.Map.WorldLayer.SetCell(Coords * halfchunsize, 0, new Vector2I(5, 3));
