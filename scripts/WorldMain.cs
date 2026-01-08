@@ -15,15 +15,8 @@ public partial class WorldMain : Node2D
         Instance = this;
         Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<Camera2D>("Camera2D");
+
         //Map.UpdateMap();
-
-        Chunk chunk3 = new Chunk(new Vector2I(-1, -1));
-        Chunk chunk1 = new Chunk(new Vector2I(0, 0));
-        Chunk chunk2 = new Chunk(new Vector2I(1, 1));
-
-        chunk1.Paint();
-        chunk2.Paint();
-        chunk3.Paint();
     }
 
     public override void _UnhandledInput(InputEvent @event)

@@ -18,31 +18,38 @@ public partial class Chunk : GodotObject
         Coords = coords;
     }
 
-    public void Paint()
+    public Vector2I[] GetTileCoords()
     {
-        //WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(Coords.X, Coords.Y), 0, new Vector2I(5, 3));
-
-        
-        int halfchunsize = ChunkSize / 2;
-        //Vector2I start = Coords * ChunkSize - new Vector2I(halfchunsize, halfchunsize);
-        //Vector2I end = Coords * ChunkSize + new Vector2I(halfchunsize-1, halfchunsize-1);
+        Vector2I[] coords = new Vector2I[ChunkSize * ChunkSize];
         Vector2I start = (Coords * ChunkSize);
-        Vector2I end = start + new Vector2I(ChunkSize-1, ChunkSize-1);
+        Vector2I end = start + new Vector2I(ChunkSize - 1, ChunkSize - 1);
 
-        //WorldMain.Instance.Map.WorldLayer.SetCell(Coords * halfchunsize, 0, new Vector2I(5, 3));
-
+        int index = 0;
         for (var x = start.X; x <= end.X; x++)
         {
-            WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(x, start.Y), 0, new Vector2I(5, 3));
-            WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(x, end.Y), 0, new Vector2I(5, 3));
+            for (var y = start.Y; y <= end.Y; y++)
+            {
+                Vector2I tileCoord = new Vector2I(x, y);
+                coords[index] = tileCoord;
+                index++;
+            }
         }
+        return coords;
+    }
 
-        for(var y = start.Y; y <= end.Y; y++)
+    public void Paint()
+    {
+        foreach (Vector2I tileCoord in GetTileCoords())
         {
-            WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(start.X, y), 0, new Vector2I(5, 3));
-            WorldMain.Instance.Map.WorldLayer.SetCell(new Vector2I(end.X, y), 0, new Vector2I(5, 3));
+            WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(5, 3));
         }
-        //WorldMain.Instance.Map.WorldLayer.SetCell(start, 0, new Vector2I(5, 3));
-        //WorldMain.Instance.Map.WorldLayer.SetCell(end, 0, new Vector2I(5, 3));
+    }
+
+    public void Clean()
+    {
+        foreach(Vector2I tileCoord in GetTileCoords())
+        {
+            WorldMain.Instance.Map.WorldLayer.EraseCell(tileCoord);
+        }
     }
 }

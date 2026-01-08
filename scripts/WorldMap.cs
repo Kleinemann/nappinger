@@ -29,36 +29,18 @@ public partial class WorldMap : Node2D
     public void UpdateMap()
     {
         Vector2I cMouse = GetMouseCoords();
-        GD.Print("Mouse POS: " + cMouse + " Chunk: " + GetChunkCoords(cMouse));
-
-        /*
-        Vector2 cameraPos = World.Camera.Position - World.Camera.GetViewportRect().Size / 2;
-        Vector2 mousePos = GetViewport().GetMousePosition();
-
-        
-        Vector2I kCamera = WorldLayer.LocalToMap(cameraPos);
-        Vector2I kMouse = WorldLayer.LocalToMap(mousePos);
-
-        GD.Print("########## MAP UPDATE ##########");
-        GD.Print("Camera POS: " + cameraPos + " COORD: " + kCamera);
-        GD.Print("Mouse POS: " + mousePos + " COORD: " + kMouse);
-
-        Vector2I totalPos = kMouse + kCamera;
-        Vector2I ChunkCoord = PosToChunk(kMouse + kCamera);
-        GD.Print("Total: " + totalPos + " CHUNK: " + ChunkCoord);
-        */
+        Vector2I ChunkCoord = GetChunkCoords(cMouse);
+        GD.Print("Mouse POS: " + cMouse + " Chunk: " + ChunkCoord);
 
 
-
-        //Chunk c = new Chunk(ChunkCoord);
-        //c.Paint();
-
-        /*
-        if(ChunkCoord == CurrentChunk)
+        //kein Update wenn selber Chunk
+        if (ChunkCoord == CurrentChunk)
         {
             GD.Print("SAME CHUNK - NO UPDATE");
             return;
         }
+
+        CurrentChunk = ChunkCoord;
 
         Array<Vector2I> chunksTmp = new Array<Vector2I>();
 
@@ -71,9 +53,14 @@ public partial class WorldMap : Node2D
             }
         }
 
+
         foreach(Vector2I coordRem in Chunks.Keys)
         {
+            if(chunksTmp.Contains(coordRem))
+                continue;
+
             GD.Print("Remove Chunk: " + coordRem);
+            Chunks[coordRem].Clean();
             Chunks.Remove(coordRem);
         }
 
@@ -82,14 +69,15 @@ public partial class WorldMap : Node2D
             if (!Chunks.ContainsKey(c))
             {
                 GD.Print("Add Chunk: " + c);
-                Chunks.Add(c, new Chunk(c));
+                Chunk chunk = new Chunk(c);
+                chunk.Paint();
+                Chunks.Add(c, chunk);
             }
             else
             {
                 GD.Print("Keep Chunk: " + c);
             }
         }
-        */
     }
 
     Vector2I GetMouseCoords()
@@ -103,8 +91,16 @@ public partial class WorldMap : Node2D
     Vector2I GetChunkCoords(Vector2I pos)
     {
         Vector2I negativFix = new Vector2I(0, 0);
-        if(pos.X < 0) negativFix.X = -1;
-        if(pos.Y < 0) negativFix.Y = -1;
+        if (pos.X < 0)
+        {
+            pos.X += 1;
+            negativFix.X = -1;
+        }
+        if (pos.Y < 0)
+        {
+            negativFix.Y = -1;
+            pos.Y += 1;
+        }
         return new Vector2I((pos.X / Chunk.ChunkSize), (pos.Y / Chunk.ChunkSize)) + negativFix;
     }
 }

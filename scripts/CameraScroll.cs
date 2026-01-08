@@ -10,7 +10,7 @@ public partial class CameraScroll : Camera2D
 
     public override void _Input(InputEvent @event)
     {
-        return;
+        //return;
         if(@event is InputEventMouseButton mbe)
         {
             if(mbe.IsPressed())
@@ -19,7 +19,7 @@ public partial class CameraScroll : Camera2D
 
                 if (mbe.ButtonIndex == MouseButton.WheelUp)
                 {
-                    if (ZoomLevel > 1f)
+                    if (ZoomLevel > 0f)
                     {
                         Vector2 preZoomValue = Zoom;
                         ZoomLevel -= 0.25f;
@@ -43,18 +43,20 @@ public partial class CameraScroll : Camera2D
 
     public override void _Process(double delta)
     {
-        return;
+        //return;
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector2 moveVector = Vector2.Zero;
+        float cammeraSpeedAdjusted = CameraSpeed * (float)delta / ZoomLevel;
+
         if (mousePos.X <= EdgeMargin)
-            moveVector.X = -CameraSpeed * (float)delta;
+            moveVector.X = -cammeraSpeedAdjusted;
         else if(mousePos.X >= UnZoomedViewportSize.X - EdgeMargin)
-            moveVector.X = CameraSpeed * (float)delta;
+            moveVector.X = cammeraSpeedAdjusted;
 
         if (mousePos.Y <= EdgeMargin)
-            moveVector.Y = -CameraSpeed * (float)delta;
+            moveVector.Y = -cammeraSpeedAdjusted;
         else if(mousePos.Y >= UnZoomedViewportSize.Y - EdgeMargin)
-            moveVector.Y = CameraSpeed * (float)delta;
+            moveVector.Y = cammeraSpeedAdjusted;
 
         if(moveVector == Vector2.Zero)
             return;
