@@ -3,9 +3,9 @@ using System;
 
 public partial class Chunk : GodotObject
 {
-    public static readonly int TileSize = 16;
-    public static readonly int ChunkSize = 16;
-    public static readonly int ChunkRange = 3;
+    public static readonly int TileSize = 8;
+    public static readonly int ChunkSize = 8;
+    public static readonly int ChunkRange = 1;
 
     public Vector2I Coords;
 
@@ -37,11 +37,26 @@ public partial class Chunk : GodotObject
         return coords;
     }
 
+    float GetNoise(Vector2I tileCoord)
+    {
+        return GetNoise(tileCoord.X, tileCoord.Y);
+    }
+
+    float GetNoise(float x, float z)
+    {
+        float value = WorldMain.Instance.Map.Noise.GetNoise2D(x, z);
+        return value;
+    }
+
     public void Paint()
     {
         foreach (Vector2I tileCoord in GetTileCoords())
         {
-            WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(5, 3));
+            float noiseValue = GetNoise(tileCoord);
+            if(noiseValue <= 0f)
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(2, 1));
+            else
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(10, 1));
         }
     }
 

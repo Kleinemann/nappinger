@@ -6,11 +6,10 @@ public partial class CameraScroll : Camera2D
     float EdgeMargin = 15f;
     float CameraSpeed = 200f;
     Vector2 UnZoomedViewportSize = new Vector2(1152, 648);
-    float ZoomLevel = 1f;
+    float ZoomLevel = 0.5f;
 
     public override void _Input(InputEvent @event)
     {
-        //return;
         if(@event is InputEventMouseButton mbe)
         {
             if(mbe.IsPressed())
@@ -43,7 +42,6 @@ public partial class CameraScroll : Camera2D
 
     public override void _Process(double delta)
     {
-        //return;
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector2 moveVector = Vector2.Zero;
         float cammeraSpeedAdjusted = CameraSpeed * (float)delta / ZoomLevel;
@@ -62,7 +60,5 @@ public partial class CameraScroll : Camera2D
             return;
 
         Position += moveVector;
-
-        //WorldMain.Instance.Map.UpdateMap();
     }
 }
