@@ -8,6 +8,10 @@ public partial class Chunk : GodotObject
     public static readonly int ChunkRange = 1;
 
     public Vector2I Coords;
+    public float MinHeight = float.MaxValue;
+    public float MaxHeight = float.MinValue;
+
+    public WorldMap Map => WorldMain.Instance.Map;
 
     public Chunk()
     {
@@ -45,6 +49,8 @@ public partial class Chunk : GodotObject
     float GetNoise(float x, float z)
     {
         float value = WorldMain.Instance.Map.Noise.GetNoise2D(x, z);
+        if (value < MinHeight) MinHeight = value;
+        if (value > MaxHeight) MaxHeight = value;
         return value;
     }
 
@@ -53,10 +59,14 @@ public partial class Chunk : GodotObject
         foreach (Vector2I tileCoord in GetTileCoords())
         {
             float noiseValue = GetNoise(tileCoord);
-            if(noiseValue <= 0f)
-                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(2, 1));
+            if(noiseValue >= 0.6f)
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, Map.TileTypeCoord[WorldMap.TileType.DIRT]);
+            else if (noiseValue >= 0.0f)
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, Map.TileTypeCoord[WorldMap.TileType.GRASS]);
+            else if (noiseValue >= -0.2f)
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, Map.TileTypeCoord[WorldMap.TileType.SAND]);
             else
-                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, new Vector2I(10, 1));
+                WorldMain.Instance.Map.WorldLayer.SetCell(tileCoord, 0, Map.TileTypeCoord[WorldMap.TileType.WATER]);
         }
     }
 

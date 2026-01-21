@@ -12,6 +12,16 @@ public partial class WorldMap : Node2D
         Frequency = 0.1689f
     };
 
+    public enum TileType { NONE, WATER, SAND, GRASS, DIRT };
+    public readonly Dictionary<TileType, Vector2I> TileTypeCoord = new Dictionary<TileType, Vector2I>()
+    {
+        { TileType.NONE, new Vector2I(-1,-1) },
+        { TileType.WATER, new Vector2I(2,1) },
+        { TileType.SAND, new Vector2I(6,1) },
+        { TileType.GRASS, new Vector2I(10,1) },
+        { TileType.DIRT, new Vector2I(14,1) }
+    };
+
     public TileMapLayer OffsetLayer;
     public TileMapLayer WorldLayer;
 
@@ -78,6 +88,22 @@ public partial class WorldMap : Node2D
                 //GD.Print("Keep Chunk: " + c);
             }
         }
+
+
+        //float min = float.MaxValue;
+        //float max = float.MinValue;
+
+        //foreach (Chunk chunk in Chunks.Values)
+        //{
+        //    if (chunk.MinHeight < min)
+        //        min = chunk.MinHeight;
+
+        //    if (chunk.MaxHeight > max)
+        //        max = chunk.MaxHeight;
+        //}
+
+        //GD.Print("Height Min: " + min + " Max: " + max);
+
     }
 
     Vector2I GetMouseCoords()
