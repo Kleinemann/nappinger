@@ -15,6 +15,7 @@ script = ExtResource("1_7ps7e")
 tile_set = ExtResource("1_o2lsi")
 
 [node name="WorldGrid" type="TileMapLayer" parent="DualTileMap"]
+visible = false
 tile_set = ExtResource("1_o2lsi")
 
 [node name="Camera2D" type="Camera2D" parent="."]

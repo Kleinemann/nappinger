@@ -16,14 +16,14 @@ public partial class WorldMain : Node2D
         Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<Camera2D>("Camera2D");
 
-        //Map.UpdateMap();
+        Map.UpdateMap();
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            Map.UpdateMap();
+            //Map.UpdateMap();
             @event.Dispose();
         }
     }

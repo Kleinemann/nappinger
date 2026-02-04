@@ -18,7 +18,7 @@ public partial class CameraScroll : Camera2D
 
                 if (mbe.ButtonIndex == MouseButton.WheelUp)
                 {
-                    if (ZoomLevel > 0f)
+                    if (ZoomLevel > 0.25f)
                     {
                         Vector2 preZoomValue = Zoom;
                         ZoomLevel -= 0.25f;
@@ -60,5 +60,7 @@ public partial class CameraScroll : Camera2D
             return;
 
         Position += moveVector;
+
+        WorldMain.Instance.Map.UpdateMap();
     }
 }

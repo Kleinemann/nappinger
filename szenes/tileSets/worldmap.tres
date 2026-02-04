@@ -68,6 +68,7 @@ separation = Vector2i(1, 1)
 13:3/0 = 0
 14:3/0 = 0
 15:3/0 = 0
+0:3/0 = 0
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_0h2f4")

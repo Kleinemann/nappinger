@@ -1,6 +1,6 @@
 using Godot;
-using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.Transactions;
 
 public partial class WorldMap : Node2D
@@ -9,10 +9,12 @@ public partial class WorldMap : Node2D
     {
         NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth,
         Seed = 0,
-        Frequency = 0.1689f
+        Frequency = 0.015f
     };
 
     public enum TileType { NONE, WATER, SAND, GRASS, DIRT };
+
+    public readonly List<Vector2I> BaseTiles = new List<Vector2I>() { new Vector2I(-1, -1), new Vector2I(2, 1), new Vector2I(6, 1), new Vector2I(10, 1), new Vector2I(14, 1)};
     public readonly Dictionary<TileType, Vector2I> TileTypeCoord = new Dictionary<TileType, Vector2I>()
     {
         { TileType.NONE, new Vector2I(-1,-1) },
@@ -30,6 +32,7 @@ public partial class WorldMap : Node2D
     Vector2I CurrentChunk = Vector2I.MinValue;
     Dictionary<Vector2I, Chunk> Chunks = new Dictionary<Vector2I, Chunk>();
 
+
     public override void _Ready()
     {
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
@@ -38,8 +41,13 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
+        Vector2 gCamera = WorldMain.Instance.Camera.GetViewportRect().Position;
+        Vector2 lCamera = ToLocal(gCamera);
+        Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
+
+
         Vector2I cMouse = GetMouseCoords();
-        Vector2I ChunkCoord = GetChunkCoords(cMouse);
+        Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
         //GD.Print("Mouse POS: " + cMouse + " Chunk: " + ChunkCoord);
 
 
@@ -52,7 +60,7 @@ public partial class WorldMap : Node2D
 
         CurrentChunk = ChunkCoord;
 
-        Array<Vector2I> chunksTmp = new Array<Vector2I>();
+        List<Vector2I> chunksTmp = new List<Vector2I>();
 
         for (int x = ChunkCoord.X - ChunkRange; x <= ChunkCoord.X + ChunkRange; x++)
         {
@@ -95,6 +103,8 @@ public partial class WorldMap : Node2D
 
         //foreach (Chunk chunk in Chunks.Values)
         //{
+        //    //chunk.Paint();
+
         //    if (chunk.MinHeight < min)
         //        min = chunk.MinHeight;
 
