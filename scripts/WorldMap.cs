@@ -41,15 +41,13 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
-        Vector2 gCamera = WorldMain.Instance.Camera.GetViewportRect().Position;
+        Vector2 gCamera = WorldMain.Instance.Camera.Position / 16;
         Vector2 lCamera = ToLocal(gCamera);
         Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
 
-
         Vector2I cMouse = GetMouseCoords();
         Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
-        //GD.Print("Mouse POS: " + cMouse + " Chunk: " + ChunkCoord);
-
+        GD.Print("Mouse POS: " + ChunkCoord2 + " Chunk: " + ChunkCoord);
 
         //kein Update wenn selber Chunk
         if (ChunkCoord == CurrentChunk)

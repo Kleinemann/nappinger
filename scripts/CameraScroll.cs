@@ -37,6 +37,7 @@ public partial class CameraScroll : Camera2D
                     }
                 }
             }
+            WorldMain.Instance.Map.UpdateMap();
         }
     }
 

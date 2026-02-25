@@ -21,9 +21,14 @@ public partial class WorldMain : Node2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        if(@event.IsActionPressed("ui_cancel"))
+        {
+            GetTree().Quit();
+        }
+
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            //Map.UpdateMap();
+            Map.UpdateMap();
             @event.Dispose();
         }
     }
