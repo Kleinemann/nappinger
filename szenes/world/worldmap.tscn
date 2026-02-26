@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3322irhb3pmu"]
+[gd_scene load_steps=8 format=3 uid="uid://b3322irhb3pmu"]
 
 [ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
 [ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
 [ext_resource type="Script" uid="uid://bg57tk5c0giu3" path="res://scripts/WorldMain.cs" id="1_tgi5o"]
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/CameraScroll.cs" id="2_1wgjs"]
+[ext_resource type="Texture2D" uid="uid://gjkas6ake265" path="res://assets/tiles/tree.png" id="4_tgi5o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_713x0"]
+texture = ExtResource("4_tgi5o")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2fbf8"]
+sources/0 = SubResource("TileSetAtlasSource_713x0")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tgi5o")
@@ -17,6 +29,9 @@ tile_set = ExtResource("1_o2lsi")
 [node name="WorldGrid" type="TileMapLayer" parent="DualTileMap"]
 visible = false
 tile_set = ExtResource("1_o2lsi")
+
+[node name="PlantGrid" type="TileMapLayer" parent="DualTileMap"]
+tile_set = SubResource("TileSet_2fbf8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(15, 16)

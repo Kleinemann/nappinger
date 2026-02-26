@@ -93,6 +93,11 @@ public partial class Chunk : GodotObject
                 SetTile(tileCoord, TileType.SAND);
             else
                 SetTile(tileCoord, TileType.WATER);
+
+            if(noiseValue < 0.3f && noiseValue > 0.2F)
+            {
+                setPlant(tileCoord, noiseValue);
+            }
         }
     }
 
@@ -122,6 +127,27 @@ public partial class Chunk : GodotObject
             RefreshOffset(ce);
         }
     }
+
+
+    public void setPlant(Vector2I pos, float value)
+    {
+        float part = value % 0.01f * 1000f;
+        int x;
+        if (part >= 8)
+            x = 0;
+        else if (part >= 5)
+            x = 1;
+        else if (part >= 3)
+            x = 2;
+        else if (part >= 1)
+            x = 3;
+        else
+            x = 4;
+
+        Vector2I atlasCoords = new Vector2I(x, 0);
+        Map.TreeLayer.SetCell(pos, 0, atlasCoords);
+    }
+
 
     public void RefreshOffset(Vector2I pos)
     {

@@ -26,6 +26,7 @@ public partial class WorldMap : Node2D
 
     public TileMapLayer OffsetLayer;
     public TileMapLayer WorldLayer;
+    public TileMapLayer TreeLayer;
 
     WorldMain World => WorldMain.Instance;
     int ChunkRange => Chunk.ChunkRange;
@@ -37,6 +38,7 @@ public partial class WorldMap : Node2D
     {
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
+        TreeLayer = GetNode<TileMapLayer>("PlantGrid");
     }
 
     public void UpdateMap()
