@@ -14,6 +14,9 @@ public partial class Chunk : GodotObject
     public float MinHeight = float.MaxValue;
     public float MaxHeight = float.MinValue;
 
+
+    public Dictionary<int, Vector2I> Animals = new Dictionary<int, Vector2I>();
+
     public WorldMap Map => WorldMain.Instance.Map;
 
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
@@ -46,6 +49,37 @@ public partial class Chunk : GodotObject
     {
         Coords = coords;
     }
+
+
+    public void Process()
+    {
+        RandomNumberGenerator rng = new RandomNumberGenerator();
+        rng.Randomize();
+
+
+        foreach (int animal in Animals.Keys)
+        {
+            var coord = Animals[animal];
+
+            int tileSet = Map.TreeLayer.GetCellSourceId(coord);
+            Vector2I TileCoords = Map.TreeLayer.GetCellAtlasCoords(coord);
+
+            int x = rng.RandiRange(-1, 1);
+            int y = rng.RandiRange(-1, 1);
+
+            Vector2I newCoord = coord + new Vector2I(x, y);
+
+            if(!Animals.ContainsValue(newCoord) && Map.TreeLayer.GetCellSourceId(newCoord) < 0)
+            {
+                Animals[animal] = newCoord;
+
+                Map.TreeLayer.EraseCell(coord);
+                Map.TreeLayer.SetCell(Animals[animal], tileSet, TileCoords);
+            }
+        }
+    }
+
+
 
     public Vector2I[] GetTileCoords()
     {
@@ -94,9 +128,14 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            if(noiseValue < 0.3f && noiseValue > 0.2F)
+            if(noiseValue > 0.2f && noiseValue < 0.3f)
             {
                 setPlant(tileCoord, noiseValue);
+            }
+
+            if(noiseValue > 0.153 && noiseValue < 0.155)
+            {
+                setAnimal(tileCoord, noiseValue);
             }
         }
     }
@@ -146,6 +185,23 @@ public partial class Chunk : GodotObject
 
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.TreeLayer.SetCell(pos, 0, atlasCoords);
+    }
+
+    public void setAnimal(Vector2I pos, float value)
+    {
+        float part = value % 0.001f * 10000f;
+        int x;
+        if (part >= 5)
+            x = 0;
+        else
+            x = 2;
+
+
+        Vector2I atlasCoords = new Vector2I(x, 0);
+        Map.TreeLayer.SetCell(pos, 1, atlasCoords);
+
+        int max = Animals.Keys.Count() > 0 ? Animals.Keys.Max() : 0;
+        Animals.Add(max +1, pos);
     }
 
 

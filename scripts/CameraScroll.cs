@@ -16,7 +16,7 @@ public partial class CameraScroll : Camera2D
             {
                 Vector2 mousePos = GetViewport().GetMousePosition();
 
-                if (mbe.ButtonIndex == MouseButton.WheelUp)
+                if (mbe.ButtonIndex == MouseButton.WheelDown)
                 {
                     if (ZoomLevel > 0.25f)
                     {
@@ -26,7 +26,7 @@ public partial class CameraScroll : Camera2D
                         Position += (mousePos - Position) * (new Vector2(1, 1) - preZoomValue / Zoom);
                     }
                 }
-                if(mbe.ButtonIndex == MouseButton.WheelDown)
+                if(mbe.ButtonIndex == MouseButton.WheelUp)
                 {
                     if (ZoomLevel < 4f)
                     {

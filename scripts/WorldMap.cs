@@ -31,7 +31,7 @@ public partial class WorldMap : Node2D
     WorldMain World => WorldMain.Instance;
     int ChunkRange => Chunk.ChunkRange;
     Vector2I CurrentChunk = Vector2I.MinValue;
-    Dictionary<Vector2I, Chunk> Chunks = new Dictionary<Vector2I, Chunk>();
+    public Dictionary<Vector2I, Chunk> Chunks = new Dictionary<Vector2I, Chunk>();
 
 
     public override void _Ready()
@@ -43,13 +43,13 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
-        Vector2 gCamera = WorldMain.Instance.Camera.Position / 16;
+        Vector2 gCamera = WorldMain.Instance.Camera.Position / Chunk.TileSize;
         Vector2 lCamera = ToLocal(gCamera);
         Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
 
         Vector2I cMouse = GetMouseCoords();
         Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
-        GD.Print("Mouse POS: " + ChunkCoord2 + " Chunk: " + ChunkCoord);
+        //GD.Print("Mouse POS: " + ChunkCoord2 + " Chunk: " + ChunkCoord);
 
         //kein Update wenn selber Chunk
         if (ChunkCoord == CurrentChunk)
