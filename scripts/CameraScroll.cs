@@ -6,7 +6,12 @@ public partial class CameraScroll : Camera2D
     float EdgeMargin = 15f;
     float CameraSpeed = 200f;
     Vector2 UnZoomedViewportSize = new Vector2(1152, 648);
-    float ZoomLevel = 0.5f;
+    float ZoomLevel = 1.25f;
+
+    public override void _Ready()
+    {
+        Zoom = new Vector2(ZoomLevel, ZoomLevel);
+    }
 
     public override void _Input(InputEvent @event)
     {
