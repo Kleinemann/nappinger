@@ -61,20 +61,20 @@ public partial class Chunk : GodotObject
         {
             var coord = Animals[animal];
 
-            int tileSet = Map.TreeLayer.GetCellSourceId(coord);
-            Vector2I TileCoords = Map.TreeLayer.GetCellAtlasCoords(coord);
+            int tileSet = Map.ItemLayer.GetCellSourceId(coord);
+            Vector2I TileCoords = Map.ItemLayer.GetCellAtlasCoords(coord);
 
             int x = rng.RandiRange(-1, 1);
             int y = rng.RandiRange(-1, 1);
 
             Vector2I newCoord = coord + new Vector2I(x, y);
 
-            if(!Animals.ContainsValue(newCoord) && Map.TreeLayer.GetCellSourceId(newCoord) < 0)
+            if(!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
             {
                 Animals[animal] = newCoord;
 
-                Map.TreeLayer.EraseCell(coord);
-                Map.TreeLayer.SetCell(Animals[animal], tileSet, TileCoords);
+                Map.ItemLayer.EraseCell(coord);
+                Map.ItemLayer.SetCell(Animals[animal], tileSet, TileCoords);
             }
         }
     }
@@ -184,7 +184,7 @@ public partial class Chunk : GodotObject
             x = 4;
 
         Vector2I atlasCoords = new Vector2I(x, 0);
-        Map.TreeLayer.SetCell(pos, 0, atlasCoords);
+        Map.ItemLayer.SetCell(pos, 0, atlasCoords);
     }
 
     public void setAnimal(Vector2I pos, float value)
@@ -198,7 +198,7 @@ public partial class Chunk : GodotObject
 
 
         Vector2I atlasCoords = new Vector2I(x, 0);
-        Map.TreeLayer.SetCell(pos, 1, atlasCoords);
+        Map.ItemLayer.SetCell(pos, 1, atlasCoords);
 
         int max = Animals.Keys.Count() > 0 ? Animals.Keys.Max() : 0;
         Animals.Add(max +1, pos);

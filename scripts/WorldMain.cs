@@ -10,6 +10,8 @@ public partial class WorldMain : Node2D
     public WorldMap Map;
     public double Time = 0;
 
+    public enum ItemType { NONE, PLANT, ANIMAL, BUILDING, NPC };
+
     public override void _Ready()
     {
         Instance = this;
@@ -27,6 +29,7 @@ public partial class WorldMain : Node2D
         {
             Time = 0;
             ProcessChunks();
+            Map.Marker.Update();
         }
     }
 
@@ -40,6 +43,7 @@ public partial class WorldMain : Node2D
     }
 
 
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if(@event.IsActionPressed("ui_cancel"))
@@ -49,7 +53,10 @@ public partial class WorldMain : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            Map.UpdateMap();
+            //Select tile
+            Vector2I pos = Map.GetMouseCoords();
+            bool marked = Map.Marker.Select(pos);
+
             @event.Dispose();
         }
     }

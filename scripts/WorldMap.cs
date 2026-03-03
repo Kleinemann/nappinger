@@ -26,7 +26,9 @@ public partial class WorldMap : Node2D
 
     public TileMapLayer OffsetLayer;
     public TileMapLayer WorldLayer;
-    public TileMapLayer TreeLayer;
+    public TileMapLayer ItemLayer;
+    public Marker Marker;
+
 
     WorldMain World => WorldMain.Instance;
     int ChunkRange => Chunk.ChunkRange;
@@ -38,7 +40,8 @@ public partial class WorldMap : Node2D
     {
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
-        TreeLayer = GetNode<TileMapLayer>("PlantGrid");
+        ItemLayer = GetNode<TileMapLayer>("ItemGrid");
+        Marker = GetNode<Marker>("Marker");
     }
 
     public void UpdateMap()
@@ -116,13 +119,20 @@ public partial class WorldMap : Node2D
 
     }
 
-    Vector2I GetMouseCoords()
+    public Vector2I GetMouseCoords()
     {   
         Vector2 gMouse = GetGlobalMousePosition();
         Vector2 lMouse = ToLocal(gMouse);
         return WorldLayer.LocalToMap(lMouse);
     }
 
+    public Chunk GetChunk(Vector2I pos)
+    {
+        Vector2I chunkCoords = GetChunkCoords(pos);
+        if (Chunks.ContainsKey(chunkCoords))
+            return Chunks[chunkCoords];
+        return null;
+    }
 
     Vector2I GetChunkCoords(Vector2I pos)
     {

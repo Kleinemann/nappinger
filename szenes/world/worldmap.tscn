@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3322irhb3pmu"]
+[gd_scene load_steps=12 format=3 uid="uid://b3322irhb3pmu"]
 
 [ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
 [ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
@@ -6,27 +6,58 @@
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://gjkas6ake265" path="res://assets/tiles/tree.png" id="4_tgi5o"]
 [ext_resource type="Texture2D" uid="uid://btsofy0ov6rav" path="res://assets/tiles/animals.png" id="5_713x0"]
+[ext_resource type="Texture2D" uid="uid://nuube55132l6" path="res://assets/tiles/Marker.png" id="6_2fbf8"]
+[ext_resource type="Script" uid="uid://duxijl8k8g5ba" path="res://szenes/world/Marker.cs" id="7_b4bkx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_713x0"]
 texture = ExtResource("4_tgi5o")
 0:0/0 = 0
+0:0/0/custom_data_0 = 1
+0:0/0/custom_data_1 = "Baum"
+0:0/0/custom_data_2 = 15
 1:0/0 = 0
+1:0/0/custom_data_0 = 1
+1:0/0/custom_data_1 = "Baum"
+1:0/0/custom_data_2 = 20
 2:0/0 = 0
+2:0/0/custom_data_0 = 1
+2:0/0/custom_data_1 = "Busch"
+2:0/0/custom_data_2 = 20
 3:0/0 = 0
+3:0/0/custom_data_0 = 1
+3:0/0/custom_data_1 = "Tanne"
+3:0/0/custom_data_2 = 15
 4:0/0 = 0
+4:0/0/custom_data_0 = 1
+4:0/0/custom_data_1 = "Stein"
+4:0/0/custom_data_2 = 20
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2fbf8"]
 texture = ExtResource("5_713x0")
 0:0/animation_columns = 2
+0:0/animation_mode = 1
 0:0/animation_frame_0/duration = 0.5
 0:0/animation_frame_1/duration = 0.5
 0:0/0 = 0
+0:0/0/custom_data_0 = 2
+0:0/0/custom_data_1 = "Igel"
+0:0/0/custom_data_2 = 1
 2:0/animation_columns = 2
+2:0/animation_mode = 1
 2:0/animation_frame_0/duration = 0.25
 2:0/animation_frame_1/duration = 0.25
 2:0/0 = 0
+2:0/0/custom_data_0 = 2
+2:0/0/custom_data_1 = "Fledermaus"
+2:0/0/custom_data_2 = 2
 
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
+custom_data_layer_0/name = "ItemType"
+custom_data_layer_0/type = 2
+custom_data_layer_1/name = "ItemName"
+custom_data_layer_1/type = 4
+custom_data_layer_2/name = "ItemValue"
+custom_data_layer_2/type = 2
 sources/0 = SubResource("TileSetAtlasSource_713x0")
 sources/1 = SubResource("TileSetAtlasSource_2fbf8")
 
@@ -43,8 +74,12 @@ tile_set = ExtResource("1_o2lsi")
 visible = false
 tile_set = ExtResource("1_o2lsi")
 
-[node name="PlantGrid" type="TileMapLayer" parent="DualTileMap"]
+[node name="ItemGrid" type="TileMapLayer" parent="DualTileMap"]
 tile_set = SubResource("TileSet_2fbf8")
+
+[node name="Marker" type="Sprite2D" parent="DualTileMap"]
+texture = ExtResource("6_2fbf8")
+script = ExtResource("7_b4bkx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(15, 16)
