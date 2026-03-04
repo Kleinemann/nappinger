@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3322irhb3pmu"]
+[gd_scene load_steps=17 format=3 uid="uid://b3322irhb3pmu"]
 
 [ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
 [ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
@@ -7,7 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://gjkas6ake265" path="res://assets/tiles/tree.png" id="4_tgi5o"]
 [ext_resource type="Texture2D" uid="uid://btsofy0ov6rav" path="res://assets/tiles/animals.png" id="5_713x0"]
 [ext_resource type="Texture2D" uid="uid://nuube55132l6" path="res://assets/tiles/Marker.png" id="6_2fbf8"]
+[ext_resource type="Texture2D" uid="uid://bk7xmw2g6risa" path="res://assets/tiles/npc.png" id="6_s58pj"]
 [ext_resource type="Script" uid="uid://duxijl8k8g5ba" path="res://szenes/world/Marker.cs" id="7_b4bkx"]
+[ext_resource type="Script" uid="uid://bdvgv1iaoiuod" path="res://szenes/world/Ui.cs" id="9_pm8jy"]
+[ext_resource type="Texture2D" uid="uid://bh10veui84myk" path="res://assets/ui/human.png" id="10_s58pj"]
+[ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_713x0"]
 texture = ExtResource("4_tgi5o")
@@ -51,6 +55,67 @@ texture = ExtResource("5_713x0")
 2:0/0/custom_data_1 = "Fledermaus"
 2:0/0/custom_data_2 = 2
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8u5v"]
+texture = ExtResource("6_s58pj")
+margins = Vector2i(1, 1)
+separation = Vector2i(1, 0)
+0:0/0 = 0
+0:0/0/custom_data_0 = 4
+0:0/0/custom_data_1 = "NPC"
+0:0/0/custom_data_2 = 20
+1:0/0 = 0
+1:0/0/custom_data_0 = 4
+1:0/0/custom_data_1 = "NPC"
+1:0/0/custom_data_2 = 20
+2:0/0 = 0
+2:0/0/custom_data_0 = 4
+2:0/0/custom_data_1 = "NPC"
+2:0/0/custom_data_2 = 20
+3:0/0 = 0
+3:0/0/custom_data_0 = 4
+3:0/0/custom_data_1 = "NPC"
+3:0/0/custom_data_2 = 20
+4:0/0 = 0
+4:0/0/custom_data_0 = 4
+4:0/0/custom_data_1 = "NPC"
+4:0/0/custom_data_2 = 20
+5:0/0 = 0
+5:0/0/custom_data_0 = 4
+5:0/0/custom_data_1 = "NPC"
+5:0/0/custom_data_2 = 20
+6:0/0 = 0
+6:0/0/custom_data_0 = 4
+6:0/0/custom_data_1 = "NPC"
+6:0/0/custom_data_2 = 20
+7:0/0 = 0
+7:0/0/custom_data_0 = 4
+7:0/0/custom_data_1 = "NPC"
+7:0/0/custom_data_2 = 20
+8:0/0 = 0
+8:0/0/custom_data_0 = 4
+8:0/0/custom_data_1 = "NPC"
+8:0/0/custom_data_2 = 20
+9:0/0 = 0
+9:0/0/custom_data_0 = 4
+9:0/0/custom_data_1 = "NPC"
+9:0/0/custom_data_2 = 20
+10:0/0 = 0
+10:0/0/custom_data_0 = 5
+10:0/0/custom_data_1 = "Spieler"
+10:0/0/custom_data_2 = 20
+11:0/0 = 0
+11:0/0/custom_data_0 = 4
+11:0/0/custom_data_1 = "NPC"
+11:0/0/custom_data_2 = 20
+12:0/0 = 0
+12:0/0/custom_data_0 = 5
+12:0/0/custom_data_1 = "Spieler"
+12:0/0/custom_data_2 = 20
+13:0/0 = 0
+13:0/0/custom_data_0 = 4
+13:0/0/custom_data_1 = "NPC"
+13:0/0/custom_data_2 = 20
+
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 custom_data_layer_0/name = "ItemType"
 custom_data_layer_0/type = 2
@@ -60,6 +125,7 @@ custom_data_layer_2/name = "ItemValue"
 custom_data_layer_2/type = 2
 sources/0 = SubResource("TileSetAtlasSource_713x0")
 sources/1 = SubResource("TileSetAtlasSource_2fbf8")
+sources/2 = SubResource("TileSetAtlasSource_f8u5v")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tgi5o")
@@ -78,9 +144,55 @@ tile_set = ExtResource("1_o2lsi")
 tile_set = SubResource("TileSet_2fbf8")
 
 [node name="Marker" type="Sprite2D" parent="DualTileMap"]
+visible = false
 texture = ExtResource("6_2fbf8")
 script = ExtResource("7_b4bkx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 script = ExtResource("2_1wgjs")
+
+[node name="UI" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_pm8jy")
+
+[node name="ItemBox" type="VBoxContainer" parent="Camera2D/UI"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 52.0
+offset_bottom = 37.0
+
+[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Label"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ItemBox"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ItemBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ItemPicture" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer/PanelContainer"]
+layout_mode = 2
+stretch_mode = 2
+
+[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_s58pj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_x812f")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true

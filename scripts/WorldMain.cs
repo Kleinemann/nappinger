@@ -10,7 +10,7 @@ public partial class WorldMain : Node2D
     public WorldMap Map;
     public double Time = 0;
 
-    public enum ItemType { NONE, PLANT, ANIMAL, BUILDING, NPC };
+    public enum ItemType { NONE, PLANT, ANIMAL, BUILDING, NPC, PLAYER };
 
     public override void _Ready()
     {
@@ -56,6 +56,16 @@ public partial class WorldMain : Node2D
             //Select tile
             Vector2I pos = Map.GetMouseCoords();
             bool marked = Map.Marker.Select(pos);
+
+            @event.Dispose();
+        }
+
+        if (Input.IsMouseButtonPressed(MouseButton.Right))
+        {
+            if(Map.Marker.Visible && Map.Marker.CuttentPlayer >= 0)
+            {
+                Map.Marker.CurrentChunk.PlayerTarget[Map.Marker.CuttentPlayer] = Map.GetMouseCoords();
+            }
 
             @event.Dispose();
         }

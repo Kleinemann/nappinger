@@ -1,16 +1,10 @@
 using Godot;
-using System;
-using System.Linq;
-using static WorldMain;
 
 public partial class Marker : Sprite2D
 {
     public Chunk CurrentChunk = null;
-    public ItemType ItemType = ItemType.NONE;
-    public string ItemName;
-    public int ItemValue;
-
     public int CurrentAnimal = -1;
+    public int CuttentPlayer = -1;
 
     WorldMap Map;
 
@@ -25,24 +19,12 @@ public partial class Marker : Sprite2D
         int atlas = Map.ItemLayer.GetCellSourceId(pos);
         if (atlas >= 0)
         {
-            TileData data = Map.ItemLayer.GetCellTileData(pos);
-
-            ItemName = (string)data.GetCustomData("ItemName");
-            ItemType = (ItemType)((int)data.GetCustomData("ItemType"));
-            ItemValue = (int)data.GetCustomData("ItemValue");
-
             Position = Map.ItemLayer.MapToLocal(pos);
             Visible = true;
             CurrentChunk = Map.GetChunk(pos);
 
-            if(ItemType == ItemType.ANIMAL)
-            {
-                int key = CurrentChunk.Animals.First(x => x.Value == pos).Key;
-                CurrentAnimal = key;
-            }
-            else CurrentAnimal = -1;
+            Ui.Instance.SelectItem(pos);
 
-            GD.Print("Clicked on: " + ItemName);
             return true;
         }
         else
@@ -55,11 +37,8 @@ public partial class Marker : Sprite2D
     {
         Visible = false;
         CurrentChunk = null;
-        ItemType = ItemType.NONE;
-        ItemName = "";
-        ItemValue = 0;
 
-        CurrentAnimal = -1;
+        Ui.Instance.DeselectItem();
     }
 
     public void Update()
@@ -67,6 +46,12 @@ public partial class Marker : Sprite2D
         if(Visible && CurrentAnimal >= 0)
         {
             Vector2I pos = CurrentChunk.Animals[CurrentAnimal];
+            Position = Map.ItemLayer.MapToLocal(pos);
+        }
+
+        if (Visible && CuttentPlayer >= 0)
+        {
+            Vector2I pos = CurrentChunk.Player[CuttentPlayer];
             Position = Map.ItemLayer.MapToLocal(pos);
         }
     }

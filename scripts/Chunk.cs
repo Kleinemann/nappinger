@@ -16,6 +16,8 @@ public partial class Chunk : GodotObject
 
 
     public Dictionary<int, Vector2I> Animals = new Dictionary<int, Vector2I>();
+    public Dictionary<int, Vector2I> Player = new Dictionary<int, Vector2I>();
+    public Dictionary<int, Vector2I> PlayerTarget = new Dictionary<int, Vector2I>();
 
     public WorldMap Map => WorldMain.Instance.Map;
 
@@ -69,7 +71,7 @@ public partial class Chunk : GodotObject
 
             Vector2I newCoord = coord + new Vector2I(x, y);
 
-            if(!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
+            if (!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
             {
                 Animals[animal] = newCoord;
 
@@ -77,8 +79,41 @@ public partial class Chunk : GodotObject
                 Map.ItemLayer.SetCell(Animals[animal], tileSet, TileCoords);
             }
         }
-    }
 
+        foreach (int player in Player.Keys)
+        {
+            var coord = Player[player];
+            var target = PlayerTarget[player];
+
+            if(coord != target)
+            {
+                int tileSet = Map.ItemLayer.GetCellSourceId(coord);
+                Vector2I TileCoords = Map.ItemLayer.GetCellAtlasCoords(coord);
+
+                int x = 0;
+                if(coord.X < target.X)
+                    x = 1;
+                else if(coord.X > target.X)
+                    x = -1;
+
+                int y = 0;
+                if(coord.Y < target.Y)                    
+                    y = 1;
+                else if(coord.Y > target.Y)
+                    y = -1;
+
+                Vector2I newCoord = coord + new Vector2I(x, y);
+
+                if (!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
+                {
+                    Player[player] = newCoord;
+
+                    Map.ItemLayer.EraseCell(coord);
+                    Map.ItemLayer.SetCell(Player[player], tileSet, TileCoords);
+                }
+            }
+        }
+    }
 
 
     public Vector2I[] GetTileCoords()
@@ -137,6 +172,11 @@ public partial class Chunk : GodotObject
             {
                 setAnimal(tileCoord, noiseValue);
             }
+
+            if (noiseValue > 0.15 && noiseValue < 0.151)
+            {
+                setPlayer(tileCoord, noiseValue);
+            }
         }
     }
 
@@ -185,6 +225,23 @@ public partial class Chunk : GodotObject
 
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 0, atlasCoords);
+    }
+
+    public void setPlayer(Vector2I pos, float value)
+    {
+        float part = value % 0.001f * 10000f;
+        int x;
+        if (part >= 5)
+            x = 10;
+        else
+            x = 12;
+
+        Vector2I atlasCoords = new Vector2I(x, 0);
+        Map.ItemLayer.SetCell(pos, 2, atlasCoords);
+
+        int max = Player.Keys.Count() > 0 ? Player.Keys.Max() : 0;
+        Player.Add(max + 1, pos);
+        PlayerTarget.Add(max + 1, pos);
     }
 
     public void setAnimal(Vector2I pos, float value)
