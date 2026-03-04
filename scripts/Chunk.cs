@@ -279,7 +279,8 @@ public partial class Chunk : GodotObject
     {
         foreach(Vector2I tileCoord in GetTileCoords())
         {
-            WorldMain.Instance.Map.WorldLayer.EraseCell(tileCoord);
+            Map.WorldLayer.EraseCell(tileCoord);
+            Map.ItemLayer.EraseCell(tileCoord);
             RefreshOffset(tileCoord);
         }
     }

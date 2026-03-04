@@ -68,10 +68,10 @@ script = ExtResource("1_tgi5o")
 script = ExtResource("1_7ps7e")
 
 [node name="OffsetGrid" type="TileMapLayer" parent="DualTileMap"]
-visible = false
 tile_set = ExtResource("1_o2lsi")
 
 [node name="WorldGrid" type="TileMapLayer" parent="DualTileMap"]
+visible = false
 tile_set = ExtResource("1_o2lsi")
 
 [node name="ItemGrid" type="TileMapLayer" parent="DualTileMap"]
