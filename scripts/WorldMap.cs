@@ -46,7 +46,10 @@ public partial class WorldMap : Node2D
 
     public void UpdateMap()
     {
-        Vector2 gCamera = WorldMain.Instance.Camera.Position / Chunk.TileSize;
+        Camera2D camera = WorldMain.Instance.Camera;
+
+        Vector2 size = camera.GetViewportRect().Size / camera.Zoom / 2;
+        Vector2 gCamera = (camera.Position + size) / Chunk.TileSize;
         Vector2 lCamera = ToLocal(gCamera);
         Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
 
