@@ -1,4 +1,5 @@
 using Godot;
+using nappinger.scripts;
 using System;
 using System.Collections.Generic;
 using static DualTilemap;
@@ -60,9 +61,10 @@ public partial class WorldMain : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
-            if(Map.Marker.Visible && Map.Marker.CuttentPlayer >= 0)
+            if(Map.Marker.Visible && Map.Marker.CurrentItem != null && Map.Marker.CurrentItem is GameItemMoveable)
             {
-                Map.Marker.CurrentChunk.PlayerTarget[Map.Marker.CuttentPlayer] = Map.GetMouseCoords();
+                GameItemMoveable gim = (GameItemMoveable)Map.Marker.CurrentItem;
+                gim.TargetPosition = Map.GetMouseCoords();
             }
 
             @event.Dispose();

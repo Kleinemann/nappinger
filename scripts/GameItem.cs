@@ -15,11 +15,13 @@ namespace nappinger.scripts
 
         int AtlasSourceId;
         Vector2I AtlasCoord;
-
         public ItemType Type { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }
         public Vector2I Position { get; set; }
+
+        public Vector2I ChunkCoord {  get; set; }
+
 
         public ImageTexture Icon
         {
@@ -48,5 +50,13 @@ namespace nappinger.scripts
 
 
         }
+    }
+
+    public class GameItemMoveable : GameItem
+    {
+        public Vector2I TargetPosition { get; set; }
+
+        public GameItemMoveable(Vector2I pos) : base(pos)
+        { }
     }
 }

@@ -1,10 +1,10 @@
 using Godot;
+using nappinger.scripts;
 
 public partial class Marker : Sprite2D
 {
     public Chunk CurrentChunk = null;
-    public int CurrentAnimal = -1;
-    public int CuttentPlayer = -1;
+    public GameItem CurrentItem = null;
 
     WorldMap Map;
 
@@ -43,15 +43,9 @@ public partial class Marker : Sprite2D
 
     public void Update()
     {
-        if(Visible && CurrentAnimal >= 0)
+        if(Visible && CurrentItem != null)
         {
-            Vector2I pos = CurrentChunk.Animals[CurrentAnimal];
-            Position = Map.ItemLayer.MapToLocal(pos);
-        }
-
-        if (Visible && CuttentPlayer >= 0)
-        {
-            Vector2I pos = CurrentChunk.Player[CuttentPlayer];
+            Vector2I pos = CurrentItem.Position;
             Position = Map.ItemLayer.MapToLocal(pos);
         }
     }

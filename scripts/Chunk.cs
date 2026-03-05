@@ -1,4 +1,5 @@
 using Godot;
+using nappinger.scripts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,7 @@ public partial class Chunk : GodotObject
     public float MinHeight = float.MaxValue;
     public float MaxHeight = float.MinValue;
 
-
-    public Dictionary<int, Vector2I> Animals = new Dictionary<int, Vector2I>();
-    public Dictionary<int, Vector2I> Player = new Dictionary<int, Vector2I>();
-    public Dictionary<int, Vector2I> PlayerTarget = new Dictionary<int, Vector2I>();
+    public Dictionary<Vector2I, GameItem> Items = new Dictionary<Vector2I, GameItem>();
 
     public WorldMap Map => WorldMain.Instance.Map;
 
@@ -58,60 +56,59 @@ public partial class Chunk : GodotObject
         RandomNumberGenerator rng = new RandomNumberGenerator();
         rng.Randomize();
 
+        Dictionary<Vector2I, Vector2I> changePosition =  new Dictionary<Vector2I, Vector2I>();
 
-        foreach (int animal in Animals.Keys)
+        foreach (GameItem gi in Items.Values)
         {
-            var coord = Animals[animal];
-
-            int tileSet = Map.ItemLayer.GetCellSourceId(coord);
-            Vector2I TileCoords = Map.ItemLayer.GetCellAtlasCoords(coord);
-
-            int x = rng.RandiRange(-1, 1);
-            int y = rng.RandiRange(-1, 1);
-
-            Vector2I newCoord = coord + new Vector2I(x, y);
-
-            if (!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
+            if (gi.Type == ItemType.ANIMAL || gi.Type == ItemType.PLAYER)
             {
-                Animals[animal] = newCoord;
+                var coord = gi.Position;
 
-                Map.ItemLayer.EraseCell(coord);
-                Map.ItemLayer.SetCell(Animals[animal], tileSet, TileCoords);
-            }
-        }
-
-        foreach (int player in Player.Keys)
-        {
-            var coord = Player[player];
-            var target = PlayerTarget[player];
-
-            if(coord != target)
-            {
                 int tileSet = Map.ItemLayer.GetCellSourceId(coord);
                 Vector2I TileCoords = Map.ItemLayer.GetCellAtlasCoords(coord);
 
-                int x = 0;
-                if(coord.X < target.X)
-                    x = 1;
-                else if(coord.X > target.X)
-                    x = -1;
+                Vector2I newCoord = Vector2I.Zero;
 
-                int y = 0;
-                if(coord.Y < target.Y)                    
-                    y = 1;
-                else if(coord.Y > target.Y)
-                    y = -1;
-
-                Vector2I newCoord = coord + new Vector2I(x, y);
-
-                if (!Animals.ContainsValue(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
+                if (gi.Type == ItemType.ANIMAL)
                 {
-                    Player[player] = newCoord;
+                    int x = rng.RandiRange(-1, 1);
+                    int y = rng.RandiRange(-1, 1);
+                    newCoord = coord + new Vector2I(x, y);
+                }
 
+                if(gi.Type == ItemType.PLAYER)
+                {
+                    GameItemMoveable gim = (GameItemMoveable)gi;
+                    int x = 0;
+                    if (coord.X < gim.TargetPosition.X)
+                        x = 1;
+                    else if (coord.X > gim.TargetPosition.X)
+                        x = -1;
+
+                    int y = 0;
+                    if (coord.Y < gim.TargetPosition.Y)
+                        y = 1;
+                    else if (coord.Y > gim.TargetPosition.Y)
+                        y = -1;
+
+                    newCoord = coord + new Vector2I(x, y);
+                }
+
+                if (!Items.ContainsKey(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
+                {
+                    changePosition.Add(coord, newCoord);
                     Map.ItemLayer.EraseCell(coord);
-                    Map.ItemLayer.SetCell(Player[player], tileSet, TileCoords);
+                    Map.ItemLayer.SetCell(newCoord, tileSet, TileCoords);
                 }
             }
+        }
+
+        foreach(KeyValuePair<Vector2I, Vector2I> pair in changePosition)
+        {
+            GameItem gi = Items[pair.Key];
+            gi.Position = pair.Value;
+            Items.Remove(pair.Key);
+            Items.Add(pair.Value, gi);
         }
     }
 
@@ -239,9 +236,7 @@ public partial class Chunk : GodotObject
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 2, atlasCoords);
 
-        int max = Player.Keys.Count() > 0 ? Player.Keys.Max() : 0;
-        Player.Add(max + 1, pos);
-        PlayerTarget.Add(max + 1, pos);
+        Items.Add(pos, new GameItemMoveable(pos));
     }
 
     public void setAnimal(Vector2I pos, float value)
@@ -257,8 +252,7 @@ public partial class Chunk : GodotObject
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 1, atlasCoords);
 
-        int max = Animals.Keys.Count() > 0 ? Animals.Keys.Max() : 0;
-        Animals.Add(max +1, pos);
+        Items.Add(pos, new GameItem(pos));
     }
 
 
