@@ -1,4 +1,5 @@
 using Godot;
+using nappinger.scripts;
 using System;
 using System.Linq;
 using static WorldMain;
@@ -42,7 +43,7 @@ public partial class Ui : Control
         TileData data = Map.ItemLayer.GetCellTileData(pos);
 
         Item.Name = (string)data.GetCustomData("ItemName");
-        WorldMain.ItemType ItemType = (ItemType)((int)data.GetCustomData("ItemType"));
+        ItemType ItemType = (ItemType)((int)data.GetCustomData("ItemType"));
         int ItemValue = (int)data.GetCustomData("ItemValue");
 
         Marker marker = WorldMain.Instance.Map.Marker;

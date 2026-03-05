@@ -10,8 +10,6 @@ public partial class WorldMain : Node2D
     public WorldMap Map;
     public double Time = 0;
 
-    public enum ItemType { NONE, PLANT, ANIMAL, BUILDING, NPC, PLAYER };
-
     public override void _Ready()
     {
         Instance = this;
