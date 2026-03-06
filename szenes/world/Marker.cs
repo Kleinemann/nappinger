@@ -3,7 +3,6 @@ using nappinger.scripts;
 
 public partial class Marker : Sprite2D
 {
-    public Chunk CurrentChunk = null;
     public GameItem CurrentItem = null;
 
     WorldMap Map;
@@ -21,7 +20,6 @@ public partial class Marker : Sprite2D
         {
             Position = Map.ItemLayer.MapToLocal(pos);
             Visible = true;
-            CurrentChunk = Map.GetChunk(pos);
 
             Ui.Instance.SelectItem(pos);
 
@@ -36,7 +34,6 @@ public partial class Marker : Sprite2D
     public void Deselect()
     {
         Visible = false;
-        CurrentChunk = null;
 
         Ui.Instance.DeselectItem();
     }

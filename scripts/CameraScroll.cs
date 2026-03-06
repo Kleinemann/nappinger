@@ -3,14 +3,25 @@ using System;
 
 public partial class CameraScroll : Camera2D
 {
-    float EdgeMargin = 15f;
+    float EdgeMargin = 20f;
     float CameraSpeed = 200f;
     Vector2 UnZoomedViewportSize = new Vector2(1152, 648);
     float ZoomLevel = 1.25f;
+    bool MouseOutOfWindow = false;
 
     public override void _Ready()
     {
         Zoom = new Vector2(ZoomLevel, ZoomLevel);
+    }
+
+    public override void _Notification(int what)
+    {
+        if(what == NotificationWMMouseExit)
+            MouseOutOfWindow = true;
+        if(what == NotificationWMMouseEnter)
+            MouseOutOfWindow = false;
+
+        base._Notification(what);
     }
 
     public override void _Input(InputEvent @event)
@@ -48,6 +59,9 @@ public partial class CameraScroll : Camera2D
 
     public override void _Process(double delta)
     {
+        if(MouseOutOfWindow)
+            return;
+
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector2 moveVector = Vector2.Zero;
         float cammeraSpeedAdjusted = CameraSpeed * (float)delta / ZoomLevel;

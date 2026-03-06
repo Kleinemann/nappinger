@@ -27,11 +27,9 @@ namespace nappinger.scripts
         {
             get
             {
-                int sourceId = Map.ItemLayer.GetCellSourceId(Position);
-                Vector2I atlasCoords = Map.ItemLayer.GetCellAtlasCoords(Position);
-                TileSetAtlasSource tss = Map.ItemLayer.TileSet.GetSource(sourceId) as TileSetAtlasSource;
+                TileSetAtlasSource tss = Map.ItemLayer.TileSet.GetSource(AtlasSourceId) as TileSetAtlasSource;
                 Texture2D atlasTexture = tss.Texture;
-                Rect2I region = tss.GetTileTextureRegion(atlasCoords);
+                Rect2I region = tss.GetTileTextureRegion(AtlasCoord);
 
                 Image atlasImage = atlasTexture.GetImage();
                 Image tileImage = atlasImage.GetRegion(region);
@@ -39,24 +37,40 @@ namespace nappinger.scripts
             }
         }
 
-        public GameItem(Vector2I pos)
+        public static GameItem NewGameItem(Vector2I pos)
         {
-            Position = pos;
-            TileData data = Map.ItemLayer.GetCellTileData(pos);
+            //Position = pos;
+            int atlasSourceId = WorldMain.Instance.Map.ItemLayer.GetCellSourceId(pos);
+            Vector2I atlasCoord = WorldMain.Instance.Map.ItemLayer.GetCellAtlasCoords(pos);
+            TileData data = WorldMain.Instance.Map.ItemLayer.GetCellTileData(pos);
 
-            Name = (string)data.GetCustomData("ItemName");
-            Type = (ItemType)((int)data.GetCustomData("ItemType"));
-            Value = (int)data.GetCustomData("ItemValue");
+            string name = (string)data.GetCustomData("ItemName");
+            ItemType type = (ItemType)((int)data.GetCustomData("ItemType"));
+            int value = (int)data.GetCustomData("ItemValue");
 
+            GameItem item;
 
+            if(type == ItemType.PLAYER)
+            {
+                item = new GameItemMoveable();
+                (item as GameItemMoveable).TargetPosition = pos;
+            }
+            else item = new GameItem();
+
+            item.Position = pos;
+            item.AtlasSourceId = atlasSourceId;
+            item.AtlasCoord = atlasCoord;
+            item.Name = name;
+            item.Type = type;
+            item.Value = value;
+            item.ChunkCoord = WorldMain.Instance.Map.GetChunkCoords(pos);
+
+            return item;
         }
     }
 
     public class GameItemMoveable : GameItem
     {
         public Vector2I TargetPosition { get; set; }
-
-        public GameItemMoveable(Vector2I pos) : base(pos)
-        { }
     }
 }

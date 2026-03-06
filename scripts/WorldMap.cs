@@ -137,7 +137,7 @@ public partial class WorldMap : Node2D
         return null;
     }
 
-    Vector2I GetChunkCoords(Vector2I pos)
+    public Vector2I GetChunkCoords(Vector2I pos)
     {
         Vector2I negativFix = new Vector2I(0, 0);
         if (pos.X < 0)

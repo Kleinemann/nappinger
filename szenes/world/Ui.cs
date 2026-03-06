@@ -42,41 +42,15 @@ public partial class Ui : Control
 
         TileData data = Map.ItemLayer.GetCellTileData(pos);
 
-        Item.Name = (string)data.GetCustomData("ItemName");
-        ItemType ItemType = (ItemType)((int)data.GetCustomData("ItemType"));
-        int ItemValue = (int)data.GetCustomData("ItemValue");
+        Chunk chunk = WorldMain.Instance.Map.GetChunk(pos);
+        GameItem item = chunk.Items[pos];
 
+        Item.Name = item.Name;
         Marker marker = WorldMain.Instance.Map.Marker;
-        if (ItemType == ItemType.ANIMAL)
-        {
-            int key = marker.CurrentChunk.Animals.First(x => x.Value == pos).Key;
-            marker.CurrentAnimal = key;
-        }
-        else marker.CurrentAnimal = -1;
+        marker.CurrentItem = item;
 
-        if (ItemType == ItemType.PLAYER)
-        {
-            int key = marker.CurrentChunk.Player.First(x => x.Value == pos).Key;
-            marker.CuttentPlayer = key;
-            Item.IsHuman = true;
-        }
-        else
-        {
-            marker.CuttentPlayer = -1;
-            Item.IsHuman = false;
-        }
-
-        int sourceId = Map.ItemLayer.GetCellSourceId(pos);
-        Vector2I atlasCoords = Map.ItemLayer.GetCellAtlasCoords(pos);
-        TileSetAtlasSource tss = Map.ItemLayer.TileSet.GetSource(sourceId) as TileSetAtlasSource;
-        Texture2D atlasTexture = tss.Texture;
-        Rect2I region = tss.GetTileTextureRegion(atlasCoords);
-
-        Image atlasImage = atlasTexture.GetImage();
-        Image tileImage = atlasImage.GetRegion(region);
-
-        Item.Picture = ImageTexture.CreateFromImage(tileImage);
-
+        Item.IsHuman = item.Type == ItemType.PLAYER;
+        Item.Picture = item.Icon;
         Item.Selected = true;
     }
 

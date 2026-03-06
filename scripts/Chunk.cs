@@ -103,12 +103,29 @@ public partial class Chunk : GodotObject
             }
         }
 
-        foreach(KeyValuePair<Vector2I, Vector2I> pair in changePosition)
+        foreach (KeyValuePair<Vector2I, Vector2I> pair in changePosition)
         {
+            Vector2I targetChunkCoords = Map.GetChunkCoords(pair.Value);
+
+            //Only Chunks in Cache can be target of movement
+            if (!Map.Chunks.ContainsKey(targetChunkCoords))
+                continue;
+
+            // move Item to new position
             GameItem gi = Items[pair.Key];
             gi.Position = pair.Value;
             Items.Remove(pair.Key);
-            Items.Add(pair.Value, gi);
+            
+            // check if Item change the Chunk
+                
+            if (targetChunkCoords == Coords)
+            {
+                Items.Add(pair.Value, gi);
+            }
+            else
+            {
+                WorldMain.Instance.Map.Chunks[targetChunkCoords].Items.Add(pair.Value, gi);
+            }
         }
     }
 
@@ -222,6 +239,8 @@ public partial class Chunk : GodotObject
 
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 0, atlasCoords);
+
+        Items.Add(pos, GameItem.NewGameItem(pos));
     }
 
     public void setPlayer(Vector2I pos, float value)
@@ -236,7 +255,7 @@ public partial class Chunk : GodotObject
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 2, atlasCoords);
 
-        Items.Add(pos, new GameItemMoveable(pos));
+        Items.Add(pos, GameItem.NewGameItem(pos));
     }
 
     public void setAnimal(Vector2I pos, float value)
@@ -252,7 +271,7 @@ public partial class Chunk : GodotObject
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 1, atlasCoords);
 
-        Items.Add(pos, new GameItem(pos));
+        Items.Add(pos, GameItem.NewGameItem(pos));
     }
 
 
