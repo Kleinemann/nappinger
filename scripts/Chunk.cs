@@ -13,8 +13,6 @@ public partial class Chunk : GodotObject
     public static readonly int ChunkRange = 5;
 
     public Vector2I Coords;
-    public float MinHeight = float.MaxValue;
-    public float MaxHeight = float.MinValue;
 
     public Dictionary<Vector2I, GameItem> Items = new Dictionary<Vector2I, GameItem>();
 
@@ -90,8 +88,6 @@ public partial class Chunk : GodotObject
     float GetNoise(float x, float z)
     {
         float value = WorldMain.Instance.Map.Noise.GetNoise2D(x, z);
-        if (value < MinHeight) MinHeight = value;
-        if (value > MaxHeight) MaxHeight = value;
         return value;
     }
 
@@ -110,19 +106,26 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            if(noiseValue > 0.2f && noiseValue < 0.3f)
+            GameItem item = null;
+            if (noiseValue > 0.2f && noiseValue < 0.3f)
             {
-                setPlant(tileCoord, noiseValue);
+                item = GameItem.NewGameItem(ItemTypeEnum.PLANT, tileCoord, noiseValue);
             }
 
             if(noiseValue > 0.153 && noiseValue < 0.155)
             {
-                setAnimal(tileCoord, noiseValue);
+                item = GameItem.NewGameItem(ItemTypeEnum.ANIMAL, tileCoord, noiseValue);
             }
 
             if (noiseValue > 0.15 && noiseValue < 0.151)
             {
-                setPlayer(tileCoord, noiseValue);
+                //item = GameItem.NewGameItem(ItemTypeEnum.PLAYER, tileCoord, noiseValue);
+            }
+
+            if(item != null)
+            {
+                Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
+                Items.Add(item.Position, item);
             }
         }
     }
@@ -132,7 +135,7 @@ public partial class Chunk : GodotObject
         Vector2I coord = Map.TileTypeCoord[tileType];
         Map.WorldLayer.SetCell(pos, 0, coord);
 
-        //Todo: Ränder korigieren !
+        //TODO: Ränder korigieren !
 
         //fixing Neigbours first
         //foreach (Vector2I offset in NEIGHBOURS_AROUND)
@@ -155,58 +158,22 @@ public partial class Chunk : GodotObject
     }
 
 
-    public void setPlant(Vector2I pos, float value)
-    {
-        float part = value % 0.01f * 1000f;
-        int x;
-        if (part >= 8)
-            x = 0;
-        else if (part >= 5)
-            x = 1;
-        else if (part >= 3)
-            x = 2;
-        else if (part >= 1)
-            x = 3;
-        else
-            x = 4;
+ 
+    //public void setPlayer(Vector2I pos, float value)
+    //{
+    //    float part = value % 0.001f * 10000f;
+    //    int x;
+    //    if (part >= 5)
+    //        x = 10;
+    //    else
+    //        x = 12;
 
-        Vector2I atlasCoords = new Vector2I(x, 0);
-        Map.ItemLayer.SetCell(pos, 0, atlasCoords);
+    //    Vector2I atlasCoords = new Vector2I(x, 0);
+    //    Map.ItemLayer.SetCell(pos, 2, atlasCoords);
 
-        Items.Add(pos, GameItem.NewGameItem(pos));
-    }
+    //    Items.Add(pos, GameItem.NewGameItem(pos));
+    //}
 
-    public void setPlayer(Vector2I pos, float value)
-    {
-        float part = value % 0.001f * 10000f;
-        int x;
-        if (part >= 5)
-            x = 10;
-        else
-            x = 12;
-
-        Vector2I atlasCoords = new Vector2I(x, 0);
-        Map.ItemLayer.SetCell(pos, 2, atlasCoords);
-
-        Items.Add(pos, GameItem.NewGameItem(pos));
-    }
-
-    public void setAnimal(Vector2I pos, float value)
-    {
-        float part = value % 0.001f * 10000f;
-        int x;
-        if (part >= 5)
-            x = 0;
-        else
-            x = 2;
-
-
-        Vector2I atlasCoords = new Vector2I(x, 0);
-        Map.ItemLayer.SetCell(pos, 1, atlasCoords);
-        GameItem item = GameItem.NewGameItem(pos);
-        item.State = ItemState.WALKING;
-        Items.Add(pos, GameItem.NewGameItem(pos));
-    }
 
 
     public void RefreshOffset(Vector2I pos)
@@ -267,6 +234,15 @@ public partial class Chunk : GodotObject
         return GetTileType(index);
     }
 
+
+    public GameItem GetItem(Vector2I pos)
+    {
+        if (Items.ContainsKey(pos))
+            return Items[pos];
+        return null;
+    }
+
+
     public Vector2I[] GetNeigbours(Vector2I pos)
     {
         Vector2I[] posN = new Vector2I[4];
@@ -281,7 +257,15 @@ public partial class Chunk : GodotObject
 
     public void Clean()
     {
-        foreach(Vector2I tileCoord in GetTileCoords())
+        //Alle SPielobjecte Löschen
+        foreach(Vector2I pos in Items.Keys)
+        {
+            Map.ItemLayer.EraseCell(pos);
+        }
+        Items.Clear();
+
+        //Karte Löschen
+        foreach (Vector2I tileCoord in GetTileCoords())
         {
             Map.WorldLayer.EraseCell(tileCoord);
             Map.ItemLayer.EraseCell(tileCoord);

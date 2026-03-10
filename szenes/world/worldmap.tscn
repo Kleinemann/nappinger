@@ -26,7 +26,7 @@ texture = ExtResource("4_tgi5o")
 2:0/0 = 0
 2:0/0/custom_data_0 = 1
 2:0/0/custom_data_1 = "Busch"
-2:0/0/custom_data_2 = 20
+2:0/0/custom_data_2 = 10
 3:0/0 = 0
 3:0/0/custom_data_0 = 1
 3:0/0/custom_data_1 = "Tanne"
@@ -34,7 +34,7 @@ texture = ExtResource("4_tgi5o")
 4:0/0 = 0
 4:0/0/custom_data_0 = 1
 4:0/0/custom_data_1 = "Stein"
-4:0/0/custom_data_2 = 20
+4:0/0/custom_data_2 = 5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2fbf8"]
 texture = ExtResource("5_713x0")
@@ -168,12 +168,19 @@ offset_top = 10.0
 offset_right = 52.0
 offset_bottom = 37.0
 
-[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ItemBox"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "Label"
+text = "Name"
+
+[node name="ItemValue" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2"]
+layout_mode = 2
+text = "Value"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ItemBox"]
 layout_mode = 2
@@ -194,5 +201,4 @@ texture = ExtResource("10_s58pj")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_x812f")
 volume_db = -10.0
-autoplay = true
 parameters/looping = true

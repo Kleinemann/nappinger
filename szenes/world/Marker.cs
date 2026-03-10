@@ -12,22 +12,26 @@ public partial class Marker : Sprite2D
         Map = GetParent<WorldMap>();
     }
 
-    public bool Select(Vector2I pos)
+    public void Select(GameItem item)
     {
-        Input.SetCustomMouseCursor(null);
-        int atlas = Map.ItemLayer.GetCellSourceId(pos);
-        if (atlas >= 0)
-        {
-            Position = Map.ItemLayer.MapToLocal(pos);
-            Visible = true;
+        Visible = true;
+        CurrentItem = item;
+        Update();
+        Ui.Instance.Update();
+        //Input.SetCustomMouseCursor(null);
+        //int atlas = Map.ItemLayer.GetCellSourceId(pos);
+        //if (atlas >= 0)
+        //{
+        //    Position = Map.ItemLayer.MapToLocal(pos);
+        //    Visible = true;
 
-            Ui.Instance.SelectItem(pos);
+        //    Ui.Instance.SelectItem(pos);
 
-            return true;
-        }
-        else
-            Deselect();
-        return false;
+        //    return true;
+        //}
+        //else
+        //    Deselect();
+        //return false;
     }
 
 
@@ -35,8 +39,9 @@ public partial class Marker : Sprite2D
     {
         Visible = false;
         CurrentItem = null;
-        Input.SetCustomMouseCursor(null);
-        Ui.Instance.DeselectItem();
+        Ui.Instance.Update();
+        //Input.SetCustomMouseCursor(null);
+        //Ui.Instance.DeselectItem();
     }
 
     public void Update()

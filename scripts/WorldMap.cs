@@ -1,4 +1,5 @@
 using Godot;
+using nappinger.scripts;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
@@ -128,6 +129,23 @@ public partial class WorldMap : Node2D
         Vector2 lMouse = ToLocal(gMouse);
         return WorldLayer.LocalToMap(lMouse);
     }
+
+    public GameItem GetItem(Vector2I pos)
+    {
+        Chunk chunk = GetChunk(pos);
+        if (chunk != null)
+        {
+            return chunk.GetItem(pos);
+        }
+        return null;
+    }
+
+    public GameItem GetItem()
+    {
+        Vector2I pos = GetMouseCoords();
+        return GetItem(pos);
+    }
+
 
     public Chunk GetChunk(Vector2I pos)
     {
