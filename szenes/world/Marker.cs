@@ -4,7 +4,6 @@ using nappinger.scripts;
 public partial class Marker : Sprite2D
 {
     public GameItem CurrentItem = null;
-
     WorldMap Map;
 
     public override void _Ready()
@@ -15,6 +14,7 @@ public partial class Marker : Sprite2D
 
     public bool Select(Vector2I pos)
     {
+        Input.SetCustomMouseCursor(null);
         int atlas = Map.ItemLayer.GetCellSourceId(pos);
         if (atlas >= 0)
         {
@@ -34,7 +34,8 @@ public partial class Marker : Sprite2D
     public void Deselect()
     {
         Visible = false;
-
+        CurrentItem = null;
+        Input.SetCustomMouseCursor(null);
         Ui.Instance.DeselectItem();
     }
 

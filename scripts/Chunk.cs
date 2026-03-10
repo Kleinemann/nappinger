@@ -2,6 +2,7 @@ using Godot;
 using nappinger.scripts;
 using System;
 using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using static WorldMap;
 
@@ -53,82 +54,14 @@ public partial class Chunk : GodotObject
 
     public void Process()
     {
-        RandomNumberGenerator rng = new RandomNumberGenerator();
-        rng.Randomize();
-
-        Dictionary<Vector2I, Vector2I> changePosition =  new Dictionary<Vector2I, Vector2I>();
-
         foreach (GameItem gi in Items.Values)
         {
-            if (gi.Type == ItemType.ANIMAL || gi.Type == ItemType.PLAYER)
+            if (Map.Marker.CurrentItem != null && Map.Marker.CurrentItem == gi)
             {
-                var coord = gi.Position;
-
-                int tileSet = Map.ItemLayer.GetCellSourceId(coord);
-                Vector2I TileCoords = Map.ItemLayer.GetCellAtlasCoords(coord);
-
-                Vector2I newCoord = Vector2I.Zero;
-
-                if (gi.Type == ItemType.ANIMAL)
-                {
-                    int x = rng.RandiRange(-1, 1);
-                    int y = rng.RandiRange(-1, 1);
-                    newCoord = coord + new Vector2I(x, y);
-                }
-
-                if(gi.Type == ItemType.PLAYER)
-                {
-                    GameItemMoveable gim = (GameItemMoveable)gi;
-                    int x = 0;
-                    if (coord.X < gim.TargetPosition.X)
-                        x = 1;
-                    else if (coord.X > gim.TargetPosition.X)
-                        x = -1;
-
-                    int y = 0;
-                    if (coord.Y < gim.TargetPosition.Y)
-                        y = 1;
-                    else if (coord.Y > gim.TargetPosition.Y)
-                        y = -1;
-
-                    newCoord = coord + new Vector2I(x, y);
-                }
-
-                if (!Items.ContainsKey(newCoord) && Map.ItemLayer.GetCellSourceId(newCoord) < 0)
-                {
-                    changePosition.Add(coord, newCoord);
-                    Map.ItemLayer.EraseCell(coord);
-                    Map.ItemLayer.SetCell(newCoord, tileSet, TileCoords);
-                }
-            }
-        }
-
-        foreach (KeyValuePair<Vector2I, Vector2I> pair in changePosition)
-        {
-            Vector2I targetChunkCoords = Map.GetChunkCoords(pair.Value);
-
-            //Only Chunks in Cache can be target of movement
-            if (!Map.Chunks.ContainsKey(targetChunkCoords))
-                continue;
-
-            // move Item to new position
-            GameItem gi = Items[pair.Key];
-            gi.Position = pair.Value;
-            Items.Remove(pair.Key);
-            
-            // check if Item change the Chunk
-                
-            if (targetChunkCoords == Coords)
-            {
-                Items.Add(pair.Value, gi);
-            }
-            else
-            {
-                WorldMain.Instance.Map.Chunks[targetChunkCoords].Items.Add(pair.Value, gi);
+                gi.Process();
             }
         }
     }
-
 
     public Vector2I[] GetTileCoords()
     {
@@ -270,7 +203,8 @@ public partial class Chunk : GodotObject
 
         Vector2I atlasCoords = new Vector2I(x, 0);
         Map.ItemLayer.SetCell(pos, 1, atlasCoords);
-
+        GameItem item = GameItem.NewGameItem(pos);
+        item.State = ItemState.WALKING;
         Items.Add(pos, GameItem.NewGameItem(pos));
     }
 
