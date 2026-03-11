@@ -52,12 +52,10 @@ public partial class Chunk : GodotObject
 
     public void Process()
     {
-        foreach (GameItem gi in Items.Values)
+        GameItem[] items = Items.Values.ToArray();
+        foreach (GameItem gi in items)
         {
-            if (Map.Marker.CurrentItem != null && Map.Marker.CurrentItem == gi)
-            {
-                gi.Process();
-            }
+            gi.Process();
         }
     }
 
@@ -119,7 +117,7 @@ public partial class Chunk : GodotObject
 
             if (noiseValue > 0.15 && noiseValue < 0.151)
             {
-                //item = GameItem.NewGameItem(ItemTypeEnum.PLAYER, tileCoord, noiseValue);
+                item = GameItem.NewGameItem(ItemTypeEnum.PLAYER, tileCoord, noiseValue);
             }
 
             if(item != null)
@@ -156,25 +154,6 @@ public partial class Chunk : GodotObject
             RefreshOffset(ce);
         }
     }
-
-
- 
-    //public void setPlayer(Vector2I pos, float value)
-    //{
-    //    float part = value % 0.001f * 10000f;
-    //    int x;
-    //    if (part >= 5)
-    //        x = 10;
-    //    else
-    //        x = 12;
-
-    //    Vector2I atlasCoords = new Vector2I(x, 0);
-    //    Map.ItemLayer.SetCell(pos, 2, atlasCoords);
-
-    //    Items.Add(pos, GameItem.NewGameItem(pos));
-    //}
-
-
 
     public void RefreshOffset(Vector2I pos)
     {

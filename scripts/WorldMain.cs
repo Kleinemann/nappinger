@@ -1,5 +1,6 @@
 using Godot;
 using nappinger.scripts;
+using System.Data;
 
 public partial class WorldMain : Node2D
 {
@@ -36,42 +37,46 @@ public partial class WorldMain : Node2D
             }
         }
 
-        //if (Map.Marker.CurrentItem != null)
-        //{
-        //    if (Map.Marker.CurrentItem.ItemType == ItemTypeEnum.PLAYER)
-        //    {
-        //        Vector2I mouse = Map.GetMouseCoords();
-        //        if (Map.ItemLayer.GetCellSourceId(mouse) >= 0)
-        //        {
-        //            TileData data = Map.ItemLayer.GetCellTileData(mouse);
-        //            ItemTypeEnum type = (ItemTypeEnum)((int)data.GetCustomData("ItemType"));
-
-        //            Resource res = null;
-        //            switch (type)
-        //            {
-        //                case ItemTypeEnum.PLANT:
-        //                    res = GD.Load("res://assets/actions/lumber.png");
-        //                    break;
-
-        //                case ItemTypeEnum.ANIMAL:
-        //                    res = GD.Load("res://assets/actions/hunt.png");
-        //                    break;
-
-        //                default:
-
-        //                    break;
-        //            }
-
-        //            Input.SetCustomMouseCursor(res);
-        //        }
-        //        else
-        //        {
-        //            Input.SetCustomMouseCursor(null);
-        //        }
-        //    }
-        //}
+        UpdateMouseIcon();
     }
 
+    public void UpdateMouseIcon()
+    {
+        if (Map.Marker.CurrentItem != null)
+        {
+            if (Map.Marker.CurrentItem.ItemType == ItemTypeEnum.PLAYER)
+            {
+                Vector2I mouse = Map.GetMouseCoords();
+                if (Map.ItemLayer.GetCellSourceId(mouse) >= 0)
+                {
+                    TileData data = Map.ItemLayer.GetCellTileData(mouse);
+                    ItemTypeEnum type = (ItemTypeEnum)((int)data.GetCustomData("ItemType"));
+
+                    Resource res = null;
+                    switch (type)
+                    {
+                        case ItemTypeEnum.PLANT:
+                            res = GD.Load("res://assets/actions/lumber.png");
+                            break;
+
+                        case ItemTypeEnum.ANIMAL:
+                            res = GD.Load("res://assets/actions/hunt.png");
+                            break;
+
+                        default:
+
+                            break;
+                    }
+
+                    Input.SetCustomMouseCursor(res);
+                }
+                else
+                {
+                    Input.SetCustomMouseCursor(null);
+                }
+            }
+        }
+    }
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -91,28 +96,20 @@ public partial class WorldMain : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
-            if(Map.Marker.CurrentItem != null)
+            if(Map.Marker.CurrentItem != null && Map.Marker.CurrentItem.ItemType == ItemTypeEnum.PLAYER)
             {
-                Map.Marker.CurrentItem.Value--;
-                Ui.Instance.Update();
+                GameItemMoveable gim = (GameItemMoveable)Map.Marker.CurrentItem;
+                gim.ItemState = ItemStateEnum.WALKING;
+
+                GameItem gi = Map.GetItem();
+
+                if(Map.GetItem() != null)
+                {
+                    gim.TargetItem = gi;
+                }
+                else
+                    gim.TargetPosition = Map.GetMouseCoords();
             }
-
-            //if(Map.Marker.Visible && Map.Marker.CurrentItem != null && Map.Marker.CurrentItem is GameItemMoveable)
-            //{
-            //    GameItemMoveable gim = (GameItemMoveable)Map.Marker.CurrentItem;
-            //    gim.ItemState = ItemStateEnum.WALKING;
-
-            //    Vector2I pos = Map.GetMouseCoords();
-            //    if (Map.ItemLayer.GetCellSourceId(pos) >= 0)
-            //    {
-            //        Chunk chunk = Map.GetChunk(pos);                    
-            //        gim.TargetItem = chunk.Items[pos];
-            //    }
-            //    else
-            //        gim.TargetPosition = Map.GetMouseCoords();
-            //}
-
-            //@event.Dispose();
         }
 
         @event.Dispose();

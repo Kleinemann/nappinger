@@ -106,6 +106,16 @@ namespace nappinger.scripts
                     break;
                 case ItemTypeEnum.PLAYER:
                     item = new GameItemPlayer();
+                    item.AtlasSourceId = 2;
+
+                    noisePart = noise % 0.001f * 10000f;
+                    if (noisePart >= 5)
+                        atlasCoord.X = 10;
+                    else
+                        atlasCoord.X = 12;
+
+                    item.AtlasCoord = atlasCoord;
+                    item.ItemState = ItemStateEnum.IDLE;
                     break;
             }
             if(item != null)
@@ -151,32 +161,17 @@ namespace nappinger.scripts
                 ((GameItemMoveable)(this)).Walking();
             }
 
+            if (ItemState == ItemStateEnum.WORKING)
+            {
+                ((GameItemMoveable)(this)).Work();
+            }
 
-
+            if (ItemState == ItemStateEnum.FIGHTING)
+            {
+                ((GameItemMoveable)(this)).ItemState = ItemStateEnum.FIGHTING;
+                ((GameItemMoveable)(this)).Fight();
+            }
         }
-
-
-        //public void moveItem(Vector2I newPos)
-        //{
-        //    Chunk oldChunk = Map.GetChunk(Position);
-        //    Chunk newChunk = Map.GetChunk(newPos);
-
-        //    if (newChunk.Items.ContainsKey(newPos))
-        //        return; // Can't move to occupied cell
-
-        //    Map.ItemLayer.EraseCell(Position);
-        //    Map.ItemLayer.SetCell(newPos, AtlasSourceId, AtlasCoord);
-
-        //    oldChunk.Items.Remove(Position);
-        //    newChunk.Items.Add(newPos, this);
-
-        //    Position = newPos;
-        //}
-
-        //public virtual void DoAction()
-        //{
-
-        //}
     }
 
     public class GameItemMoveable : GameItem
@@ -202,11 +197,16 @@ namespace nappinger.scripts
             //Ziel Item erreicht
             if(TargetItem != null && TargetItem.Position == newPos)
             {
-                if(TargetItem.ItemType == ItemTypeEnum.ANIMAL)
+                if (TargetItem.ItemType == ItemTypeEnum.ANIMAL)
+                {
                     ItemState = ItemStateEnum.FIGHTING;
+                    GameItemMoveable target = (GameItemMoveable)TargetItem;
+                    target.ItemState = ItemStateEnum.FIGHTING;
+                    target.TargetItem = this;                    
+                }
 
                 if (TargetItem.ItemType == ItemTypeEnum.PLANT)
-                    ItemState |= ItemStateEnum.WORKING;
+                    ItemState = ItemStateEnum.WORKING;
 
                 return;
             }
@@ -219,6 +219,9 @@ namespace nappinger.scripts
 
             Chunk oldChunk = Map.GetChunk(Position);
             Chunk newChunk = Map.GetChunk(newPos);
+
+            if (!Map.Chunks.Values.Contains(newChunk))
+                return;
 
             Map.ItemLayer.EraseCell(Position);
             Map.ItemLayer.SetCell(newPos, AtlasSourceId, AtlasCoord);
@@ -262,44 +265,31 @@ namespace nappinger.scripts
                 if (Position.Y < target.Value.Y) direction.Y = 1;
                 if (Position.Y > target.Value.Y) direction.Y = -1;
 
-                if (Map.GetItem(Position + direction) == null)
+                GameItem item = Map.GetItem(Position + direction);
+                if (item == null || item==TargetItem)
                     return direction;
             }
 
             return Vector2I.Zero;
         }
-        //public override Vector2I GetNextCoords()
-        //{
-        //    if(ItemType == ItemTypeEnum.PLAYER)
-        //    {
-        //        Vector2I? target = TargetItem != null ? TargetItem.Position : TargetPosition;
 
-        //        if(target != null)
-        //        {
-        //            Vector2I direction = Vector2I.Zero;
-        //            if(Position.X < target.Value.X) direction.X = 1;
-        //            if(Position.X > target.Value.X) direction.X = -1;
-        //            if(Position.Y < target.Value.Y) direction.Y = 1;
-        //            if(Position.Y > target.Value.Y) direction.Y = -1;
+        internal void Work()
+        {
+            TargetItem.Value = TargetItem.Value - 3;
+            if (TargetItem.ItemState == ItemStateEnum.DEAD)
+                ItemState = ItemStateEnum.IDLE;
 
-        //            Vector2I newPos = Position + direction;
-        //            if(newPos == target)
-        //            {
-        //                // Reached target
-        //                TargetPosition = null;
-        //                TargetItem = null;
-        //                return Vector2I.MinValue;
-        //            }
-        //            return Position + direction;
-        //        }
-        //    }
-        //    return Vector2I.MinValue;
-        //}
+            Ui.Instance.Update();
+        }
 
-        //public override void DoAction()
-        //{
+        internal void Fight()
+        {
+            TargetItem.Value = TargetItem.Value - 1;
+            if (TargetItem.ItemState == ItemStateEnum.DEAD)
+                ItemState = ItemStateEnum.IDLE;
 
-        //}
+            Ui.Instance.Update();
+        }
     }
 
     public class GameItemPlayer : GameItemMoveable
