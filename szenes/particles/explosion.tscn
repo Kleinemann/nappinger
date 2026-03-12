@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bineq2e2gm1xm"]
+
+[sub_resource type="Curve" id="Curve_j8g6u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.191011), -6.78825, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7vbjl"]
+curve = SubResource("Curve_j8g6u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_elhsi"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 143.22
+gravity = Vector3(0, 0, 0)
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_7vbjl")
+color = Color(1, 0.580392, 0.211765, 1)
+
+[node name="explosion" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_elhsi")
