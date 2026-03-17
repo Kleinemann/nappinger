@@ -115,9 +115,14 @@ public partial class Chunk : GodotObject
                 item = GameItem.NewGameItem(ItemTypeEnum.ANIMAL, tileCoord, noiseValue);
             }
 
-            if (noiseValue > 0.15 && noiseValue < 0.151)
+            if (noiseValue > 0.151 && noiseValue < 0.1515)
             {
                 item = GameItem.NewGameItem(ItemTypeEnum.PLAYER, tileCoord, noiseValue);
+            }
+
+            if(noiseValue >= 0.154 && noiseValue <= 0.157)
+            {
+                item = GameItem.NewGameItem(ItemTypeEnum.NPC, tileCoord, noiseValue);
             }
 
             if(item != null)

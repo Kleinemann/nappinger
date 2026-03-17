@@ -102,13 +102,21 @@ namespace nappinger.scripts
                     break;
 
                 case ItemTypeEnum.NPC:
-                    item = new GameItemMoveable();
+                    item = new NPCGameItem();
+                    item.AtlasSourceId = 2;
+
+                    noisePart = noise % 0.0001f * 100000f;
+                    atlasCoord.X = (int)noisePart;
+
+                    item.AtlasCoord = atlasCoord;
+                    item.ItemState = ItemStateEnum.IDLE;
                     break;
+
                 case ItemTypeEnum.PLAYER:
                     item = new GameItemPlayer();
                     item.AtlasSourceId = 2;
 
-                    noisePart = noise % 0.001f * 10000f;
+                    noisePart = noise % 0.0001f * 100000f;
                     if (noisePart >= 5)
                         atlasCoord.X = 10;
                     else
@@ -154,6 +162,9 @@ namespace nappinger.scripts
             {
                 if (ItemType == ItemTypeEnum.ANIMAL)
                     ItemState = ItemStateEnum.WALKING;
+
+                if(ItemType == ItemTypeEnum.NPC)
+                    ((NPCGameItem)(this)).ProcessIdle();
             }
 
             if (ItemState == ItemStateEnum.WALKING)
@@ -181,7 +192,7 @@ namespace nappinger.scripts
 
         public void Walking()
         {
-            if(ItemType == ItemTypeEnum.ANIMAL)
+            if(ItemType == ItemTypeEnum.ANIMAL || ItemType == ItemTypeEnum.NPC)
             {
                 RandomTarget();
             }
@@ -329,7 +340,39 @@ namespace nappinger.scripts
         }
     }
 
+
     public class GameItemPlayer : GameItemMoveable
     {
+    }
+
+
+    public class NPCGameItem : GameItemMoveable
+    {
+        int waitingCount = 0;
+        int walkingCount = 0;
+
+        public void ProcessIdle()
+        {
+            if (waitingCount > 0)
+            {
+                waitingCount--;
+            }
+            else if (walkingCount > 0)
+            {
+                walkingCount--;
+                ItemState = ItemStateEnum.WALKING;
+            }
+            else
+            {
+                int r = WorldMain.Random.RandiRange(0, 2);
+                if (r > 0)
+                    waitingCount = WorldMain.Random.RandiRange(1, 2);
+                else
+                {
+                    ItemState = ItemStateEnum.WALKING;
+                    walkingCount = WorldMain.Random.RandiRange(1, 5);
+                }
+            }
+        }
     }
 }
