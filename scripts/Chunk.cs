@@ -13,6 +13,7 @@ public partial class Chunk : GodotObject
     public static readonly int ChunkRange = 5;
 
     public Vector2I Coords;
+    public int CellIndex;
 
     public Dictionary<Vector2I, GameItem> Items = new Dictionary<Vector2I, GameItem>();
 
@@ -49,6 +50,19 @@ public partial class Chunk : GodotObject
         Coords = coords;
     }
 
+    List<Vector2I> NeigboursWidthValue(Vector2I coord, ItemTypeEnum type)
+    {
+        List<Vector2I> hits = new List<Vector2I>();
+
+        Vector2I[] neigbours = GetNeigbours(coord);
+        foreach(Vector2I v2 in neigbours)
+        {
+            GameItem tmp = GetItem(v2);
+            if (tmp != null && tmp.ItemType == ItemTypeEnum.PLANT)
+                hits.Add(v2);
+        }
+        return hits;
+    }
 
     public void Process()
     {
@@ -56,6 +70,43 @@ public partial class Chunk : GodotObject
         foreach (GameItem gi in items)
         {
             gi.Process();
+        }
+
+
+        //GOL
+        for (int row = 0; row < 16; row++)
+        {
+            for (int col = 0; col < 16; col++)
+            {
+                int cellIndex = WorldMain.Random.RandiRange(0, (ChunkSize * ChunkSize) - 1);
+
+                //int row = cellIndex / 16;
+                //int col = cellIndex % 16;
+
+                Vector2I coord = new Vector2I(col, row);
+                float noise = GetNoise(coord);
+                //if (noise < 0.2f || noise > 0.3f)
+                    //return;
+
+                List<Vector2I> list = NeigboursWidthValue(coord, ItemTypeEnum.PLANT);
+
+                GameItem item = GetItem(coord);
+
+                if (item != null)
+                {
+                    if (list.Count < 2 || list.Count > 3)
+                        item.ItemState = ItemStateEnum.DEAD;
+                }
+                else
+                {
+                    if (list.Count == 3 || list.Count == 0)
+                    {
+                        item = GameItem.NewGameItem(ItemTypeEnum.PLANT, coord, GetNoise(coord));
+                        Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
+                        Items.Add(item.Position, item);
+                    }
+                }
+            }
         }
     }
 

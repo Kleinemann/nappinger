@@ -1,8 +1,6 @@
 using Godot;
 using nappinger.scripts;
-using System;
 using System.Collections.Generic;
-using System.Transactions;
 
 public partial class WorldMap : Node2D
 {
