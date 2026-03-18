@@ -57,6 +57,7 @@ namespace nappinger.scripts
             GameItem item = null;
 
             float noisePart = 0f;
+            float noisePart2 = 0f;
             Vector2I atlasCoord = Vector2I.Zero;
 
             switch (type)
@@ -66,17 +67,25 @@ namespace nappinger.scripts
                     item.AtlasSourceId = 0;
 
                     noisePart = noise % 0.01f * 1000f;
-                    
+                    noisePart2 = noise % 0.001f * 10000f;
+
                     if (noisePart >= 8)
                         atlasCoord.X = 0;
-                    else if (noisePart >= 5)
+                    else if (noisePart >= 6)
                         atlasCoord.X = 1;
-                    else if (noisePart >= 3)
+                    else if (noisePart >= 4)
                         atlasCoord.X = 2;
-                    else if (noisePart >= 1)
+                    else if (noisePart >= 2)
                         atlasCoord.X = 3;
                     else
                         atlasCoord.X = 4;
+
+                    if (noisePart2 > 5)
+                        atlasCoord.Y = 0;
+                    else if (noisePart2 >= 2)
+                        atlasCoord.Y = 1;
+                    else
+                        atlasCoord.Y = 2;
 
                     item.AtlasCoord = atlasCoord;
 
