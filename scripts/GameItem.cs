@@ -292,26 +292,12 @@ namespace nappinger.scripts
         {
             TargetItem.Value = TargetItem.Value - 3;
             if (TargetItem.ItemState == ItemStateEnum.DEAD)
-                SetIdle();
-            else
             {
-                PackedScene scene = GD.Load<PackedScene>("res://szenes/particles/explosion.tscn");
-                Node2D node = scene.Instantiate<Node2D>();
-                Map.AddChild(node);
-                node.Position = (TargetItem.Position * Chunk.TileSize);
-                node.Position += new Vector2I(Chunk.TileSize / 2, Chunk.TileSize / 2);
-
-                Timer t = new Timer();
-                Map.AddChild(t);
-                t.WaitTime = 0.9f;
-                t.OneShot = true;
-                t.Timeout += () =>
-                {
-                    node.QueueFree();
-                    t.QueueFree();
-                };
-                t.Start();
+                TargetItem.Process();
+                SetIdle();
             }
+            else
+                ShowExplosion(TargetItem.Position);
             Ui.Instance.Update();
         }
 
@@ -319,29 +305,37 @@ namespace nappinger.scripts
         {
             TargetItem.Value = TargetItem.Value - 1;
             if (TargetItem.ItemState == ItemStateEnum.DEAD)
-                SetIdle();                
-            else
             {
-                PackedScene scene = GD.Load<PackedScene>("res://szenes/particles/explosion.tscn");
-                Node2D node = scene.Instantiate<Node2D>();
-                Map.AddChild(node);
-                node.Position = (TargetItem.Position * Chunk.TileSize);
-                node.Position += new Vector2I(Chunk.TileSize / 2, Chunk.TileSize / 2);
-
-                Timer t = new Timer();
-                Map.AddChild(t);
-                t.WaitTime = 0.9f;
-                t.OneShot = true;
-                t.Timeout += () =>
-                {
-                    node.QueueFree();
-                    t.QueueFree();
-                };
-                t.Start();
+                TargetItem.Process();
+                SetIdle();
             }
+            else
+                ShowExplosion(TargetItem.Position);
 
             Ui.Instance.Update();
         }
+
+
+        void ShowExplosion(Vector2I coord)
+        {
+            PackedScene scene = GD.Load<PackedScene>("res://szenes/particles/explosion.tscn");
+            Node2D node = scene.Instantiate<Node2D>();
+            Map.AddChild(node);
+            node.Position = (coord * Chunk.TileSize);
+            node.Position += new Vector2I(Chunk.TileSize / 2, Chunk.TileSize / 2);
+
+            Timer t = new Timer();
+            Map.AddChild(t);
+            t.WaitTime = 1f;
+            t.OneShot = true;
+            t.Timeout += () =>
+            {
+                node.QueueFree();
+                t.QueueFree();
+            };
+            t.Start();
+        }
+
 
         public void SetIdle()
         {
