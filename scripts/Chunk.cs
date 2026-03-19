@@ -66,6 +66,33 @@ public partial class Chunk : GodotObject
 
     public void Process()
     {
+
+        //GOL
+        Vector2I[] coords = GetTileCoords();
+        int cellIndex = WorldMain.Random.RandiRange(0, (ChunkSize * ChunkSize) - 1);
+
+        Vector2I coord = coords[cellIndex];
+
+        float noise = GetNoise(coord);
+        if (noise >= 0.2f && noise <= 0.3f)
+        { 
+            List<Vector2I> list = NeigboursWidthValue(coord, ItemTypeEnum.PLANT);
+
+            GameItem item = GetItem(coord);
+
+            if (item != null)
+            {
+                if (list.Count >= 4)
+                    item.ItemState = ItemStateEnum.DEAD;
+            }
+            else
+            {
+                item = GameItem.NewGameItem(ItemTypeEnum.PLANT, coord, GetNoise(coord));
+                Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
+                Items.Add(item.Position, item);
+            }
+        }
+
         GameItem[] items = Items.Values.ToArray();
         foreach (GameItem gi in items)
         {
@@ -73,41 +100,7 @@ public partial class Chunk : GodotObject
         }
 
 
-        //GOL
-        for (int row = 0; row < 16; row++)
-        {
-            for (int col = 0; col < 16; col++)
-            {
-                int cellIndex = WorldMain.Random.RandiRange(0, (ChunkSize * ChunkSize) - 1);
 
-                //int row = cellIndex / 16;
-                //int col = cellIndex % 16;
-
-                Vector2I coord = new Vector2I(col, row);
-                float noise = GetNoise(coord);
-                //if (noise < 0.2f || noise > 0.3f)
-                    //return;
-
-                List<Vector2I> list = NeigboursWidthValue(coord, ItemTypeEnum.PLANT);
-
-                GameItem item = GetItem(coord);
-
-                if (item != null)
-                {
-                    if (list.Count < 2 || list.Count > 3)
-                        item.ItemState = ItemStateEnum.DEAD;
-                }
-                else
-                {
-                    if (list.Count == 3 || list.Count == 0)
-                    {
-                        item = GameItem.NewGameItem(ItemTypeEnum.PLANT, coord, GetNoise(coord));
-                        Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
-                        Items.Add(item.Position, item);
-                    }
-                }
-            }
-        }
     }
 
     public Vector2I[] GetTileCoords()

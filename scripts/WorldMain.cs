@@ -103,12 +103,16 @@ public partial class WorldMain : Node2D
 
                 GameItem gi = Map.GetItem();
 
-                if(Map.GetItem() != null)
+                if (Map.GetItem() != null)
                 {
                     gim.TargetItem = gi;
+                    gim.TargetPosition = null;
                 }
                 else
+                {
                     gim.TargetPosition = Map.GetMouseCoords();
+                    gim.TargetItem = null;
+                }
             }
         }
 

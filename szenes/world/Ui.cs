@@ -14,6 +14,7 @@ public partial class Ui : Control
     Label ItemValue;
     TextureRect ItemPicture;
     TextureRect ItemIsHuman;
+    Label ItemCoord;
 
     public override void _Ready()
     {
@@ -25,6 +26,7 @@ public partial class Ui : Control
         ItemValue = GetNode<Label>("ItemBox/HBoxContainer2/ItemValue");
         ItemPicture = GetNode<TextureRect>("ItemBox/HBoxContainer/PanelContainer/ItemPicture");
         ItemIsHuman = GetNode<TextureRect>("ItemBox/HBoxContainer/IsHuman");
+        ItemCoord = GetNode<Label>("ItemBox/HBoxContainer/ItemCoord");
         Visible = false;
     }
 
@@ -38,6 +40,7 @@ public partial class Ui : Control
             ItemValue.Text = item.Value.ToString();
             ItemPicture.Texture = item.Icon;
             ItemIsHuman.Visible = item.ItemType == ItemTypeEnum.PLAYER;
+            ItemCoord.Text = $" ( {item.Position.X} | {item.Position.Y} )";
         }
         else
         {

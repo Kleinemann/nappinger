@@ -1,11 +1,6 @@
 ﻿using Godot;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace nappinger.scripts
 {
@@ -297,7 +292,7 @@ namespace nappinger.scripts
         {
             TargetItem.Value = TargetItem.Value - 3;
             if (TargetItem.ItemState == ItemStateEnum.DEAD)
-                ItemState = ItemStateEnum.IDLE;
+                SetIdle();
             else
             {
                 PackedScene scene = GD.Load<PackedScene>("res://szenes/particles/explosion.tscn");
@@ -324,7 +319,7 @@ namespace nappinger.scripts
         {
             TargetItem.Value = TargetItem.Value - 1;
             if (TargetItem.ItemState == ItemStateEnum.DEAD)
-                ItemState = ItemStateEnum.IDLE;
+                SetIdle();                
             else
             {
                 PackedScene scene = GD.Load<PackedScene>("res://szenes/particles/explosion.tscn");
@@ -346,6 +341,13 @@ namespace nappinger.scripts
             }
 
             Ui.Instance.Update();
+        }
+
+        public void SetIdle()
+        {
+            ItemState = ItemStateEnum.IDLE;
+            TargetPosition = null;
+            TargetItem = null;
         }
     }
 

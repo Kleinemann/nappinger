@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3322irhb3pmu"]
+[gd_scene format=3 uid="uid://b3322irhb3pmu"]
 
 [ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
 [ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
@@ -167,32 +167,32 @@ sources/0 = SubResource("TileSetAtlasSource_713x0")
 sources/1 = SubResource("TileSetAtlasSource_2fbf8")
 sources/2 = SubResource("TileSetAtlasSource_f8u5v")
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")
 
-[node name="DualTileMap" type="Node2D" parent="."]
+[node name="DualTileMap" type="Node2D" parent="." unique_id=1929417176]
 script = ExtResource("1_7ps7e")
 
-[node name="OffsetGrid" type="TileMapLayer" parent="DualTileMap"]
+[node name="OffsetGrid" type="TileMapLayer" parent="DualTileMap" unique_id=601507841]
 tile_set = ExtResource("1_o2lsi")
 
-[node name="WorldGrid" type="TileMapLayer" parent="DualTileMap"]
+[node name="WorldGrid" type="TileMapLayer" parent="DualTileMap" unique_id=284111558]
 visible = false
 tile_set = ExtResource("1_o2lsi")
 
-[node name="ItemGrid" type="TileMapLayer" parent="DualTileMap"]
+[node name="ItemGrid" type="TileMapLayer" parent="DualTileMap" unique_id=240612471]
 tile_set = SubResource("TileSet_2fbf8")
 
-[node name="Marker" type="Sprite2D" parent="DualTileMap"]
+[node name="Marker" type="Sprite2D" parent="DualTileMap" unique_id=993763749]
 visible = false
 texture = ExtResource("6_2fbf8")
 script = ExtResource("7_b4bkx")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 anchor_mode = 0
 script = ExtResource("2_1wgjs")
 
-[node name="UI" type="Control" parent="Camera2D"]
+[node name="UI" type="Control" parent="Camera2D" unique_id=1359130281]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,44 +201,48 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_pm8jy")
 
-[node name="ItemBox" type="VBoxContainer" parent="Camera2D/UI"]
+[node name="ItemBox" type="VBoxContainer" parent="Camera2D/UI" unique_id=597234812]
 layout_mode = 1
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 52.0
 offset_bottom = 37.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ItemBox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ItemBox" unique_id=559596948]
 layout_mode = 2
 
-[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2"]
+[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2" unique_id=741398407]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Name"
 
-[node name="ItemValue" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2"]
+[node name="ItemValue" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2" unique_id=577977225]
 layout_mode = 2
 text = "Value"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ItemBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ItemBox" unique_id=1197741158]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ItemBox/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=138260819]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ItemPicture" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer/PanelContainer"]
+[node name="ItemPicture" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer/PanelContainer" unique_id=1908522528]
 layout_mode = 2
 stretch_mode = 2
 
-[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer"]
+[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=219864853]
 layout_mode = 2
 texture = ExtResource("10_s58pj")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ItemCoord" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=1109624074]
+layout_mode = 2
+text = "(0,0)"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=762967687]
 stream = ExtResource("10_x812f")
 volume_db = -10.0
 parameters/looping = true
