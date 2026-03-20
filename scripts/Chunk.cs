@@ -15,7 +15,7 @@ public partial class Chunk : GodotObject
     public Vector2I Coords;
     public int CellIndex;
 
-    public Dictionary<Vector2I, GameItem> Items = new Dictionary<Vector2I, GameItem>();
+    public Dictionary<Vector2I, GameObject> Objects = new Dictionary<Vector2I, GameObject>();
 
     public WorldMap Map => WorldMain.Instance.Map;
 
@@ -50,15 +50,15 @@ public partial class Chunk : GodotObject
         Coords = coords;
     }
 
-    List<Vector2I> NeigboursWidthValue(Vector2I coord, ItemTypeEnum type)
+    List<Vector2I> NeigboursWidthValue(Vector2I coord, ObjectTypeEnum type)
     {
         List<Vector2I> hits = new List<Vector2I>();
 
         Vector2I[] neigbours = GetNeigbours(coord);
         foreach(Vector2I v2 in neigbours)
         {
-            GameItem tmp = GetItem(v2);
-            if (tmp != null && tmp.ItemType == ItemTypeEnum.PLANT)
+            GameObject tmp = GetItem(v2);
+            if (tmp != null && tmp.ObjectType == ObjectTypeEnum.PLANT)
                 hits.Add(v2);
         }
         return hits;
@@ -76,27 +76,27 @@ public partial class Chunk : GodotObject
         float noise = GetNoise(coord);
         if (noise >= 0.2f && noise <= 0.3f)
         { 
-            List<Vector2I> list = NeigboursWidthValue(coord, ItemTypeEnum.PLANT);
+            List<Vector2I> list = NeigboursWidthValue(coord, ObjectTypeEnum.PLANT);
 
-            GameItem item = GetItem(coord);
+            GameObject go = GetItem(coord);
 
-            if (item != null)
+            if (go != null)
             {
                 if (list.Count >= 4)
-                    item.ItemState = ItemStateEnum.DEAD;
+                    go.ObjectState = ObjectStateEnum.DEAD;
             }
             else
             {
-                item = GameItem.NewGameItem(ItemTypeEnum.PLANT, coord, GetNoise(coord));
-                Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
-                Items.Add(item.Position, item);
+                go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, coord, GetNoise(coord));
+                Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
+                Objects.Add(go.Position, go);
             }
         }
 
-        GameItem[] items = Items.Values.ToArray();
-        foreach (GameItem gi in items)
+        GameObject[] gobjects = Objects.Values.ToArray();
+        foreach (GameObject g in gobjects)
         {
-            gi.Process();
+            g.Process();
         }
 
 
@@ -148,31 +148,31 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            GameItem item = null;
+            GameObject go = null;
             if (noiseValue > 0.2f && noiseValue < 0.3f)
             {
-                item = GameItem.NewGameItem(ItemTypeEnum.PLANT, tileCoord, noiseValue);
+                go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, tileCoord, noiseValue);
             }
 
             if(noiseValue > 0.153 && noiseValue < 0.155)
             {
-                item = GameItem.NewGameItem(ItemTypeEnum.ANIMAL, tileCoord, noiseValue);
+                go = GameObject.NewGameItem(ObjectTypeEnum.ANIMAL, tileCoord, noiseValue);
             }
 
             if (noiseValue > 0.151 && noiseValue < 0.1515)
             {
-                item = GameItem.NewGameItem(ItemTypeEnum.PLAYER, tileCoord, noiseValue);
+                go = GameObject.NewGameItem(ObjectTypeEnum.PLAYER, tileCoord, noiseValue);
             }
 
             if(noiseValue >= 0.154 && noiseValue <= 0.157)
             {
-                item = GameItem.NewGameItem(ItemTypeEnum.NPC, tileCoord, noiseValue);
+                go = GameObject.NewGameItem(ObjectTypeEnum.NPC, tileCoord, noiseValue);
             }
 
-            if(item != null)
+            if(go != null)
             {
-                Map.ItemLayer.SetCell(item.Position, item.AtlasSourceId, item.AtlasCoord);
-                Items.Add(item.Position, item);
+                Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
+                Objects.Add(go.Position, go);
             }
         }
     }
@@ -263,10 +263,10 @@ public partial class Chunk : GodotObject
     }
 
 
-    public GameItem GetItem(Vector2I pos)
+    public GameObject GetItem(Vector2I pos)
     {
-        if (Items.ContainsKey(pos))
-            return Items[pos];
+        if (Objects.ContainsKey(pos))
+            return Objects[pos];
         return null;
     }
 
@@ -286,17 +286,17 @@ public partial class Chunk : GodotObject
     public void Clean()
     {
         //Alle SPielobjecte Löschen
-        foreach(Vector2I pos in Items.Keys)
+        foreach(Vector2I pos in Objects.Keys)
         {
-            Map.ItemLayer.EraseCell(pos);
+            Map.ObjectLayer.EraseCell(pos);
         }
-        Items.Clear();
+        Objects.Clear();
 
         //Karte Löschen
         foreach (Vector2I tileCoord in GetTileCoords())
         {
             Map.WorldLayer.EraseCell(tileCoord);
-            Map.ItemLayer.EraseCell(tileCoord);
+            Map.ObjectLayer.EraseCell(tileCoord);
             RefreshOffset(tileCoord);
         }
     }

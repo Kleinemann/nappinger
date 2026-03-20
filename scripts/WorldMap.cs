@@ -25,7 +25,7 @@ public partial class WorldMap : Node2D
 
     public TileMapLayer OffsetLayer;
     public TileMapLayer WorldLayer;
-    public TileMapLayer ItemLayer;
+    public TileMapLayer ObjectLayer;
     public Marker Marker;
 
 
@@ -39,7 +39,7 @@ public partial class WorldMap : Node2D
     {
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
-        ItemLayer = GetNode<TileMapLayer>("ItemGrid");
+        ObjectLayer = GetNode<TileMapLayer>("ObjectGrid");
         Marker = GetNode<Marker>("Marker");
     }
 
@@ -128,7 +128,7 @@ public partial class WorldMap : Node2D
         return WorldLayer.LocalToMap(lMouse);
     }
 
-    public GameItem GetItem(Vector2I pos)
+    public GameObject GetItem(Vector2I pos)
     {
         Chunk chunk = GetChunk(pos);
         if (chunk != null)
@@ -138,7 +138,7 @@ public partial class WorldMap : Node2D
         return null;
     }
 
-    public GameItem GetItem()
+    public GameObject GetItem()
     {
         Vector2I pos = GetMouseCoords();
         return GetItem(pos);

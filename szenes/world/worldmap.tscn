@@ -180,7 +180,7 @@ tile_set = ExtResource("1_o2lsi")
 visible = false
 tile_set = ExtResource("1_o2lsi")
 
-[node name="ItemGrid" type="TileMapLayer" parent="DualTileMap" unique_id=240612471]
+[node name="ObjectGrid" type="TileMapLayer" parent="DualTileMap" unique_id=240612471]
 tile_set = SubResource("TileSet_2fbf8")
 
 [node name="Marker" type="Sprite2D" parent="DualTileMap" unique_id=993763749]
@@ -201,44 +201,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_pm8jy")
 
-[node name="ItemBox" type="VBoxContainer" parent="Camera2D/UI" unique_id=597234812]
+[node name="ObjectBox" type="VBoxContainer" parent="Camera2D/UI" unique_id=597234812]
 layout_mode = 1
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 52.0
 offset_bottom = 37.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ItemBox" unique_id=559596948]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ObjectBox" unique_id=559596948]
 layout_mode = 2
 
-[node name="ItemName" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2" unique_id=741398407]
+[node name="ObjectName" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer2" unique_id=741398407]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Name"
 
-[node name="ItemValue" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer2" unique_id=577977225]
+[node name="ObjectValue" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer2" unique_id=577977225]
 layout_mode = 2
 text = "Value"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ItemBox" unique_id=1197741158]
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ObjectBox" unique_id=1197741158]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=138260819]
+[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=138260819]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ItemPicture" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer/PanelContainer" unique_id=1908522528]
+[node name="ObjectPicture" type="TextureRect" parent="Camera2D/UI/ObjectBox/HBoxContainer/PanelContainer" unique_id=1908522528]
 layout_mode = 2
 stretch_mode = 2
 
-[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=219864853]
+[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=219864853]
 layout_mode = 2
 texture = ExtResource("10_s58pj")
 
-[node name="ItemCoord" type="Label" parent="Camera2D/UI/ItemBox/HBoxContainer" unique_id=1109624074]
+[node name="ObjectCoord" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=1109624074]
 layout_mode = 2
 text = "(0,0)"
 

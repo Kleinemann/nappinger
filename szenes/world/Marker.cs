@@ -3,7 +3,7 @@ using nappinger.scripts;
 
 public partial class Marker : Sprite2D
 {
-    public GameItem CurrentItem = null;
+    public GameObject CurrentObject = null;
     WorldMap Map;
 
     public override void _Ready()
@@ -12,10 +12,10 @@ public partial class Marker : Sprite2D
         Map = GetParent<WorldMap>();
     }
 
-    public void Select(GameItem item)
+    public void Select(GameObject item)
     {
         Visible = true;
-        CurrentItem = item;
+        CurrentObject = item;
         Update();
         Ui.Instance.Update();
         //Input.SetCustomMouseCursor(null);
@@ -38,7 +38,7 @@ public partial class Marker : Sprite2D
     public void Deselect()
     {
         Visible = false;
-        CurrentItem = null;
+        CurrentObject = null;
         Ui.Instance.Update();
         //Input.SetCustomMouseCursor(null);
         //Ui.Instance.DeselectItem();
@@ -46,10 +46,10 @@ public partial class Marker : Sprite2D
 
     public void Update()
     {
-        if(Visible && CurrentItem != null)
+        if(Visible && CurrentObject != null)
         {
-            Vector2I pos = CurrentItem.Position;
-            Position = Map.ItemLayer.MapToLocal(pos);
+            Vector2I pos = CurrentObject.Position;
+            Position = Map.ObjectLayer.MapToLocal(pos);
         }
     }
 }

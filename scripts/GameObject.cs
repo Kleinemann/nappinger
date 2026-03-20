@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace nappinger.scripts
 {
-    public enum ItemTypeEnum { NONE, PLANT, ANIMAL, BUILDING, NPC, PLAYER };
-    public enum  ItemStateEnum { NONE, IDLE, WALKING, FIGHTING, WORKING, DEAD};
+    public enum ObjectTypeEnum { NONE, PLANT, ANIMAL, BUILDING, NPC, PLAYER };
+    public enum  ObjectStateEnum { NONE, IDLE, WALKING, FIGHTING, WORKING, DEAD};
 
-    public class GameItem
+    public class GameObject
     {
         internal WorldMap Map => WorldMain.Instance.Map;
 
         public int AtlasSourceId;
         public Vector2I AtlasCoord;
-        public ItemTypeEnum ItemType { get; set; } = ItemTypeEnum.NONE;
-        public ItemStateEnum ItemState { get; set; } = ItemStateEnum.NONE;
-        public string ItemName { get; set; }
+        public ObjectTypeEnum ObjectType { get; set; } = ObjectTypeEnum.NONE;
+        public ObjectStateEnum ObjectState { get; set; } = ObjectStateEnum.NONE;
+        public string ObjectName { get; set; }
 
         int _value;
         public int Value
@@ -27,7 +27,7 @@ namespace nappinger.scripts
                 if (_value <= 0)
                 {
                     _value = 0;
-                    ItemState = ItemStateEnum.DEAD;
+                    ObjectState = ObjectStateEnum.DEAD;
                 }
             }
         }
@@ -37,7 +37,7 @@ namespace nappinger.scripts
         {
             get
             {
-                TileSetAtlasSource tss = Map.ItemLayer.TileSet.GetSource(AtlasSourceId) as TileSetAtlasSource;
+                TileSetAtlasSource tss = Map.ObjectLayer.TileSet.GetSource(AtlasSourceId) as TileSetAtlasSource;
                 Texture2D atlasTexture = tss.Texture;
                 Rect2I region = tss.GetTileTextureRegion(AtlasCoord);
 
@@ -47,9 +47,9 @@ namespace nappinger.scripts
             }
         }
 
-        public static GameItem NewGameItem(ItemTypeEnum type, Vector2I pos, float noise)
+        public static GameObject NewGameItem(ObjectTypeEnum type, Vector2I pos, float noise)
         {
-            GameItem item = null;
+            GameObject go = null;
 
             float noisePart = 0f;
             float noisePart2 = 0f;
@@ -57,9 +57,9 @@ namespace nappinger.scripts
 
             switch (type)
             {
-                case ItemTypeEnum.PLANT:
-                    item = new GameItem();
-                    item.AtlasSourceId = 0;
+                case ObjectTypeEnum.PLANT:
+                    go = new GameObject();
+                    go.AtlasSourceId = 0;
 
                     noisePart = noise % 0.01f * 1000f;
                     noisePart2 = noise % 0.001f * 10000f;
@@ -82,13 +82,13 @@ namespace nappinger.scripts
                     else
                         atlasCoord.Y = 2;
 
-                    item.AtlasCoord = atlasCoord;
+                    go.AtlasCoord = atlasCoord;
 
                     break;
 
-                case ItemTypeEnum.ANIMAL:
-                    item = new GameItemMoveable();
-                    item.AtlasSourceId = 1;
+                case ObjectTypeEnum.ANIMAL:
+                    go = new GameItemMoveable();
+                    go.AtlasSourceId = 1;
 
                     noisePart = noise % 0.001f * 10000f;
 
@@ -97,28 +97,28 @@ namespace nappinger.scripts
                     else
                         atlasCoord.X = 2;
 
-                    item.AtlasCoord = atlasCoord;
-                    item.ItemState = ItemStateEnum.IDLE;
+                    go.AtlasCoord = atlasCoord;
+                    go.ObjectState = ObjectStateEnum.IDLE;
                     break;
 
-                case ItemTypeEnum.BUILDING:
-                    item = new GameItem();
+                case ObjectTypeEnum.BUILDING:
+                    go = new GameObject();
                     break;
 
-                case ItemTypeEnum.NPC:
-                    item = new NPCGameItem();
-                    item.AtlasSourceId = 2;
+                case ObjectTypeEnum.NPC:
+                    go = new NPCGameItem();
+                    go.AtlasSourceId = 2;
 
                     noisePart = noise % 0.0001f * 100000f;
                     atlasCoord.X = (int)noisePart;
 
-                    item.AtlasCoord = atlasCoord;
-                    item.ItemState = ItemStateEnum.IDLE;
+                    go.AtlasCoord = atlasCoord;
+                    go.ObjectState = ObjectStateEnum.IDLE;
                     break;
 
-                case ItemTypeEnum.PLAYER:
-                    item = new GameItemPlayer();
-                    item.AtlasSourceId = 2;
+                case ObjectTypeEnum.PLAYER:
+                    go = new GameItemPlayer();
+                    go.AtlasSourceId = 2;
 
                     noisePart = noise % 0.0001f * 100000f;
                     if (noisePart >= 5)
@@ -126,77 +126,77 @@ namespace nappinger.scripts
                     else
                         atlasCoord.X = 12;
 
-                    item.AtlasCoord = atlasCoord;
-                    item.ItemState = ItemStateEnum.IDLE;
+                    go.AtlasCoord = atlasCoord;
+                    go.ObjectState = ObjectStateEnum.IDLE;
                     break;
             }
-            if(item != null)
+            if(go != null)
             {
-                item.ItemType = type;
-                item.Position = pos;
+                go.ObjectType = type;
+                go.Position = pos;
 
                 //Get Data From Tile;
-                TileSetAtlasSource tss = WorldMain.Instance.Map.ItemLayer.TileSet.GetSource(item.AtlasSourceId) as TileSetAtlasSource;
-                TileData td = tss.GetTileData(item.AtlasCoord, 0);
-                item.ItemName = (string)td.GetCustomData("ItemName");
-                item.Value = (int)td.GetCustomData("ItemValue");
+                TileSetAtlasSource tss = WorldMain.Instance.Map.ObjectLayer.TileSet.GetSource(go.AtlasSourceId) as TileSetAtlasSource;
+                TileData td = tss.GetTileData(go.AtlasCoord, 0);
+                go.ObjectName = (string)td.GetCustomData("ItemName");
+                go.Value = (int)td.GetCustomData("ItemValue");
             }
-            return item;
+            return go;
         }
 
 
         public void Process()
         {
             //Tote Items entfernen
-            if (ItemState == ItemStateEnum.DEAD)
+            if (ObjectState == ObjectStateEnum.DEAD)
             {
-                if(Map.Marker.CurrentItem == this)
+                if(Map.Marker.CurrentObject == this)
                     Map.Marker.Deselect();
 
-                Map.GetChunk(Position).Items.Remove(Position);
-                Map.ItemLayer.EraseCell(Position);
+                Map.GetChunk(Position).Objects.Remove(Position);
+                Map.ObjectLayer.EraseCell(Position);
                 return;
             }
 
             //Item wird nie etwas selbständig machen
-            if (ItemState == ItemStateEnum.NONE)
+            if (ObjectState == ObjectStateEnum.NONE)
                 return;
 
-            if(ItemState == ItemStateEnum.IDLE)
+            if(ObjectState == ObjectStateEnum.IDLE)
             {
-                if (ItemType == ItemTypeEnum.ANIMAL)
-                    ItemState = ItemStateEnum.WALKING;
+                if (ObjectType == ObjectTypeEnum.ANIMAL)
+                    ObjectState = ObjectStateEnum.WALKING;
 
-                if(ItemType == ItemTypeEnum.NPC)
+                if(ObjectType == ObjectTypeEnum.NPC)
                     ((NPCGameItem)(this)).ProcessIdle();
             }
 
-            if (ItemState == ItemStateEnum.WALKING)
+            if (ObjectState == ObjectStateEnum.WALKING)
             {
                 ((GameItemMoveable)(this)).Walking();
             }
 
-            if (ItemState == ItemStateEnum.WORKING)
+            if (ObjectState == ObjectStateEnum.WORKING)
             {
                 ((GameItemMoveable)(this)).Work();
             }
 
-            if (ItemState == ItemStateEnum.FIGHTING)
+            if (ObjectState == ObjectStateEnum.FIGHTING)
             {
-                ((GameItemMoveable)(this)).ItemState = ItemStateEnum.FIGHTING;
+                ((GameItemMoveable)(this)).ObjectState = ObjectStateEnum.FIGHTING;
                 ((GameItemMoveable)(this)).Fight();
             }
         }
     }
 
-    public class GameItemMoveable : GameItem
+    public class GameItemMoveable : GameObject
     {
         public Vector2I? TargetPosition { get; set; }
-        public GameItem TargetItem { get; set; }
+        public GameObject TargetItem { get; set; }
 
         public void Walking()
         {
-            if(ItemType == ItemTypeEnum.ANIMAL || ItemType == ItemTypeEnum.NPC)
+            if(ObjectType == ObjectTypeEnum.ANIMAL || ObjectType == ObjectTypeEnum.NPC)
             {
                 RandomTarget();
             }
@@ -212,16 +212,16 @@ namespace nappinger.scripts
             //Ziel Item erreicht
             if(TargetItem != null && TargetItem.Position == newPos)
             {
-                if (TargetItem.ItemType == ItemTypeEnum.ANIMAL)
+                if (TargetItem.ObjectType == ObjectTypeEnum.ANIMAL)
                 {
-                    ItemState = ItemStateEnum.FIGHTING;
+                    ObjectState = ObjectStateEnum.FIGHTING;
                     GameItemMoveable target = (GameItemMoveable)TargetItem;
-                    target.ItemState = ItemStateEnum.FIGHTING;
+                    target.ObjectState = ObjectStateEnum.FIGHTING;
                     target.TargetItem = this;                    
                 }
 
-                if (TargetItem.ItemType == ItemTypeEnum.PLANT)
-                    ItemState = ItemStateEnum.WORKING;
+                if (TargetItem.ObjectType == ObjectTypeEnum.PLANT)
+                    ObjectState = ObjectStateEnum.WORKING;
 
                 return;
             }
@@ -229,7 +229,7 @@ namespace nappinger.scripts
             //an Punkt x angekommen
             if(TargetPosition != null && TargetPosition == newPos)
             {
-                ItemState = ItemStateEnum.IDLE;
+                ObjectState = ObjectStateEnum.IDLE;
             }
 
             Chunk oldChunk = Map.GetChunk(Position);
@@ -238,15 +238,15 @@ namespace nappinger.scripts
             if (!Map.Chunks.Values.Contains(newChunk))
                 return;
 
-            Map.ItemLayer.EraseCell(Position);
-            Map.ItemLayer.SetCell(newPos, AtlasSourceId, AtlasCoord);
+            Map.ObjectLayer.EraseCell(Position);
+            Map.ObjectLayer.SetCell(newPos, AtlasSourceId, AtlasCoord);
 
-            oldChunk.Items.Remove(Position);
-            newChunk.Items.Add(newPos, this);
+            oldChunk.Objects.Remove(Position);
+            newChunk.Objects.Add(newPos, this);
 
             Position = newPos;
 
-            if(Map.Marker.CurrentItem != null && Map.Marker.CurrentItem == this)
+            if(Map.Marker.CurrentObject != null && Map.Marker.CurrentObject == this)
                 Map.Marker.Update();
         }
 
@@ -280,7 +280,7 @@ namespace nappinger.scripts
                 if (Position.Y < target.Value.Y) direction.Y = 1;
                 if (Position.Y > target.Value.Y) direction.Y = -1;
 
-                GameItem item = Map.GetItem(Position + direction);
+                GameObject item = Map.GetItem(Position + direction);
                 if (item == null || item==TargetItem)
                     return direction;
             }
@@ -291,7 +291,7 @@ namespace nappinger.scripts
         internal void Work()
         {
             TargetItem.Value = TargetItem.Value - 3;
-            if (TargetItem.ItemState == ItemStateEnum.DEAD)
+            if (TargetItem.ObjectState == ObjectStateEnum.DEAD)
             {
                 TargetItem.Process();
                 SetIdle();
@@ -304,7 +304,7 @@ namespace nappinger.scripts
         internal void Fight()
         {
             TargetItem.Value = TargetItem.Value - 1;
-            if (TargetItem.ItemState == ItemStateEnum.DEAD)
+            if (TargetItem.ObjectState == ObjectStateEnum.DEAD)
             {
                 TargetItem.Process();
                 SetIdle();
@@ -339,7 +339,7 @@ namespace nappinger.scripts
 
         public void SetIdle()
         {
-            ItemState = ItemStateEnum.IDLE;
+            ObjectState = ObjectStateEnum.IDLE;
             TargetPosition = null;
             TargetItem = null;
         }
@@ -365,7 +365,7 @@ namespace nappinger.scripts
             else if (walkingCount > 0)
             {
                 walkingCount--;
-                ItemState = ItemStateEnum.WALKING;
+                ObjectState = ObjectStateEnum.WALKING;
             }
             else
             {
@@ -374,7 +374,7 @@ namespace nappinger.scripts
                     waitingCount = WorldMain.Random.RandiRange(1, 2);
                 else
                 {
-                    ItemState = ItemStateEnum.WALKING;
+                    ObjectState = ObjectStateEnum.WALKING;
                     walkingCount = WorldMain.Random.RandiRange(1, 5);
                 }
             }

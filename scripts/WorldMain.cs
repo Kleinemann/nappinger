@@ -42,24 +42,24 @@ public partial class WorldMain : Node2D
 
     public void UpdateMouseIcon()
     {
-        if (Map.Marker.CurrentItem != null)
+        if (Map.Marker.CurrentObject != null)
         {
-            if (Map.Marker.CurrentItem.ItemType == ItemTypeEnum.PLAYER)
+            if (Map.Marker.CurrentObject.ObjectType == ObjectTypeEnum.PLAYER)
             {
                 Vector2I mouse = Map.GetMouseCoords();
-                if (Map.ItemLayer.GetCellSourceId(mouse) >= 0)
+                if (Map.ObjectLayer.GetCellSourceId(mouse) >= 0)
                 {
-                    TileData data = Map.ItemLayer.GetCellTileData(mouse);
-                    ItemTypeEnum type = (ItemTypeEnum)((int)data.GetCustomData("ItemType"));
+                    TileData data = Map.ObjectLayer.GetCellTileData(mouse);
+                    ObjectTypeEnum type = (ObjectTypeEnum)((int)data.GetCustomData("ItemType"));
 
                     Resource res = null;
                     switch (type)
                     {
-                        case ItemTypeEnum.PLANT:
+                        case ObjectTypeEnum.PLANT:
                             res = GD.Load("res://assets/actions/lumber.png");
                             break;
 
-                        case ItemTypeEnum.ANIMAL:
+                        case ObjectTypeEnum.ANIMAL:
                             res = GD.Load("res://assets/actions/hunt.png");
                             break;
 
@@ -87,21 +87,21 @@ public partial class WorldMain : Node2D
 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            GameItem item = Map.GetItem();
-            if(item != null)
-                Map.Marker.Select(item);
+            GameObject go = Map.GetItem();
+            if(go != null)
+                Map.Marker.Select(go);
             else                
                 Map.Marker.Deselect();
         }
 
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
-            if(Map.Marker.CurrentItem != null && Map.Marker.CurrentItem.ItemType == ItemTypeEnum.PLAYER)
+            if(Map.Marker.CurrentObject != null && Map.Marker.CurrentObject.ObjectType == ObjectTypeEnum.PLAYER)
             {
-                GameItemMoveable gim = (GameItemMoveable)Map.Marker.CurrentItem;
-                gim.ItemState = ItemStateEnum.WALKING;
+                GameItemMoveable gim = (GameItemMoveable)Map.Marker.CurrentObject;
+                gim.ObjectState = ObjectStateEnum.WALKING;
 
-                GameItem gi = Map.GetItem();
+                GameObject gi = Map.GetItem();
 
                 if (Map.GetItem() != null)
                 {
