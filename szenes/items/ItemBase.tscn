@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://rfrf2bo3nvn5"]
 
-[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_2fhli"]
-[ext_resource type="Script" uid="uid://bkhsf076cxgd4" path="res://szenes/items/ItemBase.cs" id="2_1mleq"]
+[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_tft7i"]
+[ext_resource type="Script" uid="uid://bkhsf076cxgd4" path="res://scripts/ItemBase.cs" id="2_cpcx2"]
 
 [node name="Icon" type="Sprite2D" unique_id=716425521]
-texture = ExtResource("1_2fhli")
-script = ExtResource("2_1mleq")
+texture = ExtResource("1_tft7i")
+script = ExtResource("2_cpcx2")
 
 [node name="ItemValue" type="Label" parent="." unique_id=389990428]
 offset_left = -14.0

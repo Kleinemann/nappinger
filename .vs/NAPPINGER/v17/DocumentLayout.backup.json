@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\szenes\\world\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:szenes\\world\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\itembase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\itembase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\szenes\\world\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:szenes\\world\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,94 +42,104 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "ItemBase.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ItemBase.cs",
+              "RelativeDocumentMoniker": "scripts\\ItemBase.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ItemBase.cs",
+              "RelativeToolTip": "scripts\\ItemBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-22T10:18:17.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "WorldMap.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\WorldMap.cs",
               "RelativeDocumentMoniker": "scripts\\WorldMap.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\WorldMap.cs",
               "RelativeToolTip": "scripts\\WorldMap.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAcwCkAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T13:01:16.316Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-18T13:01:16.316Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "CameraScroll.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
               "RelativeDocumentMoniker": "scripts\\CameraScroll.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
               "RelativeToolTip": "scripts\\CameraScroll.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-13T06:02:34.51Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameItem.cs",
-              "DocumentMoniker": "C:\\WORKSPACE\\NAPPINGER\\scripts\\GameItem.cs",
-              "RelativeDocumentMoniker": "scripts\\GameItem.cs",
-              "ToolTip": "C:\\WORKSPACE\\NAPPINGER\\scripts\\GameItem.cs",
-              "RelativeToolTip": "scripts\\GameItem.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAqwNEAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "GameObject.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\GameObject.cs",
+              "RelativeDocumentMoniker": "scripts\\GameObject.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\GameObject.cs",
+              "RelativeToolTip": "scripts\\GameObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T06:25:56.736Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Ui.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\szenes\\world\\Ui.cs",
               "RelativeDocumentMoniker": "szenes\\world\\Ui.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\szenes\\world\\Ui.cs",
               "RelativeToolTip": "szenes\\world\\Ui.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-04T09:14:49.262Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Marker.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\szenes\\world\\Marker.cs",
               "RelativeDocumentMoniker": "szenes\\world\\Marker.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\szenes\\world\\Marker.cs",
               "RelativeToolTip": "szenes\\world\\Marker.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowBMAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-03T06:37:23.1Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-03T06:37:23.1Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Chunk.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\Chunk.cs",
               "RelativeDocumentMoniker": "scripts\\Chunk.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\Chunk.cs",
               "RelativeToolTip": "scripts\\Chunk.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAIwFQAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAOAAAAAAAAAAAAAswB0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T05:39:18.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-15T05:39:18.072Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "WorldMain.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\WorldMain.cs",
               "RelativeDocumentMoniker": "scripts\\WorldMain.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\WorldMain.cs",
               "RelativeToolTip": "scripts\\WorldMain.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAwwFIAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-14T06:21:59.684Z",
               "EditorCaption": ""
