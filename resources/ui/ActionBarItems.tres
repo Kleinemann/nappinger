@@ -1,0 +1,7 @@
+[gd_resource type="Resource" format=3 uid="uid://bqgjwy5c7gsem"]
+
+[ext_resource type="Script" uid="uid://bdu61iaojqbsp" path="res://scripts/ui/ActionBarItems.cs" id="2_jgda7"]
+
+[resource]
+script = ExtResource("2_jgda7")
+Items = Array[Object]([null, null, null, null, null, null, null, null, null, null])

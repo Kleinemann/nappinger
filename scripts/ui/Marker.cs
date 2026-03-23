@@ -18,20 +18,6 @@ public partial class Marker : Sprite2D
         CurrentObject = item;
         Update();
         Ui.Instance.Update();
-        //Input.SetCustomMouseCursor(null);
-        //int atlas = Map.ItemLayer.GetCellSourceId(pos);
-        //if (atlas >= 0)
-        //{
-        //    Position = Map.ItemLayer.MapToLocal(pos);
-        //    Visible = true;
-
-        //    Ui.Instance.SelectItem(pos);
-
-        //    return true;
-        //}
-        //else
-        //    Deselect();
-        //return false;
     }
 
 
@@ -40,8 +26,6 @@ public partial class Marker : Sprite2D
         Visible = false;
         CurrentObject = null;
         Ui.Instance.Update();
-        //Input.SetCustomMouseCursor(null);
-        //Ui.Instance.DeselectItem();
     }
 
     public void Update()

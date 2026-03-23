@@ -10,8 +10,7 @@ public partial class WorldMain : Node2D
     public double Time = 0;
 
     public static RandomNumberGenerator Random = new RandomNumberGenerator();
-    Sprite2D SpriteW;
-    Sprite2D SpriteF;
+
     public override void _Ready()
     {
         Instance = this;
@@ -22,7 +21,7 @@ public partial class WorldMain : Node2D
         Camera = GetNode<Camera2D>("Camera2D");
 
         Map.UpdateMap();
-        Ui.Instance.Update();
+        //Ui.Instance.Update();
     }
 
 
@@ -81,36 +80,6 @@ public partial class WorldMain : Node2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if(@event is InputEventKey keyEvent && keyEvent.IsPressed() && keyEvent.Keycode == Key.I)
-        {
-            if (SpriteW == null)
-            {
-                ItemBase item = ItemBase.NewItem(1);
-                item.Position = new Vector2I(100, 100);
-                SpriteW = item;
-                AddChild(item);
-            }
-            else
-            {
-                ((ItemBase)SpriteW).Value++;
-            }
-        }
-
-        if (@event is InputEventKey keyEventF && keyEventF.IsPressed() && keyEventF.Keycode == Key.O)
-        {
-            if (SpriteF == null)
-            {
-                ItemBase item = ItemBase.NewItem(2);
-                item.Position = new Vector2I(140, 100);
-                SpriteF = item;
-                AddChild(item);
-            }
-            else
-            {
-                ((ItemBase)SpriteF).Value++;
-            }
-        }
-
         if (@event.IsActionPressed("ui_cancel"))
         {
             GetTree().Quit();

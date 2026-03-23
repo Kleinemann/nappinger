@@ -1,12 +1,9 @@
 using Godot;
 using nappinger.scripts;
 using System;
-using System.Linq;
-using static WorldMain;
 
-public partial class Ui : Control
+public partial class ObjectOverview : Control
 {
-    public static Ui Instance;
 
     // Items
     VBoxContainer ObjectBox;
@@ -18,8 +15,6 @@ public partial class Ui : Control
 
     public override void _Ready()
     {
-        Instance = this;
-
         //Items
         ObjectBox = GetNode<VBoxContainer>("ObjectBox");
         ObjectLabel = GetNode<Label>("ObjectBox/HBoxContainer2/ObjectName");
@@ -33,7 +28,7 @@ public partial class Ui : Control
     public void Update()
     {
         GameObject go = WorldMain.Instance.Map.Marker.CurrentObject;
-        if(go != null)
+        if (go != null)
         {
             Visible = true;
             ObjectLabel.Text = go.ObjectName;

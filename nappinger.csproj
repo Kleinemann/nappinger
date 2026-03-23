@@ -4,6 +4,13 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Test2D\script\" />
+    <Compile Remove="szenes\items\**" />
+    <Compile Remove="Test2D\**" />
+    <EmbeddedResource Remove="szenes\items\**" />
+    <EmbeddedResource Remove="Test2D\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="szenes\" />
+    <Folder Include="szenes\ui\" />
   </ItemGroup>
 </Project>

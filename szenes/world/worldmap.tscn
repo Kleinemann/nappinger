@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://b3322irhb3pmu"]
 
-[ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/WorldMap.cs" id="1_7ps7e"]
+[ext_resource type="Script" uid="uid://7vsy4253ewky" path="res://scripts/world/WorldMap.cs" id="1_7ps7e"]
 [ext_resource type="TileSet" uid="uid://vtaair2y8i5i" path="res://szenes/tileSets/worldmap.tres" id="1_o2lsi"]
-[ext_resource type="Script" uid="uid://bg57tk5c0giu3" path="res://scripts/WorldMain.cs" id="1_tgi5o"]
+[ext_resource type="Script" uid="uid://bg57tk5c0giu3" path="res://scripts/world/WorldMain.cs" id="1_tgi5o"]
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://gjkas6ake265" path="res://assets/tiles/tree.png" id="4_tgi5o"]
 [ext_resource type="Texture2D" uid="uid://btsofy0ov6rav" path="res://assets/tiles/animals.png" id="5_713x0"]
 [ext_resource type="Texture2D" uid="uid://nuube55132l6" path="res://assets/tiles/Marker.png" id="6_2fbf8"]
 [ext_resource type="Texture2D" uid="uid://bk7xmw2g6risa" path="res://assets/tiles/npc.png" id="6_s58pj"]
-[ext_resource type="Script" uid="uid://duxijl8k8g5ba" path="res://szenes/world/Marker.cs" id="7_b4bkx"]
-[ext_resource type="Script" uid="uid://bdvgv1iaoiuod" path="res://szenes/world/Ui.cs" id="9_pm8jy"]
-[ext_resource type="Texture2D" uid="uid://bh10veui84myk" path="res://assets/ui/human.png" id="10_s58pj"]
+[ext_resource type="Script" uid="uid://duxijl8k8g5ba" path="res://scripts/ui/Marker.cs" id="7_b4bkx"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
+[ext_resource type="PackedScene" uid="uid://cogehielxa1pb" path="res://szenes/ui/UI.tscn" id="11_x812f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_713x0"]
 texture = ExtResource("4_tgi5o")
@@ -192,55 +191,7 @@ script = ExtResource("7_b4bkx")
 anchor_mode = 0
 script = ExtResource("2_1wgjs")
 
-[node name="UI" type="Control" parent="Camera2D" unique_id=1359130281]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_pm8jy")
-
-[node name="ObjectBox" type="VBoxContainer" parent="Camera2D/UI" unique_id=597234812]
-layout_mode = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 52.0
-offset_bottom = 37.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Camera2D/UI/ObjectBox" unique_id=559596948]
-layout_mode = 2
-
-[node name="ObjectName" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer2" unique_id=741398407]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-text = "Name"
-
-[node name="ObjectValue" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer2" unique_id=577977225]
-layout_mode = 2
-text = "Value"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UI/ObjectBox" unique_id=1197741158]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=138260819]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="ObjectPicture" type="TextureRect" parent="Camera2D/UI/ObjectBox/HBoxContainer/PanelContainer" unique_id=1908522528]
-layout_mode = 2
-stretch_mode = 2
-
-[node name="IsHuman" type="TextureRect" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=219864853]
-layout_mode = 2
-texture = ExtResource("10_s58pj")
-
-[node name="ObjectCoord" type="Label" parent="Camera2D/UI/ObjectBox/HBoxContainer" unique_id=1109624074]
-layout_mode = 2
-text = "(0,0)"
+[node name="UI" parent="Camera2D" unique_id=486205012 instance=ExtResource("11_x812f")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=762967687]
 stream = ExtResource("10_x812f")

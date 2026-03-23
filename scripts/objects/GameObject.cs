@@ -291,6 +291,7 @@ namespace nappinger.scripts
         internal void Work()
         {
             TargetItem.Value = TargetItem.Value - 3;
+            AddItem(1);
             if (TargetItem.ObjectState == ObjectStateEnum.DEAD)
             {
                 TargetItem.Process();
@@ -304,6 +305,7 @@ namespace nappinger.scripts
         internal void Fight()
         {
             TargetItem.Value = TargetItem.Value - 1;
+            AddItem(2);
             if (TargetItem.ObjectState == ObjectStateEnum.DEAD)
             {
                 TargetItem.Process();
@@ -315,6 +317,10 @@ namespace nappinger.scripts
             Ui.Instance.Update();
         }
 
+        void AddItem(int id, int value = 1)
+        {
+            Ui.Instance.ActionBar.AddItem(id, value);
+        }
 
         void ShowExplosion(Vector2I coord)
         {

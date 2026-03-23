@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cb3pv23pqcwmm"]
+
+[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_c1fpi"]
+[ext_resource type="Script" uid="uid://vd8nwa3lr1u6" path="res://scripts/ui/InventarSlot.cs" id="1_ll46o"]
+
+[node name="InventarSlot" type="Control" unique_id=1846707159]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ll46o")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1124438194]
+texture = ExtResource("1_c1fpi")
+centered = false
+
+[node name="LabelCount" type="Label" parent="." unique_id=1164393470]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.18039216, 0.49411765, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2

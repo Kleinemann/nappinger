@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemBase" format=3 uid="uid://svjrm86yf7oh"]
+
+[ext_resource type="Script" uid="uid://bv6a3yy6x5fi6" path="res://scripts/items/ItemBase.cs" id="1_0c3oh"]
+[ext_resource type="Texture2D" uid="uid://3hotbms1q4gy" path="res://assets/items/wood.png" id="1_j640n"]
+
+[resource]
+script = ExtResource("1_0c3oh")
+ID = 1
+Name = "Holz"
+Texture = ExtResource("1_j640n")
+metadata/_custom_type_script = "uid://bv6a3yy6x5fi6"
