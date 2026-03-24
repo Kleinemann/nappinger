@@ -291,7 +291,7 @@ namespace nappinger.scripts
         internal void Work()
         {
             TargetItem.Value = TargetItem.Value - 3;
-            AddItem(1);
+            AddItem(1, 3);
             if (TargetItem.ObjectState == ObjectStateEnum.DEAD)
             {
                 TargetItem.Process();

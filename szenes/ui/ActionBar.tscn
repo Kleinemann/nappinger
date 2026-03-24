@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://vhe6u3s6y4jo"]
 
-[ext_resource type="Script" uid="uid://dfu1srseq2eh2" path="res://szenes/ui/ActionBar.cs" id="1_efn5d"]
+[ext_resource type="Script" uid="uid://dfu1srseq2eh2" path="res://scripts/ui/ActionBar.cs" id="1_efn5d"]
 [ext_resource type="Texture2D" uid="uid://6nkxp88tu3q" path="res://assets/ui/Menu.png" id="2_b37n1"]
 [ext_resource type="PackedScene" uid="uid://cb3pv23pqcwmm" path="res://szenes/ui/InventarSlot.tscn" id="3_efn5d"]
 

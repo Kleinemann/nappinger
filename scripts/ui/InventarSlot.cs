@@ -4,6 +4,8 @@ using System;
 
 public partial class InventarSlot : Control
 {
+    const int MaxValue = 9;
+
     public ItemBase Item;
     public int ItemCount;
 
@@ -16,7 +18,16 @@ public partial class InventarSlot : Control
 
             if (Item != null && Item.ID == item.ID)
             {
-                ItemCount += value;
+                if(ItemCount + value > MaxValue)
+                {
+                    ItemCount = MaxValue;
+                    value = ItemCount + value - 99;
+                    
+                    //Todo: Drop to Floor
+                    
+                }
+                else
+                    ItemCount += value;
             }
             else
             {
