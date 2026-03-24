@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
 
 public partial class ActionBar : Control
 {
@@ -24,30 +25,64 @@ public partial class ActionBar : Control
     {
         foreach(int i in GD.Range(Mathf.Min(ItemResource.Items.Count, Slots.Count)))
         {
-            Slots[i].Update(ItemResource.Items[i], 0);
+            Slots[i].Update(null);
         }
     }
 
-    public void AddItem(int id , int value = 1)
+    public int AddItem(int id , int count = 1)
     {
-        int index = -1;
-        for(int i =0; i< Slots.Count; i++)
+        ItemBase ib = ItemBase.GetItem(id);
+        ib.Count = count;
+
+        return AddItem(ib);
+    }
+
+    public int AddItem(ItemBase ib)
+    {
+        int iEmpty = -1;
+        int iItem = -1;
+
+        for(int i = 0; i < ItemResource.Items.Count; i++)
         {
-            InventarSlot s = Slots[i];
-            if(s.Item == null || s.Item.ID == id)
+            ItemBase tmpItem = ItemResource.Items[i];
+
+            if (tmpItem == null && iEmpty < 0)
             {
-                index = i;
-                break;
+                iEmpty = i;
+            }
+
+            if (tmpItem != null
+                && tmpItem.ID == ib.ID
+                && tmpItem.Count < ItemBase.MaxCount)
+            {
+                iItem = i;
             }
         }
 
-        if (index > -1)
+        if(iItem >=0)
         {
-            ItemBase ib = ActionBarItems.ItemList[id];
-            ItemResource.Items[index] = ib;
-            Slots[index].Update(ib, value);
+            ItemBase item = ItemResource.Items[iItem];
+            var ret = item.Add(ib.Count);
+            Slots[iItem].Update(item);
+
+            //Overflow to next Slot
+            if (ret > 0)
+            {
+                ib.Count = ret;
+                return AddItem(ib);
+            }
+
+            return ret;
         }
-        else
-            GD.Print("KEIN PLATZ IM INVENTAR");
+
+
+        if(iEmpty >= 0)
+        {
+            ItemResource.Items[iEmpty] = ib;
+            Slots[iEmpty].Update(ib);
+            return 0;
+        }
+
+        return ib.Count;
     }
 }

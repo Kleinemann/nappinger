@@ -1,42 +1,45 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
+  "WorkspaceRootPath": "C:\\Worspace_Godot\\nappinger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\objects\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\objects\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\objectoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\items\\itembase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\items\\itembase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\ui\\objectoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\objectoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\szenes\\ui\\actionbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:szenes\\ui\\actionbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\inventarslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\ui\\inventarslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\inventarslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\ui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\marker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\ui\\marker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\marker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\world\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\actionbaritems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\worspace_godot\\nappinger\\scripts\\ui\\actionbaritems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\actionbaritems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Workspace\\nappinger\\szenes\\ui\\ActionBar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,28 +49,39 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "ItemBase.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\items\\ItemBase.cs",
+              "RelativeDocumentMoniker": "scripts\\items\\ItemBase.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\items\\ItemBase.cs",
+              "RelativeToolTip": "scripts\\items\\ItemBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:38:12.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ActionBar.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\szenes\\ui\\ActionBar.cs",
-              "RelativeDocumentMoniker": "szenes\\ui\\ActionBar.cs",
+              "RelativeDocumentMoniker": "..\\..\\Workspace\\nappinger\\szenes\\ui\\ActionBar.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\szenes\\ui\\ActionBar.cs",
-              "RelativeToolTip": "szenes\\ui\\ActionBar.cs",
+              "RelativeToolTip": "..\\..\\Workspace\\nappinger\\szenes\\ui\\ActionBar.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAowCEAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T13:56:53.627Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T13:56:53.627Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "ActionBarItems.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\ActionBarItems.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\ActionBarItems.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\ActionBarItems.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\ActionBarItems.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\ActionBarItems.cs",
               "RelativeToolTip": "scripts\\ui\\ActionBarItems.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -77,9 +91,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "InventarSlot.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\InventarSlot.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\InventarSlot.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\InventarSlot.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\InventarSlot.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\InventarSlot.cs",
               "RelativeToolTip": "scripts\\ui\\InventarSlot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -87,24 +101,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ObjectOverview.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\ObjectOverview.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\ObjectOverview.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\ObjectOverview.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\ObjectOverview.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\ObjectOverview.cs",
               "RelativeToolTip": "scripts\\ui\\ObjectOverview.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T07:27:23.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T07:27:23.125Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Ui.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\Ui.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\Ui.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\Ui.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\Ui.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\Ui.cs",
               "RelativeToolTip": "scripts\\ui\\Ui.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAQwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -114,11 +127,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "GameObject.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\objects\\GameObject.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\objects\\GameObject.cs",
               "RelativeDocumentMoniker": "scripts\\objects\\GameObject.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\objects\\GameObject.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\objects\\GameObject.cs",
               "RelativeToolTip": "scripts\\objects\\GameObject.cs",
-              "ViewState": "AgIAAB8BAAAAAAAAAAAcwCUBAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAB8BAAAAAAAAAAAcwEkBAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T07:12:11.396Z",
               "EditorCaption": ""
@@ -127,9 +140,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Marker.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\Marker.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\Marker.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\Marker.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\Marker.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\ui\\Marker.cs",
               "RelativeToolTip": "scripts\\ui\\Marker.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -139,9 +152,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "WorldMap.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMap.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\world\\WorldMap.cs",
               "RelativeDocumentMoniker": "scripts\\world\\WorldMap.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMap.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\world\\WorldMap.cs",
               "RelativeToolTip": "scripts\\world\\WorldMap.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAgwCwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -151,9 +164,9 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "WorldMain.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
+              "DocumentMoniker": "C:\\Worspace_Godot\\nappinger\\scripts\\world\\WorldMain.cs",
               "RelativeDocumentMoniker": "scripts\\world\\WorldMain.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
+              "ToolTip": "C:\\Worspace_Godot\\nappinger\\scripts\\world\\WorldMain.cs",
               "RelativeToolTip": "scripts\\world\\WorldMain.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
