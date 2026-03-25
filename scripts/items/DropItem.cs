@@ -34,17 +34,20 @@ public partial class DropItem : Area2D
                 if (chunk.Drops.ContainsKey(c) && chunk.Drops[coord].Item.ID == id)
                 {
                     chunk.Drops[coord].Item.Count += count;
+                    chunk.Drops[coord].Update();
+                    break;
                 }
                 else if(!chunk.Drops.ContainsKey(coord))
                 {
                     di.Position = map.CoordsToPosition(coord);
                     chunk.Drops.Add(coord, di);
+                    di.Update();
                     map.AddChild(di);
+                    break;
                 }
             }
         }
     }
-
 
     public override void _Ready()
     {
@@ -56,6 +59,12 @@ public partial class DropItem : Area2D
 
         Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
 
-        sprite.Texture = Item.Texture; 
+        sprite.Texture = Item.Texture;
+        Update();
+    }
+
+    public void Update()
+    {
+        GetNode<Label>("Sprite2D/LabelCount").Text = Item.Count > 1 ? Item.Count.ToString() : "";
     }
 }

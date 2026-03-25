@@ -327,7 +327,6 @@ namespace nappinger.scripts
             int ret = Ui.Instance.ActionBar.AddItem(id, value);
             if(ret > 0)
             {
-                GD.Print("KEIN PLATZ");
                 DropItem.DropNewItem(Position, id, value);
             }
         }

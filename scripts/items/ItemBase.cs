@@ -4,7 +4,7 @@ using Godot.Collections;
 [GlobalClass]
 public partial class ItemBase : Resource
 {
-    public const int MaxCount = 2;
+    public const int MaxCount = 99;
 
     [Export] public int ID { get; set; }
     [Export] public string Name { get; set; }

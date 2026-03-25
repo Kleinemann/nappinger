@@ -15,3 +15,22 @@ shape = SubResource("RectangleShape2D_6np8m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=812043995]
 texture = ExtResource("1_o1sw2")
+
+[node name="LabelCount" type="Label" parent="Sprite2D" unique_id=138466509]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -39.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0.9882353, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
