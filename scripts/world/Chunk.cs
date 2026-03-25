@@ -16,6 +16,7 @@ public partial class Chunk : GodotObject
     public int CellIndex;
 
     public Dictionary<Vector2I, GameObject> Objects = new Dictionary<Vector2I, GameObject>();
+    public Dictionary<Vector2I, DropItem> Drops = new Dictionary<Vector2I, DropItem>();
 
     public WorldMap Map => WorldMain.Instance.Map;
 
@@ -173,6 +174,18 @@ public partial class Chunk : GodotObject
             {
                 Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
                 Objects.Add(go.Position, go);
+            }
+
+            if (noiseValue > 0.100 && noiseValue <= 0.101)
+            {
+                if (!Drops.ContainsKey(tileCoord))
+                {
+                    PackedScene scene = GD.Load<PackedScene>("res://szenes/gameObjects/DropItem.tscn");
+                    DropItem item = scene.Instantiate<DropItem>();
+                    item.Position = tileCoord * TileSize;
+                    Drops.Add(tileCoord, item);
+                    WorldMain.Instance.AddChild(item);
+                }
             }
         }
     }

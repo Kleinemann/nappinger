@@ -246,6 +246,11 @@ namespace nappinger.scripts
 
             Position = newPos;
 
+            if(this is GameItemPlayer && newChunk.Drops.ContainsKey(Position))
+            {
+                ((GameItemPlayer)this).Collect(newChunk.Drops[Position]);
+            }
+
             if(Map.Marker.CurrentObject != null && Map.Marker.CurrentObject == this)
                 Map.Marker.Update();
         }
@@ -317,7 +322,7 @@ namespace nappinger.scripts
             Ui.Instance.Update();
         }
 
-        void AddItem(int id, int value = 1)
+        public void AddItem(int id, int value = 1)
         {
             Ui.Instance.ActionBar.AddItem(id, value);
         }
@@ -354,6 +359,11 @@ namespace nappinger.scripts
 
     public class GameItemPlayer : GameItemMoveable
     {
+        public void Collect(DropItem dItem)
+        {
+            AddItem(dItem.Item.ID, dItem.Item.Count);
+            dItem.QueueFree();
+        }
     }
 
 
