@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 public partial class ActionBar : Control
 {
@@ -78,9 +79,19 @@ public partial class ActionBar : Control
 
         if(iEmpty >= 0)
         {
-            ItemResource.Items[iEmpty] = ib;
-            Slots[iEmpty].Update(ib);
-            return 0;
+
+            if (ib.Count > ItemBase.MaxCount)
+            {
+                var ret = ItemBase.MaxCount - ib.Count;
+                ib.Count = ItemBase.MaxCount;
+
+            }
+            else
+            {
+                ItemResource.Items[iEmpty] = ib;
+                Slots[iEmpty].Update(ib);
+                return 0;
+            }
         }
 
         return ib.Count;

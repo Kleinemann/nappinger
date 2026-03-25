@@ -24,6 +24,6 @@ public partial class InventarSlot : Control
         }
 
         Label l = GetNode<Label>("LabelCount");
-        l.Text = count > 0 ? count.ToString() : "";
+        l.Text = count > 1 ? count.ToString() : "";
     }
 }
