@@ -324,7 +324,12 @@ namespace nappinger.scripts
 
         public void AddItem(int id, int value = 1)
         {
-            Ui.Instance.ActionBar.AddItem(id, value);
+            int ret = Ui.Instance.ActionBar.AddItem(id, value);
+            if(ret > 0)
+            {
+                GD.Print("KEIN PLATZ");
+                DropItem.DropNewItem(Position, id, value);
+            }
         }
 
         void ShowExplosion(Vector2I coord)

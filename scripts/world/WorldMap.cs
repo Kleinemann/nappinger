@@ -145,6 +145,11 @@ public partial class WorldMap : Node2D
     }
 
 
+    public Vector2I CoordsToPosition(Vector2I coord)
+    {
+        return coord * Chunk.ChunkSize;
+    }
+
     public Chunk GetChunk(Vector2I pos)
     {
         Vector2I chunkCoords = GetChunkCoords(pos);

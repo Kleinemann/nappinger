@@ -79,16 +79,18 @@ public partial class ActionBar : Control
 
         if(iEmpty >= 0)
         {
-
-            if (ib.Count > ItemBase.MaxCount)
-            {
-                var ret = ItemBase.MaxCount - ib.Count;
-                ib.Count = ItemBase.MaxCount;
-
-            }
-            else
             {
                 ItemResource.Items[iEmpty] = ib;
+
+                if(ItemResource.Items[iEmpty].Count > ItemBase.MaxCount)
+                {
+                    ItemBase ibNew = ib.Duplicate() as ItemBase;
+                    ibNew.Count = ib.Count - ItemBase.MaxCount;
+                    ib.Count = ItemBase.MaxCount;
+                    Slots[iEmpty].Update(ib);
+                    return AddItem(ibNew);
+                }
+
                 Slots[iEmpty].Update(ib);
                 return 0;
             }
