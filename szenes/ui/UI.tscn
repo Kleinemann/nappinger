@@ -15,15 +15,16 @@ script = ExtResource("1_jf26m")
 
 [node name="ObjectOverview" parent="." unique_id=1628235557 instance=ExtResource("1_v46pf")]
 layout_mode = 1
-
-[node name="ActionBar" parent="." unique_id=52296770 instance=ExtResource("3_xe4sy")]
-layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 303.0
-offset_top = 447.0
-offset_right = 303.0
-offset_bottom = 447.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="ActionBar" parent="." unique_id=52296770 instance=ExtResource("3_xe4sy")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+grow_vertical = 0

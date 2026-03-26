@@ -1,5 +1,6 @@
 using Godot;
 using nappinger.scripts;
+using System;
 using System.Data;
 
 public partial class WorldMain : Node2D
@@ -78,7 +79,7 @@ public partial class WorldMain : Node2D
         }
     }
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("ui_cancel"))
         {

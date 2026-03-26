@@ -12,12 +12,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fb888")
 
+[node name="Panel" type="Panel" parent="." unique_id=435769429]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 23.0
+offset_right = 181.0
+offset_bottom = 104.0
+
 [node name="ObjectBox" type="VBoxContainer" parent="." unique_id=1915888530]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 52.0
-offset_bottom = 37.0
+offset_left = 33.0
+offset_top = 31.0
+offset_right = 128.0
+offset_bottom = 81.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ObjectBox" unique_id=1483377446]
 layout_mode = 2

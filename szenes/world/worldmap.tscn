@@ -191,9 +191,11 @@ script = ExtResource("7_b4bkx")
 anchor_mode = 0
 script = ExtResource("2_1wgjs")
 
-[node name="UI" parent="Camera2D" unique_id=486205012 instance=ExtResource("11_x812f")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=762967687]
 stream = ExtResource("10_x812f")
 volume_db = -10.0
 parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=821004357]
+
+[node name="UI" parent="CanvasLayer" unique_id=486205012 instance=ExtResource("11_x812f")]
