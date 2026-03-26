@@ -4,16 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_o1sw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6np8m"]
-size = Vector2(40, 39)
+size = Vector2(32, 32)
 
 [node name="DropItem" type="Area2D" unique_id=37936592]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_6np8m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=261528957]
-position = Vector2(0, -0.5)
+position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_6np8m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=812043995]
+position = Vector2(16, 16)
 texture = ExtResource("1_o1sw2")
 
 [node name="LabelCount" type="Label" parent="Sprite2D" unique_id=138466509]
@@ -22,10 +24,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -37.0
-offset_top = -39.0
-offset_right = -16.0
-offset_bottom = -16.0
+offset_left = -36.0
+offset_top = -38.0
+offset_right = -15.0
+offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0.9882353, 1, 1)
