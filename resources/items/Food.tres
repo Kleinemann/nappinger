@@ -8,5 +8,5 @@ script = ExtResource("1_w4j12")
 ID = 2
 Name = "Essen"
 Texture = ExtResource("1_gmb1c")
-Count = 2
+Count = 1
 metadata/_custom_type_script = "uid://bv6a3yy6x5fi6"

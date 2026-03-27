@@ -8,4 +8,5 @@ script = ExtResource("1_0c3oh")
 ID = 1
 Name = "Holz"
 Texture = ExtResource("1_j640n")
+Count = 1
 metadata/_custom_type_script = "uid://bv6a3yy6x5fi6"

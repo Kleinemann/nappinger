@@ -28,6 +28,7 @@ public partial class WorldMain : Node2D
 
     public override void _Process(double delta)
     {
+        /*
         Time += delta;
         if(Time >= 1)
         {
@@ -37,8 +38,8 @@ public partial class WorldMain : Node2D
                 chunk.Process();
             }
         }
-
-        UpdateMouseIcon();
+        */
+        //UpdateMouseIcon();
     }
 
     public void UpdateMouseIcon()
@@ -81,6 +82,7 @@ public partial class WorldMain : Node2D
 
     public override void _Input(InputEvent @event)
     {
+        /*
         if (@event.IsActionPressed("ui_cancel"))
         {
             GetTree().Quit();
@@ -118,6 +120,7 @@ public partial class WorldMain : Node2D
         }
 
         @event.Dispose();
+        */
     }
 }
 

@@ -8,9 +8,9 @@ using static WorldMap;
 
 public partial class Chunk : GodotObject
 {
-    public static readonly int TileSize = 16;
+    public static readonly int TileSize = 32;
     public static readonly int ChunkSize = 16;
-    public static readonly int ChunkRange = 5;
+    public static readonly int ChunkRange = 3;
 
     public Vector2I Coords;
     public int CellIndex;
@@ -67,7 +67,7 @@ public partial class Chunk : GodotObject
 
     public void Process()
     {
-
+        /*
         //GOL
         Vector2I[] coords = GetTileCoords();
         int cellIndex = WorldMain.Random.RandiRange(0, (ChunkSize * ChunkSize) - 1);
@@ -101,7 +101,7 @@ public partial class Chunk : GodotObject
         }
 
 
-
+        */
     }
 
     public Vector2I[] GetTileCoords()
@@ -149,44 +149,44 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            GameObject go = null;
-            if (noiseValue > 0.2f && noiseValue < 0.3f)
-            {
-                go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, tileCoord, noiseValue);
-            }
+            //GameObject go = null;
+            //if (noiseValue > 0.2f && noiseValue < 0.3f)
+            //{
+            //    go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, tileCoord, noiseValue);
+            //}
 
-            if(noiseValue > 0.153 && noiseValue < 0.155)
-            {
-                go = GameObject.NewGameItem(ObjectTypeEnum.ANIMAL, tileCoord, noiseValue);
-            }
+            //if(noiseValue > 0.153 && noiseValue < 0.155)
+            //{
+            //    go = GameObject.NewGameItem(ObjectTypeEnum.ANIMAL, tileCoord, noiseValue);
+            //}
 
-            if (noiseValue > 0.151 && noiseValue < 0.1515)
-            {
-                go = GameObject.NewGameItem(ObjectTypeEnum.PLAYER, tileCoord, noiseValue);
-            }
+            //if (noiseValue > 0.151 && noiseValue < 0.1515)
+            //{
+            //    go = GameObject.NewGameItem(ObjectTypeEnum.PLAYER, tileCoord, noiseValue);
+            //}
 
-            if(noiseValue >= 0.154 && noiseValue <= 0.157)
-            {
-                go = GameObject.NewGameItem(ObjectTypeEnum.NPC, tileCoord, noiseValue);
-            }
+            //if(noiseValue >= 0.154 && noiseValue <= 0.157)
+            //{
+            //    go = GameObject.NewGameItem(ObjectTypeEnum.NPC, tileCoord, noiseValue);
+            //}
 
-            if(go != null)
-            {
-                Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
-                Objects.Add(go.Position, go);
-            }
+            //if(go != null)
+            //{
+            //    Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
+            //    Objects.Add(go.Position, go);
+            //}
 
-            if (noiseValue > 0.100 && noiseValue <= 0.101)
-            {
-                if (!Drops.ContainsKey(tileCoord))
-                {
-                    PackedScene scene = GD.Load<PackedScene>("res://szenes/gameObjects/DropItem.tscn");
-                    DropItem item = scene.Instantiate<DropItem>();
-                    item.Position = tileCoord * TileSize;
-                    Drops.Add(tileCoord, item);
-                    WorldMain.Instance.AddChild(item);
-                }
-            }
+            //if (noiseValue > 0.100 && noiseValue <= 0.101)
+            //{
+            //    if (!Drops.ContainsKey(tileCoord))
+            //    {
+            //        PackedScene scene = GD.Load<PackedScene>("res://szenes/gameObjects/DropItem.tscn");
+            //        DropItem item = scene.Instantiate<DropItem>();
+            //        item.Position = tileCoord * TileSize;
+            //        Drops.Add(tileCoord, item);
+            //        WorldMain.Instance.AddChild(item);
+            //    }
+            //}
         }
     }
 
