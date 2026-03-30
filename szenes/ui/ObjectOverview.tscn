@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cuw6rfyu5dl3w"]
 
-[ext_resource type="Texture2D" uid="uid://bh10veui84myk" path="res://assets/ui/human.png" id="1_1syye"]
 [ext_resource type="Script" uid="uid://yf4evw0nsmdb" path="res://scripts/ui/ObjectOverview.cs" id="1_fb888"]
 
 [node name="ObjectOverview" type="Control" unique_id=1628235557]
@@ -51,10 +50,6 @@ size_flags_vertical = 0
 [node name="ObjectPicture" type="TextureRect" parent="ObjectBox/HBoxContainer/PanelContainer" unique_id=802434186]
 layout_mode = 2
 stretch_mode = 2
-
-[node name="IsHuman" type="TextureRect" parent="ObjectBox/HBoxContainer" unique_id=1369510187]
-layout_mode = 2
-texture = ExtResource("1_1syye")
 
 [node name="ObjectCoord" type="Label" parent="ObjectBox/HBoxContainer" unique_id=17417262]
 layout_mode = 2

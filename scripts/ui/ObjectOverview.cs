@@ -10,7 +10,6 @@ public partial class ObjectOverview : Control
     Label ObjectLabel;
     Label ObjectValue;
     TextureRect ObjectPicture;
-    TextureRect ObjectIsHuman;
     Label ObjectCoord;
 
     public override void _Ready()
@@ -20,7 +19,6 @@ public partial class ObjectOverview : Control
         ObjectLabel = GetNode<Label>("ObjectBox/HBoxContainer2/ObjectName");
         ObjectValue = GetNode<Label>("ObjectBox/HBoxContainer2/ObjectValue");
         ObjectPicture = GetNode<TextureRect>("ObjectBox/HBoxContainer/PanelContainer/ObjectPicture");
-        ObjectIsHuman = GetNode<TextureRect>("ObjectBox/HBoxContainer/IsHuman");
         ObjectCoord = GetNode<Label>("ObjectBox/HBoxContainer/ObjectCoord");
         Visible = false;
     }
@@ -34,7 +32,6 @@ public partial class ObjectOverview : Control
             ObjectLabel.Text = go.ObjectName;
             ObjectValue.Text = go.Value.ToString();
             ObjectPicture.Texture = go.Icon;
-            ObjectIsHuman.Visible = go.ObjectType == ObjectTypeEnum.PLAYER;
             ObjectCoord.Text = $" ( {go.Position.X} | {go.Position.Y} )";
         }
         else
