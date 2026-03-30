@@ -4,6 +4,7 @@ using System;
 public partial class Player : CharacterBody2D
 {
     AnimatedSprite2D Animator;
+    AnimatedSprite2D AnimatorShadow;
     int Speed = 150;
     string direction = "d";
 
@@ -11,6 +12,7 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
         Animator = GetNode<AnimatedSprite2D>("Sprite2D");
+        AnimatorShadow = GetNode<AnimatedSprite2D>("Sprite2DShadow");
         PlayerMovement();
         PlayerAnimation();
     }
@@ -30,9 +32,14 @@ public partial class Player : CharacterBody2D
         else if (Velocity.Y > 0) direction = "d";
         else if (Velocity.Y < 0) direction = "u";
 
+        string animationName;
+
         if(Velocity == Vector2.Zero)
-            Animator.Play("idle_" + direction);
+            animationName = "idle_" + direction;
         else
-            Animator.Play("walk_" + direction);
+            animationName= "walk_" + direction;
+
+        Animator.Play(animationName);
+        AnimatorShadow.Play(animationName);
     }
 }
