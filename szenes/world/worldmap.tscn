@@ -192,9 +192,9 @@ script = ExtResource("7_b4bkx")
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(644, 178)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
-anchor_mode = 0
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459 node_paths=PackedStringArray("CameraTarget")]
 script = ExtResource("2_1wgjs")
+CameraTarget = NodePath("../DualTileMap/Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=762967687]
 stream = ExtResource("10_x812f")

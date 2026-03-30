@@ -6,13 +6,26 @@ public partial class CameraScroll : Camera2D
     float EdgeMargin = 20f;
     float CameraSpeed = 200f;
     Vector2 UnZoomedViewportSize = new Vector2(1152, 648);
-    float ZoomLevel = 1.25f;
+    float ZoomLevel = 1f;
     bool MouseOutOfWindow = false;
+
+    [Export] Node2D CameraTarget;
+    Node2D LastTarget;
 
     public override void _Ready()
     {
         Zoom = new Vector2(ZoomLevel, ZoomLevel);
+        LastTarget = CameraTarget;
     }
+
+    public void SwitchFocus()
+    {
+        if (CameraTarget == null && LastTarget != null)
+            CameraTarget = LastTarget;
+        else
+            CameraTarget = null;
+    }
+
 
     public override void _Notification(int what)
     {
@@ -59,27 +72,35 @@ public partial class CameraScroll : Camera2D
 
     public override void _Process(double delta)
     {
-        if(MouseOutOfWindow)
-            return;
+        //Free camera
+        if (CameraTarget == null)
+        {
+            if (MouseOutOfWindow)
+                return;
 
-        Vector2 mousePos = GetViewport().GetMousePosition();
-        Vector2 moveVector = Vector2.Zero;
-        float cammeraSpeedAdjusted = CameraSpeed * (float)delta / ZoomLevel;
+            Vector2 mousePos = GetViewport().GetMousePosition();
+            Vector2 moveVector = Vector2.Zero;
+            float cammeraSpeedAdjusted = CameraSpeed * (float)delta / ZoomLevel;
 
-        if (mousePos.X <= EdgeMargin)
-            moveVector.X = -cammeraSpeedAdjusted;
-        else if(mousePos.X >= UnZoomedViewportSize.X - EdgeMargin)
-            moveVector.X = cammeraSpeedAdjusted;
+            if (mousePos.X <= EdgeMargin)
+                moveVector.X = -cammeraSpeedAdjusted;
+            else if (mousePos.X >= UnZoomedViewportSize.X - EdgeMargin)
+                moveVector.X = cammeraSpeedAdjusted;
 
-        if (mousePos.Y <= EdgeMargin)
-            moveVector.Y = -cammeraSpeedAdjusted;
-        else if(mousePos.Y >= UnZoomedViewportSize.Y - EdgeMargin)
-            moveVector.Y = cammeraSpeedAdjusted;
+            if (mousePos.Y <= EdgeMargin)
+                moveVector.Y = -cammeraSpeedAdjusted;
+            else if (mousePos.Y >= UnZoomedViewportSize.Y - EdgeMargin)
+                moveVector.Y = cammeraSpeedAdjusted;
 
-        if(moveVector == Vector2.Zero)
-            return;
+            if (moveVector == Vector2.Zero)
+                return;
 
-        Position += moveVector;
+            Position += moveVector;
+        }
+        else
+        {
+            Position = CameraTarget.Position;
+        }
 
         WorldMain.Instance.Map.UpdateMap();
     }
