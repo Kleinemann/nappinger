@@ -12,7 +12,6 @@ public partial class Chunk : GodotObject
     public Vector2I Coords;
     public int CellIndex;
 
-    public Dictionary<Vector2I, GameObject> Objects = new Dictionary<Vector2I, GameObject>();
     public Dictionary<Vector2I, DropItem> Drops = new Dictionary<Vector2I, DropItem>();
 
     public WorldMap Map => WorldMain.Instance.Map;
@@ -259,14 +258,6 @@ public partial class Chunk : GodotObject
     }
 
 
-    public GameObject GetItem(Vector2I pos)
-    {
-        if (Objects.ContainsKey(pos))
-            return Objects[pos];
-        return null;
-    }
-
-
     public Vector2I[] GetNeigbours(Vector2I pos)
     {
         Vector2I[] posN = new Vector2I[4];
@@ -281,13 +272,6 @@ public partial class Chunk : GodotObject
 
     public void Clean()
     {
-        //Alle SPielobjecte Löschen
-        foreach(Vector2I pos in Objects.Keys)
-        {
-            Map.ObjectLayer.EraseCell(pos);
-        }
-        Objects.Clear();
-
         //Karte Löschen
         foreach (Vector2I tileCoord in GetTileCoords())
         {

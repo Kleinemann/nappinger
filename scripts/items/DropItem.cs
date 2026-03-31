@@ -29,23 +29,23 @@ public partial class DropItem : Area2D
 
         foreach(Vector2I c in chunk.GetNeigbours(coord))
         {
-            if(chunk.GetItem(c) == null)
-            {
-                if (chunk.Drops.ContainsKey(c) && chunk.Drops[coord].Item.ID == id)
-                {
-                    chunk.Drops[coord].Item.Count += count;
-                    chunk.Drops[coord].Update();
-                    break;
-                }
-                else if(!chunk.Drops.ContainsKey(coord))
-                {
-                    di.Position = map.CoordsToPosition(coord);
-                    chunk.Drops.Add(coord, di);
-                    di.Update();
-                    map.AddChild(di);
-                    break;
-                }
-            }
+            //if(chunk.GetItem(c) == null)
+            //{
+            //    if (chunk.Drops.ContainsKey(c) && chunk.Drops[coord].Item.ID == id)
+            //    {
+            //        chunk.Drops[coord].Item.Count += count;
+            //        chunk.Drops[coord].Update();
+            //        break;
+            //    }
+            //    else if(!chunk.Drops.ContainsKey(coord))
+            //    {
+            //        di.Position = map.CoordsToPosition(coord);
+            //        chunk.Drops.Add(coord, di);
+            //        di.Update();
+            //        map.AddChild(di);
+            //        break;
+            //    }
+            //}
         }
     }
 

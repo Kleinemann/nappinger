@@ -124,23 +124,6 @@ public partial class WorldMap : Node2D
         return WorldLayer.LocalToMap(lMouse);
     }
 
-    public GameObject GetItem(Vector2I pos)
-    {
-        Chunk chunk = GetChunk(pos);
-        if (chunk != null)
-        {
-            return chunk.GetItem(pos);
-        }
-        return null;
-    }
-
-    public GameObject GetItem()
-    {
-        Vector2I pos = GetMouseCoords();
-        return GetItem(pos);
-    }
-
-
     public Vector2I CoordsToPosition(Vector2I coord)
     {
         return coord * Chunk.ChunkSize;
