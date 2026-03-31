@@ -7,7 +7,7 @@ public partial class Player : CharacterBody2D
     AnimatedSprite2D AnimatorShadow;
     int Speed = 150;
     string direction = "d";
-
+    public static Player SelectetPlayer;
 
     public override void _Process(double delta)
     {
@@ -19,6 +19,9 @@ public partial class Player : CharacterBody2D
 
     public void PlayerMovement()
     {
+        if (SelectetPlayer != this)
+            return;
+
         Velocity = Input.GetVector("left", "rigth", "up", "down");
         Velocity = Velocity * Speed;
 

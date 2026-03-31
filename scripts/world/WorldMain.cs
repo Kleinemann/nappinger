@@ -79,18 +79,24 @@ public partial class WorldMain : Node2D
             }
         }
     }
-
     public override void _Input(InputEvent @event)
     {
-        
-        if (@event.IsActionPressed("ui_cancel"))
+        //Quit
+        if(@event.IsActionPressed("ui_cancel"))
         {
             GetTree().Quit();
         }
 
+        //Focus / defocus Player
         if(@event.IsActionPressed("camera_focus"))
         {
             Camera.SwitchFocus();
+        }
+
+        //Deselect 
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            Player.SelectetPlayer = null;
         }
 
         /*
@@ -124,9 +130,9 @@ public partial class WorldMain : Node2D
                 }
             }
         }
-
-        @event.Dispose();
         */
+        @event.Dispose();
+        
     }
 }
 

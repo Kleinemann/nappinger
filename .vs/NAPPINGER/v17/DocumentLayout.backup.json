@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\szenes\\character\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:szenes\\character\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\worldmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\camerascroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\marker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\marker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\objectoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\objectoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,32 +30,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CameraScroll.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
-              "RelativeDocumentMoniker": "scripts\\CameraScroll.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
-              "RelativeToolTip": "scripts\\CameraScroll.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAsAAAAGAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Marker.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\Marker.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\Marker.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\Marker.cs",
+              "RelativeToolTip": "scripts\\ui\\Marker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-30T07:54:03.045Z",
+              "WhenOpened": "2026-03-30T12:27:55.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ObjectOverview.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\ObjectOverview.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\ObjectOverview.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\ObjectOverview.cs",
+              "RelativeToolTip": "scripts\\ui\\ObjectOverview.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-30T12:25:10.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorldMain.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
+              "RelativeDocumentMoniker": "scripts\\world\\WorldMain.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
+              "RelativeToolTip": "scripts\\world\\WorldMain.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAqwGcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-30T08:01:24.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WorldMap.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMap.cs",
-              "RelativeDocumentMoniker": "scripts\\world\\WorldMap.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMap.cs",
-              "RelativeToolTip": "scripts\\world\\WorldMap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "CameraScroll.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
+              "RelativeDocumentMoniker": "scripts\\CameraScroll.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\CameraScroll.cs",
+              "RelativeToolTip": "scripts\\CameraScroll.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-30T07:41:43.676Z",
+              "WhenOpened": "2026-03-30T07:54:03.045Z",
               "EditorCaption": ""
             },
             {
@@ -58,7 +90,7 @@
               "RelativeDocumentMoniker": "szenes\\character\\Player.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\szenes\\character\\Player.cs",
               "RelativeToolTip": "szenes\\character\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T16:00:21.868Z",
               "EditorCaption": ""

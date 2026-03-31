@@ -199,6 +199,7 @@ size = Vector2(18, 7)
 script = ExtResource("1_7a20s")
 
 [node name="Sprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1308097073]
+z_index = 1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_5stuu")
 position = Vector2(3, -1)
@@ -210,6 +211,7 @@ frame_progress = 0.70679337
 offset = Vector2(0, -16)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2061302791]
+z_index = 1
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_3bsk1")
 animation = &"walk_d"

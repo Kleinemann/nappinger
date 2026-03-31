@@ -9,19 +9,17 @@ public partial class CameraScroll : Camera2D
     float ZoomLevel = 1f;
     bool MouseOutOfWindow = false;
 
-    [Export] Node2D CameraTarget;
-    Node2D LastTarget;
+    Node2D CameraTarget;
 
     public override void _Ready()
     {
         Zoom = new Vector2(ZoomLevel, ZoomLevel);
-        LastTarget = CameraTarget;
     }
 
     public void SwitchFocus()
     {
-        if (CameraTarget == null && LastTarget != null)
-            CameraTarget = LastTarget;
+        if (CameraTarget == null && Player.SelectetPlayer != null)
+            CameraTarget = Player.SelectetPlayer;
         else
             CameraTarget = null;
     }
