@@ -1,7 +1,4 @@
 using Godot;
-using nappinger.scripts;
-using System;
-using System.Data;
 
 public partial class WorldMain : Node2D
 {
@@ -44,42 +41,42 @@ public partial class WorldMain : Node2D
 
     public void UpdateMouseIcon()
     {
-        if (Map.Marker.CurrentObject != null)
-        {
-            if (Map.Marker.CurrentObject.ObjectType == ObjectTypeEnum.PLAYER)
-            {
-                Vector2I mouse = Map.GetMouseCoords();
-                if (Map.ObjectLayer.GetCellSourceId(mouse) >= 0)
-                {
-                    TileData data = Map.ObjectLayer.GetCellTileData(mouse);
-                    ObjectTypeEnum type = (ObjectTypeEnum)((int)data.GetCustomData("ItemType"));
+        //if (Map.Marker.CurrentObject != null)
+        //{
+        //    if (Map.Marker.CurrentObject.ObjectType == ObjectTypeEnum.PLAYER)
+        //    {
+        //        Vector2I mouse = Map.GetMouseCoords();
+        //        if (Map.ObjectLayer.GetCellSourceId(mouse) >= 0)
+        //        {
+        //            TileData data = Map.ObjectLayer.GetCellTileData(mouse);
+        //            ObjectTypeEnum type = (ObjectTypeEnum)((int)data.GetCustomData("ItemType"));
 
-                    Resource res = null;
-                    switch (type)
-                    {
-                        case ObjectTypeEnum.PLANT:
-                            res = GD.Load("res://assets/actions/lumber.png");
-                            break;
+        //            Resource res = null;
+        //            switch (type)
+        //            {
+        //                case ObjectTypeEnum.PLANT:
+        //                    res = GD.Load("res://assets/actions/lumber.png");
+        //                    break;
 
-                        case ObjectTypeEnum.ANIMAL:
-                            res = GD.Load("res://assets/actions/hunt.png");
-                            break;
+        //                case ObjectTypeEnum.ANIMAL:
+        //                    res = GD.Load("res://assets/actions/hunt.png");
+        //                    break;
 
-                        default:
+        //                default:
 
-                            break;
-                    }
+        //                    break;
+        //            }
 
-                    Input.SetCustomMouseCursor(res);
-                }
-                else
-                {
-                    Input.SetCustomMouseCursor(null);
-                }
-            }
-        }
+        //            Input.SetCustomMouseCursor(res);
+        //        }
+        //        else
+        //        {
+        //            Input.SetCustomMouseCursor(null);
+        //        }
+        //    }
+        //}
     }
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         //Quit
         if(@event.IsActionPressed("ui_cancel"))
@@ -96,6 +93,7 @@ public partial class WorldMain : Node2D
         //Deselect 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
+            GD.Print("WORLD CLICK");
             Player.SelectetPlayer = null;
         }
 

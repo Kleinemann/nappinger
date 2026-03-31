@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b4kuwvqd7cucm"]
+
+[ext_resource type="Script" uid="uid://ctgam6exij4t2" path="res://scripts/objects/GameObject.cs" id="2_0jkve"]
+[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="2_5sfjh"]
+[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_37816"]
+[ext_resource type="Resource" uid="uid://bbl2ods53gwck" path="res://resources/objects/BigStone.tres" id="2_x3ia6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7v3h"]
+size = Vector2(32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jkve"]
+shader = ExtResource("2_37816")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_alpha = 0.5
+
+[node name="Area2D" type="Area2D" unique_id=777048603]
+script = ExtResource("2_0jkve")
+_Obj = ExtResource("2_x3ia6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=140239857]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_i7v3h")
+script = ExtResource("2_0jkve")
+
+[node name="Sprite2DShadow" type="Sprite2D" parent="." unique_id=1395555536]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_0jkve")
+position = Vector2(1, -3)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_5sfjh")
+offset = Vector2(0, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177534467]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("2_5sfjh")
+offset = Vector2(0, 16)

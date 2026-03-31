@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://cmvy5lfomikog"]
 
-[ext_resource type="Script" uid="uid://pa2ph36afi1x" path="res://szenes/character/Player.cs" id="1_7a20s"]
+[ext_resource type="Script" uid="uid://pa2ph36afi1x" path="res://scripts/objects/Player.cs" id="1_7a20s"]
 [ext_resource type="Texture2D" uid="uid://d8j135imywbi" path="res://assets/objects/player/dummy.png" id="2_5stuu"]
-[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://szenes/character/shadow.gdshader" id="2_5wu8j"]
+[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_5wu8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6v8"]
+size = Vector2(18, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5stuu"]
 shader = ExtResource("2_5wu8j")
@@ -192,11 +195,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6v8"]
-size = Vector2(18, 7)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5stuu"]
+radius = 14.0
+height = 38.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1468443236]
 script = ExtResource("1_7a20s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_yc6v8")
 
 [node name="Sprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1308097073]
 z_index = 1
@@ -219,6 +227,10 @@ frame = 2
 frame_progress = 0.095184505
 offset = Vector2(0, -16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_yc6v8")
+[node name="Area2D" type="Area2D" parent="." unique_id=1555219098]
+position = Vector2(0, 3)
+
+[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1476901129]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_5stuu")
+debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)

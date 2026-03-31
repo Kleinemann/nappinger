@@ -1,9 +1,6 @@
 using Godot;
-using nappinger.scripts;
 using System;
 using System.Collections.Generic;
-using System.IO.MemoryMappedFiles;
-using System.Linq;
 using static WorldMap;
 
 public partial class Chunk : GodotObject
@@ -49,20 +46,6 @@ public partial class Chunk : GodotObject
     public Chunk(Vector2I coords)
     {
         Coords = coords;
-    }
-
-    List<Vector2I> NeigboursWidthValue(Vector2I coord, ObjectTypeEnum type)
-    {
-        List<Vector2I> hits = new List<Vector2I>();
-
-        Vector2I[] neigbours = GetNeigbours(coord);
-        foreach(Vector2I v2 in neigbours)
-        {
-            GameObject tmp = GetItem(v2);
-            if (tmp != null && tmp.ObjectType == ObjectTypeEnum.PLANT)
-                hits.Add(v2);
-        }
-        return hits;
     }
 
     public void Process()

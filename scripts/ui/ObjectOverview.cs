@@ -1,5 +1,4 @@
 using Godot;
-using nappinger.scripts;
 using System;
 
 public partial class ObjectOverview : Control
@@ -25,18 +24,18 @@ public partial class ObjectOverview : Control
 
     public void Update()
     {
-        GameObject go = WorldMain.Instance.Map.Marker.CurrentObject;
-        if (go != null)
-        {
-            Visible = true;
-            ObjectLabel.Text = go.ObjectName;
-            ObjectValue.Text = go.Value.ToString();
-            ObjectPicture.Texture = go.Icon;
-            ObjectCoord.Text = $" ( {go.Position.X} | {go.Position.Y} )";
-        }
-        else
-        {
-            Visible = false;
-        }
+        //GameObject go = WorldMain.Instance.Map.Marker.CurrentObject;
+        //if (go != null)
+        //{
+        //    Visible = true;
+        //    ObjectLabel.Text = go.ObjectName;
+        //    //ObjectValue.Text = go.Value.ToString();
+        //    ObjectPicture.Texture = go.Texture;
+        //    ObjectCoord.Text = $" ( {go.Position.X} | {go.Position.Y} )";
+        //}
+        //else
+        //{
+        //    Visible = false;
+        //}
     }
 }

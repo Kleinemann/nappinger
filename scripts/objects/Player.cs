@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Player : CharacterBody2D
 {
@@ -8,6 +7,23 @@ public partial class Player : CharacterBody2D
     int Speed = 150;
     string direction = "d";
     public static Player SelectetPlayer;
+
+    public override void _Ready()
+    {
+        Area2D area = GetNode<Area2D>("Area2D");
+        area.InputEvent += OnInputEvent;
+    }
+
+
+    public void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
+    {
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            GD.Print("Player CLICK");
+            SelectetPlayer = this;
+        }
+    }
+
 
     public override void _Process(double delta)
     {
@@ -19,11 +35,12 @@ public partial class Player : CharacterBody2D
 
     public void PlayerMovement()
     {
-        if (SelectetPlayer != this)
-            return;
-
         Velocity = Input.GetVector("left", "rigth", "up", "down");
         Velocity = Velocity * Speed;
+
+        //TODO: Only in first Person
+        if (SelectetPlayer != this)
+            Velocity = Vector2.Zero;
 
         MoveAndSlide();
     }

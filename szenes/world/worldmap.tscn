@@ -5,8 +5,6 @@
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://co5cjuy4gqevt" path="res://assets/tiles/BaseTiles.png" id="3_qw1xo"]
 [ext_resource type="Texture2D" uid="uid://cabu8xpcdhuli" path="res://assets/tiles/ObjectTiles.png" id="4_pm8jy"]
-[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="5_pm8jy"]
-[ext_resource type="Script" uid="uid://duxijl8k8g5ba" path="res://scripts/ui/Marker.cs" id="7_b4bkx"]
 [ext_resource type="PackedScene" uid="uid://cmvy5lfomikog" path="res://szenes/character/Player.tscn" id="9_s58pj"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://cogehielxa1pb" path="res://szenes/ui/UI.tscn" id="11_x812f"]
@@ -163,22 +161,17 @@ tile_set = SubResource("TileSet_x812f")
 [node name="ObjectGrid" type="TileMapLayer" parent="DualTileMap" unique_id=240612471]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAQAAMAAAACAAEAAAAQAAQAAAACAAIAAAAQAAUAAAACAAMAAAARAAMAAAADAAEAAAARAAQAAAADAAIAAAARAAUAAAADAAMAAAAWAAMAAAAAAAEAAAAWAAQAAAAAAAIAAAAXAAMAAAABAAEAAAAXAAQAAAABAAIAAAA=")
+tile_map_data = PackedByteArray("AAAUAAcAAAACAAEAAAAQAAUAAAAAAAEAAAAYAAMAAAABAAAAAAAOAAkAAAABAAAAAAAdAAkAAAACAAEAAAAbAAoAAAABAAMAAAAXAAsAAAAAAAMAAAAbAAcAAAAAAAAAAAAPAAwAAAADAAAAAAAMAAYAAAADAAAAAAAdAAMAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_2fbf8")
 
-[node name="Marker" type="Sprite2D" parent="DualTileMap" unique_id=993763749]
-visible = false
-texture = ExtResource("5_pm8jy")
-script = ExtResource("7_b4bkx")
-
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
-position = Vector2(644, 178)
+position = Vector2(643, 178)
 
 [node name="Player2" parent="DualTileMap" unique_id=616823879 instance=ExtResource("9_s58pj")]
 position = Vector2(755, 214)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
-position = Vector2(577, 322)
+position = Vector2(576, 323)
 script = ExtResource("2_1wgjs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=762967687]
@@ -189,3 +182,4 @@ parameters/looping = true
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=821004357]
 
 [node name="UI" parent="CanvasLayer" unique_id=486205012 instance=ExtResource("11_x812f")]
+mouse_filter = 1

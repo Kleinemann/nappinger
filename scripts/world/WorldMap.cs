@@ -1,5 +1,4 @@
 using Godot;
-using nappinger.scripts;
 using System.Collections.Generic;
 
 public partial class WorldMap : Node2D
@@ -26,8 +25,6 @@ public partial class WorldMap : Node2D
     public TileMapLayer OffsetLayer;
     public TileMapLayer WorldLayer;
     public TileMapLayer ObjectLayer;
-    public Marker Marker;
-
 
     WorldMain World => WorldMain.Instance;
     int ChunkRange => Chunk.ChunkRange;
@@ -40,7 +37,6 @@ public partial class WorldMap : Node2D
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
         ObjectLayer = GetNode<TileMapLayer>("ObjectGrid");
-        Marker = GetNode<Marker>("Marker");
     }
 
     public void UpdateMap()
