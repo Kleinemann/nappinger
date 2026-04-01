@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bhs1726f46e0o"]
+
+[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/BreakableObject.cs" id="1_1n0qm"]
+[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_cd2yp"]
+[ext_resource type="Texture2D" uid="uid://fvgfwlho5llh" path="res://assets/objects/breakable/tree.png" id="2_sjomh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_etsbv"]
+shader = ExtResource("1_cd2yp")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
+shader = ExtResource("1_cd2yp")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd2yp"]
+atlas = ExtResource("2_sjomh")
+region = Rect2(0, 0, 224, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etsbv"]
+atlas = ExtResource("2_sjomh")
+region = Rect2(224, 0, 224, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjegs"]
+atlas = ExtResource("2_sjomh")
+region = Rect2(448, 0, 224, 230)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4avf0"]
+atlas = ExtResource("2_sjomh")
+region = Rect2(672, 0, 224, 230)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrg52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd2yp")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etsbv")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjegs")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4avf0")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgiwq"]
+size = Vector2(129, 46.5)
+
+[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape")]
+material = SubResource("ShaderMaterial_etsbv")
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1n0qm")
+Sprite = NodePath("AnimatedSprite2D")
+SpriteShadow = NodePath("AnimatedSprite2DShadow")
+CollisionShape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://cotxv47yclevo"
+
+[node name="AnimatedSprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1280575189]
+z_index = 1
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_tjegs")
+position = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_rrg52")
+animation = &"0"
+offset = Vector2(0, -64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=372263934]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_rrg52")
+animation = &"0"
+offset = Vector2(0, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1608928362]
+position = Vector2(8, 24)
+shape = SubResource("RectangleShape2D_rgiwq")
