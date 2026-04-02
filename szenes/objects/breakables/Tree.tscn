@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhs1726f46e0o"]
 
-[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/BreakableObject.cs" id="1_1n0qm"]
+[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/objects/BreakableObject.cs" id="1_1n0qm"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_cd2yp"]
 [ext_resource type="Texture2D" uid="uid://fvgfwlho5llh" path="res://assets/objects/breakable/tree.png" id="2_sjomh"]
 

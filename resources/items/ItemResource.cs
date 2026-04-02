@@ -9,5 +9,4 @@ public partial class ObjectBaseResource : Resource
     [Export] public string Description { get; set; }
     [Export] public Texture2D Texture { get; set; }
 
-    public Guid GUID = Guid.NewGuid();
 }

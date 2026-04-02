@@ -12,8 +12,6 @@ public partial class Chunk : GodotObject
     public Vector2I Coords;
     public int CellIndex;
 
-    public Dictionary<Vector2I, DropItem> Drops = new Dictionary<Vector2I, DropItem>();
-
     public WorldMap Map => WorldMain.Instance.Map;
 
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
@@ -49,41 +47,7 @@ public partial class Chunk : GodotObject
 
     public void Process()
     {
-        /*
-        //GOL
-        Vector2I[] coords = GetTileCoords();
-        int cellIndex = WorldMain.Random.RandiRange(0, (ChunkSize * ChunkSize) - 1);
-
-        Vector2I coord = coords[cellIndex];
-
-        float noise = GetNoise(coord);
-        if (noise >= 0.2f && noise <= 0.3f)
-        { 
-            List<Vector2I> list = NeigboursWidthValue(coord, ObjectTypeEnum.PLANT);
-
-            GameObject go = GetItem(coord);
-
-            if (go != null)
-            {
-                if (list.Count >= 4)
-                    go.ObjectState = ObjectStateEnum.DEAD;
-            }
-            else
-            {
-                go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, coord, GetNoise(coord));
-                Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
-                Objects.Add(go.Position, go);
-            }
-        }
-
-        GameObject[] gobjects = Objects.Values.ToArray();
-        foreach (GameObject g in gobjects)
-        {
-            g.Process();
-        }
-
-
-        */
+ 
     }
 
     public Vector2I[] GetTileCoords()
@@ -178,20 +142,6 @@ public partial class Chunk : GodotObject
         Map.WorldLayer.SetCell(pos, 0, coord);
 
         //TODO: Ränder korigieren !
-
-        //fixing Neigbours first
-        //foreach (Vector2I offset in NEIGHBOURS_AROUND)
-        //{
-        //    Vector2I nPos = pos + offset;
-
-        //    int t = (int)tileType;
-        //    int tN = (int)GetTileType(nPos);
-
-        //    if ((tN + 1) < t)
-        //        SetTile(nPos, GetTileType(t - 1));
-        //    if ((t + 1) < tN)
-        //        SetTile(nPos, GetTileType(t + 1));
-        //}
 
         foreach (Vector2I ce in GetNeigbours(pos))
         {

@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://c6lytmsm8v0n8"]
-
-[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/BreakableObject.cs" id="1_h183r"]
-
-[node name="BreakableObject" type="StaticBody2D" unique_id=952268778 node_paths=PackedStringArray("Sprite", "CollisionShape")]
-script = ExtResource("1_h183r")
-Sprite = NodePath("")
-CollisionShape = NodePath("")
