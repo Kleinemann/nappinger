@@ -181,7 +181,7 @@ position = Vector2(755, 214)
 position = Vector2(340, 256)
 
 [node name="Player3" parent="DualTileMap" unique_id=704436641 instance=ExtResource("9_s58pj")]
-position = Vector2(117, 300)
+position = Vector2(119, 301)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)
