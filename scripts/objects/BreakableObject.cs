@@ -8,24 +8,23 @@ public partial class BreakableObject : StaticBody2D
     [Export] public AnimatedSprite2D SpriteShadow;
     [Export] public CollisionShape2D CollisionShape;
 
-    public int Healt = 10;
-    public int MaxHealt =10;
+    GameObjectData Data = new GameObjectData();
 
     public override void _Input(InputEvent @event)
     {
         //Focus / defocus Player
         if (@event.IsActionPressed("kill"))
         {
-            Healt--;
-            if(Healt < 0)
-                Healt = 0;
+            Data.Healt--;
+            if(Data.Healt < 0)
+                Data.Healt = 0;
             UpdateAnimation();
         }
     }
 
     public void UpdateAnimation()
     {
-          float healt = (Healt * 100 / MaxHealt);
+          float healt = (Data.Healt * 100 / Data.MaxHealt);
 
         if (healt == 0) Sprite.Play("3");
         else if (healt < 40) Sprite.Play("2");
@@ -39,4 +38,3 @@ public partial class BreakableObject : StaticBody2D
 
     }
 }
-

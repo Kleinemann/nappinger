@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
@@ -7,6 +8,33 @@ public partial class Player : CharacterBody2D
     int Speed = 150;
     string direction = "d";
     public static Player SelectetPlayer;
+
+    public static Player GetNextPlayer()
+    {
+        Array<Node> nodes = WorldMain.Instance.Map.GetChildren();
+
+        Player first = null;
+        bool foundCurrent = false;
+        foreach (Node n in nodes)
+        {
+            if (n is Player player)
+            {
+                if (first == null)
+                    first = player;
+
+                if (foundCurrent && player != SelectetPlayer)
+                    return player;
+
+                if (player == SelectetPlayer)
+                    foundCurrent = true;
+            }
+        }
+
+        if(first != null)
+            return first;
+
+        return null;
+    }
 
     public override void _Ready()
     {

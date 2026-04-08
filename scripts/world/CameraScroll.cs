@@ -9,7 +9,7 @@ public partial class CameraScroll : Camera2D
     float ZoomLevel = 1f;
     bool MouseOutOfWindow = false;
 
-    Node2D CameraTarget;
+    public Node2D CameraTarget;
 
     public override void _Ready()
     {

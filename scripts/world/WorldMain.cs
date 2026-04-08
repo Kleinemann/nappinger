@@ -29,8 +29,19 @@ public partial class WorldMain : Node2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        //Select next player
+        if (@event.IsActionPressed("next_player"))
+        {
+            Player p = Player.GetNextPlayer();
+            if(p != null)
+            {
+                Player.SelectetPlayer = p;
+                Camera.CameraTarget = p;
+            }
+        }
+
         //Quit
-        if(@event.IsActionPressed("ui_cancel"))
+        if (@event.IsActionPressed("ui_cancel"))
         {
             GetTree().Quit();
         }
