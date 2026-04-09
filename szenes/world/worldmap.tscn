@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b75j48ilah04l" path="res://szenes/objects/statics/BigRock.tscn" id="9_qw1xo"]
 [ext_resource type="PackedScene" uid="uid://cmvy5lfomikog" path="res://szenes/character/Player.tscn" id="9_s58pj"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
+[ext_resource type="Script" uid="uid://c1ua3hhtviacv" path="res://szenes/world/Hud.cs" id="11_x812f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm8jy"]
 texture = ExtResource("3_qw1xo")
@@ -152,6 +153,30 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x812f")
 sources/1 = SubResource("TileSetScenesCollectionSource_qw1xo")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm8jy"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x812f"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")
 
@@ -173,15 +198,24 @@ tile_set = SubResource("TileSet_2fbf8")
 
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(643, 178)
+ObjectName = "Spieler 1"
+Healt = 10
+MaxHealt = 10
 
 [node name="Player2" parent="DualTileMap" unique_id=616823879 instance=ExtResource("9_s58pj")]
 position = Vector2(755, 214)
+ObjectName = "Spieler 2"
+Healt = 8
+MaxHealt = 10
 
 [node name="Tree" parent="DualTileMap" unique_id=1073618912 instance=ExtResource("8_x812f")]
 position = Vector2(340, 256)
 
 [node name="Player3" parent="DualTileMap" unique_id=704436641 instance=ExtResource("9_s58pj")]
 position = Vector2(119, 301)
+ObjectName = "Spieler 3"
+Healt = 5
+MaxHealt = 10
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)
@@ -193,3 +227,37 @@ volume_db = -10.0
 parameters/looping = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=821004357]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=894960723]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_x812f")
+
+[node name="ObjectName" type="Label" parent="CanvasLayer/HUD" unique_id=33879347]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 47.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Name"
+
+[node name="HealtBar" type="ProgressBar" parent="CanvasLayer/HUD" unique_id=1555800026]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pm8jy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x812f")
+value = 50.0

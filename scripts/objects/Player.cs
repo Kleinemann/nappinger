@@ -9,6 +9,57 @@ public partial class Player : CharacterBody2D
     string direction = "d";
     public static Player SelectetPlayer;
 
+    #region GameObjectData
+    [Export] 
+    public string ObjectName
+    {
+        get => _data.Name;
+        set => _data.Name = value;
+    }
+
+    [Export]
+    public int Healt
+    { get => _data.Healt;
+        set
+        {
+            _data.Healt = value;
+            if (_data.Healt <= 0)
+            {
+                _data.Healt = 0;
+                State = GameObjectState.DEAD;
+            }
+            if(Healt > MaxHealt)
+                _data.Healt = MaxHealt;
+        }
+    }
+
+    [Export] 
+    public int MaxHealt
+    {
+        get => _data.MaxHealt;
+        set
+        {
+            _data.MaxHealt = value;
+            if (_data.MaxHealt < 1)
+                _data.MaxHealt = 1;
+        }
+    }
+
+    [Export]
+    public GameObjectState State
+    {
+        get => _data.State;
+        set
+        {
+            _data.State = value;
+            if (_data.State == GameObjectState.DEAD)
+                GD.Print("Player is dead");
+        }
+    }
+
+    GameObjectDataMoveable _data = new GameObjectDataMoveable();
+    #endregion
+
     public static Player GetNextPlayer()
     {
         Array<Node> nodes = WorldMain.Instance.Map.GetChildren();

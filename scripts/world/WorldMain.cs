@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class WorldMain : Node2D
 {
@@ -19,12 +20,15 @@ public partial class WorldMain : Node2D
         Camera = GetNode<CameraScroll>("Camera2D");
 
         Map.UpdateMap();
+
+        //select first player
+        Player.SelectetPlayer = Player.GetNextPlayer();
     }
 
 
     public override void _Process(double delta)
     {
-
+        Hud.Instance.UpdateHud();
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -59,7 +63,18 @@ public partial class WorldMain : Node2D
             Player.SelectetPlayer = null;
         }
 
- 
+        if (Player.SelectetPlayer != null)
+        {
+            if (@event.IsActionPressed("add_value"))
+            {
+                Player.SelectetPlayer.Healt++;
+            }
+
+            if (@event.IsActionPressed("remove_value"))
+            {
+                Player.SelectetPlayer.Healt--;
+            }
+        }
         @event.Dispose();
         
     }
