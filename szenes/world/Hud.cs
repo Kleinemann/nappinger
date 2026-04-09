@@ -16,17 +16,31 @@ public partial class Hud : Control
 
     public void UpdateHud()
     {
-        Player player = Player.SelectetPlayer;
+        Player player = Player.SelectetPlayer;        
 
-        if (player == null)
+        if (player != null)
         {
-            ObjectName.Text = "";
-            HealtBar.Value = 1;
-            HealtBar.MaxValue = 1;
+            HealtBar.Visible = true;
+            ObjectName.Text = player.ObjectName;
+            HealtBar.Value = player.Healt;
+            HealtBar.MaxValue = player.MaxHealt;
             return;
         }
-        ObjectName.Text = player.ObjectName;
-        HealtBar.Value = player.Healt;
-        HealtBar.MaxValue = player.MaxHealt;
+
+        BreakableObject go = BreakableObject.SelectedObject;
+
+        if (go != null)
+        {
+            HealtBar.Visible = true;
+            ObjectName.Text = go.ObjectName;
+            HealtBar.Value = go.Healt;
+            HealtBar.MaxValue = go.MaxHealt;
+            return;
+        }
+
+        HealtBar.Visible = false;
+        ObjectName.Text = "";
+        HealtBar.Value = 1;
+        HealtBar.MaxValue = 1;
     }
 }

@@ -5,7 +5,6 @@ public partial class Player : CharacterBody2D
 {
     AnimatedSprite2D Animator;
     AnimatedSprite2D AnimatorShadow;
-    int Speed = 150;
     string direction = "d";
     public static Player SelectetPlayer;
 
@@ -57,6 +56,13 @@ public partial class Player : CharacterBody2D
         }
     }
 
+    [Export] 
+    public float Speed
+    {
+        get => _data.Speed;
+        set => _data.Speed = value;
+    }
+
     GameObjectDataMoveable _data = new GameObjectDataMoveable();
     #endregion
 
@@ -99,6 +105,7 @@ public partial class Player : CharacterBody2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Player CLICK");
+            BreakableObject.SelectedObject = null;
             SelectetPlayer = this;
         }
     }

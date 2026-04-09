@@ -8,9 +8,18 @@ public partial class BreakableObject : StaticBody2D
     [Export] public AnimatedSprite2D SpriteShadow;
     [Export] public CollisionShape2D CollisionShape;
 
+    public static BreakableObject SelectedObject;
+
     GameObjectDataBase _data = new GameObjectDataBase();
 
     #region GameObjectData
+    [Export]
+    public string ObjectName
+    {
+        get => _data.Name;
+        set => _data.Name = value;
+    }
+
     public int Healt
     {
         get => _data.Healt;
@@ -33,18 +42,25 @@ public partial class BreakableObject : StaticBody2D
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _Ready()
     {
-        ////Focus / defocus Player
-        //if (@event.IsActionPressed("remove_value"))
-        //{
-        //    Healt--;
-        //    if(Healt < 0)
-        //        Healt = 0;
-        //    UpdateAnimation();
-        //}
+        Area2D area = GetNode<Area2D>("Area2D");
+        area.InputEvent += OnInputEvent;
     }
+
     #endregion
+
+
+    public void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
+    {
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            GD.Print("Object CLICK");
+            Player.SelectetPlayer = null;
+            SelectedObject = this;
+        }
+    }
+
 
     public void UpdateAnimation()
     {

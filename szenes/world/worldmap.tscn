@@ -198,24 +198,27 @@ tile_set = SubResource("TileSet_2fbf8")
 
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(643, 178)
-ObjectName = "Spieler 1"
-Healt = 10
+ObjectName = "Anton"
+Healt = 8
 MaxHealt = 10
+Speed = 150.0
 
 [node name="Player2" parent="DualTileMap" unique_id=616823879 instance=ExtResource("9_s58pj")]
 position = Vector2(755, 214)
-ObjectName = "Spieler 2"
-Healt = 8
+ObjectName = "Holga"
+Healt = 10
 MaxHealt = 10
+Speed = 350.0
 
 [node name="Tree" parent="DualTileMap" unique_id=1073618912 instance=ExtResource("8_x812f")]
 position = Vector2(340, 256)
 
 [node name="Player3" parent="DualTileMap" unique_id=704436641 instance=ExtResource("9_s58pj")]
 position = Vector2(119, 301)
-ObjectName = "Spieler 3"
-Healt = 5
+ObjectName = "Karl"
+Healt = 2
 MaxHealt = 10
+Speed = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)
@@ -235,6 +238,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("11_x812f")
 
 [node name="ObjectName" type="Label" parent="CanvasLayer/HUD" unique_id=33879347]

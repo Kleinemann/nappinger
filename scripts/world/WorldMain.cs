@@ -61,6 +61,7 @@ public partial class WorldMain : Node2D
         {
             GD.Print("WORLD CLICK");
             Player.SelectetPlayer = null;
+            BreakableObject.SelectedObject = null;
         }
 
         if (Player.SelectetPlayer != null)

@@ -68,6 +68,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgiwq"]
 size = Vector2(129, 46.5)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cd2yp"]
+radius = 11.999999
+height = 23.999998
+
 [node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape")]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
@@ -75,6 +79,7 @@ script = ExtResource("1_1n0qm")
 Sprite = NodePath("AnimatedSprite2D")
 SpriteShadow = NodePath("AnimatedSprite2DShadow")
 CollisionShape = NodePath("CollisionShape2D")
+ObjectName = "Großer Baum"
 metadata/_custom_type_script = "uid://cotxv47yclevo"
 
 [node name="AnimatedSprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1280575189]
@@ -96,3 +101,12 @@ offset = Vector2(0, -64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1608928362]
 position = Vector2(8, 24)
 shape = SubResource("RectangleShape2D_rgiwq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=532841440]
+position = Vector2(0, 3)
+
+[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1363485688]
+position = Vector2(-7.1054274e-15, -63)
+scale = Vector2(10, 10)
+shape = SubResource("CapsuleShape2D_cd2yp")
+debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
