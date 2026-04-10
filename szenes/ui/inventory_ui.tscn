@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://k65rhelc7y7j"]
+
+[ext_resource type="Script" uid="uid://bis3betv32n7r" path="res://InventoryUi.cs" id="1_k1aup"]
+
+[node name="InventoryUI" type="Control" unique_id=1891325353]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_k1aup")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=781465979]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

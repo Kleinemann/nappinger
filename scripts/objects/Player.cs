@@ -6,10 +6,14 @@ public partial class Player : CharacterBody2D
     AnimatedSprite2D Animator;
     AnimatedSprite2D AnimatorShadow;
     string direction = "d";
+    public object Target;
+
     public static Player SelectetPlayer;
 
     #region GameObjectData
-    [Export] 
+    public GameObjectDataMoveable _data = new GameObjectDataMoveable();
+
+    [Export]
     public string ObjectName
     {
         get => _data.Name;
@@ -17,8 +21,16 @@ public partial class Player : CharacterBody2D
     }
 
     [Export]
+    public Texture2D Icon
+    {
+        get => _data.Icon;
+        set => _data.Icon = value;
+    }
+
+    [Export]
     public int Healt
-    { get => _data.Healt;
+    {
+        get => _data.Healt;
         set
         {
             _data.Healt = value;
@@ -27,12 +39,12 @@ public partial class Player : CharacterBody2D
                 _data.Healt = 0;
                 State = GameObjectState.DEAD;
             }
-            if(Healt > MaxHealt)
+            if (Healt > MaxHealt)
                 _data.Healt = MaxHealt;
         }
     }
 
-    [Export] 
+    [Export]
     public int MaxHealt
     {
         get => _data.MaxHealt;
@@ -56,14 +68,19 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    [Export] 
+    [Export]
     public float Speed
     {
         get => _data.Speed;
         set => _data.Speed = value;
     }
 
-    GameObjectDataMoveable _data = new GameObjectDataMoveable();
+    [Export]
+    public Inventory Inventory
+    {
+        get => _data.Inventory;
+        set => _data.Inventory = value;
+    }
     #endregion
 
     public static Player GetNextPlayer()
@@ -121,12 +138,24 @@ public partial class Player : CharacterBody2D
 
     public void PlayerMovement()
     {
-        Velocity = Input.GetVector("left", "rigth", "up", "down");
-        Velocity = Velocity * Speed;
+        Velocity = Vector2.Zero;
 
         //TODO: Only in first Person
-        if (SelectetPlayer != this)
-            Velocity = Vector2.Zero;
+        if (SelectetPlayer == this)
+            Velocity = Input.GetVector("left", "rigth", "up", "down");
+
+        if (Target != null && Target is Vector2 targetPos)
+        {
+            if(targetPos.DistanceTo(GlobalPosition) > 2)
+            {
+                Vector2 direction = (targetPos - GlobalPosition).Normalized();
+                Velocity = direction;
+            }
+            else
+                Target = null;
+        }
+
+        Velocity = Velocity * Speed;
 
         MoveAndSlide();
     }

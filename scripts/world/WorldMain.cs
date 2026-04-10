@@ -37,7 +37,7 @@ public partial class WorldMain : Node2D
         if (@event.IsActionPressed("next_player"))
         {
             Player p = Player.GetNextPlayer();
-            if(p != null)
+            if (p != null)
             {
                 Player.SelectetPlayer = p;
                 Camera.CameraTarget = p;
@@ -51,7 +51,7 @@ public partial class WorldMain : Node2D
         }
 
         //Focus / defocus Player
-        if(@event.IsActionPressed("camera_focus"))
+        if (@event.IsActionPressed("camera_focus"))
         {
             Camera.SwitchFocus();
         }
@@ -62,6 +62,15 @@ public partial class WorldMain : Node2D
             GD.Print("WORLD CLICK");
             Player.SelectetPlayer = null;
             BreakableObject.SelectedObject = null;
+        }
+
+        //targeting
+        if (Input.IsMouseButtonPressed(MouseButton.Right))
+        { 
+            if(Player.SelectetPlayer != null)
+            {
+                Player.SelectetPlayer.Target = Map.GetGlobalMousePosition();
+            }
         }
 
         if (Player.SelectetPlayer != null)

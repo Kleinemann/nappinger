@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://wu647omd2idc"]
+
+[ext_resource type="Script" uid="uid://c1ua3hhtviacv" path="res://szenes/world/Hud.cs" id="1_86ivm"]
+[ext_resource type="PackedScene" uid="uid://ckrmfnnrc4bk3" path="res://szenes/ui/object_panel.tscn" id="2_au7n6"]
+[ext_resource type="PackedScene" uid="uid://k65rhelc7y7j" path="res://szenes/ui/inventory_ui.tscn" id="3_n5vxs"]
+
+[node name="HUD" type="Control" unique_id=140401685]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_86ivm")
+
+[node name="ObjectPanel" parent="." unique_id=910636050 instance=ExtResource("2_au7n6")]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 226.0
+offset_bottom = 111.0
+
+[node name="InventoryUI" parent="." unique_id=1891325353 instance=ExtResource("3_n5vxs")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0

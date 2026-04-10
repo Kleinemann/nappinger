@@ -20,6 +20,14 @@ public partial class BreakableObject : StaticBody2D
         set => _data.Name = value;
     }
 
+    [Export]
+    public Texture2D Icon
+    {
+        get => _data.Icon;
+        set => _data.Icon = value;
+    }
+
+    [Export]
     public int Healt
     {
         get => _data.Healt;
@@ -31,6 +39,7 @@ public partial class BreakableObject : StaticBody2D
         }
     }
 
+    [Export]
     public int MaxHealt
     {
         get => _data.MaxHealt;

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://b7fi7us858o7w"]
+
+[ext_resource type="Texture2D" uid="uid://dlvcqcjm3j4at" path="res://assets/items/food.png" id="1_3xhoh"]
+[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="1_uhv4u"]
+
+[resource]
+script = ExtResource("1_uhv4u")
+ItemName = "Nahrung"
+Icon = ExtResource("1_3xhoh")
+metadata/_custom_type_script = "uid://f6p8ujqxsixx"

@@ -48,8 +48,8 @@ public partial class WorldMap : Node2D
         Vector2 lCamera = ToLocal(gCamera);
         Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
 
-        Vector2I cMouse = GetMouseCoords();
-        Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
+        //Vector2I cMouse = GetMouseCoords();
+        //Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
         //GD.Print("Mouse POS: " + ChunkCoord2 + " Chunk: " + ChunkCoord);
 
         //kein Update wenn selber Chunk

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/objects/BreakableObject.cs" id="1_1n0qm"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_cd2yp"]
 [ext_resource type="Texture2D" uid="uid://fvgfwlho5llh" path="res://assets/objects/breakable/tree.png" id="2_sjomh"]
+[ext_resource type="Texture2D" uid="uid://2ki3xb2onkxd" path="res://assets/objects/bigTree.png" id="3_etsbv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etsbv"]
 shader = ExtResource("1_cd2yp")
@@ -80,6 +81,9 @@ Sprite = NodePath("AnimatedSprite2D")
 SpriteShadow = NodePath("AnimatedSprite2DShadow")
 CollisionShape = NodePath("CollisionShape2D")
 ObjectName = "Großer Baum"
+Icon = ExtResource("3_etsbv")
+Healt = 20
+MaxHealt = 20
 metadata/_custom_type_script = "uid://cotxv47yclevo"
 
 [node name="AnimatedSprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1280575189]

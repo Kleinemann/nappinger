@@ -3,6 +3,16 @@
 [ext_resource type="Script" uid="uid://pa2ph36afi1x" path="res://scripts/objects/Player.cs" id="1_7a20s"]
 [ext_resource type="Texture2D" uid="uid://d8j135imywbi" path="res://assets/objects/player/dummy.png" id="2_5stuu"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_5wu8j"]
+[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="2_vs4wc"]
+[ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_x4mwj"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://scripts/items/Inventory.cs" id="3_vw75l"]
+[ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="3_x4mwj"]
+
+[sub_resource type="Resource" id="Resource_x4mwj"]
+resource_local_to_scene = true
+script = ExtResource("3_vw75l")
+Items = Array[ExtResource("2_vs4wc")]([ExtResource("3_x4mwj"), null, null, null, null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6v8"]
 size = Vector2(18, 7)
@@ -201,6 +211,12 @@ height = 38.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1468443236]
 script = ExtResource("1_7a20s")
+ObjectName = "Player"
+Icon = ExtResource("2_x4mwj")
+Healt = 10
+MaxHealt = 10
+Speed = 150.0
+Inventory = SubResource("Resource_x4mwj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
 position = Vector2(0, -3.5)

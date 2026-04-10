@@ -8,14 +8,17 @@ public enum GameObjectState {
     DEAD
 }
 
+
 public class GameObjectDataBase
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public Texture2D Texture { get; set; }
+    public Texture2D Icon { get; set; }
     public int Healt { get; set; } = 10;
     public int MaxHealt { get; set; } = 10;
+    public Inventory Inventory;
 }
+
 
 public class GameObjectDataMoveable : GameObjectDataBase
 {

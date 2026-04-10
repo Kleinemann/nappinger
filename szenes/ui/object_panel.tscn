@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://ckrmfnnrc4bk3"]
+
+[ext_resource type="Script" uid="uid://dk70b3yayfp5" path="res://ObjectPanel.cs" id="1_ixe73"]
+[ext_resource type="Texture2D" uid="uid://3hotbms1q4gy" path="res://assets/items/wood.png" id="2_hf0s6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_au7n6"]
+bg_color = Color(0, 0, 0, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm8jy"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x812f"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ObjectPanel" type="Panel" unique_id=910636050]
+custom_minimum_size = Vector2(220, 110)
+anchors_preset = -1
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_au7n6")
+script = ExtResource("1_ixe73")
+
+[node name="HealtBar" type="ProgressBar" parent="." unique_id=1737815593]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_pm8jy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x812f")
+value = 50.0
+
+[node name="ObjectName" type="Label" parent="." unique_id=1539508522]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Name"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=353359133]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_vertical = 2
+texture = ExtResource("2_hf0s6")

@@ -3,44 +3,30 @@ using System;
 
 public partial class Hud : Control
 {
-    Label ObjectName;
-    ProgressBar HealtBar;
+    ObjectPanel ObjectPanel;
+    InventoryUi InventoryUi;
+
     public static Hud Instance;
+    
     public override void _Ready()
     {
         Instance = this;
-        ObjectName = GetNode<Label>("ObjectName");
-        HealtBar = GetNode<ProgressBar>("HealtBar");
+        ObjectPanel = GetNode<ObjectPanel>("ObjectPanel");
+        InventoryUi = GetNode<InventoryUi>("InventoryUI");
         UpdateHud();
     }
 
     public void UpdateHud()
     {
-        Player player = Player.SelectetPlayer;        
+        object selection = Player.SelectetPlayer != null ? Player.SelectetPlayer 
+                    : BreakableObject.SelectedObject != null ? BreakableObject.SelectedObject : null;
 
-        if (player != null)
+        ObjectPanel.Visible = selection != null;
+
+        if (selection != null)
         {
-            HealtBar.Visible = true;
-            ObjectName.Text = player.ObjectName;
-            HealtBar.Value = player.Healt;
-            HealtBar.MaxValue = player.MaxHealt;
-            return;
+            ObjectPanel.Update(selection);
+            InventoryUi.Update(selection);
         }
-
-        BreakableObject go = BreakableObject.SelectedObject;
-
-        if (go != null)
-        {
-            HealtBar.Visible = true;
-            ObjectName.Text = go.ObjectName;
-            HealtBar.Value = go.Healt;
-            HealtBar.MaxValue = go.MaxHealt;
-            return;
-        }
-
-        HealtBar.Visible = false;
-        ObjectName.Text = "";
-        HealtBar.Value = 1;
-        HealtBar.MaxValue = 1;
     }
 }
