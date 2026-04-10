@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wu647omd2idc"]
 
-[ext_resource type="Script" uid="uid://c1ua3hhtviacv" path="res://szenes/world/Hud.cs" id="1_86ivm"]
+[ext_resource type="Script" uid="uid://c1ua3hhtviacv" path="res://scripts/ui/Hud.cs" id="1_86ivm"]
 [ext_resource type="PackedScene" uid="uid://ckrmfnnrc4bk3" path="res://szenes/ui/object_panel.tscn" id="2_au7n6"]
 [ext_resource type="PackedScene" uid="uid://k65rhelc7y7j" path="res://szenes/ui/inventory_ui.tscn" id="3_n5vxs"]
 
@@ -29,6 +29,6 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_bottom = -100.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0

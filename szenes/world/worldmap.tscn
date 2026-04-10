@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bhs1726f46e0o" path="res://szenes/objects/breakables/Tree.tscn" id="8_x812f"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="9_o3lj0"]
 [ext_resource type="PackedScene" uid="uid://cmvy5lfomikog" path="res://szenes/character/Player.tscn" id="9_s58pj"]
-[ext_resource type="Script" uid="uid://csar5086emnio" path="res://scripts/items/Inventory.cs" id="10_ckhle"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="10_ckhle"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
@@ -152,19 +152,19 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x812f")
 sources/1 = SubResource("TileSetScenesCollectionSource_qw1xo")
 
-[sub_resource type="Resource" id="Resource_f8u5v"]
+[sub_resource type="Resource" id="Resource_s58pj"]
 resource_local_to_scene = true
 script = ExtResource("10_ckhle")
 Items = Array[ExtResource("8_1d8lm")]([ExtResource("9_o3lj0"), ExtResource("9_o3lj0"), null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
-[sub_resource type="Resource" id="Resource_1d8lm"]
+[sub_resource type="Resource" id="Resource_f8u5v"]
 resource_local_to_scene = true
 script = ExtResource("10_ckhle")
-Items = Array[ExtResource("8_1d8lm")]([null, null, null, null, null, null, null, null, null])
+Items = Array[ExtResource("8_1d8lm")]([null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
-[sub_resource type="Resource" id="Resource_o3lj0"]
+[sub_resource type="Resource" id="Resource_1d8lm"]
 resource_local_to_scene = true
 script = ExtResource("10_ckhle")
 Items = Array[ExtResource("8_1d8lm")]([ExtResource("9_o3lj0"), null, null, null, null, null, null, null, null, null])
@@ -192,13 +192,13 @@ tile_set = SubResource("TileSet_2fbf8")
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(643, 178)
 ObjectName = "Player 1"
-Inventory = SubResource("Resource_f8u5v")
+Inventory = SubResource("Resource_s58pj")
 
 [node name="Player2" parent="DualTileMap" unique_id=616823879 instance=ExtResource("9_s58pj")]
 position = Vector2(755, 214)
 ObjectName = "Player 2"
 Speed = 250.0
-Inventory = SubResource("Resource_1d8lm")
+Inventory = SubResource("Resource_f8u5v")
 
 [node name="Tree" parent="DualTileMap" unique_id=1073618912 instance=ExtResource("8_x812f")]
 position = Vector2(340, 256)
@@ -206,7 +206,7 @@ position = Vector2(340, 256)
 [node name="Player3" parent="DualTileMap" unique_id=704436641 instance=ExtResource("9_s58pj")]
 position = Vector2(119, 301)
 ObjectName = "Player 3"
-Inventory = SubResource("Resource_o3lj0")
+Inventory = SubResource("Resource_1d8lm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)

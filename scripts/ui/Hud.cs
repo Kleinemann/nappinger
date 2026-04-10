@@ -25,8 +25,18 @@ public partial class Hud : Control
 
         if (selection != null)
         {
-            ObjectPanel.Update(selection);
-            InventoryUi.Update(selection);
+            ObjectPanel.UpdatePanel(selection);
+        }
+
+        if (Player.SelectetPlayer != null)
+        {
+            InventoryUi.Show();
+            InventoryUi.UpdateSlots(Player.SelectetPlayer.Inventory);
+        }
+        else
+        {
+            InventoryUi.UpdateSlots(null);
+            InventoryUi.Hide();
         }
     }
 }

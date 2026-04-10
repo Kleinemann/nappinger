@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_5wu8j"]
 [ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="2_vs4wc"]
 [ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_x4mwj"]
-[ext_resource type="Script" uid="uid://csar5086emnio" path="res://scripts/items/Inventory.cs" id="3_vw75l"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="3_vw75l"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="3_x4mwj"]
 
 [sub_resource type="Resource" id="Resource_x4mwj"]
