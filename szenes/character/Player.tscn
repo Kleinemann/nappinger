@@ -3,15 +3,56 @@
 [ext_resource type="Script" uid="uid://pa2ph36afi1x" path="res://scripts/objects/Player.cs" id="1_7a20s"]
 [ext_resource type="Texture2D" uid="uid://d8j135imywbi" path="res://assets/objects/player/dummy.png" id="2_5stuu"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_5wu8j"]
-[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="2_vs4wc"]
 [ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_x4mwj"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://scripts/items/InventorySlot.cs" id="3_hj26c"]
 [ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="3_vw75l"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="3_x4mwj"]
 
-[sub_resource type="Resource" id="Resource_x4mwj"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_8kbi3"]
+script = ExtResource("3_hj26c")
+Item = ExtResource("3_x4mwj")
+Amount = 2
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_4osc8"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_lk2e0"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_pqj6x"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_5umfc"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_rmndt"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_l405v"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_6lfjv"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_troyg"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_sj07k"]
+script = ExtResource("3_hj26c")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_8hspi"]
 script = ExtResource("3_vw75l")
-Items = Array[ExtResource("2_vs4wc")]([ExtResource("3_x4mwj"), null, null, null, null, null, null, null, null, null])
+Items = Array[ExtResource("3_hj26c")]([SubResource("Resource_8kbi3"), SubResource("Resource_4osc8"), SubResource("Resource_lk2e0"), SubResource("Resource_pqj6x"), SubResource("Resource_5umfc"), SubResource("Resource_rmndt"), SubResource("Resource_l405v"), SubResource("Resource_6lfjv"), SubResource("Resource_troyg"), SubResource("Resource_sj07k")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6v8"]
@@ -216,7 +257,7 @@ Icon = ExtResource("2_x4mwj")
 Healt = 10
 MaxHealt = 10
 Speed = 150.0
-Inventory = SubResource("Resource_x4mwj")
+Inventory = SubResource("Resource_8hspi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
 position = Vector2(0, -3.5)

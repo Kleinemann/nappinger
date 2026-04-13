@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class InventoryUi : Control
 {
-    Array<InventorySlot> Slots = new Array<InventorySlot>();
+    Array<InventorySlotUI> Slots = new Array<InventorySlotUI>();
 
     public override void _Ready()
     {
@@ -12,7 +12,7 @@ public partial class InventoryUi : Control
         var children = grid.GetChildren();
         foreach (var child in children)
         {
-            if (child is InventorySlot slot)
+            if (child is InventorySlotUI slot)
             {
                 Slots.Add(slot);
             }
