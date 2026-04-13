@@ -250,7 +250,7 @@ animations = [{
 radius = 14.0
 height = 38.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1468443236]
+[node name="Player" type="CharacterBody2D" unique_id=1468443236 groups=["Breakable", "Player"]]
 script = ExtResource("1_7a20s")
 ObjectName = "Player"
 Icon = ExtResource("2_x4mwj")

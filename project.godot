@@ -26,6 +26,11 @@ config/icon="res://assets/icon.svg"
 
 project/assembly_name="nappinger"
 
+[global_group]
+
+Player=""
+Breakable=""
+
 [input]
 
 left={

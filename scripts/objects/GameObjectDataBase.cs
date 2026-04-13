@@ -14,8 +14,8 @@ public class GameObjectDataBase
     public string Name { get; set; }
     public string Description { get; set; }
     public Texture2D Icon { get; set; }
-    public int Healt { get; set; } = 10;
-    public int MaxHealt { get; set; } = 10;
+    public int Healt { get; set; } = int.MaxValue;
+    public int MaxHealt { get; set; } = int.MaxValue;
     public Inventory Inventory;
 }
 

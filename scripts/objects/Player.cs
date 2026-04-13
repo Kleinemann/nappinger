@@ -136,6 +136,12 @@ public partial class Player : CharacterBody2D
         PlayerAnimation();
     }
 
+    public void Collect(InventoryItem item, int amount = 1)
+    {
+        Inventory.Insert(item, amount);
+    }
+
+
     public void PlayerMovement()
     {
         Velocity = Vector2.Zero;

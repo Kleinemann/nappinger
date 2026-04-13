@@ -4,11 +4,25 @@
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_cd2yp"]
 [ext_resource type="Texture2D" uid="uid://fvgfwlho5llh" path="res://assets/objects/breakable/tree.png" id="2_sjomh"]
 [ext_resource type="Texture2D" uid="uid://2ki3xb2onkxd" path="res://assets/objects/bigTree.png" id="3_etsbv"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://scripts/items/InventorySlot.cs" id="4_rrg52"]
+[ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="5_rgiwq"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="6_fojxk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etsbv"]
 shader = ExtResource("1_cd2yp")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="Resource" id="Resource_jo1kc"]
+script = ExtResource("4_rrg52")
+Item = ExtResource("5_rgiwq")
+Amount = 5
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_lk64d"]
+script = ExtResource("6_fojxk")
+Items = Array[ExtResource("4_rrg52")]([SubResource("Resource_jo1kc")])
+metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
 shader = ExtResource("1_cd2yp")
@@ -73,17 +87,43 @@ size = Vector2(129, 46.5)
 radius = 11.999999
 height = 23.999998
 
-[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrg52"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgiwq"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar")]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1n0qm")
 Sprite = NodePath("AnimatedSprite2D")
 SpriteShadow = NodePath("AnimatedSprite2DShadow")
 CollisionShape = NodePath("CollisionShape2D")
+HealtBar = NodePath("HealtBar")
 ObjectName = "Großer Baum"
 Icon = ExtResource("3_etsbv")
 Healt = 20
 MaxHealt = 20
+Inventory = SubResource("Resource_lk64d")
 metadata/_custom_type_script = "uid://cotxv47yclevo"
 
 [node name="AnimatedSprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1280575189]
@@ -114,3 +154,20 @@ position = Vector2(-7.1054274e-15, -63)
 scale = Vector2(10, 10)
 shape = SubResource("CapsuleShape2D_cd2yp")
 debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
+
+[node name="HealtBar" type="ProgressBar" parent="." unique_id=467514914]
+custom_minimum_size = Vector2(200, 10)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -208.0
+offset_right = 98.0
+offset_bottom = -181.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_rrg52")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rgiwq")
+value = 50.0

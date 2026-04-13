@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bko5002gs57tg"]
+
+[ext_resource type="Texture2D" uid="uid://3hotbms1q4gy" path="res://assets/items/wood.png" id="1_0653s"]
+[ext_resource type="Script" uid="uid://3q0x12gd5b8p" path="res://szenes/objects/DropItem.cs" id="1_a32dn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a32dn"]
+size = Vector2(32, 32)
+
+[node name="DropItem" type="Area2D" unique_id=1056664420]
+script = ExtResource("1_a32dn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=614021118]
+shape = SubResource("RectangleShape2D_a32dn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=947319190]
+texture = ExtResource("1_0653s")

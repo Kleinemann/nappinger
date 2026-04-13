@@ -73,20 +73,23 @@ public partial class WorldMain : Node2D
             }
         }
 
-        if (Player.SelectetPlayer != null)
+        if (@event.IsActionPressed("add_value"))
         {
-            if (@event.IsActionPressed("add_value"))
-            {
+            if(Player.SelectetPlayer != null)
                 Player.SelectetPlayer.Healt++;
-            }
-
-            if (@event.IsActionPressed("remove_value"))
-            {
-                Player.SelectetPlayer.Healt--;
-            }
+            else if(BreakableObject.SelectedObject != null)
+                BreakableObject.SelectedObject.Healt++;
         }
-        @event.Dispose();
-        
+
+        if (@event.IsActionPressed("remove_value"))
+        {
+            if(Player.SelectetPlayer != null)
+                Player.SelectetPlayer.Healt--;
+            else if(BreakableObject.SelectedObject != null)
+                BreakableObject.SelectedObject.Healt--;
+        }
+
+        @event.Dispose();        
     }
 }
 

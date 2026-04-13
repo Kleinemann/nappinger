@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class BreakableObject : StaticBody2D
@@ -7,6 +8,7 @@ public partial class BreakableObject : StaticBody2D
     [Export] public AnimatedSprite2D Sprite;
     [Export] public AnimatedSprite2D SpriteShadow;
     [Export] public CollisionShape2D CollisionShape;
+    [Export] public ProgressBar HealtBar;
 
     public static BreakableObject SelectedObject;
 
@@ -34,8 +36,16 @@ public partial class BreakableObject : StaticBody2D
         set
         {
             _data.Healt = value;
-            if (_data.Healt < 0)
+            if (_data.Healt <= 0)
+            {
                 _data.Healt = 0;
+                _ = RIP();
+            }
+
+            if(_data.Healt > MaxHealt)
+                _data.Healt = MaxHealt;
+
+            this.UpdateAnimation();
         }
     }
 
@@ -51,13 +61,43 @@ public partial class BreakableObject : StaticBody2D
         }
     }
 
+    [Export]
+    public Inventory Inventory
+    {
+        get => _data.Inventory;
+        set => _data.Inventory = value;
+    }
+
     public override void _Ready()
     {
         Area2D area = GetNode<Area2D>("Area2D");
         area.InputEvent += OnInputEvent;
+        UpdateAnimation();
     }
 
     #endregion
+
+    public async Task RIP()
+    {
+        CollisionShape.Disabled = true;
+
+        //Drop Items
+        if (Inventory == null)
+            return;
+
+
+        PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
+        DropItem item = scene.Instantiate<DropItem>();
+
+        item.Position = Position;
+        item.Item = Inventory.Items[0].Item;
+        item.Amount = Inventory.Items[0].Amount;
+        WorldMain.Instance.AddChild(item);
+
+        await ToSignal(GetTree().CreateTimer(5f), "timeout");
+        QueueFree();
+
+    }
 
 
     public void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
@@ -73,7 +113,14 @@ public partial class BreakableObject : StaticBody2D
 
     public void UpdateAnimation()
     {
-          float healt = (Healt * 100 / MaxHealt);
+        if (Sprite == null)
+            return;
+
+        float healt = (Healt * 100 / MaxHealt);
+
+        HealtBar.Visible = Healt != MaxHealt;
+        HealtBar.Value = Healt;
+        HealtBar.MaxValue = MaxHealt;
 
         if (healt == 0) Sprite.Play("3");
         else if (healt < 40) Sprite.Play("2");
