@@ -1,55 +1,55 @@
-[gd_scene format=3 uid="uid://bhs1726f46e0o"]
+[gd_scene format=3 uid="uid://xtyseoa8ftle"]
 
-[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/objects/BreakableObject.cs" id="1_1n0qm"]
-[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_cd2yp"]
-[ext_resource type="Texture2D" uid="uid://fvgfwlho5llh" path="res://assets/objects/breakable/tree.png" id="2_sjomh"]
-[ext_resource type="Texture2D" uid="uid://2ki3xb2onkxd" path="res://assets/objects/bigTree.png" id="3_etsbv"]
-[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_rrg52"]
-[ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="5_rgiwq"]
-[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="6_fojxk"]
+[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_fbo7v"]
+[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/objects/BreakableObject.cs" id="2_amwvu"]
+[ext_resource type="Texture2D" uid="uid://cfwk123kswr3" path="res://assets/objects/bigStone.png" id="3_fbo7v"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_8iv0o"]
+[ext_resource type="Resource" uid="uid://2emakvxo32rb" path="res://resources/items/stone.tres" id="5_fbo7v"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="6_0jfmf"]
+[ext_resource type="Texture2D" uid="uid://bfymrtvbyok0v" path="res://assets/objects/breakable/stone.png" id="7_amwvu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etsbv"]
-shader = ExtResource("1_cd2yp")
+shader = ExtResource("1_fbo7v")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
 [sub_resource type="Resource" id="Resource_jo1kc"]
-script = ExtResource("4_rrg52")
-Item = ExtResource("5_rgiwq")
-Amount = 5
+script = ExtResource("4_8iv0o")
+Item = ExtResource("5_fbo7v")
+Amount = 3
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_lk64d"]
-script = ExtResource("6_fojxk")
-Items = Array[ExtResource("4_rrg52")]([SubResource("Resource_jo1kc")])
+script = ExtResource("6_0jfmf")
+Items = Array[ExtResource("4_8iv0o")]([SubResource("Resource_jo1kc")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
-shader = ExtResource("1_cd2yp")
+shader = ExtResource("1_fbo7v")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cd2yp"]
-atlas = ExtResource("2_sjomh")
-region = Rect2(0, 0, 224, 230)
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5w2g"]
+atlas = ExtResource("7_amwvu")
+region = Rect2(0, 0, 126, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_etsbv"]
-atlas = ExtResource("2_sjomh")
-region = Rect2(224, 0, 224, 230)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iv0o"]
+atlas = ExtResource("7_amwvu")
+region = Rect2(126, 0, 126, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tjegs"]
-atlas = ExtResource("2_sjomh")
-region = Rect2(448, 0, 224, 230)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgqn3"]
+atlas = ExtResource("7_amwvu")
+region = Rect2(252, 0, 126, 84)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4avf0"]
-atlas = ExtResource("2_sjomh")
-region = Rect2(672, 0, 224, 230)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jfmf"]
+atlas = ExtResource("7_amwvu")
+region = Rect2(378, 0, 126, 84)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rrg52"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cd2yp")
+"texture": SubResource("AtlasTexture_u5w2g")
 }],
 "loop": true,
 "name": &"0",
@@ -57,7 +57,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_etsbv")
+"texture": SubResource("AtlasTexture_8iv0o")
 }],
 "loop": true,
 "name": &"1",
@@ -65,7 +65,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tjegs")
+"texture": SubResource("AtlasTexture_mgqn3")
 }],
 "loop": true,
 "name": &"2",
@@ -73,7 +73,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4avf0")
+"texture": SubResource("AtlasTexture_0jfmf")
 }],
 "loop": true,
 "name": &"3",
@@ -81,11 +81,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgiwq"]
-size = Vector2(129, 46.5)
+size = Vector2(129, 61.25)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cd2yp"]
-radius = 11.999999
-height = 23.999998
+radius = 6.799999
+height = 13.599998
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrg52"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -111,16 +111,16 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar")]
+[node name="Rock" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar")]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_1n0qm")
+script = ExtResource("2_amwvu")
 Sprite = NodePath("AnimatedSprite2D")
 SpriteShadow = NodePath("AnimatedSprite2DShadow")
 CollisionShape = NodePath("CollisionShape2D")
 HealtBar = NodePath("HealtBar")
-ObjectName = "Großer Baum"
-Icon = ExtResource("3_etsbv")
+ObjectName = "Großer Stein"
+Icon = ExtResource("3_fbo7v")
 Healt = 20
 MaxHealt = 20
 Inventory = SubResource("Resource_lk64d")
@@ -143,7 +143,7 @@ animation = &"0"
 offset = Vector2(0, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1608928362]
-position = Vector2(8, 24)
+position = Vector2(2, -51.375)
 shape = SubResource("RectangleShape2D_rgiwq")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=532841440]
@@ -157,15 +157,15 @@ debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
 
 [node name="HealtBar" type="ProgressBar" parent="." unique_id=467514914]
 custom_minimum_size = Vector2(200, 10)
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -102.0
-offset_top = -208.0
+offset_top = -146.0
 offset_right = 98.0
-offset_bottom = -181.0
+offset_bottom = -119.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_rrg52")

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/world/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://co5cjuy4gqevt" path="res://assets/tiles/BaseTiles.png" id="3_qw1xo"]
 [ext_resource type="Texture2D" uid="uid://cabu8xpcdhuli" path="res://assets/tiles/ObjectTiles.png" id="4_pm8jy"]
-[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://scripts/items/InventorySlot.cs" id="6_f8u5v"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="6_f8u5v"]
 [ext_resource type="PackedScene" uid="uid://bhs1726f46e0o" path="res://szenes/objects/breakables/Tree.tscn" id="8_x812f"]
 [ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="9_1d8lm"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="9_o3lj0"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://bko5002gs57tg" path="res://szenes/objects/DropItem.tscn" id="11_1d8lm"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
+[ext_resource type="PackedScene" uid="uid://xtyseoa8ftle" path="res://szenes/objects/breakables/Rock.tscn" id="15_o3lj0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm8jy"]
 texture = ExtResource("3_qw1xo")
@@ -147,6 +148,7 @@ use_texture_padding = false
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qw1xo"]
 resource_name = "statics"
+scenes/1/scene = ExtResource("8_x812f")
 
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 tile_size = Vector2i(32, 32)
@@ -357,3 +359,6 @@ parameters/looping = true
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=821004357]
 
 [node name="HUD" parent="CanvasLayer" unique_id=140401685 instance=ExtResource("12_s58pj")]
+
+[node name="Rock" parent="." unique_id=2055855490 instance=ExtResource("15_o3lj0")]
+position = Vector2(468, 393)

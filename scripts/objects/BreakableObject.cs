@@ -80,7 +80,6 @@ public partial class BreakableObject : StaticBody2D
     public async Task RIP()
     {
         CollisionShape.Disabled = true;
-
         //Drop Items
         if (Inventory == null)
             return;
@@ -118,7 +117,7 @@ public partial class BreakableObject : StaticBody2D
 
         float healt = (Healt * 100 / MaxHealt);
 
-        HealtBar.Visible = Healt != MaxHealt;
+        HealtBar.Visible = Healt != MaxHealt && Healt > 0;
         HealtBar.Value = Healt;
         HealtBar.MaxValue = MaxHealt;
 
