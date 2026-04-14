@@ -5,10 +5,12 @@ public partial class Player : CharacterBody2D
 {
     AnimatedSprite2D Animator;
     AnimatedSprite2D AnimatorShadow;
-    string direction = "d";
+    public string Direction = "d";
     public object Target;
 
     public static Player SelectetPlayer;
+
+    public Weapon Weapon;
 
     #region GameObjectData
     public GameObjectDataMoveable _data = new GameObjectDataMoveable();
@@ -112,6 +114,10 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        Weapon = GetNode<Weapon>("Weapon");
+        Animator = GetNode<AnimatedSprite2D>("Sprite2D");
+        AnimatorShadow = GetNode<AnimatedSprite2D>("Sprite2DShadow");
+
         Area2D area = GetNode<Area2D>("Area2D");
         area.InputEvent += OnInputEvent;
     }
@@ -130,11 +136,20 @@ public partial class Player : CharacterBody2D
 
     public override void _Process(double delta)
     {
-        Animator = GetNode<AnimatedSprite2D>("Sprite2D");
-        AnimatorShadow = GetNode<AnimatedSprite2D>("Sprite2DShadow");
         PlayerMovement();
         PlayerAnimation();
     }
+
+    public void PlayerWeapon()
+    {
+        if(Input.IsActionJustPressed("attack"))
+        {
+            Weapon.Show();
+            Animator.Play("attack_" + Direction);
+            Weapon.CollisionShape.Disabled = false;
+        }
+    }
+
 
     public void Collect(InventoryItem item, int amount = 1)
     {
@@ -168,17 +183,17 @@ public partial class Player : CharacterBody2D
 
     public void PlayerAnimation()
     {
-        if (Velocity.X > 0) direction = "r";
-        else if (Velocity.X < 0) direction = "l";
-        else if (Velocity.Y > 0) direction = "d";
-        else if (Velocity.Y < 0) direction = "u";
+        if (Velocity.X > 0) Direction = "r";
+        else if (Velocity.X < 0) Direction = "l";
+        else if (Velocity.Y > 0) Direction = "d";
+        else if (Velocity.Y < 0) Direction = "u";
 
         string animationName;
 
         if(Velocity == Vector2.Zero)
-            animationName = "idle_" + direction;
+            animationName = "idle_" + Direction;
         else
-            animationName= "walk_" + direction;
+            animationName= "walk_" + Direction;
 
         Animator.Play(animationName);
         AnimatorShadow.Play(animationName);

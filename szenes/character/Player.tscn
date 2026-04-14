@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="3_hj26c"]
 [ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="3_vw75l"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="3_x4mwj"]
+[ext_resource type="Script" uid="uid://b8kq0taw04o42" path="res://scripts/objects/Weapon.cs" id="8_8kbi3"]
+[ext_resource type="Texture2D" uid="uid://bi7els6k7micp" path="res://assets/objects/tools/sword.png" id="8_hj26c"]
 
 [sub_resource type="Resource" id="Resource_8kbi3"]
 script = ExtResource("3_hj26c")
@@ -62,6 +64,22 @@ size = Vector2(18, 7)
 shader = ExtResource("2_5wu8j")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bsk1"]
+atlas = ExtResource("2_5stuu")
+region = Rect2(0, 132, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avs7p"]
+atlas = ExtResource("2_5stuu")
+region = Rect2(99, 132, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atex5"]
+atlas = ExtResource("2_5stuu")
+region = Rect2(66, 132, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48yu1"]
+atlas = ExtResource("2_5stuu")
+region = Rect2(33, 132, 33, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vw75l"]
 atlas = ExtResource("2_5stuu")
@@ -145,6 +163,38 @@ region = Rect2(133, 34, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3bsk1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bsk1")
+}],
+"loop": true,
+"name": &"attack_d",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avs7p")
+}],
+"loop": true,
+"name": &"attack_l",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atex5")
+}],
+"loop": true,
+"name": &"attack_r",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48yu1")
+}],
+"loop": true,
+"name": &"attack_u",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_vw75l")
@@ -250,6 +300,9 @@ animations = [{
 radius = 14.0
 height = 38.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4osc8"]
+size = Vector2(16, 19)
+
 [node name="Player" type="CharacterBody2D" unique_id=1468443236 groups=["Breakable", "Player"]]
 script = ExtResource("1_7a20s")
 ObjectName = "Player"
@@ -269,18 +322,14 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_5stuu")
 position = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_3bsk1")
-animation = &"walk_d"
-frame = 2
-frame_progress = 0.70679337
+animation = &"attack_r"
 offset = Vector2(0, -16)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2061302791]
 z_index = 1
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_3bsk1")
-animation = &"walk_d"
-frame = 2
-frame_progress = 0.095184505
+animation = &"attack_l"
 offset = Vector2(0, -16)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1555219098]
@@ -290,3 +339,21 @@ position = Vector2(0, 3)
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_5stuu")
 debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
+
+[node name="Weapon" type="Node2D" parent="." unique_id=902662312]
+script = ExtResource("8_8kbi3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon" unique_id=581628634]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(-2, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hj26c")
+
+[node name="WeaponHitBox" type="Area2D" parent="Weapon" unique_id=341216204]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponHitBox" unique_id=157196144]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_4osc8")
+disabled = true
+debug_color = Color(0.6343951, 0.52590567, 0.12781584, 0.41960785)
