@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pa2ph36afi1x" path="res://scripts/objects/Player.cs" id="1_7a20s"]
 [ext_resource type="Texture2D" uid="uid://d8j135imywbi" path="res://assets/objects/player/dummy.png" id="2_5stuu"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="2_5wu8j"]
+[ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_hj26c"]
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="3_hj26c"]
 [ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="3_vw75l"]
 [ext_resource type="Script" uid="uid://b8kq0taw04o42" path="res://scripts/objects/Weapon.cs" id="8_8kbi3"]
@@ -307,6 +308,7 @@ size = Vector2(16, 19)
 [node name="Player" type="CharacterBody2D" unique_id=1468443236 groups=["Player"]]
 script = ExtResource("1_7a20s")
 ObjectName = "Player"
+Icon = ExtResource("2_hj26c")
 Healt = 10
 MaxHealt = 10
 Speed = 150.0

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://btj5m18g33auw"]
+
+[ext_resource type="Texture2D" uid="uid://jcqhahd3dc5e" path="res://assets/objects/player/chicken.png" id="1_lypqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asa2a"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7epk"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4i4n"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3ufx"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oht44"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47tv4"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb82o"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1lrb"]
+atlas = ExtResource("1_lypqv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8kqur"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_asa2a")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_q7epk")
+}],
+"loop": true,
+"name": &"d",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f4i4n")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_v3ufx")
+}],
+"loop": true,
+"name": &"l",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_oht44")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_47tv4")
+}],
+"loop": true,
+"name": &"r",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lb82o")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g1lrb")
+}],
+"loop": true,
+"name": &"u",
+"speed": 5.0
+}]
+
+[node name="Chicken" type="CharacterBody2D" unique_id=2138341029]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522379917]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1288913699]
+sprite_frames = SubResource("SpriteFrames_8kqur")
+animation = &"u"
+frame_progress = 0.23617406
