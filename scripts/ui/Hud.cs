@@ -18,7 +18,7 @@ public partial class Hud : Control
 
     public void UpdateHud()
     {
-        object selection = Player.SelectetPlayer != null ? Player.SelectetPlayer 
+        object selection = Animal.SelectetAnimal != null ? Animal.SelectetAnimal 
                     : BreakableObject.SelectedObject != null ? BreakableObject.SelectedObject : null;
 
         ObjectPanel.Visible = selection != null;
@@ -28,10 +28,10 @@ public partial class Hud : Control
             ObjectPanel.UpdatePanel(selection);
         }
 
-        if (Player.SelectetPlayer != null)
+        if (Animal.SelectetAnimal != null)
         {
             InventoryUi.Show();
-            InventoryUi.UpdateSlots(Player.SelectetPlayer.Inventory);
+            InventoryUi.UpdateSlots(Animal.SelectetAnimal.Inventory);
         }
         else
         {

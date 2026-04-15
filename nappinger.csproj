@@ -13,6 +13,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\items\" />
-    <Folder Include="szenes\" />
   </ItemGroup>
 </Project>

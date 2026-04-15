@@ -18,8 +18,8 @@ public partial class CameraScroll : Camera2D
 
     public void SwitchFocus()
     {
-        if (CameraTarget == null && Player.SelectetPlayer != null)
-            CameraTarget = Player.SelectetPlayer;
+        if (CameraTarget == null && Player.SelectetAnimal != null)
+            CameraTarget = Player.SelectetAnimal;
         else
             CameraTarget = null;
     }

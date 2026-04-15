@@ -22,7 +22,7 @@ public partial class WorldMain : Node2D
         Map.UpdateMap();
 
         //select first player
-        Player.SelectetPlayer = Player.GetNextPlayer();
+        Player.SelectetAnimal = Player.GetNextPlayer();
     }
 
 
@@ -39,7 +39,7 @@ public partial class WorldMain : Node2D
             Player p = Player.GetNextPlayer();
             if (p != null)
             {
-                Player.SelectetPlayer = p;
+                Player.SelectetAnimal = p;
                 Camera.CameraTarget = p;
             }
         }
@@ -60,31 +60,31 @@ public partial class WorldMain : Node2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("WORLD CLICK");
-            Player.SelectetPlayer = null;
+            Player.SelectetAnimal = null;
             BreakableObject.SelectedObject = null;
         }
 
         //targeting
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         { 
-            if(Player.SelectetPlayer != null)
+            if(Player.SelectetAnimal != null)
             {
-                Player.SelectetPlayer.Target = Map.GetGlobalMousePosition();
+                Player.SelectetAnimal.Target = Map.GetGlobalMousePosition();
             }
         }
 
         if (@event.IsActionPressed("add_value"))
         {
-            if(Player.SelectetPlayer != null)
-                Player.SelectetPlayer.Healt++;
+            if(Player.SelectetAnimal != null)
+                Player.SelectetAnimal.Healt++;
             else if(BreakableObject.SelectedObject != null)
                 BreakableObject.SelectedObject.Healt++;
         }
 
         if (@event.IsActionPressed("remove_value"))
         {
-            if(Player.SelectetPlayer != null)
-                Player.SelectetPlayer.Healt--;
+            if(Player.SelectetAnimal != null)
+                Player.SelectetAnimal.Healt--;
             else if(BreakableObject.SelectedObject != null)
                 BreakableObject.SelectedObject.Healt--;
         }

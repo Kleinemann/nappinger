@@ -8,10 +8,10 @@ public partial class Weapon : Node2D
     Sprite2D Sprite;
     public CollisionShape2D CollisionShape;
 
-    readonly Vector2 rightPos = new Vector2(17, -13);
-    readonly Vector2 leftPos = new Vector2(-17, -10);
-    readonly Vector2 upPos = new Vector2(0, -31);
-    readonly Vector2 downPos = new Vector2(-2, 0);
+    readonly Vector2 rightPos = new Vector2(34, 0);
+    readonly Vector2 leftPos = new Vector2(-34, 0);
+    readonly Vector2 upPos = new Vector2(10, -38);
+    readonly Vector2 downPos = new Vector2(-14, 22);
 
     readonly float rightRot = -90;
     readonly float leftRot = 90;
@@ -34,7 +34,12 @@ public partial class Weapon : Node2D
         {
             BreakableObject obj = body as BreakableObject;
             obj.Healt -= 2;
-        }        
+        }  
+        if(body.IsInGroup("Animal"))
+        {
+            Animal enemy = body as Animal;
+            enemy.Healt -= 2;
+        }
     }
 
     public override void _Process(double delta)

@@ -1,92 +1,17 @@
 using Godot;
 using Godot.Collections;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Animal
 {
-    public static Player SelectetPlayer;
+    //public static Player SelectetPlayer;
 
-    AnimatedSprite2D Animator;
-    AnimatedSprite2D AnimatorShadow;
-    public string Direction = "d";
-    public object Target;
+    //AnimatedSprite2D Animator;
+    //AnimatedSprite2D AnimatorShadow;
 
     public Weapon Weapon;
     public Timer ActionTimer;
     public Timer ActionCooldown;
     bool cooldown = false;
-
-    #region GameObjectData
-    public GameObjectDataMoveable _data = new GameObjectDataMoveable();
-
-    [Export]
-    public string ObjectName
-    {
-        get => _data.Name;
-        set => _data.Name = value;
-    }
-
-    [Export]
-    public Texture2D Icon
-    {
-        get => _data.Icon;
-        set => _data.Icon = value;
-    }
-
-    [Export]
-    public int Healt
-    {
-        get => _data.Healt;
-        set
-        {
-            _data.Healt = value;
-            if (_data.Healt <= 0)
-            {
-                _data.Healt = 0;
-                State = GameObjectState.DEAD;
-            }
-            if (Healt > MaxHealt)
-                _data.Healt = MaxHealt;
-        }
-    }
-
-    [Export]
-    public int MaxHealt
-    {
-        get => _data.MaxHealt;
-        set
-        {
-            _data.MaxHealt = value;
-            if (_data.MaxHealt < 1)
-                _data.MaxHealt = 1;
-        }
-    }
-
-    [Export]
-    public GameObjectState State
-    {
-        get => _data.State;
-        set
-        {
-            _data.State = value;
-            if (_data.State == GameObjectState.DEAD)
-                GD.Print("Player is dead");
-        }
-    }
-
-    [Export]
-    public float Speed
-    {
-        get => _data.Speed;
-        set => _data.Speed = value;
-    }
-
-    [Export]
-    public Inventory Inventory
-    {
-        get => _data.Inventory;
-        set => _data.Inventory = value;
-    }
-    #endregion
 
     public static Player GetNextPlayer()
     {
@@ -101,10 +26,10 @@ public partial class Player : CharacterBody2D
                 if (first == null)
                     first = player;
 
-                if (foundCurrent && player != SelectetPlayer)
+                if (foundCurrent && player != SelectetAnimal)
                     return player;
 
-                if (player == SelectetPlayer)
+                if (player == SelectetAnimal)
                     foundCurrent = true;
             }
         }
@@ -117,18 +42,14 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        base._Ready();
         Weapon = GetNode<Weapon>("Weapon");
-        Animator = GetNode<AnimatedSprite2D>("Sprite2D");
-        AnimatorShadow = GetNode<AnimatedSprite2D>("Sprite2DShadow");
 
         ActionTimer = GetNode<Timer>("ActionTimer");
         ActionTimer.Timeout += OnTimerTimeout;
 
         ActionCooldown = GetNode<Timer>("ActionCooldown");
         ActionCooldown.Timeout += OnTimerCoolDownTimeout;
-
-        Area2D area = GetNode<Area2D>("Area2D");
-        area.InputEvent += OnInputEvent;
     }
 
     public void OnTimerTimeout()
@@ -151,7 +72,7 @@ public partial class Player : CharacterBody2D
         {
             GD.Print("Player CLICK");
             BreakableObject.SelectedObject = null;
-            SelectetPlayer = this;
+            SelectetAnimal = this;
         }
     }
 
@@ -159,17 +80,17 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
         PlayerWeapon();        
-        PlayerMovement();
+        Movement();
 
         if (State != GameObjectState.FIGHTING)
         {
-            PlayerAnimation();
+            UpdateAnimation();
         }
     }
 
     public void PlayerWeapon()
     {
-        if(SelectetPlayer == this && !cooldown 
+        if(SelectetAnimal == this && !cooldown 
             && Input.IsActionJustPressed("attack") 
             && State != GameObjectState.FIGHTING)
         {
@@ -189,12 +110,12 @@ public partial class Player : CharacterBody2D
     }
 
 
-    public void PlayerMovement()
+    public override void Movement()
     {
         Velocity = Vector2.Zero;
 
         //TODO: Only in first Person
-        if (SelectetPlayer == this)
+        if (SelectetAnimal == this)
             Velocity = Input.GetVector("left", "rigth", "up", "down");
 
         if (Target != null && Target is Vector2 targetPos)
@@ -213,7 +134,7 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
     }
 
-    public void PlayerAnimation()
+    public override void UpdateAnimation()
     {
         if (Velocity.X > 0) Direction = "r";
         else if (Velocity.X < 0) Direction = "l";

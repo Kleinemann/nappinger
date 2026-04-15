@@ -105,7 +105,7 @@ public partial class BreakableObject : StaticBody2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Object CLICK");
-            Player.SelectetPlayer = null;
+            Player.SelectetAnimal = null;
             SelectedObject = this;
         }
     }

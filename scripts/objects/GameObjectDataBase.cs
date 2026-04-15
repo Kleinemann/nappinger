@@ -22,6 +22,8 @@ public class GameObjectDataBase
 
 public class GameObjectDataMoveable : GameObjectDataBase
 {
+    public string Direction = "d";
+    public object Target;
     public float Speed { get; set; } = 100f;
     public GameObjectState State { get; set; } = GameObjectState.IDLE;
 }

@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://btj5m18g33auw"]
 
 [ext_resource type="Texture2D" uid="uid://jcqhahd3dc5e" path="res://assets/objects/player/chicken.png" id="1_lypqv"]
+[ext_resource type="Script" uid="uid://d7lflluaicxm" path="res://szenes/character/Animal.cs" id="1_oht44"]
+[ext_resource type="Texture2D" uid="uid://c2kdn6wdue86k" path="res://assets/objects/chicken.png" id="2_47tv4"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="3_lb82o"]
+[ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="4_g1lrb"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="5_8kqur"]
+
+[sub_resource type="Resource" id="Resource_i1y6g"]
+script = ExtResource("3_lb82o")
+Item = ExtResource("4_g1lrb")
+Amount = 2
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_6jxur"]
+script = ExtResource("5_8kqur")
+Items = Array[ExtResource("3_lb82o")]([SubResource("Resource_i1y6g")])
+metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asa2a"]
 atlas = ExtResource("1_lypqv")
@@ -44,7 +60,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_q7epk")
 }],
 "loop": true,
-"name": &"d",
+"name": &"idle_d",
 "speed": 5.0
 }, {
 "frames": [{
@@ -55,7 +71,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_v3ufx")
 }],
 "loop": true,
-"name": &"l",
+"name": &"idle_l",
 "speed": 5.0
 }, {
 "frames": [{
@@ -66,7 +82,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_47tv4")
 }],
 "loop": true,
-"name": &"r",
+"name": &"idle_r",
 "speed": 5.0
 }, {
 "frames": [{
@@ -77,15 +93,135 @@ animations = [{
 "texture": SubResource("AtlasTexture_g1lrb")
 }],
 "loop": true,
-"name": &"u",
+"name": &"idle_u",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_asa2a")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_q7epk")
+}],
+"loop": true,
+"name": &"walk_d",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f4i4n")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_v3ufx")
+}],
+"loop": true,
+"name": &"walk_l",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_oht44")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_47tv4")
+}],
+"loop": true,
+"name": &"walk_r",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lb82o")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g1lrb")
+}],
+"loop": true,
+"name": &"walk_u",
 "speed": 5.0
 }]
 
-[node name="Chicken" type="CharacterBody2D" unique_id=2138341029]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lypqv"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asa2a"]
+radius = 18.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oht44"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47tv4"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Chicken" type="CharacterBody2D" unique_id=2138341029 node_paths=PackedStringArray("Sprite", "HealtBar") groups=["Animal"]]
+script = ExtResource("1_oht44")
+Sprite = NodePath("Sprite2DShadow")
+HealtBar = NodePath("HealtBar")
+ObjectName = "Huhn"
+Icon = ExtResource("2_47tv4")
+Healt = 5
+MaxHealt = 5
+State = 1
+Speed = 175.0
+Inventory = SubResource("Resource_6jxur")
+
+[node name="Sprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1288913699]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_8kqur")
+animation = &"walk_r"
+offset = Vector2(0, -16)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1095272857]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_8kqur")
+animation = &"walk_r"
+offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522379917]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_lypqv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1288913699]
-sprite_frames = SubResource("SpriteFrames_8kqur")
-animation = &"u"
-frame_progress = 0.23617406
+[node name="Area2D" type="Area2D" parent="." unique_id=473165407]
+
+[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1312002167]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_asa2a")
+debug_color = Color(0.6494322, 0.5194141, 0.08486947, 0.41960785)
+
+[node name="HealtBar" type="ProgressBar" parent="." unique_id=132836559]
+custom_minimum_size = Vector2(200, 27)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -49.0
+offset_right = 151.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_oht44")
+theme_override_styles/fill = SubResource("StyleBoxFlat_47tv4")
+value = 50.0

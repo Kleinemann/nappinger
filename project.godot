@@ -30,6 +30,7 @@ project/assembly_name="nappinger"
 
 Player=""
 Breakable=""
+Animal=""
 
 [input]
 

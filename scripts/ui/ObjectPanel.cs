@@ -17,12 +17,12 @@ public partial class ObjectPanel : Panel
 
     public void UpdatePanel(object selection)
     {
-        if (selection is Player player)
+        if (selection is Animal animal)
         {
-            ObjectName.Text = player.Name;
-            Icon.Texture = player.Icon;
-            HealtBar.Value = player.Healt;
-            HealtBar.MaxValue = player.MaxHealt;
+            ObjectName.Text = animal.Name;
+            Icon.Texture = animal.Icon;
+            HealtBar.Value = animal.Healt;
+            HealtBar.MaxValue = animal.MaxHealt;
         }
         else if(selection is BreakableObject obj)
         {
