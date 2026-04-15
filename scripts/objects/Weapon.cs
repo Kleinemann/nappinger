@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 
 public partial class Weapon : Node2D
@@ -21,7 +22,19 @@ public partial class Weapon : Node2D
     {
         Hide();
         Sprite = GetNode<Sprite2D>("Sprite2D");
-        CollisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        CollisionShape = GetNode<CollisionShape2D>("WeaponHitBox/CollisionShape2D");
+        Area2D area = GetNode<Area2D>("WeaponHitBox");
+        area.BodyEntered += OnBodyEntered;
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        GD.Print("Hit: " + body.Name);
+        if(body.IsInGroup("Breakable"))
+        {
+            BreakableObject obj = body as BreakableObject;
+            obj.Healt -= 2;
+        }        
     }
 
     public override void _Process(double delta)

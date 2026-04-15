@@ -16,12 +16,12 @@ shader_parameter/shadow_alpha = 0.5
 [sub_resource type="Resource" id="Resource_jo1kc"]
 script = ExtResource("4_rrg52")
 Item = ExtResource("5_rgiwq")
-Amount = 5
+Amount = 10
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_lk64d"]
 script = ExtResource("6_fojxk")
-Items = Array[ExtResource("4_rrg52")]([SubResource("Resource_jo1kc")])
+Items = [SubResource("Resource_jo1kc")]
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
@@ -111,7 +111,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar")]
+[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable"]]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1n0qm")
@@ -157,7 +157,7 @@ debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
 
 [node name="HealtBar" type="ProgressBar" parent="." unique_id=467514914]
 custom_minimum_size = Vector2(200, 10)
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5

@@ -80,20 +80,21 @@ public partial class BreakableObject : StaticBody2D
     public async Task RIP()
     {
         CollisionShape.Disabled = true;
+
         //Drop Items
-        if (Inventory == null)
-            return;
+        if (Inventory != null)
+        {
 
+            PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
+            DropItem item = scene.Instantiate<DropItem>();
 
-        PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
-        DropItem item = scene.Instantiate<DropItem>();
+            item.Position = Position;
+            item.Item = Inventory.Items[0].Item;
+            item.Amount = Inventory.Items[0].Amount;
+            WorldMain.Instance.AddChild(item);
+        }
 
-        item.Position = Position;
-        item.Item = Inventory.Items[0].Item;
-        item.Amount = Inventory.Items[0].Amount;
-        WorldMain.Instance.AddChild(item);
-
-        await ToSignal(GetTree().CreateTimer(5f), "timeout");
+        await ToSignal(GetTree().CreateTimer(2f), "timeout");
         QueueFree();
 
     }

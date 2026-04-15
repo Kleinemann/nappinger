@@ -3,14 +3,17 @@ using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
+    public static Player SelectetPlayer;
+
     AnimatedSprite2D Animator;
     AnimatedSprite2D AnimatorShadow;
     public string Direction = "d";
     public object Target;
 
-    public static Player SelectetPlayer;
-
     public Weapon Weapon;
+    public Timer ActionTimer;
+    public Timer ActionCooldown;
+    bool cooldown = false;
 
     #region GameObjectData
     public GameObjectDataMoveable _data = new GameObjectDataMoveable();
@@ -118,10 +121,29 @@ public partial class Player : CharacterBody2D
         Animator = GetNode<AnimatedSprite2D>("Sprite2D");
         AnimatorShadow = GetNode<AnimatedSprite2D>("Sprite2DShadow");
 
+        ActionTimer = GetNode<Timer>("ActionTimer");
+        ActionTimer.Timeout += OnTimerTimeout;
+
+        ActionCooldown = GetNode<Timer>("ActionCooldown");
+        ActionCooldown.Timeout += OnTimerCoolDownTimeout;
+
         Area2D area = GetNode<Area2D>("Area2D");
         area.InputEvent += OnInputEvent;
     }
 
+    public void OnTimerTimeout()
+    {
+        Weapon.Hide();
+        Weapon.CollisionShape.Disabled = true;
+        State = GameObjectState.IDLE;
+        cooldown = true;
+        ActionCooldown.Start();
+    }
+
+    public void OnTimerCoolDownTimeout()
+    {
+        cooldown = false;
+    }
 
     public void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
     {
@@ -136,17 +158,27 @@ public partial class Player : CharacterBody2D
 
     public override void _Process(double delta)
     {
+        PlayerWeapon();        
         PlayerMovement();
-        PlayerAnimation();
+
+        if (State != GameObjectState.FIGHTING)
+        {
+            PlayerAnimation();
+        }
     }
 
     public void PlayerWeapon()
     {
-        if(Input.IsActionJustPressed("attack"))
+        if(SelectetPlayer == this && !cooldown 
+            && Input.IsActionJustPressed("attack") 
+            && State != GameObjectState.FIGHTING)
         {
+            State = GameObjectState.FIGHTING;
             Weapon.Show();
             Animator.Play("attack_" + Direction);
+            AnimatorShadow.Play("attack_" + Direction);
             Weapon.CollisionShape.Disabled = false;
+            ActionTimer.Start();
         }
     }
 
