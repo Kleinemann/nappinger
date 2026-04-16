@@ -14,7 +14,7 @@ public class GameObjectDataBase
     public string Description { get; set; }
     public Texture2D Icon { get; set; }
 
-    public Inventory Inventory = new Inventory();
+    public Inventory Inventory; 
 }
 
 public class GameObjectDestoyable: GameObjectDataBase

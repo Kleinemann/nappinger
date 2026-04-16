@@ -10,48 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bi7els6k7micp" path="res://assets/objects/tools/sword.png" id="8_hj26c"]
 
 [sub_resource type="Resource" id="Resource_hj26c"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_8kbi3"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_4osc8"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_lk2e0"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_pqj6x"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_5umfc"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_rmndt"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_l405v"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_6lfjv"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_troyg"]
-script = ExtResource("3_hj26c")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_x4mwj"]
+resource_local_to_scene = true
 script = ExtResource("3_vw75l")
-Items = Array[ExtResource("3_hj26c")]([SubResource("Resource_hj26c"), SubResource("Resource_8kbi3"), SubResource("Resource_4osc8"), SubResource("Resource_lk2e0"), SubResource("Resource_pqj6x"), SubResource("Resource_5umfc"), SubResource("Resource_rmndt"), SubResource("Resource_l405v"), SubResource("Resource_6lfjv"), SubResource("Resource_troyg")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6v8"]
@@ -343,7 +303,7 @@ Icon = ExtResource("2_hj26c")
 Healt = 10
 MaxHealt = 10
 Speed = 150.0
-Inventory = SubResource("Resource_x4mwj")
+Inventory = SubResource("Resource_hj26c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
 position = Vector2(1.5, 13.75)

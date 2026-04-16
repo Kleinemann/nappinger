@@ -7,49 +7,10 @@
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="3_uy5bg"]
 [ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="4_ddv6b"]
 
-[sub_resource type="Resource" id="Resource_dmbco"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_a4lm4"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_lepte"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_55m5g"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_75pe8"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_h0ku5"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_4n0wo"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_5ng7n"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_e1h8m"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_w5o3h"]
-script = ExtResource("3_uy5bg")
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
 [sub_resource type="Resource" id="Resource_gh0ph"]
+resource_local_to_scene = true
 script = ExtResource("4_ddv6b")
-Items = Array[ExtResource("3_uy5bg")]([SubResource("Resource_dmbco"), SubResource("Resource_a4lm4"), SubResource("Resource_lepte"), SubResource("Resource_55m5g"), SubResource("Resource_75pe8"), SubResource("Resource_h0ku5"), SubResource("Resource_4n0wo"), SubResource("Resource_5ng7n"), SubResource("Resource_e1h8m"), SubResource("Resource_w5o3h")])
+MaxStackSize = 99
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4svy2"]

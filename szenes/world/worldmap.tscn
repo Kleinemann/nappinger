@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/world/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://co5cjuy4gqevt" path="res://assets/tiles/BaseTiles.png" id="3_qw1xo"]
 [ext_resource type="Texture2D" uid="uid://cabu8xpcdhuli" path="res://assets/tiles/ObjectTiles.png" id="4_pm8jy"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="7_2xwxs"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="8_i0m1b"]
 [ext_resource type="PackedScene" uid="uid://bhs1726f46e0o" path="res://szenes/objects/breakables/Tree.tscn" id="8_x812f"]
 [ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="9_1d8lm"]
 [ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="9_o3lj0"]
@@ -156,6 +158,52 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x812f")
 sources/1 = SubResource("TileSetScenesCollectionSource_qw1xo")
 
+[sub_resource type="Resource" id="Resource_dmbco"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_a4lm4"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_lepte"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_55m5g"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_75pe8"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_h0ku5"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_4n0wo"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_5ng7n"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_e1h8m"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_w5o3h"]
+script = ExtResource("7_2xwxs")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_ushu4"]
+resource_local_to_scene = true
+script = ExtResource("8_i0m1b")
+Items = Array[ExtResource("7_2xwxs")]([SubResource("Resource_dmbco"), SubResource("Resource_a4lm4"), SubResource("Resource_lepte"), SubResource("Resource_55m5g"), SubResource("Resource_75pe8"), SubResource("Resource_h0ku5"), SubResource("Resource_4n0wo"), SubResource("Resource_5ng7n"), SubResource("Resource_e1h8m"), SubResource("Resource_w5o3h")])
+metadata/_custom_type_script = "uid://csar5086emnio"
+
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")
 
@@ -174,19 +222,6 @@ tile_set = SubResource("TileSet_x812f")
 y_sort_enabled = true
 tile_map_data = PackedByteArray(0, 0, 18, 0, 6, 0, 1, 0, 0, 0, 0, 0, 3, 0, 18, 0, 11, 0, 1, 0, 0, 0, 0, 0, 4, 0)
 tile_set = SubResource("TileSet_2fbf8")
-
-[node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
-position = Vector2(643, 178)
-ObjectName = "Player 1"
-
-[node name="Player2" parent="DualTileMap" unique_id=616823879 instance=ExtResource("9_s58pj")]
-position = Vector2(755, 214)
-ObjectName = "Player 2"
-Speed = 250.0
-
-[node name="Player3" parent="DualTileMap" unique_id=704436641 instance=ExtResource("9_s58pj")]
-position = Vector2(119, 301)
-ObjectName = "Player 3"
 
 [node name="DropItem" parent="DualTileMap" unique_id=1056664420 instance=ExtResource("11_1d8lm")]
 position = Vector2(509, 241)
@@ -219,6 +254,16 @@ position = Vector2(829, 230)
 
 [node name="Camp" parent="DualTileMap" unique_id=2072282089 instance=ExtResource("12_o3lj0")]
 position = Vector2(749, 92)
+Inventory = SubResource("Resource_ushu4")
+
+[node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
+position = Vector2(601, 223)
+
+[node name="Player2" parent="DualTileMap" unique_id=1937316488 instance=ExtResource("9_s58pj")]
+position = Vector2(689, 238)
+
+[node name="Player3" parent="DualTileMap" unique_id=1018381198 instance=ExtResource("9_s58pj")]
+position = Vector2(177, 207)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)

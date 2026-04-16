@@ -13,7 +13,6 @@ public partial class WorldMain : Node2D
     public static Player SelectedPlayer => SelectedObject != null && SelectedObject is Player player ? player : null;
     public static Animal SelectedAnimal => SelectedObject != null && SelectedObject is Animal animal ? animal : null;
     public static BreakableObject SelectedBreakable => SelectedObject != null && SelectedObject is BreakableObject breakable ? breakable : null;
-
     public static Store SelectedStore => SelectedObject != null && SelectedObject is Store store ? store : null;
 
     public static RandomNumberGenerator Random = new RandomNumberGenerator();

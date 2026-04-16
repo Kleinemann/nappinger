@@ -6,6 +6,17 @@ using System.Linq;
 public partial class Inventory : Resource
 {
     [Export] public Array<InventorySlot> Items = new Array<InventorySlot>();
+    [Export] public int Slots = 10;
+    [Export] public int MaxStackSize = 10;
+
+    public Inventory()
+    {
+        for (var i = 0; i < Slots; i++)
+        {
+            InventorySlot slot = new InventorySlot() { ResourceLocalToScene = true }; 
+            Items.Add(slot);
+        }
+    }
 
     public void Insert(InventoryItem item, int amount=1)
     {
