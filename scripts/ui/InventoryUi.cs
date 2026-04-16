@@ -19,7 +19,7 @@ public partial class InventoryUi : Control
         }
     }
 
-    public void UpdateSlots(Inventory inventory)
+    public void UpdateSlots()
     {
         for(var i =0; i < Slots.Count; i++)
         {

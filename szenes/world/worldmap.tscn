@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://bko5002gs57tg" path="res://szenes/objects/DropItem.tscn" id="11_1d8lm"]
 [ext_resource type="PackedScene" uid="uid://btj5m18g33auw" path="res://szenes/character/chicken.tscn" id="11_o3lj0"]
+[ext_resource type="PackedScene" uid="uid://wg3kcgj0vn68" path="res://szenes/buildings/camp.tscn" id="12_o3lj0"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 [ext_resource type="PackedScene" uid="uid://xtyseoa8ftle" path="res://szenes/objects/breakables/Rock.tscn" id="15_o3lj0"]
 
@@ -215,6 +216,9 @@ position = Vector2(401, 369)
 
 [node name="Chicken3" parent="DualTileMap" unique_id=651292433 instance=ExtResource("11_o3lj0")]
 position = Vector2(829, 230)
+
+[node name="Camp" parent="DualTileMap" unique_id=2072282089 instance=ExtResource("12_o3lj0")]
+position = Vector2(749, 92)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)

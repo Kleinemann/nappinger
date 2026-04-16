@@ -15,7 +15,7 @@ public partial class ObjectPanel : Panel
         HealtBar = GetNode<ProgressBar>("HealtBar");
     }
 
-    public void UpdatePanel(object selection)
+    public void UpdatePanel()
     {
         if (selection is Animal animal)
         {

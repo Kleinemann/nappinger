@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 
 public partial class Animal: CharacterBody2D
 {
-    public static Animal SelectetAnimal;
-
-
     [Export] public AnimatedSprite2D Sprite;
     [Export] public ProgressBar HealtBar;
 
@@ -128,7 +125,7 @@ public partial class Animal: CharacterBody2D
         {
             GD.Print("Animal CLICK");
             BreakableObject.SelectedObject = null;
-            SelectetAnimal = this;
+            WorldMain.SelectedObject = this;
         }
     }
 

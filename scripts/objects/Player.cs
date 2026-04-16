@@ -3,11 +3,6 @@ using Godot.Collections;
 
 public partial class Player : Animal
 {
-    //public static Player SelectetPlayer;
-
-    //AnimatedSprite2D Animator;
-    //AnimatedSprite2D AnimatorShadow;
-
     public Weapon Weapon;
     public Timer ActionTimer;
     public Timer ActionCooldown;
@@ -26,10 +21,10 @@ public partial class Player : Animal
                 if (first == null)
                     first = player;
 
-                if (foundCurrent && player != SelectetAnimal)
+                if (foundCurrent && player != WorldMain.SelectedObject)
                     return player;
 
-                if (player == SelectetAnimal)
+                if (player == WorldMain.SelectedObject)
                     foundCurrent = true;
             }
         }
@@ -66,13 +61,13 @@ public partial class Player : Animal
         cooldown = false;
     }
 
-    public void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
+    public new void OnInputEvent(Node Viewport, InputEvent @event, long shapeIdx)
     {
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Player CLICK");
             BreakableObject.SelectedObject = null;
-            SelectetAnimal = this;
+            WorldMain.SelectedObject = this;
         }
     }
 
@@ -90,7 +85,7 @@ public partial class Player : Animal
 
     public void PlayerWeapon()
     {
-        if(SelectetAnimal == this && !cooldown 
+        if(WorldMain.SelectedPlayer == this && !cooldown 
             && Input.IsActionJustPressed("attack") 
             && State != GameObjectState.FIGHTING)
         {
@@ -115,7 +110,7 @@ public partial class Player : Animal
         Velocity = Vector2.Zero;
 
         //TODO: Only in first Person
-        if (SelectetAnimal == this)
+        if (WorldMain.SelectedPlayer == this)
             Velocity = Input.GetVector("left", "rigth", "up", "down");
 
         if (Target != null && Target is Vector2 targetPos)

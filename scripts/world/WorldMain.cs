@@ -8,6 +8,13 @@ public partial class WorldMain : Node2D
     public WorldMap Map;
     public double Time = 0;
 
+    //Ausgewähltes Object
+    public static Node2D SelectedObject;
+    public static Player SelectedPlayer => SelectedObject != null && SelectedObject is Player player ? player : null;
+    public static Animal SelectedAnimal => SelectedObject != null && SelectedObject is Animal animal ? animal : null;
+    public static BreakableObject SelectedBreakable => SelectedObject != null && SelectedObject is BreakableObject breakable ? breakable : null;
+
+
     public static RandomNumberGenerator Random = new RandomNumberGenerator();
 
     public override void _Ready()
@@ -22,7 +29,7 @@ public partial class WorldMain : Node2D
         Map.UpdateMap();
 
         //select first player
-        Player.SelectetAnimal = Player.GetNextPlayer();
+        SelectedObject = Player.GetNextPlayer();
     }
 
 
@@ -39,7 +46,7 @@ public partial class WorldMain : Node2D
             Player p = Player.GetNextPlayer();
             if (p != null)
             {
-                Player.SelectetAnimal = p;
+                SelectedObject = p;
                 Camera.CameraTarget = p;
             }
         }
@@ -60,33 +67,33 @@ public partial class WorldMain : Node2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("WORLD CLICK");
-            Player.SelectetAnimal = null;
+            SelectedObject = null;
             BreakableObject.SelectedObject = null;
         }
 
         //targeting
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         { 
-            if(Player.SelectetAnimal != null)
+            if(SelectedObject != null && SelectedObject is Player player)
             {
-                Player.SelectetAnimal.Target = Map.GetGlobalMousePosition();
+                player.Target = Map.GetGlobalMousePosition();
             }
         }
 
         if (@event.IsActionPressed("add_value"))
         {
-            if(Player.SelectetAnimal != null)
-                Player.SelectetAnimal.Healt++;
-            else if(BreakableObject.SelectedObject != null)
-                BreakableObject.SelectedObject.Healt++;
+            if(SelectedAnimal != null)
+                SelectedAnimal.Healt++;
+            else if(SelectedBreakable != null)
+                SelectedBreakable.Healt++;
         }
 
         if (@event.IsActionPressed("remove_value"))
         {
-            if(Player.SelectetAnimal != null)
-                Player.SelectetAnimal.Healt--;
-            else if(BreakableObject.SelectedObject != null)
-                BreakableObject.SelectedObject.Healt--;
+            if(SelectedAnimal != null)
+                SelectedAnimal.Healt--;
+            else if(SelectedBreakable != null)
+                SelectedBreakable.Healt--;
         }
 
         @event.Dispose();        
