@@ -8,19 +8,23 @@ public enum GameObjectState {
     DEAD
 }
 
-
 public class GameObjectDataBase
 {
     public string Name { get; set; }
     public string Description { get; set; }
     public Texture2D Icon { get; set; }
+
+    public Inventory Inventory = new Inventory();
+}
+
+public class GameObjectDestoyable: GameObjectDataBase
+{
     public int Healt { get; set; } = int.MaxValue;
     public int MaxHealt { get; set; } = int.MaxValue;
-    public Inventory Inventory;
 }
 
 
-public class GameObjectDataMoveable : GameObjectDataBase
+public class GameObjectDataMoveable : GameObjectDestoyable
 {
     public string Direction = "d";
     public object Target;

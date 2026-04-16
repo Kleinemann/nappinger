@@ -124,7 +124,6 @@ public partial class Animal: CharacterBody2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Animal CLICK");
-            BreakableObject.SelectedObject = null;
             WorldMain.SelectedObject = this;
         }
     }

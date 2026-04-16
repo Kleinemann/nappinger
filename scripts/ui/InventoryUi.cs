@@ -21,12 +21,22 @@ public partial class InventoryUi : Control
 
     public void UpdateSlots()
     {
-        for(var i =0; i < Slots.Count; i++)
+        Inventory inventory = null;
+
+        if (WorldMain.SelectedPlayer != null)
+            inventory = WorldMain.SelectedPlayer.Inventory;
+
+        if (WorldMain.SelectedStore != null)
+            inventory = WorldMain.SelectedStore.Inventory;
+
+        for (var i =0; i < Slots.Count; i++)
         {
             if(inventory != null && inventory.Items.Count > i)
                 Slots[i].UpdateSlot(inventory.Items[i]);
             else
                 Slots[i].UpdateSlot(null);
         }
+
+        this.Visible = inventory != null;
     }
 }

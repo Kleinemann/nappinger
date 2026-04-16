@@ -10,9 +10,7 @@ public partial class BreakableObject : StaticBody2D
     [Export] public CollisionShape2D CollisionShape;
     [Export] public ProgressBar HealtBar;
 
-    public static BreakableObject SelectedObject;
-
-    GameObjectDataBase _data = new GameObjectDataBase();
+    GameObjectDestoyable _data = new GameObjectDestoyable();
 
     #region GameObjectData
     [Export]
@@ -105,7 +103,7 @@ public partial class BreakableObject : StaticBody2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Object CLICK");
-            SelectedObject = this;
+            WorldMain.SelectedObject = this;
         }
     }
 

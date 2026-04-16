@@ -17,19 +17,31 @@ public partial class ObjectPanel : Panel
 
     public void UpdatePanel()
     {
-        if (selection is Animal animal)
+        this.Visible = WorldMain.SelectedObject != null;
+
+        if (WorldMain.SelectedObject is Animal animal)
         {
             ObjectName.Text = animal.Name;
             Icon.Texture = animal.Icon;
+            HealtBar.Show();
             HealtBar.Value = animal.Healt;
             HealtBar.MaxValue = animal.MaxHealt;
         }
-        else if(selection is BreakableObject obj)
+        else if(WorldMain.SelectedObject is BreakableObject obj)
         {
             ObjectName.Text = obj.ObjectName;
             Icon.Texture = obj.Icon;
+            HealtBar.Show();
             HealtBar.Value = obj.Healt;
             HealtBar.MaxValue = obj.MaxHealt;
+        }
+        else if(WorldMain.SelectedObject is Store store)
+        {
+            ObjectName.Text = store.ObjectName;
+            Icon.Texture = store.Icon;
+            HealtBar.Hide();
+            HealtBar.Value = 1;
+            HealtBar.MaxValue = 1;
         }
         else
         {

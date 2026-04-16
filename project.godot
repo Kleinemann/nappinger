@@ -32,6 +32,7 @@ Player=""
 Breakable=""
 Animal=""
 Building=""
+Storable=""
 
 [input]
 

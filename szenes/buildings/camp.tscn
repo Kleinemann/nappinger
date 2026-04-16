@@ -1,7 +1,56 @@
 [gd_scene format=3 uid="uid://wg3kcgj0vn68"]
 
+[ext_resource type="Script" uid="uid://6gr8qec53u5d" path="res://szenes/buildings/Store.cs" id="1_h7bkp"]
 [ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_s3oe2"]
 [ext_resource type="Texture2D" uid="uid://crs3ug5o3jnfq" path="res://assets/objects/camp.png" id="1_v05mg"]
+[ext_resource type="Texture2D" uid="uid://cwajjgl33gtvo" path="res://assets/objects/camp_icon.png" id="2_b1qv2"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="3_uy5bg"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="4_ddv6b"]
+
+[sub_resource type="Resource" id="Resource_dmbco"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_a4lm4"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_lepte"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_55m5g"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_75pe8"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_h0ku5"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_4n0wo"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_5ng7n"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_e1h8m"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_w5o3h"]
+script = ExtResource("3_uy5bg")
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_gh0ph"]
+script = ExtResource("4_ddv6b")
+Items = Array[ExtResource("3_uy5bg")]([SubResource("Resource_dmbco"), SubResource("Resource_a4lm4"), SubResource("Resource_lepte"), SubResource("Resource_55m5g"), SubResource("Resource_75pe8"), SubResource("Resource_h0ku5"), SubResource("Resource_4n0wo"), SubResource("Resource_5ng7n"), SubResource("Resource_e1h8m"), SubResource("Resource_w5o3h")])
+metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4svy2"]
 shader = ExtResource("1_s3oe2")
@@ -14,7 +63,11 @@ size = Vector2(180, 55)
 [sub_resource type="CircleShape2D" id="CircleShape2D_s3oe2"]
 radius = 89.005615
 
-[node name="Camp" type="StaticBody2D" unique_id=2072282089 groups=["Building"]]
+[node name="Camp" type="StaticBody2D" unique_id=2072282089 groups=["Building", "Storable"]]
+script = ExtResource("1_h7bkp")
+ObjectName = "Lagerhaus"
+Icon = ExtResource("2_b1qv2")
+Inventory = SubResource("Resource_gh0ph")
 
 [node name="Sprite2DShadow" type="Sprite2D" parent="." unique_id=273930590]
 z_index = 1

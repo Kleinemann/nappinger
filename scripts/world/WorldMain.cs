@@ -8,12 +8,13 @@ public partial class WorldMain : Node2D
     public WorldMap Map;
     public double Time = 0;
 
-    //Ausgewähltes Object
+    //AusgewÃ¤hltes Object
     public static Node2D SelectedObject;
     public static Player SelectedPlayer => SelectedObject != null && SelectedObject is Player player ? player : null;
     public static Animal SelectedAnimal => SelectedObject != null && SelectedObject is Animal animal ? animal : null;
     public static BreakableObject SelectedBreakable => SelectedObject != null && SelectedObject is BreakableObject breakable ? breakable : null;
 
+    public static Store SelectedStore => SelectedObject != null && SelectedObject is Store store ? store : null;
 
     public static RandomNumberGenerator Random = new RandomNumberGenerator();
 
@@ -67,8 +68,7 @@ public partial class WorldMain : Node2D
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("WORLD CLICK");
-            SelectedObject = null;
-            BreakableObject.SelectedObject = null;
+            WorldMain.SelectedObject = null;
         }
 
         //targeting

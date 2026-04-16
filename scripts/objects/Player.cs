@@ -66,7 +66,6 @@ public partial class Player : Animal
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("Player CLICK");
-            BreakableObject.SelectedObject = null;
             WorldMain.SelectedObject = this;
         }
     }
