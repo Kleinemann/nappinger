@@ -10,8 +10,6 @@ public partial class Animal: CharacterBody2D
     public AnimatedSprite2D Animator;
     public AnimatedSprite2D AnimatorShadow;
 
-    public int moveCounter = 0;
-
     #region GameObjectData
     public GameObjectDataMoveable _data = new GameObjectDataMoveable();
 
@@ -167,12 +165,10 @@ public partial class Animal: CharacterBody2D
             return;
         }
         
-        if(!MoveAndSlide())
-            moveCounter++;
-        
-        if (moveCounter > 10)
+        if(MoveAndSlide())
         {
-            moveCounter = 0;
+            Velocity += new Vector2(-1, -1);
+            MoveAndSlide();
             Target = null;
         }
     }

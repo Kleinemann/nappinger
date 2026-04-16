@@ -18,8 +18,7 @@ public partial class ObjectPanel : Panel
     public void UpdatePanel()
     {
         this.Visible = WorldMain.SelectedObject != null;
-
-        if (WorldMain.SelectedObject is Animal animal)
+        if (WorldMain.SelectedAnimal is Animal animal)
         {
             ObjectName.Text = animal.Name;
             Icon.Texture = animal.Icon;
