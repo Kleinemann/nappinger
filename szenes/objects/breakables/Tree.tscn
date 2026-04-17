@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_lk64d"]
 script = ExtResource("6_fojxk")
-Items = [SubResource("Resource_jo1kc")]
+Items = Array[ExtResource("4_rrg52")]([SubResource("Resource_jo1kc")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
@@ -111,7 +111,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable"]]
+[node name="Tree" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable", "R_Wood"]]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_1n0qm")

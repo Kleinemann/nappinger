@@ -282,8 +282,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5stuu"]
-radius = 26.0
-height = 68.0
+radius = 30.0
+height = 80.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vs4wc"]
 shader = ExtResource("2_5wu8j")
@@ -291,7 +291,10 @@ shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4osc8"]
-size = Vector2(24, 34)
+size = Vector2(52, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hj26c"]
+radius = 2048.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1468443236 groups=["Player"]]
 scale = Vector2(0.5, 0.5)
@@ -306,6 +309,7 @@ Speed = 150.0
 Inventory = SubResource("Resource_hj26c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453358444]
+visible = false
 position = Vector2(1.5, 13.75)
 shape = SubResource("RectangleShape2D_yc6v8")
 
@@ -332,7 +336,8 @@ offset = Vector2(0, -16)
 position = Vector2(0, 3)
 
 [node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1476901129]
-position = Vector2(2, -5)
+visible = false
+position = Vector2(2, -9)
 shape = SubResource("CapsuleShape2D_5stuu")
 debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
 
@@ -357,7 +362,7 @@ texture = ExtResource("8_hj26c")
 [node name="WeaponHitBox" type="Area2D" parent="Weapon" unique_id=341216204]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponHitBox" unique_id=157196144]
-position = Vector2(0, 5)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_4osc8")
 disabled = true
 debug_color = Color(0.6343951, 0.52590567, 0.12781584, 0.41960785)
@@ -369,3 +374,9 @@ one_shot = true
 [node name="ActionCooldown" type="Timer" parent="." unique_id=999084084]
 wait_time = 0.5
 one_shot = true
+
+[node name="Area2DSearch" type="Area2D" parent="." unique_id=1067898800]
+visible = false
+
+[node name="CollisionSearch" type="CollisionShape2D" parent="Area2DSearch" unique_id=1496576866]
+shape = SubResource("CircleShape2D_hj26c")

@@ -5,6 +5,7 @@ using System;
 public partial class InventoryItem : Resource
 {
     [Export] public string ItemName = "";
+    [Export] public string GroupName;
     [Export] public string Description = "";
     [Export] public Texture2D Icon;
 }

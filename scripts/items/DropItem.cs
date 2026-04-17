@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class DropItem : Area2D
 {
@@ -14,7 +15,14 @@ public partial class DropItem : Area2D
             sprite.Texture = Item.Icon;
         }
 
+        
+
         BodyEntered += OnBodyEntered;
+    }
+
+    public override void _EnterTree()
+    {
+        AddToGroup(Item.GroupName);
     }
 
     private void OnBodyEntered(Node2D body)
@@ -23,6 +31,7 @@ public partial class DropItem : Area2D
         {
             ((Player)body).Collect(Item, Amount);
 
+            GameObjectDataMoveable.RemoveFromTarget(this);
             QueueFree();
         }
     }

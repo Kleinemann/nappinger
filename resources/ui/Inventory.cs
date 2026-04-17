@@ -18,6 +18,20 @@ public partial class Inventory : Resource
         }
     }
 
+    public bool IsEmpty
+    {
+        get
+        {
+            foreach (var slot in Items)
+            {
+                if (slot.Amount > 0)
+                    return false;
+            }
+
+            return true;
+        }
+    }
+
     public void Insert(InventoryItem item, int amount=1)
     {
         var slot = Items.FirstOrDefault(i => i.Item == item);

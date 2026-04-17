@@ -82,7 +82,6 @@ public partial class BreakableObject : StaticBody2D
         //Drop Items
         if (Inventory != null)
         {
-
             PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
             DropItem item = scene.Instantiate<DropItem>();
 
@@ -92,7 +91,7 @@ public partial class BreakableObject : StaticBody2D
             WorldMain.Instance.AddChild(item);
         }
 
-        await ToSignal(GetTree().CreateTimer(2f), "timeout");
+        GameObjectDataMoveable.RemoveFromTarget(this);
         QueueFree();
 
     }

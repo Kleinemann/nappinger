@@ -1,9 +1,13 @@
 ﻿using Godot;
+using System.Linq;
 
-public enum GameObjectState { 
+public enum GameObjectState 
+{ 
+    NONE,
     IDLE,
     WALKING,
     WORKING,
+    FARMING,
     FIGHTING,
     DEAD
 }
@@ -30,4 +34,19 @@ public class GameObjectDataMoveable : GameObjectDestoyable
     public object Target;
     public float Speed { get; set; } = 100f;
     public GameObjectState State { get; set; } = GameObjectState.IDLE;
+
+
+    public static void RemoveFromTarget(Node2D remObject)
+    {
+        var animals = WorldMain.Instance.Map.GetChildren().Where(x => x is Animal).ToArray();
+        foreach (Animal animal in animals)
+        {
+            if (animal.Target == remObject)
+            {
+                animal.Target = null;
+                animal.State = GameObjectState.IDLE;
+            }
+        }
+    }
+
 }

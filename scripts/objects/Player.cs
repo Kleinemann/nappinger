@@ -1,12 +1,18 @@
 using Godot;
 using Godot.Collections;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 public partial class Player : Animal
 {
     public Weapon Weapon;
     public Timer ActionTimer;
     public Timer ActionCooldown;
+    bool action = false;
     bool cooldown = false;
+
+    Area2D SearchArea;
 
     public static Player GetNextPlayer()
     {
@@ -45,13 +51,36 @@ public partial class Player : Animal
 
         ActionCooldown = GetNode<Timer>("ActionCooldown");
         ActionCooldown.Timeout += OnTimerCoolDownTimeout;
+
+        SearchArea = GetNode<Area2D>("Area2DSearch");
+
+        Area2D area = GetNode<Area2D>("Area2D");
+        area.BodyEntered += OnBodyEntered;
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        if(Target is Node2D)
+        {
+            if(body == Target)
+            {
+                if(body.IsInGroup("Breakable"))
+                    State = GameObjectState.FIGHTING;
+
+                if (body.IsInGroup("Storable"))
+                {
+                    Target = null;
+                    State = GameObjectState.IDLE;
+                }
+            }
+        }
     }
 
     public void OnTimerTimeout()
     {
         Weapon.Hide();
         Weapon.CollisionShape.Disabled = true;
-        State = GameObjectState.IDLE;
+        action = false;
         cooldown = true;
         ActionCooldown.Start();
     }
@@ -76,24 +105,66 @@ public partial class Player : Animal
         PlayerWeapon();        
         Movement();
 
-        if (State != GameObjectState.FIGHTING)
+        if (!action)
         {
             UpdateAnimation();
         }
+
+        if(State == GameObjectState.IDLE)
+        {
+            SetNextState();
+        }
     }
+
+    void SetNextState()
+    {
+        Node2D target = SearchNextResource("R_Stone");
+        SetTarget(target);
+    }
+
+    Node2D SearchNextResource(string groupName)
+    {
+        var objs = SearchArea.GetOverlappingBodies();
+        objs.AddRange(SearchArea.GetOverlappingAreas());
+
+        Array<Node2D> nodes = new Array<Node2D>();
+
+        foreach (Node2D obj in objs)
+        {
+            if (obj.IsInGroup(groupName))
+            {
+                nodes.Add(obj);
+            }
+        }
+
+        Node2D nearest = null;
+        float min = float.MaxValue;
+        foreach (Node2D obj in nodes)
+        {
+            float dist = Position.DistanceTo(obj.Position);
+            if(dist < min)
+            {
+                min = dist;
+                nearest = obj;
+            }
+        }
+
+        return nearest;
+    }
+
 
     public void PlayerWeapon()
     {
-        if(WorldMain.SelectedPlayer == this && !cooldown 
-            && Input.IsActionJustPressed("attack") 
-            && State != GameObjectState.FIGHTING)
+        if(!action && !cooldown 
+            && ((WorldMain.SelectedPlayer == this && Input.IsActionJustPressed("attack"))
+                    || State == GameObjectState.FIGHTING))
         {
-            State = GameObjectState.FIGHTING;
             Weapon.Show();
             Animator.Play("attack_" + Direction);
             AnimatorShadow.Play("attack_" + Direction);
             Weapon.CollisionShape.Disabled = false;
             ActionTimer.Start();
+            action = true;
         }
     }
 
@@ -103,6 +174,37 @@ public partial class Player : Animal
         Inventory.Insert(item, amount);
     }
 
+    internal void SetTarget(Vector2 vector2)
+    {
+        State = GameObjectState.WALKING;
+        Target = vector2;
+    }
+
+    internal void SetTarget(Node2D node)
+    {
+        Target = node;
+        State = node == null ? GameObjectState.IDLE : GameObjectState.WALKING;
+
+        if(node == null && !Inventory.IsEmpty)
+        {
+            Node2D nearest = null;
+            float min = float.MaxValue;
+            var storages = GetTree().GetNodesInGroup("Storable");
+            foreach (Node2D store in storages)
+            {
+                float dist = Position.DistanceTo(store.Position);
+                if(dist < min)
+                {
+                    min = dist;
+                    nearest = store;
+                }
+            }
+
+            SetTarget(nearest);
+        }
+    }
+
+    
 
     public override void Movement()
     {
@@ -112,18 +214,15 @@ public partial class Player : Animal
         if (WorldMain.SelectedPlayer == this)
             Velocity = Input.GetVector("left", "rigth", "up", "down");
 
-        if (Target != null && Target is Vector2 targetPos)
+        if (State == GameObjectState.WALKING && Target != null)
         {
-            if(targetPos.DistanceTo(GlobalPosition) > 2)
-            {
-                Vector2 direction = (targetPos - GlobalPosition).Normalized();
-                Velocity = direction;
-            }
-            else
-                Target = null;
+            Vector2 targetPos =  Target is Vector2 ? (Vector2)Target : ((Node2D)Target).Position;
+
+            Vector2 direction = (targetPos - GlobalPosition).Normalized();
+            Velocity = direction;
         }
 
-        Velocity = Velocity * Speed;
+        Velocity *= Speed;
 
         MoveAndSlide();
     }

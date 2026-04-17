@@ -198,10 +198,25 @@ metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 script = ExtResource("7_2xwxs")
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
-[sub_resource type="Resource" id="Resource_ushu4"]
+[sub_resource type="Resource" id="Resource_2xwxs"]
 resource_local_to_scene = true
 script = ExtResource("8_i0m1b")
 Items = Array[ExtResource("7_2xwxs")]([SubResource("Resource_dmbco"), SubResource("Resource_a4lm4"), SubResource("Resource_lepte"), SubResource("Resource_55m5g"), SubResource("Resource_75pe8"), SubResource("Resource_h0ku5"), SubResource("Resource_4n0wo"), SubResource("Resource_5ng7n"), SubResource("Resource_e1h8m"), SubResource("Resource_w5o3h")])
+metadata/_custom_type_script = "uid://csar5086emnio"
+
+[sub_resource type="Resource" id="Resource_i0m1b"]
+resource_local_to_scene = true
+script = ExtResource("8_i0m1b")
+metadata/_custom_type_script = "uid://csar5086emnio"
+
+[sub_resource type="Resource" id="Resource_pa6fl"]
+resource_local_to_scene = true
+script = ExtResource("8_i0m1b")
+metadata/_custom_type_script = "uid://csar5086emnio"
+
+[sub_resource type="Resource" id="Resource_sen3t"]
+resource_local_to_scene = true
+script = ExtResource("8_i0m1b")
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [node name="World" type="Node2D" unique_id=1278773746]
@@ -238,7 +253,7 @@ position = Vector2(341, 280)
 position = Vector2(549, 411)
 
 [node name="Rock2" parent="DualTileMap" unique_id=14909213 instance=ExtResource("15_o3lj0")]
-position = Vector2(968, 295)
+position = Vector2(951, 260)
 
 [node name="Tree2" parent="DualTileMap" unique_id=1843271030 instance=ExtResource("8_x812f")]
 position = Vector2(443, 108)
@@ -253,17 +268,22 @@ position = Vector2(401, 369)
 position = Vector2(829, 230)
 
 [node name="Camp" parent="DualTileMap" unique_id=2072282089 instance=ExtResource("12_o3lj0")]
-position = Vector2(749, 92)
-Inventory = SubResource("Resource_ushu4")
+position = Vector2(759, 88)
+Inventory = SubResource("Resource_2xwxs")
 
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(601, 223)
+Inventory = SubResource("Resource_i0m1b")
 
 [node name="Player2" parent="DualTileMap" unique_id=1937316488 instance=ExtResource("9_s58pj")]
 position = Vector2(689, 238)
+ObjectName = "Player2"
+Inventory = SubResource("Resource_pa6fl")
 
 [node name="Player3" parent="DualTileMap" unique_id=1018381198 instance=ExtResource("9_s58pj")]
-position = Vector2(177, 207)
+position = Vector2(332, 444)
+ObjectName = "Player3"
+Inventory = SubResource("Resource_sen3t")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)
