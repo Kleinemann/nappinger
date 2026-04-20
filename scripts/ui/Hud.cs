@@ -5,6 +5,7 @@ public partial class Hud : Control
 {
     ObjectPanel ObjectPanel;
     InventoryUi InventoryUi;
+    PlayerControlCenter PlayerControlCenter;
 
     public static Hud Instance;
     
@@ -13,6 +14,7 @@ public partial class Hud : Control
         Instance = this;
         ObjectPanel = GetNode<ObjectPanel>("ObjectPanel");
         InventoryUi = GetNode<InventoryUi>("InventoryUI");
+        PlayerControlCenter = GetNode<PlayerControlCenter>("PlayerControlCenter");
         UpdateHud();
     }
 
@@ -20,5 +22,13 @@ public partial class Hud : Control
     {
         ObjectPanel.UpdatePanel();
         InventoryUi.UpdateSlots();
+    }
+
+    public void SwitchPlayerControlCenter()
+    {
+        if (!PlayerControlCenter.Visible)
+            PlayerControlCenter.ShowPlayers();
+        else
+            PlayerControlCenter.HidePlayers();
     }
 }

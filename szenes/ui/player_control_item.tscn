@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bqxqrvs44bpv0"]
+
+[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_ey1h2"]
+[ext_resource type="Script" uid="uid://wjs6ua01mdhi" path="res://scripts/ui/PlayerControlItem.cs" id="1_k4wbp"]
+[ext_resource type="Texture2D" uid="uid://3hotbms1q4gy" path="res://assets/items/wood.png" id="2_nsckk"]
+[ext_resource type="Texture2D" uid="uid://2xsjqvil6si2" path="res://assets/items/rock.png" id="3_pcr5e"]
+[ext_resource type="Texture2D" uid="uid://dlvcqcjm3j4at" path="res://assets/items/food.png" id="4_w5d7y"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_nsckk"]
+resource_name = "Working"
+
+[node name="PlayerControlItem" type="Control" unique_id=1204885029]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k4wbp")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=850504959]
+layout_mode = 0
+offset_right = 148.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=936809557]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=597720304]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_ey1h2")
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer" unique_id=56728829]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Spieler Name"
+
+[node name="BtnIdle" type="Button" parent="PanelContainer/HBoxContainer" unique_id=887286742]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_nsckk")
+icon = ExtResource("1_ey1h2")
+
+[node name="BtnWood" type="Button" parent="PanelContainer/HBoxContainer" unique_id=351902725]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_nsckk")
+icon = ExtResource("2_nsckk")
+
+[node name="BtnStone" type="Button" parent="PanelContainer/HBoxContainer" unique_id=267838138]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_nsckk")
+icon = ExtResource("3_pcr5e")
+
+[node name="BtnFood" type="Button" parent="PanelContainer/HBoxContainer" unique_id=1989833642]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_nsckk")
+icon = ExtResource("4_w5d7y")

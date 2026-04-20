@@ -273,16 +273,17 @@ Inventory = SubResource("Resource_2xwxs")
 
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
 position = Vector2(601, 223)
+ObjectName = "Hans"
 Inventory = SubResource("Resource_i0m1b")
 
 [node name="Player2" parent="DualTileMap" unique_id=1937316488 instance=ExtResource("9_s58pj")]
 position = Vector2(689, 238)
-ObjectName = "Player2"
+ObjectName = "Peter"
 Inventory = SubResource("Resource_pa6fl")
 
 [node name="Player3" parent="DualTileMap" unique_id=1018381198 instance=ExtResource("9_s58pj")]
 position = Vector2(332, 444)
-ObjectName = "Player3"
+ObjectName = "Uwe"
 Inventory = SubResource("Resource_sen3t")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]

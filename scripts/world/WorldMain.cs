@@ -92,6 +92,11 @@ public partial class WorldMain : Node2D
                 SelectedBreakable.Healt--;
         }
 
+        if(@event.IsActionPressed("ControlCenter"))
+        {
+            Hud.Instance.SwitchPlayerControlCenter();
+        }
+
         @event.Dispose();        
     }
 }

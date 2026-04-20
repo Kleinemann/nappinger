@@ -112,9 +112,21 @@ public partial class Player : Animal
 
         if(State == GameObjectState.IDLE)
         {
-            SetNextState();
+            //SetNextState();
         }
     }
+
+    public void SetSearch(string search)
+    {
+        if(search != null)
+        {
+            Node2D target = SearchNextResource(search);
+            SetTarget(target);
+        }
+        else
+            State = GameObjectState.IDLE;
+    }
+
 
     void SetNextState()
     {
