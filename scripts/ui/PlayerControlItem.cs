@@ -26,11 +26,15 @@ public partial class PlayerControlItem : Control
     private void Group_Pressed(BaseButton button)
     {
         if (button.Name == "BtnIdle")
-            Player.SetSearch(null);
+        {
+            Player.Mission = null;
+            Player.State = GameObjectState.IDLE;
+        }
         else
         {
-            string search = ((string)button.Name).Substring(3);
-            Player.SetSearch("R_" + search);
+            string search = "R_" + ((string)button.Name).Substring(3);
+
+            Player.Mission = new Mission(GameObjectState.FARMING, search);
         }
     }
 

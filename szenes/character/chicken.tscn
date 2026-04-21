@@ -180,7 +180,7 @@ Icon = ExtResource("2_47tv4")
 Healt = 5
 MaxHealt = 5
 State = 1
-Speed = 175.0
+Speed = 75.0
 Inventory = SubResource("Resource_6jxur")
 
 [node name="Sprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1288913699]

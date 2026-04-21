@@ -112,7 +112,7 @@ public partial class Player : Animal
 
         if(State == GameObjectState.IDLE)
         {
-            //SetNextState();
+            SetNextState();
         }
     }
 
@@ -130,8 +130,30 @@ public partial class Player : Animal
 
     void SetNextState()
     {
-        Node2D target = SearchNextResource("R_Stone");
-        SetTarget(target);
+        if(State == GameObjectState.WAITING)
+        {
+            State = GameObjectState.IDLE;
+                return;
+        }
+
+        if(Mission != null)
+        {
+            if(Mission.State == GameObjectState.FARMING)
+            {
+                string search = (string)Mission.Target;
+
+                Node2D target;
+                if(Inventory.CountItemGroup(search) == 0)
+                    target = SearchNextResource(search);
+                else
+                {
+                    target = SearchNextResource("Storable");
+                }
+
+                State = GameObjectState.WALKING;
+                Target = target;
+            }
+        }
     }
 
     Node2D SearchNextResource(string groupName)

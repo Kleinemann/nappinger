@@ -97,6 +97,11 @@ public partial class Animal: CharacterBody2D
         set => _data.Target = value;
     }
 
+    public Mission Mission
+    {
+        get => _data.Mission;
+        set => _data.Mission = value;
+    }
     #endregion
 
     public override void _Process(double delta)
@@ -131,7 +136,6 @@ public partial class Animal: CharacterBody2D
         //Drop Items
         if (Inventory != null)
         {
-
             PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
             DropItem item = scene.Instantiate<DropItem>();
 

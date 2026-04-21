@@ -18,6 +18,17 @@ public partial class Inventory : Resource
         }
     }
 
+    public int CountItemGroup(string group)
+    {
+        int amountSum = 0;
+        foreach (var slot in Items)
+        {
+            if(slot.Item != null && slot.Item.GroupName == group)
+                amountSum += slot.Amount;
+        }
+        return amountSum;
+    }
+
     public bool IsEmpty
     {
         get

@@ -9,7 +9,20 @@ public enum GameObjectState
     WORKING,
     FARMING,
     FIGHTING,
+    WAITING,
     DEAD
+}
+
+public class Mission
+{
+    public GameObjectState State;
+    public Variant Target;
+
+    public Mission(GameObjectState state, Variant target)
+    {
+        State = state;
+        Target = target;
+    }
 }
 
 public class GameObjectDataBase
@@ -34,6 +47,7 @@ public class GameObjectDataMoveable : GameObjectDestoyable
     public object Target;
     public float Speed { get; set; } = 100f;
     public GameObjectState State { get; set; } = GameObjectState.IDLE;
+    public Mission Mission { get; set; } = null;
 
 
     public static void RemoveFromTarget(Node2D remObject)

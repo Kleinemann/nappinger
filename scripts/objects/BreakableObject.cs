@@ -77,8 +77,6 @@ public partial class BreakableObject : StaticBody2D
 
     public async Task RIP()
     {
-        CollisionShape.Disabled = true;
-
         //Drop Items
         if (Inventory != null)
         {

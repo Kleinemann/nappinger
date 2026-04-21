@@ -29,16 +29,30 @@ public partial class Weapon : Node2D
 
     private void OnBodyEntered(Node2D body)
     {
+        bool death = false;
+
         GD.Print("Hit: " + body.Name);
         if(body.IsInGroup("Breakable"))
         {
             BreakableObject obj = body as BreakableObject;
-            obj.Healt -= 2;
+            obj.Healt -= 2;               
+
+            if(obj.Healt < 0)
+                death = true;
         }  
         if(body.IsInGroup("Animal"))
         {
             Animal enemy = body as Animal;
             enemy.Healt -= 2;
+
+            if (enemy.Healt < 0)
+                death= true;
+        }
+
+        if (death)
+        {
+            Animal animal = GetParent<Animal>();
+            animal.State = GameObjectState.WAITING;
         }
     }
 
