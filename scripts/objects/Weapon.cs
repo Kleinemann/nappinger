@@ -37,7 +37,7 @@ public partial class Weapon : Node2D
             BreakableObject obj = body as BreakableObject;
             obj.Healt -= 2;               
 
-            if(obj.Healt < 0)
+            if(obj.Healt <= 0)
                 death = true;
         }  
         if(body.IsInGroup("Animal"))
@@ -45,7 +45,7 @@ public partial class Weapon : Node2D
             Animal enemy = body as Animal;
             enemy.Healt -= 2;
 
-            if (enemy.Healt < 0)
+            if (enemy.Healt <= 0)
                 death= true;
         }
 

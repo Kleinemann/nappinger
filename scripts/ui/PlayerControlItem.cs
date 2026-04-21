@@ -33,8 +33,8 @@ public partial class PlayerControlItem : Control
         else
         {
             string search = "R_" + ((string)button.Name).Substring(3);
-
             Player.Mission = new Mission(GameObjectState.FARMING, search);
+            Player.State = GameObjectState.WAITING;
         }
     }
 

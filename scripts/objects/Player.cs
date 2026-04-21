@@ -110,6 +110,13 @@ public partial class Player : Animal
             UpdateAnimation();
         }
 
+        if(State == GameObjectState.WAITING)
+        {
+            State = GameObjectState.IDLE;
+            return;
+        }
+
+
         if(State == GameObjectState.IDLE)
         {
             SetNextState();
@@ -130,12 +137,6 @@ public partial class Player : Animal
 
     void SetNextState()
     {
-        if(State == GameObjectState.WAITING)
-        {
-            State = GameObjectState.IDLE;
-                return;
-        }
-
         if(Mission != null)
         {
             if(Mission.State == GameObjectState.FARMING)

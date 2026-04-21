@@ -20,7 +20,7 @@ public partial class ObjectPanel : Panel
         this.Visible = WorldMain.SelectedObject != null;
         if (WorldMain.SelectedAnimal is Animal animal)
         {
-            ObjectName.Text = animal.Name;
+            ObjectName.Text = animal.ObjectName;
             Icon.Texture = animal.Icon;
             HealtBar.Show();
             HealtBar.Value = animal.Healt;
