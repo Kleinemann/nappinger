@@ -95,11 +95,12 @@ public partial class WorldMain : Node2D
 
         if(@event.IsActionPressed("ControlCenter"))
         {
-            Hud.Instance.SwitchPlayerControlCenter();
             var nodes = GetTree().GetNodesInGroup("Storable");
             //TODO: dound the nearest
             if (nodes.Count > 0)
                 WorldMain.SelectedObject = (Node2D)nodes[0];
+
+            Hud.Instance.SwitchPlayerControlCenter();
         }
 
         @event.Dispose();        

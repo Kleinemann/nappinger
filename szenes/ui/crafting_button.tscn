@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bx3icgtfnow7o"]
+
+[ext_resource type="Texture2D" uid="uid://dukxxi2rcpbyl" path="res://assets/items/empty.png" id="1_m53qb"]
+[ext_resource type="Script" uid="uid://da7v07prqalc6" path="res://scripts/ui/CraftingButton.cs" id="2_68evd"]
+
+[node name="CraftingButton" type="Button" unique_id=768870847]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Name"
+icon = ExtResource("1_m53qb")
+script = ExtResource("2_68evd")

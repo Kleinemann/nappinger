@@ -160,6 +160,8 @@ sources/1 = SubResource("TileSetScenesCollectionSource_qw1xo")
 
 [sub_resource type="Resource" id="Resource_dmbco"]
 script = ExtResource("7_2xwxs")
+Item = ExtResource("9_1d8lm")
+Amount = 5
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_a4lm4"]
@@ -209,16 +211,6 @@ resource_local_to_scene = true
 script = ExtResource("8_i0m1b")
 metadata/_custom_type_script = "uid://csar5086emnio"
 
-[sub_resource type="Resource" id="Resource_pa6fl"]
-resource_local_to_scene = true
-script = ExtResource("8_i0m1b")
-metadata/_custom_type_script = "uid://csar5086emnio"
-
-[sub_resource type="Resource" id="Resource_sen3t"]
-resource_local_to_scene = true
-script = ExtResource("8_i0m1b")
-metadata/_custom_type_script = "uid://csar5086emnio"
-
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")
 
@@ -245,6 +237,7 @@ Item = ExtResource("9_o3lj0")
 [node name="DropItem2" parent="DualTileMap" unique_id=1939550078 instance=ExtResource("11_1d8lm")]
 position = Vector2(708, 343)
 Item = ExtResource("9_1d8lm")
+Amount = 10
 
 [node name="Tree" parent="DualTileMap" unique_id=1073618912 instance=ExtResource("8_x812f")]
 position = Vector2(341, 280)
@@ -272,19 +265,9 @@ position = Vector2(759, 88)
 Inventory = SubResource("Resource_2xwxs")
 
 [node name="Player" parent="DualTileMap" unique_id=1468443236 instance=ExtResource("9_s58pj")]
-position = Vector2(601, 223)
+position = Vector2(691, 272)
 ObjectName = "Hans"
 Inventory = SubResource("Resource_i0m1b")
-
-[node name="Player2" parent="DualTileMap" unique_id=1937316488 instance=ExtResource("9_s58pj")]
-position = Vector2(689, 238)
-ObjectName = "Peter"
-Inventory = SubResource("Resource_pa6fl")
-
-[node name="Player3" parent="DualTileMap" unique_id=1018381198 instance=ExtResource("9_s58pj")]
-position = Vector2(332, 444)
-ObjectName = "Uwe"
-Inventory = SubResource("Resource_sen3t")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1319886459]
 position = Vector2(576, 323)

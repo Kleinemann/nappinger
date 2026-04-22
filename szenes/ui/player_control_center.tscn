@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://tfcym24ohlbm"]
 
 [ext_resource type="Script" uid="uid://ctwdglpepbk4n" path="res://scripts/ui/PlayerControlCenter.cs" id="1_q40mv"]
+[ext_resource type="PackedScene" uid="uid://bx3icgtfnow7o" path="res://szenes/ui/crafting_button.tscn" id="2_0d523"]
+[ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_nvira"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_0d523"]
+[ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="5_bxt3t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ey3p"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -13,6 +17,12 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="Resource" id="Resource_m03u2"]
+script = ExtResource("4_0d523")
+Item = ExtResource("5_bxt3t")
+Amount = 10
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [node name="PlayerControlCenter" type="Control" unique_id=1024858583]
 layout_mode = 3
@@ -38,3 +48,23 @@ offset_right = 370.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=498113822]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BtnWorker" parent="Panel/HBoxContainer" unique_id=768870847 instance=ExtResource("2_0d523")]
+layout_mode = 2
+text = "Arbeiter"
+icon = ExtResource("2_nvira")
+Items = Array[ExtResource("4_0d523")]([SubResource("Resource_m03u2")])
