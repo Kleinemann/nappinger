@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://df7htu1bo4nev"]
+
+[ext_resource type="Texture2D" uid="uid://bovqjrqc201a3" path="res://assets/objects/tools/axe.png" id="1_ih03p"]
+[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="1_t485b"]
+
+[resource]
+script = ExtResource("1_t485b")
+ItemName = "Axt"
+GroupName = "R_Weapon"
+Icon = ExtResource("1_ih03p")
+metadata/_custom_type_script = "uid://f6p8ujqxsixx"

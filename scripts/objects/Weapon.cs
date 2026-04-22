@@ -13,10 +13,10 @@ public partial class Weapon : Node2D
     readonly Vector2 upPos = new Vector2(10, -38);
     readonly Vector2 downPos = new Vector2(-14, 22);
 
-    readonly float rightRot = -90;
-    readonly float leftRot = 90;
-    readonly float upRot = 180;
-    readonly float downRot = 0;
+    readonly float rightRot = 90;
+    readonly float leftRot = -90;
+    readonly float upRot = 0;
+    readonly float downRot = 180;
 
     public override void _Ready()
     {
