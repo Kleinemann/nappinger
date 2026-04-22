@@ -21,8 +21,8 @@ shader_parameter/shadow_alpha = 0.5
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3oe2"]
 size = Vector2(180, 55)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s3oe2"]
-radius = 89.005615
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7bkp"]
+size = Vector2(234, 118)
 
 [node name="Camp" type="StaticBody2D" unique_id=2072282089 groups=["Building", "Storable"]]
 script = ExtResource("1_h7bkp")
@@ -51,5 +51,6 @@ shape = SubResource("RectangleShape2D_s3oe2")
 [node name="Area2D" type="Area2D" parent="." unique_id=1233403985]
 
 [node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1752688498]
-position = Vector2(2, -12)
-shape = SubResource("CircleShape2D_s3oe2")
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_h7bkp")
+debug_color = Color(0.9578565, 1.92523e-07, 0.53077674, 0.41960785)

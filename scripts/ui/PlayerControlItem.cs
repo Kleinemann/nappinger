@@ -8,6 +8,7 @@ public partial class PlayerControlItem : Control
     TextureRect Icon;
     Label PlayerName;
     ButtonGroup Group;
+    InventoryUi InvUi;
 
 
     public override void _Ready()
@@ -16,6 +17,8 @@ public partial class PlayerControlItem : Control
         PlayerName = GetNode<Label>("PanelContainer/HBoxContainer/Label");
         Button b = GetNode<Button>("PanelContainer/HBoxContainer/BtnIdle");
         Group = b.ButtonGroup;
+
+        InvUi = GetNode<InventoryUi>("InventoryUI");
 
         Icon.Texture = Player.Icon;
         PlayerName.Text = Player.ObjectName;
@@ -41,5 +44,10 @@ public partial class PlayerControlItem : Control
     internal void SetPlayer(Player player)
     {
         Player = player;
+    }
+
+    public void UpdatePlayerItem()
+    {
+        InvUi.UpdateSlots(Player.Inventory);
     }
 }

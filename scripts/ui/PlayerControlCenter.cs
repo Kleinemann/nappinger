@@ -35,4 +35,12 @@ public partial class PlayerControlCenter : Control
         }
         this.Hide();
     }
+
+    public void UpdateControlCenter()
+    {
+        foreach(PlayerControlItem item in Grid.GetChildren())
+        {
+            item.UpdatePlayerItem();
+        }
+    }
 }

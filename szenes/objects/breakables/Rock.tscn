@@ -83,9 +83,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgiwq"]
 size = Vector2(129, 61.25)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cd2yp"]
-radius = 6.799999
-height = 13.599998
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbo7v"]
+size = Vector2(17.399998, 11.6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrg52"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -150,9 +149,9 @@ shape = SubResource("RectangleShape2D_rgiwq")
 position = Vector2(0, 3)
 
 [node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1363485688]
-position = Vector2(1.9999999, -31.000002)
+position = Vector2(2.999999, -19.000002)
 scale = Vector2(10, 10)
-shape = SubResource("CapsuleShape2D_cd2yp")
+shape = SubResource("RectangleShape2D_fbo7v")
 debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
 
 [node name="HealtBar" type="ProgressBar" parent="." unique_id=467514914]

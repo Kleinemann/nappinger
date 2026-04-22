@@ -22,6 +22,8 @@ public partial class Hud : Control
     {
         ObjectPanel.UpdatePanel();
         InventoryUi.UpdateSlots();
+        if (PlayerControlCenter.Visible)
+            PlayerControlCenter.UpdateControlCenter();
     }
 
     public void SwitchPlayerControlCenter()
