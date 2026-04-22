@@ -45,6 +45,9 @@ public partial class Weapon : Node2D
             Animal enemy = body as Animal;
             enemy.Healt -= 2;
 
+            if(enemy.State != GameObjectState.FIGHTING)
+                enemy.State = GameObjectState.FIGHTING;
+
             if (enemy.Healt <= 0)
                 death= true;
         }

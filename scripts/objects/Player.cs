@@ -64,7 +64,7 @@ public partial class Player : Animal
         {
             if(body == Target)
             {
-                if(body.IsInGroup("Breakable"))
+                if(body.IsInGroup("Breakable") || (body.IsInGroup("Animal") && body.IsInGroup("R_Food")))
                     State = GameObjectState.FIGHTING;
 
                 if (body.IsInGroup("Storable"))

@@ -106,7 +106,8 @@ public partial class Animal: CharacterBody2D
 
     public override void _Process(double delta)
     {
-        Movement();
+        if(State != GameObjectState.FIGHTING)
+            Movement();
         UpdateAnimation();
     }
 

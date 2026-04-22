@@ -145,7 +145,7 @@ animations = [{
 size = Vector2(32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_asa2a"]
-radius = 18.0
+radius = 32.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oht44"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -203,7 +203,7 @@ shape = SubResource("RectangleShape2D_lypqv")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=473165407]
 
-[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1312002167]
+[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1312002167 groups=["Animal", "R_Food"]]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_asa2a")
 debug_color = Color(0.6494322, 0.5194141, 0.08486947, 0.41960785)
