@@ -161,7 +161,7 @@ sources/1 = SubResource("TileSetScenesCollectionSource_qw1xo")
 [sub_resource type="Resource" id="Resource_dmbco"]
 script = ExtResource("7_2xwxs")
 Item = ExtResource("9_1d8lm")
-Amount = 5
+Amount = 10
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_a4lm4"]

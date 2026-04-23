@@ -16,6 +16,10 @@ public partial class PlayerControlCenter : Control
 
     private void BtnWorker_Pressed()
     {
+        //remove materials
+        BtnWorker.Pay();
+
+        //Creat Player
         PackedScene scene = GD.Load<PackedScene>("res://szenes/character/Player.tscn");
         Player player = scene.Instantiate<Player>();
         player.Position = Position + new Vector2(500, 200);

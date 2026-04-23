@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 public partial class CraftingButton : Button
 {
@@ -13,7 +14,7 @@ public partial class CraftingButton : Button
         {
             foreach (InventorySlot slot in Items)
             {
-                if(Inv.CountItemGroup(slot.Item.GroupName) <= slot.Amount)
+                if(Inv.CountItemGroup(slot.Item.GroupName) < slot.Amount)
                 {
                     enabled = false;
                     break;
@@ -24,5 +25,33 @@ public partial class CraftingButton : Button
             enabled = false;
 
         Disabled = !enabled;
+    }
+
+    internal void Pay()
+    {
+        foreach (InventorySlot slot in Items)
+        {
+            InventoryItem item = slot.Item;
+            int cost = slot.Amount;
+
+            for(int s = Inv.Slots-1; s >= 0; s--)
+            {
+                InventorySlot invS = Inv.Items[s];
+                if (invS.Item == item)
+                {
+                    //mehr als nötig
+                    if(cost < invS.Amount)
+                    {
+                        invS.Amount -= cost;
+                    }
+                    else
+                    {
+                        cost -= invS.Amount;
+                        invS.Amount = 0;
+                        invS.Item = null;
+                    }
+                }                
+            }
+        }
     }
 }
