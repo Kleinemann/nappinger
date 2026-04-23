@@ -95,44 +95,25 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            //GameObject go = null;
-            //if (noiseValue > 0.2f && noiseValue < 0.3f)
-            //{
-            //    go = GameObject.NewGameItem(ObjectTypeEnum.PLANT, tileCoord, noiseValue);
-            //}
+            //Add Items
+            if(noiseValue >= 0.150 && noiseValue <= 0.155)
+            {
+                int amount = (int)(noiseValue * 10000 % 10);
+                int resourceID = (int)(noiseValue * 100000 % 10);
 
-            //if(noiseValue > 0.153 && noiseValue < 0.155)
-            //{
-            //    go = GameObject.NewGameItem(ObjectTypeEnum.ANIMAL, tileCoord, noiseValue);
-            //}
+                PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
+                DropItem item = scene.Instantiate<DropItem>();
 
-            //if (noiseValue > 0.151 && noiseValue < 0.1515)
-            //{
-            //    go = GameObject.NewGameItem(ObjectTypeEnum.PLAYER, tileCoord, noiseValue);
-            //}
+                InventoryItem invItem = null;
+                if(resourceID < 4) invItem = GD.Load<Resource>("res://resources/items/food.tres") as InventoryItem;
+                else if(resourceID < 7) invItem = GD.Load<Resource>("res://resources/items/stone.tres") as InventoryItem;
+                else invItem = GD.Load<Resource>("res://resources/items/wood.tres") as InventoryItem;
 
-            //if(noiseValue >= 0.154 && noiseValue <= 0.157)
-            //{
-            //    go = GameObject.NewGameItem(ObjectTypeEnum.NPC, tileCoord, noiseValue);
-            //}
-
-            //if(go != null)
-            //{
-            //    Map.ObjectLayer.SetCell(go.Position, go.AtlasSourceId, go.AtlasCoord);
-            //    Objects.Add(go.Position, go);
-            //}
-
-            //if (noiseValue > 0.100 && noiseValue <= 0.101)
-            //{
-            //    if (!Drops.ContainsKey(tileCoord))
-            //    {
-            //        PackedScene scene = GD.Load<PackedScene>("res://szenes/gameObjects/DropItem.tscn");
-            //        DropItem item = scene.Instantiate<DropItem>();
-            //        item.Position = tileCoord * TileSize;
-            //        Drops.Add(tileCoord, item);
-            //        WorldMain.Instance.AddChild(item);
-            //    }
-            //}
+                item.Item = invItem;
+                item.Amount = amount;
+                item.Position = tileCoord * TileSize;
+                WorldMain.Instance.AddChild(item);
+            }
         }
     }
 
