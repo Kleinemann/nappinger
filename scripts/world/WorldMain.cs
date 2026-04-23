@@ -27,7 +27,26 @@ public partial class WorldMain : Node2D
         Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<CameraScroll>("Camera2D");
 
+        Vector2 v2 = Tools.GetGeoLocation();
+        Vector2I coord = new Vector2I((int)v2.X * 10, (int)v2.Y * 10);
+        Camera.Position = Map.CoordsToPosition(coord);
+
         Map.UpdateMap();
+
+        InitPlayerStartup();
+    }
+
+    public void InitPlayerStartup()
+    {
+        PackedScene scene = GD.Load<PackedScene>("res://szenes/buildings/camp.tscn");
+        Store camp = scene.Instantiate<Store>();
+
+        InventoryItem item = ResourceLoader.Load<InventoryItem>("res://resources/items/food.tres");
+        camp.Inventory.Items[0].Item = item;
+        camp.Inventory.Items[0].Amount = 10;
+
+        camp.Position = Camera.Position;
+        Map.AddChild(camp);
 
         //select first player
         SelectedObject = Player.GetNextPlayer();

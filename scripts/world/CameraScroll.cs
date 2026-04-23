@@ -50,7 +50,6 @@ public partial class CameraScroll : Camera2D
                         Vector2 preZoomValue = Zoom;
                         ZoomLevel -= 0.25f;
                         Zoom = new Vector2(ZoomLevel, ZoomLevel);
-                        Position += (mousePos - Position) * (new Vector2(1, 1) - preZoomValue / Zoom);
                     }
                 }
                 if(mbe.ButtonIndex == MouseButton.WheelUp)
@@ -60,7 +59,6 @@ public partial class CameraScroll : Camera2D
                         Vector2 preZoomValue = Zoom;
                         ZoomLevel += 0.25f;
                         Zoom = new Vector2(ZoomLevel, ZoomLevel);
-                        Position += (mousePos - Position) * (new Vector2(1, 1) - preZoomValue / Zoom);
                     }
                 }
             }

@@ -22,8 +22,11 @@ public partial class PlayerControlCenter : Control
         //Creat Player
         PackedScene scene = GD.Load<PackedScene>("res://szenes/character/Player.tscn");
         Player player = scene.Instantiate<Player>();
-        player.Position = Position + new Vector2(500, 200);
+
+        Store store = WorldMain.SelectedObject as Store;
+        player.Position = store.Position + new Vector2(100, -100);
         player.ObjectName = Player.GetRandomName();
+
         WorldMain.Instance.Map.AddChild(player);
 
         ReloadPlayers();

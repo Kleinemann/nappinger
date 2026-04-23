@@ -43,10 +43,10 @@ public partial class WorldMap : Node2D
     {
         Camera2D camera = WorldMain.Instance.Camera;
 
-        Vector2 size = camera.GetViewportRect().Size / camera.Zoom / 2;
-        Vector2 gCamera = (camera.Position + size) / Chunk.TileSize;
-        Vector2 lCamera = ToLocal(gCamera);
-        Vector2I ChunkCoord = WorldLayer.LocalToMap(lCamera);
+        Vector2 p = ToLocal(camera.Position);
+        Vector2 p1 = WorldLayer.LocalToMap(p);
+        Vector2I p2 = (Vector2I)(p1 / new Vector2(Chunk.ChunkSize, Chunk.ChunkSize));
+        Vector2I ChunkCoord = p2;
 
         //Vector2I cMouse = GetMouseCoords();
         //Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
@@ -126,7 +126,7 @@ public partial class WorldMap : Node2D
 
     public Vector2I CoordsToPosition(Vector2I coord)
     {
-        return coord * Chunk.ChunkSize;
+        return coord * Chunk.ChunkSize * Chunk.TileSize;
     }
 
     public Chunk GetChunk(Vector2I pos)
