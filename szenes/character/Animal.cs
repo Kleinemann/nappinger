@@ -137,12 +137,9 @@ public partial class Animal: CharacterBody2D
         //Drop Items
         if (Inventory != null)
         {
-            PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
-            DropItem item = scene.Instantiate<DropItem>();
-
+            //TODO: Drop multi Items !!!
+            DropItem item = DropItem.CreateDropItem(Inventory.Items[0].Item, Inventory.Items[0].Amount);
             item.Position = Position;
-            item.Item = Inventory.Items[0].Item;
-            item.Amount = Inventory.Items[0].Amount;
             WorldMain.Instance.AddChild(item);
         }
         QueueFree();

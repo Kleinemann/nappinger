@@ -60,6 +60,8 @@ public partial class Store : StaticBody2D
         {
             GD.Print("Store CLICK");
             WorldMain.SelectedObject = this;
+
+            Hud.Instance.SwitchPlayerControlCenter();
         }
     }
 }

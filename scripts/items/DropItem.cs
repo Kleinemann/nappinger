@@ -15,14 +15,33 @@ public partial class DropItem : Area2D
             sprite.Texture = Item.Icon;
         }
 
-        
-
         BodyEntered += OnBodyEntered;
+    }
+
+    public static DropItem CreateDropItem(string resourceName, int amount = 1)
+    {
+        InventoryItem invItem = InventoryItem.CreateInventoryItem(resourceName);
+        return CreateDropItem(invItem, amount);
+    }
+
+    public static DropItem CreateDropItem(InventoryItem invItem, int amount = 1)
+    {
+        PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
+        DropItem item = scene.Instantiate<DropItem>();
+
+        item.Item = invItem;
+        item.Amount = amount;
+
+        return item;
     }
 
     public override void _EnterTree()
     {
         AddToGroup(Item.GroupName);
+        Label label = GetNode<Label>("Label");
+        label.Text = Amount.ToString();
+
+        label.Visible = Amount > 1;
     }
 
     private void OnBodyEntered(Node2D body)

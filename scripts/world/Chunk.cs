@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using static WorldMap;
 
 public partial class Chunk : GodotObject
@@ -95,24 +96,39 @@ public partial class Chunk : GodotObject
             else
                 SetTile(tileCoord, TileType.WATER);
 
-            //Add Items
-            if(noiseValue >= 0.150 && noiseValue <= 0.155)
+            
+            int d4 = (int)(noiseValue * 10000 % 10);
+            int d5 = (int)(noiseValue * 100000 % 10);
+
+            //Add DropItems
+            if (noiseValue >= 0.150 && noiseValue <= 0.155)
             {
-                int amount = (int)(noiseValue * 10000 % 10);
-                int resourceID = (int)(noiseValue * 100000 % 10);
+                int amount = d4;
+                int resourceID = d5;
 
-                PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/DropItem.tscn");
-                DropItem item = scene.Instantiate<DropItem>();
+                string resourceName = string.Empty;
+                if (resourceID < 4) resourceName = "food";
+                else if (resourceID < 7) resourceName = "stone";
+                else resourceName = "wood";
 
-                InventoryItem invItem = null;
-                if(resourceID < 4) invItem = GD.Load<Resource>("res://resources/items/food.tres") as InventoryItem;
-                else if(resourceID < 7) invItem = GD.Load<Resource>("res://resources/items/stone.tres") as InventoryItem;
-                else invItem = GD.Load<Resource>("res://resources/items/wood.tres") as InventoryItem;
-
-                item.Item = invItem;
-                item.Amount = amount;
+                DropItem item = DropItem.CreateDropItem(resourceName, amount);
                 item.Position = tileCoord * TileSize;
                 WorldMain.Instance.AddChild(item);
+            }
+
+            //add Big Tree / Rock
+            else if(noiseValue >= 0.170 && noiseValue <= 0.173)
+            {
+                Map.ObjectLayer.SetCell(tileCoord, 0, Vector2I.Zero, 1);
+            }
+            else if(noiseValue >= 0.160 && noiseValue <= 0.164)
+            {
+                Map.ObjectLayer.SetCell(tileCoord, 0, Vector2I.Zero, 2);
+            }
+
+            else if(noiseValue >= 0.140 && noiseValue <= 0.142)
+            {
+                Map.ObjectLayer.SetCell(tileCoord, 1, Vector2I.Zero, 1);
             }
         }
     }

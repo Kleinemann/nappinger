@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://bg57tk5c0giu3" path="res://scripts/world/WorldMain.cs" id="1_tgi5o"]
 [ext_resource type="Script" uid="uid://bf8l0htxetv0g" path="res://scripts/world/CameraScroll.cs" id="2_1wgjs"]
 [ext_resource type="Texture2D" uid="uid://co5cjuy4gqevt" path="res://assets/tiles/BaseTiles.png" id="3_qw1xo"]
+[ext_resource type="PackedScene" uid="uid://xtyseoa8ftle" path="res://szenes/objects/breakables/Rock.tscn" id="4_b4bkx"]
+[ext_resource type="PackedScene" uid="uid://bhs1726f46e0o" path="res://szenes/objects/breakables/Tree.tscn" id="5_qw1xo"]
+[ext_resource type="PackedScene" uid="uid://btj5m18g33auw" path="res://szenes/character/chicken.tscn" id="6_qw1xo"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
-[ext_resource type="PackedScene" uid="uid://bko5002gs57tg" path="res://szenes/objects/DropItem.tscn" id="11_1d8lm"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm8jy"]
@@ -108,13 +110,19 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_pm8jy")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qw1xo"]
-resource_name = "statics"
-scenes/0/scene = ExtResource("11_1d8lm")
+resource_name = "Plants"
+scenes/1/scene = ExtResource("4_b4bkx")
+scenes/2/scene = ExtResource("5_qw1xo")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pm8jy"]
+resource_name = "Animals"
+scenes/1/scene = ExtResource("6_qw1xo")
 
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_qw1xo")
+sources/1 = SubResource("TileSetScenesCollectionSource_pm8jy")
 
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")

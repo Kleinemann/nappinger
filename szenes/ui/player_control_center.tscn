@@ -68,3 +68,16 @@ layout_mode = 2
 text = "Arbeiter"
 icon = ExtResource("2_nvira")
 Items = Array[ExtResource("4_0d523")]([SubResource("Resource_m03u2")])
+
+[node name="ButtonClose" type="Button" parent="Panel" unique_id=633608449]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 42.0
+grow_horizontal = 0
+text = "X"

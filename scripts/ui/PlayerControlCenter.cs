@@ -12,6 +12,14 @@ public partial class PlayerControlCenter : Control
         Grid = GetNode<GridContainer>("Panel/GridContainer");
         BtnWorker = GetNode<CraftingButton>("Panel/HBoxContainer/BtnWorker");
         BtnWorker.Pressed += BtnWorker_Pressed;
+
+        Button btnClose = GetNode<Button>("Panel/ButtonClose");
+        btnClose.Pressed += BtnClose_Pressed;
+    }
+
+    private void BtnClose_Pressed()
+    {
+        HidePlayers();
     }
 
     private void BtnWorker_Pressed()
@@ -24,7 +32,7 @@ public partial class PlayerControlCenter : Control
         Player player = scene.Instantiate<Player>();
 
         Store store = WorldMain.SelectedObject as Store;
-        player.Position = store.Position + new Vector2(100, -100);
+        player.Position = store.Position + new Vector2(20, 100);
         player.ObjectName = Player.GetRandomName();
 
         WorldMain.Instance.Map.AddChild(player);

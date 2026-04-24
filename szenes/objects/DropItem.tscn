@@ -14,3 +14,11 @@ shape = SubResource("RectangleShape2D_a32dn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=947319190]
 texture = ExtResource("1_0653s")
+
+[node name="Label" type="Label" parent="." unique_id=959383479]
+offset_left = -25.0
+offset_top = -5.0
+offset_right = 15.0
+offset_bottom = 18.0
+text = "99"
+horizontal_alignment = 2
