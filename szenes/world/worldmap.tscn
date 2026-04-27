@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xtyseoa8ftle" path="res://szenes/objects/breakables/Rock.tscn" id="4_b4bkx"]
 [ext_resource type="PackedScene" uid="uid://bhs1726f46e0o" path="res://szenes/objects/breakables/Tree.tscn" id="5_qw1xo"]
 [ext_resource type="PackedScene" uid="uid://btj5m18g33auw" path="res://szenes/character/chicken.tscn" id="6_qw1xo"]
+[ext_resource type="PackedScene" uid="uid://rw0b2fy8ldf5" path="res://szenes/character/rabbit.tscn" id="7_pm8jy"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
@@ -117,6 +118,7 @@ scenes/2/scene = ExtResource("5_qw1xo")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pm8jy"]
 resource_name = "Animals"
 scenes/1/scene = ExtResource("6_qw1xo")
+scenes/2/scene = ExtResource("7_pm8jy")
 
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 tile_size = Vector2i(32, 32)

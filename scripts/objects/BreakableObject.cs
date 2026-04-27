@@ -11,6 +11,7 @@ public partial class BreakableObject : StaticBody2D
     [Export] public ProgressBar HealtBar;
 
     GameObjectDestoyable _data = new GameObjectDestoyable();
+    Timer _timer;
 
     #region GameObjectData
     [Export]
@@ -66,17 +67,37 @@ public partial class BreakableObject : StaticBody2D
         set => _data.Inventory = value;
     }
 
+    #endregion
+
     public override void _Ready()
     {
         Area2D area = GetNode<Area2D>("Area2D");
         area.InputEvent += OnInputEvent;
+
+        _timer = GetNode<Timer>("RegenTimer");
+        if (_timer != null)
+        {
+            _timer.OneShot = true;
+            _timer.WaitTime = 30;
+            _timer.Timeout += Respawn;
+        }
+
         UpdateAnimation();
     }
 
-    #endregion
+    private void Respawn()
+    {
+        Healt = MaxHealt;
+        UpdateAnimation();
+        CollisionShape.Disabled = false;
+        CollisionLayer = 1;
+    }
 
     public async Task RIP()
     {
+        GameObjectDataMoveable.RemoveFromTarget(this);
+        CollisionShape.Disabled = true;
+        CollisionLayer = 0;
         //Drop Items
         if (Inventory != null)
         {
@@ -84,10 +105,12 @@ public partial class BreakableObject : StaticBody2D
             item.Position = Position;
             WorldMain.Instance.AddChild(item);
         }
-
-        GameObjectDataMoveable.RemoveFromTarget(this);
-        QueueFree();
-
+        if(_timer == null)
+            QueueFree();
+        else
+        {
+            _timer.Start();
+        }
     }
 
 

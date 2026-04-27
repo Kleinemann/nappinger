@@ -170,3 +170,5 @@ grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_rrg52")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rgiwq")
 value = 50.0
+
+[node name="RegenTimer" type="Timer" parent="." unique_id=374531182]
