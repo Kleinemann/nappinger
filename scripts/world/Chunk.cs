@@ -125,7 +125,11 @@ public partial class Chunk : GodotObject
             {
                 Map.ObjectLayer.SetCell(tileCoord, 0, Vector2I.Zero, 2);
             }
-
+            else if (noiseValue >= 0.165 && noiseValue <= 0.169)
+            {
+                Map.ObjectLayer.SetCell(tileCoord, 0, Vector2I.Zero, 3);
+            }
+            //Animals
             else if(noiseValue >= 0.120 && noiseValue <= 0.125)
             {
                 if(d4 <= 4)

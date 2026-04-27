@@ -101,9 +101,15 @@ public partial class BreakableObject : StaticBody2D
         //Drop Items
         if (Inventory != null)
         {
-            DropItem item = DropItem.CreateDropItem(Inventory.Items[0].Item, Inventory.Items[0].Amount);
-            item.Position = Position;
-            WorldMain.Instance.AddChild(item);
+            foreach (InventorySlot slot in Inventory.Items)
+            {
+                if (slot.Item != null)
+                {
+                    DropItem item = DropItem.CreateDropItem(slot.Item, slot.Amount);
+                    item.Position = Position;
+                    WorldMain.Instance.AddChild(item);
+                }
+            }
         }
         if(_timer == null)
             QueueFree();

@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\breakableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\items\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\objects\\Player.cs",
               "RelativeDocumentMoniker": "scripts\\objects\\Player.cs",
@@ -53,7 +53,7 @@
               "RelativeDocumentMoniker": "scripts\\objects\\BreakableObject.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\objects\\BreakableObject.cs",
               "RelativeToolTip": "scripts\\objects\\BreakableObject.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwFQAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAgwGwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T22:21:27.105Z",
               "EditorCaption": ""
@@ -72,15 +72,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Chunk.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\Chunk.cs",
               "RelativeDocumentMoniker": "scripts\\world\\Chunk.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\Chunk.cs",
               "RelativeToolTip": "scripts\\world\\Chunk.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAewIAAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAewIEAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T08:24:06.664Z"
+              "WhenOpened": "2026-04-24T08:24:06.664Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

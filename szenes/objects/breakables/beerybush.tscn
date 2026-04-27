@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://c3gyh6hyo0g7o"]
+
+[ext_resource type="Shader" uid="uid://dfil5lvfbl5n0" path="res://assets/shader/shadow.gdshader" id="1_2lhu5"]
+[ext_resource type="Script" uid="uid://cotxv47yclevo" path="res://scripts/objects/BreakableObject.cs" id="2_hncu0"]
+[ext_resource type="Texture2D" uid="uid://x6c6d05lhqxx" path="res://assets/objects/beerybush.png" id="3_hncu0"]
+[ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_ih48p"]
+[ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="5_1pg3m"]
+[ext_resource type="Script" uid="uid://csar5086emnio" path="res://resources/ui/Inventory.cs" id="6_htb8y"]
+[ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="6_p6iod"]
+[ext_resource type="Texture2D" uid="uid://dssgokdvbtdoh" path="res://assets/objects/breakable/beerybush.png" id="8_ih48p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_etsbv"]
+shader = ExtResource("1_2lhu5")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="Resource" id="Resource_jo1kc"]
+script = ExtResource("4_ih48p")
+Item = ExtResource("5_1pg3m")
+Amount = 1
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_1pg3m"]
+script = ExtResource("4_ih48p")
+Item = ExtResource("6_p6iod")
+Amount = 3
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_lk64d"]
+script = ExtResource("6_htb8y")
+Items = Array[ExtResource("4_ih48p")]([SubResource("Resource_jo1kc"), SubResource("Resource_1pg3m")])
+metadata/_custom_type_script = "uid://csar5086emnio"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
+shader = ExtResource("1_2lhu5")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_alpha = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hncu0"]
+atlas = ExtResource("8_ih48p")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6iod"]
+atlas = ExtResource("8_ih48p")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih48p"]
+atlas = ExtResource("8_ih48p")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pg3m"]
+atlas = ExtResource("8_ih48p")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrg52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hncu0")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6iod")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih48p")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pg3m")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgiwq"]
+size = Vector2(66, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrg52"]
+size = Vector2(7.2, 7.5999994)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrg52"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgiwq"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Bush" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable", "R_Food"]]
+material = SubResource("ShaderMaterial_etsbv")
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_hncu0")
+Sprite = NodePath("AnimatedSprite2D")
+SpriteShadow = NodePath("AnimatedSprite2DShadow")
+CollisionShape = NodePath("CollisionShape2D")
+HealtBar = NodePath("HealtBar")
+ObjectName = "Beeren"
+Icon = ExtResource("3_hncu0")
+Healt = 10
+MaxHealt = 10
+Inventory = SubResource("Resource_lk64d")
+metadata/_custom_type_script = "uid://cotxv47yclevo"
+
+[node name="AnimatedSprite2DShadow" type="AnimatedSprite2D" parent="." unique_id=1280575189]
+z_index = 1
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_tjegs")
+position = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_rrg52")
+animation = &"0"
+offset = Vector2(0, -16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=372263934]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_rrg52")
+animation = &"0"
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1608928362]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_rgiwq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=532841440]
+position = Vector2(0, 3)
+
+[node name="CollisionInput" type="CollisionShape2D" parent="Area2D" unique_id=1363485688]
+light_mask = 524288
+visibility_layer = 524288
+position = Vector2(-2.3841858e-07, -13.000002)
+scale = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_rrg52")
+debug_color = Color(0.94019115, 1.1840165e-05, 0.6182631, 0.41960785)
+
+[node name="HealtBar" type="ProgressBar" parent="." unique_id=467514914]
+z_index = 3
+custom_minimum_size = Vector2(200, 10)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -82.0
+offset_right = 102.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_rrg52")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rgiwq")
+value = 50.0
+metadata/_edit_use_anchors_ = true
+
+[node name="RegenTimer" type="Timer" parent="." unique_id=999379969]
