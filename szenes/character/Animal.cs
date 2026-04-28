@@ -137,7 +137,6 @@ public partial class Animal: CharacterBody2D
         //Drop Items
         DropItem.DropInvetar(Inventory, Position);
         QueueFree();
-
     }
 
     public virtual void Movement()

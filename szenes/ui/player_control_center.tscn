@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ctwdglpepbk4n" path="res://scripts/ui/PlayerControlCenter.cs" id="1_q40mv"]
 [ext_resource type="PackedScene" uid="uid://bx3icgtfnow7o" path="res://szenes/ui/crafting_button.tscn" id="2_0d523"]
-[ext_resource type="PackedScene" uid="uid://bqxqrvs44bpv0" path="res://szenes/ui/player_control_item.tscn" id="2_c1nri"]
 [ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_nvira"]
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_0d523"]
 [ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="5_bxt3t"]
@@ -73,24 +72,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer" unique_id=1955777288]
-layout_mode = 2
-
-[node name="PlayerControlItem" parent="Panel/ScrollContainer/GridContainer" unique_id=1204885029 instance=ExtResource("2_c1nri")]
-layout_mode = 2
-
-[node name="PlayerControlItem2" parent="Panel/ScrollContainer/GridContainer" unique_id=1615768855 instance=ExtResource("2_c1nri")]
-layout_mode = 2
-
-[node name="PlayerControlItem3" parent="Panel/ScrollContainer/GridContainer" unique_id=2061568649 instance=ExtResource("2_c1nri")]
-layout_mode = 2
-
-[node name="PlayerControlItem5" parent="Panel/ScrollContainer/GridContainer" unique_id=718330965 instance=ExtResource("2_c1nri")]
-layout_mode = 2
-
-[node name="PlayerControlItem6" parent="Panel/ScrollContainer/GridContainer" unique_id=761626446 instance=ExtResource("2_c1nri")]
-layout_mode = 2
-
-[node name="PlayerControlItem4" parent="Panel/ScrollContainer/GridContainer" unique_id=275017572 instance=ExtResource("2_c1nri")]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=498113822]
