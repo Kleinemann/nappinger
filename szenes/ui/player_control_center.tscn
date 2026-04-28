@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctwdglpepbk4n" path="res://scripts/ui/PlayerControlCenter.cs" id="1_q40mv"]
 [ext_resource type="PackedScene" uid="uid://bx3icgtfnow7o" path="res://szenes/ui/crafting_button.tscn" id="2_0d523"]
+[ext_resource type="PackedScene" uid="uid://bqxqrvs44bpv0" path="res://szenes/ui/player_control_item.tscn" id="2_c1nri"]
 [ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_nvira"]
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_0d523"]
 [ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="5_bxt3t"]
@@ -44,19 +45,53 @@ offset_right = 800.0
 offset_bottom = 500.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3ey3p")
 
-[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=1955777288]
+[node name="Label" type="Label" parent="Panel" unique_id=1874870824]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 9.0
+offset_right = 463.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.72916675, 0.35000002, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Control Center"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=220900177]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -370.0
-offset_top = -220.0
-offset_right = 370.0
-offset_bottom = 180.0
+offset_left = -361.0
+offset_top = -202.0
+offset_right = 366.0
+offset_bottom = 193.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer" unique_id=1955777288]
+layout_mode = 2
+
+[node name="PlayerControlItem" parent="Panel/ScrollContainer/GridContainer" unique_id=1204885029 instance=ExtResource("2_c1nri")]
+layout_mode = 2
+
+[node name="PlayerControlItem2" parent="Panel/ScrollContainer/GridContainer" unique_id=1615768855 instance=ExtResource("2_c1nri")]
+layout_mode = 2
+
+[node name="PlayerControlItem3" parent="Panel/ScrollContainer/GridContainer" unique_id=2061568649 instance=ExtResource("2_c1nri")]
+layout_mode = 2
+
+[node name="PlayerControlItem5" parent="Panel/ScrollContainer/GridContainer" unique_id=718330965 instance=ExtResource("2_c1nri")]
+layout_mode = 2
+
+[node name="PlayerControlItem6" parent="Panel/ScrollContainer/GridContainer" unique_id=761626446 instance=ExtResource("2_c1nri")]
+layout_mode = 2
+
+[node name="PlayerControlItem4" parent="Panel/ScrollContainer/GridContainer" unique_id=275017572 instance=ExtResource("2_c1nri")]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=498113822]
 layout_mode = 1
@@ -65,9 +100,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
+offset_left = -98.5
 offset_top = -50.0
-offset_right = 50.0
+offset_right = 98.5
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0

@@ -10,7 +10,7 @@ public partial class PlayerControlCenter : Control
 
     public override void _Ready()
     {
-        Grid = GetNode<GridContainer>("Panel/GridContainer");
+        Grid = GetNode<GridContainer>("Panel/ScrollContainer/GridContainer");
 
         BtnWorker = GetNode<CraftingButton>("Panel/HBoxContainer/BtnWorker");
         BtnWorker.Pressed += BtnWorker_Pressed;

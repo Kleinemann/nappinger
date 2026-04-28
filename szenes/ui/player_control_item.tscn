@@ -12,7 +12,7 @@
 resource_name = "Working"
 
 [node name="PlayerControlItem" type="Control" unique_id=1204885029]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,11 +23,12 @@ script = ExtResource("1_k4wbp")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=850504959]
 layout_mode = 0
-offset_right = 148.0
-offset_bottom = 40.0
+offset_right = 716.0
+offset_bottom = 98.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=936809557]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Icon" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=597720304]
 custom_minimum_size = Vector2(40, 40)
