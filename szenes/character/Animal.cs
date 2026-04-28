@@ -135,13 +135,7 @@ public partial class Animal: CharacterBody2D
     public void RIP()
     {
         //Drop Items
-        if (Inventory != null)
-        {
-            //TODO: Drop multi Items !!!
-            DropItem item = DropItem.CreateDropItem(Inventory.Slots[0].Item, Inventory.Slots[0].Amount);
-            item.Position = Position;
-            WorldMain.Instance.AddChild(item);
-        }
+        DropItem.DropInvetar(Inventory, Position);
         QueueFree();
 
     }

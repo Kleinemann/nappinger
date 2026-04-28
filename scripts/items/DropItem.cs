@@ -10,12 +10,26 @@ public partial class DropItem : Area2D
     public override void _Ready()
     {
         Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
-        if (Item != null && Item.Icon != null)
-        {
-            sprite.Texture = Item.Icon;
-        }
+        sprite.Texture = Item.Icon;
+        AddToGroup(Item.GroupName);
 
         BodyEntered += OnBodyEntered;
+    }
+
+    public static void DropInvetar(Inventory inv, Vector2 pos)
+    {
+         if (inv != null)
+        {
+            foreach (InventorySlot slot in inv.Slots)
+            {
+                if (slot.Item != null)
+                {
+                    DropItem item = DropItem.CreateDropItem(slot.Item, slot.Amount);
+                    item.Position = pos;
+                    WorldMain.Instance.AddChild(item);
+                }
+            }
+        }
     }
 
     public static DropItem CreateDropItem(string resourceName, int amount = 1)
@@ -37,7 +51,6 @@ public partial class DropItem : Area2D
 
     public override void _EnterTree()
     {
-        AddToGroup(Item.GroupName);
         UpdateAmount();
     }
 

@@ -14,21 +14,21 @@ shader = ExtResource("1_2lhu5")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
-[sub_resource type="Resource" id="Resource_jo1kc"]
-script = ExtResource("4_ih48p")
-Item = ExtResource("5_1pg3m")
-Amount = 1
-metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
-
-[sub_resource type="Resource" id="Resource_1pg3m"]
+[sub_resource type="Resource" id="Resource_hncu0"]
 script = ExtResource("4_ih48p")
 Item = ExtResource("6_p6iod")
 Amount = 3
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
+[sub_resource type="Resource" id="Resource_p6iod"]
+script = ExtResource("4_ih48p")
+Item = ExtResource("5_1pg3m")
+Amount = 1
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
 [sub_resource type="Resource" id="Resource_lk64d"]
 script = ExtResource("6_htb8y")
-Items = Array[ExtResource("4_ih48p")]([SubResource("Resource_jo1kc"), SubResource("Resource_1pg3m")])
+Slots = Array[ExtResource("4_ih48p")]([SubResource("Resource_hncu0"), SubResource("Resource_p6iod")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]
@@ -117,7 +117,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Bush" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable", "R_Food"]]
+[node name="Bush" type="StaticBody2D" unique_id=1073618912 node_paths=PackedStringArray("Sprite", "SpriteShadow", "CollisionShape", "HealtBar") groups=["Breakable", "R_Food", "R_Wood"]]
 material = SubResource("ShaderMaterial_etsbv")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_hncu0")

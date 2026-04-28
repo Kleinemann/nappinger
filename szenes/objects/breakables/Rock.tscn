@@ -14,10 +14,10 @@ shader = ExtResource("1_fbo7v")
 shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
-[sub_resource type="Resource" id="Resource_jo1kc"]
+[sub_resource type="Resource" id="Resource_amwvu"]
 script = ExtResource("4_8iv0o")
 Item = ExtResource("5_fbo7v")
-Amount = 4
+Amount = 5
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_u5w2g"]
@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
 [sub_resource type="Resource" id="Resource_lk64d"]
 script = ExtResource("6_0jfmf")
-Items = Array[ExtResource("4_8iv0o")]([SubResource("Resource_jo1kc"), SubResource("Resource_u5w2g")])
+Slots = Array[ExtResource("4_8iv0o")]([SubResource("Resource_amwvu"), SubResource("Resource_u5w2g")])
 metadata/_custom_type_script = "uid://csar5086emnio"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjegs"]

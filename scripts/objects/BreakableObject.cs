@@ -99,18 +99,8 @@ public partial class BreakableObject : StaticBody2D
         CollisionShape.Disabled = true;
         CollisionLayer = 0;
         //Drop Items
-        if (Inventory != null)
-        {
-            foreach (InventorySlot slot in Inventory.Slots)
-            {
-                if (slot.Item != null)
-                {
-                    DropItem item = DropItem.CreateDropItem(slot.Item, slot.Amount);
-                    item.Position = Position;
-                    WorldMain.Instance.AddChild(item);
-                }
-            }
-        }
+        DropItem.DropInvetar(Inventory, Position);
+
         if(_timer == null)
             QueueFree();
         else
