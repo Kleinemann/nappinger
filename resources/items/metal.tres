@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://c3lxxinveyj8p"]
+
+[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="1_nb14e"]
+[ext_resource type="Texture2D" uid="uid://bff1diykehyrh" path="res://assets/items/metal.png" id="1_wkyil"]
+
+[resource]
+script = ExtResource("1_nb14e")
+ItemName = "Metall"
+GroupName = "R_Metal"
+Icon = ExtResource("1_wkyil")
+metadata/_custom_type_script = "uid://f6p8ujqxsixx"

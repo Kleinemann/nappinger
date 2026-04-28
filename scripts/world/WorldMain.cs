@@ -42,8 +42,11 @@ public partial class WorldMain : Node2D
         Store camp = scene.Instantiate<Store>();
 
         InventoryItem item = ResourceLoader.Load<InventoryItem>("res://resources/items/food.tres");
-        camp.Inventory.Items[0].Item = item;
-        camp.Inventory.Items[0].Amount = 10;
+        camp.Inventory.Slots[0].Item = item;
+        camp.Inventory.Slots[0].Amount = 30;
+
+        camp.Inventory.Slots[1].Item = InventoryItem.CreateInventoryItem("ore");
+        camp.Inventory.Slots[1].Amount = 11;
 
         camp.Position = Camera.Position;
         Map.AddChild(camp);

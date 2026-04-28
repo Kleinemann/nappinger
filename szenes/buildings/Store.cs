@@ -40,16 +40,16 @@ public partial class Store : StaticBody2D
         {
             Inventory iPlayer = player.Inventory;
             
-            for(int i = 0; i < iPlayer.Items.Count; i++)
+            for(int i = 0; i < iPlayer.Slots.Count; i++)
             {
-                var item = iPlayer.Items[i];
+                var item = iPlayer.Slots[i];
 
                 if (item != null)
                 {
                     Inventory.Insert(item.Item, item.Amount);
                 }
-                iPlayer.Items[i].Item = null;
-                iPlayer.Items[i].Amount = 0;
+                iPlayer.Slots[i].Item = null;
+                iPlayer.Slots[i].Amount = 0;
             }
         }
     }

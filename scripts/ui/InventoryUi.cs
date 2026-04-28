@@ -38,8 +38,8 @@ public partial class InventoryUi : Control
     {
         for (var i = 0; i < Slots.Count; i++)
         {
-            if (inventory != null && inventory.Items.Count > i)
-                Slots[i].UpdateSlot(inventory.Items[i]);
+            if (inventory != null && inventory.Slots.Count > i)
+                Slots[i].UpdateSlot(inventory.Slots[i]);
             else
                 Slots[i].UpdateSlot(null);
         }

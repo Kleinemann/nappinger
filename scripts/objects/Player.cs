@@ -209,9 +209,9 @@ public partial class Player : Animal
     }
 
 
-    public void Collect(InventoryItem item, int amount = 1)
+    public int Collect(InventoryItem item, int amount = 1)
     {
-        Inventory.Insert(item, amount);
+        return Inventory.Insert(item, amount);
     }
 
     internal void SetTarget(Vector2 vector2)

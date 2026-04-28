@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://bxqotnqxjsk56"]
+
+[ext_resource type="Script" uid="uid://f6p8ujqxsixx" path="res://scripts/items/InventoryItem.cs" id="1_cpq2t"]
+[ext_resource type="Texture2D" uid="uid://dybxcas3eodse" path="res://assets/items/ore.png" id="1_wtc77"]
+
+[resource]
+script = ExtResource("1_cpq2t")
+ItemName = "Erz"
+GroupName = "R_Ore"
+Icon = ExtResource("1_wtc77")
+metadata/_custom_type_script = "uid://f6p8ujqxsixx"

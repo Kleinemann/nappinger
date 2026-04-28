@@ -36,6 +36,8 @@ Storable=""
 R_Food=""
 R_Stone=""
 R_Wood=""
+R_Ore=""
+R_Metal=""
 
 [input]
 

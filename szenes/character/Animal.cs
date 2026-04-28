@@ -138,7 +138,7 @@ public partial class Animal: CharacterBody2D
         if (Inventory != null)
         {
             //TODO: Drop multi Items !!!
-            DropItem item = DropItem.CreateDropItem(Inventory.Items[0].Item, Inventory.Items[0].Amount);
+            DropItem item = DropItem.CreateDropItem(Inventory.Slots[0].Item, Inventory.Slots[0].Amount);
             item.Position = Position;
             WorldMain.Instance.AddChild(item);
         }

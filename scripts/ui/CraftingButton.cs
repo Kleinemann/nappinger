@@ -34,9 +34,9 @@ public partial class CraftingButton : Button
             InventoryItem item = slot.Item;
             int cost = slot.Amount;
 
-            for(int s = Inv.Slots-1; s >= 0; s--)
+            for(int s = Inv.SlotsMax-1; s >= 0; s--)
             {
-                InventorySlot invS = Inv.Items[s];
+                InventorySlot invS = Inv.Slots[s];
                 if (invS.Item == item)
                 {
                     //mehr als nötig

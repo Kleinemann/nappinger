@@ -38,6 +38,11 @@ public partial class DropItem : Area2D
     public override void _EnterTree()
     {
         AddToGroup(Item.GroupName);
+        UpdateAmount();
+    }
+
+    public void UpdateAmount()
+    {
         Label label = GetNode<Label>("Label");
         label.Text = Amount.ToString();
 
@@ -48,10 +53,16 @@ public partial class DropItem : Area2D
     {
         if(body.IsInGroup("Player"))
         {
-            ((Player)body).Collect(Item, Amount);
-
+            int rest = ((Player)body).Collect(Item, Amount);
             GameObjectDataMoveable.RemoveFromTarget(this);
-            QueueFree();
+
+            if (rest > 0)
+            {
+                Amount = rest;
+                UpdateAmount();
+            }
+            else
+                QueueFree();
         }
     }
 }

@@ -101,7 +101,7 @@ public partial class BreakableObject : StaticBody2D
         //Drop Items
         if (Inventory != null)
         {
-            foreach (InventorySlot slot in Inventory.Items)
+            foreach (InventorySlot slot in Inventory.Slots)
             {
                 if (slot.Item != null)
                 {

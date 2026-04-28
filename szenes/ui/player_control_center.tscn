@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://rmkcbwnvpk0y" path="res://assets/objects/player/playerIcon.png" id="2_nvira"]
 [ext_resource type="Script" uid="uid://c5vra8bsj7lhe" path="res://resources/ui/InventorySlot.cs" id="4_0d523"]
 [ext_resource type="Resource" uid="uid://b7fi7us858o7w" path="res://resources/items/food.tres" id="5_bxt3t"]
+[ext_resource type="Texture2D" uid="uid://bff1diykehyrh" path="res://assets/items/metal.png" id="6_47gr6"]
+[ext_resource type="Script" uid="uid://da7v07prqalc6" path="res://scripts/ui/CraftingButton.cs" id="7_c1nri"]
+[ext_resource type="Resource" uid="uid://bxqotnqxjsk56" path="res://resources/items/ore.tres" id="8_ev8j0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ey3p"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -21,6 +24,12 @@ corner_radius_bottom_left = 10
 [sub_resource type="Resource" id="Resource_m03u2"]
 script = ExtResource("4_0d523")
 Item = ExtResource("5_bxt3t")
+Amount = 10
+metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
+
+[sub_resource type="Resource" id="Resource_f7r1y"]
+script = ExtResource("4_0d523")
+Item = ExtResource("8_ev8j0")
 Amount = 10
 metadata/_custom_type_script = "uid://c5vra8bsj7lhe"
 
@@ -65,9 +74,18 @@ grow_vertical = 0
 
 [node name="BtnWorker" parent="Panel/HBoxContainer" unique_id=768870847 instance=ExtResource("2_0d523")]
 layout_mode = 2
+tooltip_text = "10 Essen"
 text = "Arbeiter"
 icon = ExtResource("2_nvira")
 Items = Array[ExtResource("4_0d523")]([SubResource("Resource_m03u2")])
+
+[node name="BtnMetal" type="Button" parent="Panel/HBoxContainer" unique_id=281549022]
+layout_mode = 2
+tooltip_text = "10 Erz"
+text = "Metall"
+icon = ExtResource("6_47gr6")
+script = ExtResource("7_c1nri")
+Items = Array[ExtResource("4_0d523")]([SubResource("Resource_f7r1y")])
 
 [node name="ButtonClose" type="Button" parent="Panel" unique_id=633608449]
 custom_minimum_size = Vector2(32, 32)

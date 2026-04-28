@@ -6,15 +6,27 @@ public partial class PlayerControlCenter : Control
 {
     GridContainer Grid;
     CraftingButton BtnWorker;
+    CraftingButton BtnMetal;
 
     public override void _Ready()
     {
         Grid = GetNode<GridContainer>("Panel/GridContainer");
+
         BtnWorker = GetNode<CraftingButton>("Panel/HBoxContainer/BtnWorker");
         BtnWorker.Pressed += BtnWorker_Pressed;
 
+        BtnMetal = GetNode<CraftingButton>("Panel/HBoxContainer/BtnMetal");
+        BtnMetal.Pressed += BtnMetal_Pressed;
+
         Button btnClose = GetNode<Button>("Panel/ButtonClose");
         btnClose.Pressed += BtnClose_Pressed;
+    }
+
+    private void BtnMetal_Pressed()
+    {
+        BtnMetal.Pay();
+        InventoryItem item = InventoryItem.CreateInventoryItem("metal");
+        BtnMetal.Inv.Insert(item);
     }
 
     private void BtnClose_Pressed()
@@ -61,6 +73,7 @@ public partial class PlayerControlCenter : Control
         }
 
         BtnWorker.Inv = WorldMain.SelectedStore.Inventory;
+        BtnMetal.Inv = WorldMain.SelectedStore.Inventory;
     }
 
     public void HidePlayers()
@@ -77,11 +90,12 @@ public partial class PlayerControlCenter : Control
 
     public void UpdateControlCenter()
     {
-        foreach(PlayerControlItem item in Grid.GetChildren())
+        foreach(PlayerControlItem player in Grid.GetChildren())
         {
-            item.UpdatePlayerItem();
+            player.UpdatePlayerItem();
         }
 
         BtnWorker.UpdateButton();
+        BtnMetal.UpdateButton();
     }
 }
