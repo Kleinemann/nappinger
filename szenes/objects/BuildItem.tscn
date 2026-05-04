@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://0lbtydt8bxml"]
+
+[ext_resource type="Script" uid="uid://c34o8yk6mp0f2" path="res://scripts/items/BuildItem.cs" id="1_kmnp6"]
+[ext_resource type="Texture2D" uid="uid://dctx3m6gyl1vy" path="res://assets/tiles/buildings/floor1.png" id="2_4rt8m"]
+[ext_resource type="PackedScene" uid="uid://bko5002gs57tg" path="res://szenes/objects/DropItem.tscn" id="3_6squi"]
+[ext_resource type="Resource" uid="uid://3th86medeae5" path="res://resources/items/wood.tres" id="4_05c0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wyik2"]
+size = Vector2(70, 70)
+
+[node name="BuildItem" type="Area2D" unique_id=129698830]
+script = ExtResource("1_kmnp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1616450052]
+shape = SubResource("RectangleShape2D_wyik2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=23830566]
+self_modulate = Color(1, 1, 1, 0.39215687)
+texture = ExtResource("2_4rt8m")
+
+[node name="DropItem" parent="." unique_id=1056664420 instance=ExtResource("3_6squi")]
+position = Vector2(16, 16)
+Item = ExtResource("4_05c0i")

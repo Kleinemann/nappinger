@@ -124,6 +124,12 @@ public partial class WorldMap : Node2D
         return WorldLayer.LocalToMap(lMouse);
     }
 
+    public Vector2I GetCoords(Vector2 pos)
+    {
+        Vector2 lPos = ToLocal(pos);
+        return WorldLayer.LocalToMap(lPos);
+    }
+
     public Vector2I CoordsToPosition(Vector2I coord)
     {
         return coord * Chunk.ChunkSize * Chunk.TileSize;

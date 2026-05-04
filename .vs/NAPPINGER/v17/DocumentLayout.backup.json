@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\items\\builditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\items\\builditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\resources\\ui\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:resources\\ui\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\items\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\items\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\craftingbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\craftingbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\playercontrolcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\playercontrolcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\buildmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\buildmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\worldmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\world\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\world\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\items\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\items\\dropitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\hud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\hud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\ui\\playercontrolitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\ui\\playercontrolitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,45 +42,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "CraftingButton.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\CraftingButton.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\CraftingButton.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\CraftingButton.cs",
+              "RelativeToolTip": "scripts\\ui\\CraftingButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T06:08:50.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Inventory.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\resources\\ui\\Inventory.cs",
               "RelativeDocumentMoniker": "resources\\ui\\Inventory.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\resources\\ui\\Inventory.cs",
               "RelativeToolTip": "resources\\ui\\Inventory.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFcAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAD4AAAAAAAAAAADgv00AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T05:16:22.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerControlCenter.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\PlayerControlCenter.cs",
-              "RelativeDocumentMoniker": "scripts\\ui\\PlayerControlCenter.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\PlayerControlCenter.cs",
-              "RelativeToolTip": "scripts\\ui\\PlayerControlCenter.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwEsAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T04:57:13.232Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\objects\\Player.cs",
-              "RelativeDocumentMoniker": "scripts\\objects\\Player.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\objects\\Player.cs",
-              "RelativeToolTip": "scripts\\objects\\Player.cs",
-              "ViewState": "AgIAALwAAAAAAAAAAAAMwNUAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T05:50:47.481Z",
+              "WhenOpened": "2026-04-30T15:04:12.738Z",
               "EditorCaption": ""
             },
             {
@@ -83,35 +78,71 @@
               "RelativeDocumentMoniker": "scripts\\world\\WorldMain.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
               "RelativeToolTip": "scripts\\world\\WorldMain.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowC8AAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAYwIYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T12:50:02.006Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T08:12:01.601Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Chunk.cs",
-              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\Chunk.cs",
-              "RelativeDocumentMoniker": "scripts\\world\\Chunk.cs",
-              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\world\\Chunk.cs",
-              "RelativeToolTip": "scripts\\world\\Chunk.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAewIEAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T08:24:06.664Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "DropItem.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\items\\DropItem.cs",
               "RelativeDocumentMoniker": "scripts\\items\\DropItem.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\items\\DropItem.cs",
               "RelativeToolTip": "scripts\\items\\DropItem.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAkwCcAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T05:16:33.377Z",
+              "WhenOpened": "2026-04-30T08:00:11.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BuildItem.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\items\\BuildItem.cs",
+              "RelativeDocumentMoniker": "scripts\\items\\BuildItem.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\items\\BuildItem.cs",
+              "RelativeToolTip": "scripts\\items\\BuildItem.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T07:49:41.462Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BuildMenu.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\BuildMenu.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\BuildMenu.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\BuildMenu.cs",
+              "RelativeToolTip": "scripts\\ui\\BuildMenu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T07:07:45.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Hud.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\Hud.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\Hud.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\Hud.cs",
+              "RelativeToolTip": "scripts\\ui\\Hud.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T06:44:48.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerControlItem.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\PlayerControlItem.cs",
+              "RelativeDocumentMoniker": "scripts\\ui\\PlayerControlItem.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\ui\\PlayerControlItem.cs",
+              "RelativeToolTip": "scripts\\ui\\PlayerControlItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-28T05:59:50.287Z"
             }
           ]
         }

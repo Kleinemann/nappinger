@@ -1,9 +1,51 @@
 [gd_scene format=3 uid="uid://bsyhwhmxdiqak"]
 
-[node name="BuildMenu" type="Control" unique_id=743413971]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" uid="uid://bylru31xcvvgo" path="res://scripts/ui/BuildMenu.cs" id="1_mhxc0"]
+[ext_resource type="Texture2D" uid="uid://dctx3m6gyl1vy" path="res://assets/tiles/buildings/floor1.png" id="2_62gpy"]
+[ext_resource type="Texture2D" uid="uid://cs1aqn2uda8m2" path="res://assets/tiles/buildings/floor2.png" id="5_8d4a6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjgcx"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ia52a"]
+resource_name = "BuildingGroup"
+
+[node name="BuildMenu" type="Panel" unique_id=89034009]
+offset_right = 250.0
+offset_bottom = 343.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjgcx")
+script = ExtResource("1_mhxc0")
+
+[node name="Label" type="Label" parent="." unique_id=1609959789]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 59.0
+offset_bottom = 25.0
+text = "Boden:"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="." unique_id=2031779721]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 246.0
+offset_bottom = 110.0
+
+[node name="BtnFloor1" type="Button" parent="HFlowContainer" unique_id=159456605]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ia52a")
+icon = ExtResource("2_62gpy")
+
+[node name="BtnFloor2" type="Button" parent="HFlowContainer" unique_id=29788949]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ia52a")
+icon = ExtResource("5_8d4a6")

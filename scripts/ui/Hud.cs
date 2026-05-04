@@ -6,6 +6,7 @@ public partial class Hud : Control
     ObjectPanel ObjectPanel;
     InventoryUi InventoryUi;
     PlayerControlCenter PlayerControlCenter;
+    BuildMenu BuildMenu;
 
     public static Hud Instance;
     
@@ -15,6 +16,7 @@ public partial class Hud : Control
         ObjectPanel = GetNode<ObjectPanel>("ObjectPanel");
         InventoryUi = GetNode<InventoryUi>("InventoryUI");
         PlayerControlCenter = GetNode<PlayerControlCenter>("PlayerControlCenter");
+        BuildMenu = GetNode<BuildMenu>("BuildMenu");
         UpdateHud();
     }
 
@@ -32,5 +34,13 @@ public partial class Hud : Control
             PlayerControlCenter.ShowPlayers();
         else
             PlayerControlCenter.HidePlayers();
+    }
+
+    public void SwitchBuildMenu()
+    {
+        if (!BuildMenu.Visible)
+            BuildMenu.ShowBuildMenu();
+        else
+            BuildMenu.HideBuildMenu();
     }
 }

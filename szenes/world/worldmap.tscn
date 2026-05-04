@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://btj5m18g33auw" path="res://szenes/character/chicken.tscn" id="6_qw1xo"]
 [ext_resource type="PackedScene" uid="uid://c3gyh6hyo0g7o" path="res://szenes/objects/breakables/beerybush.tscn" id="6_x812f"]
 [ext_resource type="PackedScene" uid="uid://rw0b2fy8ldf5" path="res://szenes/character/rabbit.tscn" id="7_pm8jy"]
+[ext_resource type="Texture2D" uid="uid://oomrm21vommq" path="res://assets/tiles/floorTiles.png" id="9_s58pj"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
@@ -122,11 +123,23 @@ resource_name = "Animals"
 scenes/1/scene = ExtResource("6_qw1xo")
 scenes/2/scene = ExtResource("7_pm8jy")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8u5v"]
+resource_name = "Floor"
+texture = ExtResource("9_s58pj")
+texture_region_size = Vector2i(32, 32)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, 16)
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(16, 16)
+
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_qw1xo")
 sources/1 = SubResource("TileSetScenesCollectionSource_pm8jy")
+sources/2 = SubResource("TileSetAtlasSource_f8u5v")
 
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")

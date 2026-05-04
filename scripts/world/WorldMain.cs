@@ -91,6 +91,13 @@ public partial class WorldMain : Node2D
         {
             GD.Print("WORLD CLICK");
             WorldMain.SelectedObject = null;
+
+            if (BuildMenu.SelectedItem != null)
+            {
+                BuildItem item = BuildItem.CreateBuildItem();
+                item.Position = Map.GetMouseCoords() * Chunk.TileSize;
+                WorldMain.Instance.AddChild(item);
+            }
         }
 
         //targeting
@@ -123,6 +130,11 @@ public partial class WorldMain : Node2D
                 WorldMain.SelectedObject = (Node2D)nodes[0];
 
             Hud.Instance.SwitchPlayerControlCenter();
+        }
+
+        if(@event.IsActionPressed("build_menu"))
+        {
+            Hud.Instance.SwitchBuildMenu();
         }
 
         @event.Dispose();        

@@ -69,6 +69,33 @@ public partial class Inventory : Resource
         return amount;
     }
 
+    public int Remove(InventoryItem item, int amount = 1)
+    {
+        foreach (InventorySlot slot in Slots)
+        {
+            if (slot.Item == item)
+            {
+                if(slot.Amount >= amount)
+                {
+                    slot.Amount -= amount;
+                    amount = 0;
+                }
+                else
+                {
+                    amount = slot.Amount;
+                    slot.Amount = 0;
+                }
+
+                if (slot.Amount <= 0)
+                {
+                    slot.Amount = 0;
+                    slot.Item = null;
+                }
+            }
+        }
+        return amount;
+    }
+
     InventorySlot First(InventoryItem item)
     {
         InventorySlot empty = null;
