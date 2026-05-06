@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Net.NetworkInformation;
 
 public partial class Player : Animal
@@ -18,6 +19,8 @@ public partial class Player : Animal
     bool cooldown = false;
 
     Area2D SearchArea;
+
+    [Export] public AudioStreamPlayer2D StepPlayer;
 
     public static Player GetNextPlayer()
     {
@@ -205,12 +208,14 @@ public partial class Player : Animal
             Weapon.CollisionShape.Disabled = false;
             ActionTimer.Start();
             action = true;
+            PlaySound([Tools.SOUNDS.HIT_1, Tools.SOUNDS.HIT_2, Tools.SOUNDS.HIT_3, Tools.SOUNDS.HIT_4]);
         }
     }
 
 
     public int Collect(InventoryItem item, int amount = 1)
     {
+        PlaySound(Tools.SOUNDS.COLLECT);
         return Inventory.Insert(item, amount);
     }
 
@@ -276,12 +281,37 @@ public partial class Player : Animal
 
         string animationName;
 
-        if(Velocity == Vector2.Zero)
+        if (Velocity == Vector2.Zero)
+        {
             animationName = "idle_" + Direction;
+        }
         else
-            animationName= "walk_" + Direction;
+        {
+            animationName = "walk_" + Direction;
+            PlaySoundBackground([Tools.SOUNDS.WALK_1, Tools.SOUNDS.WALK_2, Tools.SOUNDS.WALK_3, Tools.SOUNDS.WALK_4]);
+        }
 
         Animator.Play(animationName);
         AnimatorShadow.Play(animationName);
+    }
+
+    public void PlaySoundBackground(AudioStream[] sound)
+    {
+        if (StepPlayer.HasStreamPlayback())
+            return;
+
+        PlaySound(sound[WorldMain.Random.RandiRange(0, sound.Length - 1)]);
+    }
+
+    public void PlaySound(AudioStream[] sound)
+    {
+        PlaySound(sound[WorldMain.Random.RandiRange(0, sound.Length - 1)]);
+    }
+    
+
+    public void PlaySound(AudioStream sound)
+    {
+        StepPlayer.Stream = sound;
+        StepPlayer.Play();
     }
 }

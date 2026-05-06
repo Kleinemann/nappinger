@@ -18,6 +18,8 @@ public partial class WorldMain : Node2D
 
     public static RandomNumberGenerator Random = new RandomNumberGenerator();
 
+    public static AudioStreamPlayer SoundPlayer;
+
     public override void _Ready()
     {
         Instance = this;
@@ -26,6 +28,7 @@ public partial class WorldMain : Node2D
 
         Map = GetNode<WorldMap>("DualTileMap");
         Camera = GetNode<CameraScroll>("Camera2D");
+        SoundPlayer = GetNode<AudioStreamPlayer>("SoundPlayer");
 
         Vector2 v2 = Tools.GetGeoLocation();
         Vector2I coord = new Vector2I((int)v2.X * 10, (int)v2.Y * 10);
@@ -138,6 +141,12 @@ public partial class WorldMain : Node2D
         }
 
         @event.Dispose();        
+    }
+
+    public static void PlaySound(AudioStream sound)
+    {
+        SoundPlayer.Stream = sound;
+        SoundPlayer.Play();
     }
 }
 

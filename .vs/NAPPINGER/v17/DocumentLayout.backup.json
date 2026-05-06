@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Workspace\\nappinger\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\objects\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\tools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|c:\\workspace\\nappinger\\scripts\\items\\builditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3F5421A-F17D-4DF6-85D8-6A0FE1EC7EEC}|nappinger.csproj|solutionrelative:scripts\\items\\builditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,11 +50,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "Tools.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\Tools.cs",
+              "RelativeDocumentMoniker": "scripts\\Tools.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\Tools.cs",
+              "RelativeToolTip": "scripts\\Tools.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T04:58:27.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\objects\\Player.cs",
+              "RelativeDocumentMoniker": "scripts\\objects\\Player.cs",
+              "ToolTip": "C:\\Workspace\\nappinger\\scripts\\objects\\Player.cs",
+              "RelativeToolTip": "scripts\\objects\\Player.cs",
+              "ViewState": "AgIAABMBAAAAAAAAAAAgwCIBAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T07:07:06.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "CraftingButton.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\CraftingButton.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\CraftingButton.cs",
@@ -54,12 +88,11 @@
               "RelativeToolTip": "scripts\\ui\\CraftingButton.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-04T06:08:50.472Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-04T06:08:50.472Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Inventory.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\resources\\ui\\Inventory.cs",
               "RelativeDocumentMoniker": "resources\\ui\\Inventory.cs",
@@ -67,12 +100,11 @@
               "RelativeToolTip": "resources\\ui\\Inventory.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAADgv00AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T15:04:12.738Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T15:04:12.738Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "WorldMain.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\world\\WorldMain.cs",
               "RelativeDocumentMoniker": "scripts\\world\\WorldMain.cs",
@@ -84,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "DropItem.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\items\\DropItem.cs",
               "RelativeDocumentMoniker": "scripts\\items\\DropItem.cs",
@@ -96,20 +128,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "BuildItem.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\items\\BuildItem.cs",
               "RelativeDocumentMoniker": "scripts\\items\\BuildItem.cs",
               "ToolTip": "C:\\Workspace\\nappinger\\scripts\\items\\BuildItem.cs",
               "RelativeToolTip": "scripts\\items\\BuildItem.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBwAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T07:49:41.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T07:49:41.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "BuildMenu.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\BuildMenu.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\BuildMenu.cs",
@@ -117,12 +148,11 @@
               "RelativeToolTip": "scripts\\ui\\BuildMenu.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-30T07:07:45.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-30T07:07:45.458Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Hud.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\Hud.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\Hud.cs",
@@ -134,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "PlayerControlItem.cs",
               "DocumentMoniker": "C:\\Workspace\\nappinger\\scripts\\ui\\PlayerControlItem.cs",
               "RelativeDocumentMoniker": "scripts\\ui\\PlayerControlItem.cs",

@@ -9,6 +9,22 @@ using HttpClient = System.Net.Http.HttpClient;
 
 public static class Tools
 {
+    public static class SOUNDS
+    {
+        public static readonly AudioStream WALK_1 = GD.Load<AudioStream>("res://assets/sounds/walk/Footsteps_Dirt_01.ogg");
+        public static readonly AudioStream WALK_2 = GD.Load<AudioStream>("res://assets/sounds/walk/Footsteps_Dirt_02.ogg");
+        public static readonly AudioStream WALK_3 = GD.Load<AudioStream>("res://assets/sounds/walk/Footsteps_Dirt_03.ogg");
+        public static readonly AudioStream WALK_4 = GD.Load<AudioStream>("res://assets/sounds/walk/Footsteps_Dirt_04.ogg");
+
+        public static readonly AudioStream HIT_1 = GD.Load<AudioStream>("res://assets/sounds/walk/GS1_Hit_1.ogg");
+        public static readonly AudioStream HIT_2 = GD.Load<AudioStream>("res://assets/sounds/walk/GS1_Hit_2.ogg");
+        public static readonly AudioStream HIT_3 = GD.Load<AudioStream>("res://assets/sounds/walk/GS1_Hit_3.ogg");
+        public static readonly AudioStream HIT_4 = GD.Load<AudioStream>("res://assets/sounds/walk/GS1_Hit_4.ogg");
+
+        public static readonly AudioStream COLLECT = GD.Load<AudioStream>("res://assets/sounds/walk/Collect.ogg");
+        public static readonly AudioStream Pressed = GD.Load<AudioStream>("res://assets/sounds/walk/BtnPresed.ogg");
+    } 
+
     public static Vector2 GetGeoLocation()
     {
         string ip = "84.137.162.144";
