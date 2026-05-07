@@ -29,7 +29,7 @@ public partial class CraftingButton : Button
 
     internal void Pay()
     {
-        WorldMain.PlaySound(Tools.SOUNDS.Pressed);
+        WorldMain.PlaySound(SOUNDS.Pressed);
 
         foreach (InventorySlot slot in Items)
         {

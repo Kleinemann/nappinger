@@ -23,11 +23,11 @@ public partial class BuildItem : Area2D
             string groupName = Drop.Item.GroupName;
             int costs = Drop.Amount;
 
-            //int inStock = player.Inventory.CountItemGroup(groupName);
-
             int rest = player.Inventory.Remove(Drop.Item, costs);
             if (rest == 0)
             {
+                player.State = GameObjectState.WORKING;
+                player.action = true;
                 Vector2I coords = WorldMain.Instance.Map.GetCoords(Position);
 
                 WorldMain.Instance.Map.ObjectLayer.SetCell(coords, 2, new Vector2I(0, 0), 0);

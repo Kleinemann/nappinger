@@ -30,7 +30,7 @@ public partial class WorldMain : Node2D
         Camera = GetNode<CameraScroll>("Camera2D");
         SoundPlayer = GetNode<AudioStreamPlayer>("SoundPlayer");
 
-        Vector2 v2 = Tools.GetGeoLocation();
+        Vector2 v2 = TOOLS.GetGeoLocation();
         Vector2I coord = new Vector2I((int)v2.X * 10, (int)v2.Y * 10);
         Camera.Position = Map.CoordsToPosition(coord);
 
