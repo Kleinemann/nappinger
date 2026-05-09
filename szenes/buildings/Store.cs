@@ -51,6 +51,7 @@ public partial class Store : StaticBody2D
                 iPlayer.Slots[i].Item = null;
                 iPlayer.Slots[i].Amount = 0;
             }
+            player.State = GameObjectState.IDLE;
         }
     }
 

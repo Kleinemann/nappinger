@@ -67,7 +67,7 @@ public partial class Player : Animal
 
     private void OnBodyEntered(Node2D body)
     {
-        if(Target is Node2D)
+        if(Target is Node2D target)
         {
             if(body == Target)
             {
@@ -87,20 +87,10 @@ public partial class Player : Animal
     {
         action = false;
 
-        switch (State)
-        {
-
-            case GameObjectState.FIGHTING:
-                Weapon.Hide();
-                Weapon.CollisionShape.Disabled = true;
-                cooldown = true;
-                ActionCooldown.Start();
-                break;
-
-            default:
-                State = GameObjectState.IDLE;
-                break;
-        }
+        Weapon.Hide();
+        Weapon.CollisionShape.Disabled = true;
+        cooldown = true;
+        ActionCooldown.Start();
     }
 
     public void OnTimerCoolDownTimeout()
@@ -212,6 +202,10 @@ public partial class Player : Animal
             && ((WorldMain.SelectedPlayer == this && Input.IsActionJustPressed("attack"))
                     || State == GameObjectState.FIGHTING))
         {
+            Vector2 direction = (((Node2D)Target).GlobalPosition - GlobalPosition).Normalized();
+            Velocity = direction;
+            UpdateAnimation();
+
             Weapon.Show();
             Animator.Play("attack_" + Direction);
             AnimatorShadow.Play("attack_" + Direction);
@@ -264,10 +258,14 @@ public partial class Player : Animal
     public override void Movement()
     {
         Velocity = Vector2.Zero;
+        bool moving = false;
 
         //TODO: Only in first Person
         if (WorldMain.SelectedPlayer == this)
+        {
             Velocity = Input.GetVector("left", "rigth", "up", "down");
+            moving = true;
+        }
 
         if (State == GameObjectState.WALKING && Target != null)
         {
@@ -275,19 +273,35 @@ public partial class Player : Animal
 
             Vector2 direction = (targetPos - GlobalPosition).Normalized();
             Velocity = direction;
+            moving = true;
         }
 
-        Velocity *= Speed;
+        if(Target is Vector2 targetPos2)
+        {
+            if(Position.DistanceTo(targetPos2) < 5)
+            {
+                Position = targetPos2;
+                Target = null;
+                State = GameObjectState.IDLE;
+                moving = false;
+            }
+        }
 
-        MoveAndSlide();
+        if (moving)
+        {
+            Velocity *= Speed;
+            MoveAndSlide();
+        }
     }
 
     public override void UpdateAnimation()
     {
-        if (Velocity.X > 0) Direction = "r";
-        else if (Velocity.X < 0) Direction = "l";
-        else if (Velocity.Y > 0) Direction = "d";
-        else if (Velocity.Y < 0) Direction = "u";
+        if(Velocity == Vector2.Zero)
+            Direction = "d";
+        else if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+            Direction = Velocity.X > 0 ? "r" : "l";
+        else
+            Direction = Velocity.Y > 0 ? "d" : "u";
 
         string animationName;
 

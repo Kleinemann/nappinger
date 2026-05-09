@@ -106,7 +106,12 @@ public partial class WorldMain : Node2D
         //targeting
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         { 
-            SelectedPlayer?.SetTarget(Map.GetGlobalMousePosition());
+            Player player = SelectedPlayer;
+            if (player != null) {
+                player.SetTarget(Map.GetGlobalMousePosition());
+                player.State = GameObjectState.IDLE;
+                player.Mission = null;
+            }
         }
 
         if (@event.IsActionPressed("add_value"))

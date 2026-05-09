@@ -103,7 +103,9 @@ public partial class Chunk : GodotObject
             //Add DropItems
             if (noiseValue >= 0.150 && noiseValue <= 0.155)
             {
-                int amount = d4;
+                int amount = d4 % 4;
+                if (amount == 0) amount = 1;
+
                 int resourceID = d5;
 
                 string resourceName = string.Empty;

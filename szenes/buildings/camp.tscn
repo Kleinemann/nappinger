@@ -19,7 +19,7 @@ shader_parameter/shadow_offset = Vector2(5, 5)
 shader_parameter/shadow_alpha = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3oe2"]
-size = Vector2(180, 55)
+size = Vector2(193, 69)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7bkp"]
 size = Vector2(234, 118)
@@ -45,7 +45,7 @@ texture = ExtResource("1_v05mg")
 offset = Vector2(0, -32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2048451637]
-position = Vector2(-1, 4.5)
+position = Vector2(-0.5, 11.5)
 shape = SubResource("RectangleShape2D_s3oe2")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1233403985]

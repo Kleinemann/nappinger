@@ -64,10 +64,15 @@ public partial class DropItem : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if(body.IsInGroup("Player"))
+        if(body is Player player)
         {
-            int rest = ((Player)body).Collect(Item, Amount);
+            int rest = player.Collect(Item, Amount);
             GameObjectDataMoveable.RemoveFromTarget(this);
+
+            if(player.Target == this)
+                player.Target = null;
+
+            player.State = GameObjectState.IDLE;
 
             if (rest > 0)
             {
