@@ -66,8 +66,6 @@ public partial class PlayerControlCenter : Control
         {
             PackedScene scene = GD.Load<PackedScene>("res://szenes/ui/player_control_item.tscn");
             PlayerControlItem item = scene.Instantiate<PlayerControlItem>();
-            player.State = GameObjectState.IDLE;
-            player.Mission = null;
             item.SetPlayer(player);
             Grid.AddChild(item);
         }

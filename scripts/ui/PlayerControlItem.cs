@@ -10,7 +10,6 @@ public partial class PlayerControlItem : Control
     ButtonGroup Group;
     InventoryUi InvUi;
 
-
     public override void _Ready()
     {
         Icon = GetNode<TextureRect>("PanelContainer/HBoxContainer/Icon");
@@ -22,9 +21,15 @@ public partial class PlayerControlItem : Control
 
         Icon.Texture = Player.Icon;
         PlayerName.Text = Player.ObjectName;
-
+        if(Player.Mission != null && Player.Mission.State == GameObjectState.FARMING)
+        {
+            string name = ((string)Player.Mission.Target).Substring(2);
+            Button btn = GetNode<Button>("PanelContainer/HBoxContainer/Btn" + name);
+            btn.ButtonPressed = true;
+        }
         Group.Pressed += Group_Pressed;
     }
+
 
     private void Group_Pressed(BaseButton button)
     {
@@ -37,7 +42,7 @@ public partial class PlayerControlItem : Control
         {
             string search = "R_" + ((string)button.Name).Substring(3);
             Player.Mission = new Mission(GameObjectState.FARMING, search);
-            Player.State = GameObjectState.WAITING;
+            Player.State = GameObjectState.IDLE;
         }
     }
 

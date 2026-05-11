@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bylru31xcvvgo" path="res://scripts/ui/BuildMenu.cs" id="1_mhxc0"]
 [ext_resource type="Texture2D" uid="uid://dctx3m6gyl1vy" path="res://assets/tiles/buildings/floor1.png" id="2_62gpy"]
+[ext_resource type="Theme" uid="uid://b6lf2o4pwadqv" path="res://assets/theme.tres" id="2_nqbdb"]
 [ext_resource type="Texture2D" uid="uid://cs1aqn2uda8m2" path="res://assets/tiles/buildings/floor2.png" id="5_8d4a6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjgcx"]
@@ -39,13 +40,20 @@ offset_right = 246.0
 offset_bottom = 110.0
 
 [node name="BtnFloor1" type="Button" parent="HFlowContainer" unique_id=159456605]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+theme = ExtResource("2_nqbdb")
 toggle_mode = true
+button_pressed = true
 button_group = SubResource("ButtonGroup_ia52a")
 icon = ExtResource("2_62gpy")
+icon_alignment = 1
 
 [node name="BtnFloor2" type="Button" parent="HFlowContainer" unique_id=29788949]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+theme = ExtResource("2_nqbdb")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ia52a")
 icon = ExtResource("5_8d4a6")
+icon_alignment = 1
