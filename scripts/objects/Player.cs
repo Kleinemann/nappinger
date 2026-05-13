@@ -111,18 +111,8 @@ public partial class Player : Animal
 
     public override void _Process(double delta)
     {
-        //Turn to target direction
-        if (Target is Node2D targetNode)
-        {
-            Vector2 direction = (targetNode.GlobalPosition - GlobalPosition).Normalized();
-            Velocity = direction;
-        }
-
+        Movement();
         PlayerWeapon();
-
-        if (State != GameObjectState.FIGHTING && State != GameObjectState.WORKING)
-            Movement();
-
         UpdateAnimation();
 
         if (State == GameObjectState.WAITING)
@@ -283,8 +273,28 @@ public partial class Player : Animal
     {
         bool moving = false;
 
+//        if (State != GameObjectState.FIGHTING && State != GameObjectState.WORKING)
+
+/*
+ * 
+        //Turn to target direction
+        if (Target is Node2D targetNode)
+        {
+            Vector2 direction = (targetNode.GlobalPosition - GlobalPosition).Normalized();
+            Velocity = direction;
+
+            if (Velocity == Vector2.Zero)
+                Direction = "d";
+            else if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                Direction = Velocity.X > 0 ? "r" : "l";
+            else
+                Direction = Velocity.Y > 0 ? "d" : "u";
+        }
+*/
+
+
         //TODO: Only in first Person
-        if (WorldMain.SelectedPlayer == this)
+        if (WorldMain.SelectedPlayer == this && State != GameObjectState.WALKING)
         {
             Velocity = Input.GetVector("left", "rigth", "up", "down");
             moving = true;
@@ -312,6 +322,14 @@ public partial class Player : Animal
 
         if (moving)
         {
+            if (Velocity != Vector2.Zero)
+            {
+                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                    Direction = Velocity.X > 0 ? "r" : "l";
+                else
+                    Direction = Velocity.Y < 0 ? "u" : "d";
+            }
+
             Velocity *= Speed;
             MoveAndSlide();
         }
@@ -319,13 +337,6 @@ public partial class Player : Animal
 
     public override void UpdateAnimation()
     {
-        if(Velocity == Vector2.Zero)
-            Direction = "d";
-        else if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
-            Direction = Velocity.X > 0 ? "r" : "l";
-        else
-            Direction = Velocity.Y > 0 ? "d" : "u";
-
         string animationName;
 
         if(State == GameObjectState.WORKING)
