@@ -26,7 +26,7 @@ public partial class DropItem : Area2D
                 {
                     DropItem item = DropItem.CreateDropItem(slot.Item, slot.Amount);
                     item.Position = pos;
-                    WorldMain.Instance.AddChild(item);
+                    WorldMain.Instance.CallDeferred("add_child", item);
                 }
             }
         }

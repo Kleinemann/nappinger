@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 
 public partial class Player : Animal
 {
@@ -110,15 +111,21 @@ public partial class Player : Animal
 
     public override void _Process(double delta)
     {
-        PlayerWeapon();        
-        Movement();
-
-        if (!action)
+        //Turn to target direction
+        if (Target is Node2D targetNode)
         {
-            UpdateAnimation();
+            Vector2 direction = (targetNode.GlobalPosition - GlobalPosition).Normalized();
+            Velocity = direction;
         }
 
-        if(State == GameObjectState.WAITING)
+        PlayerWeapon();
+
+        if (State != GameObjectState.FIGHTING && State != GameObjectState.WORKING)
+            Movement();
+
+        UpdateAnimation();
+
+        if (State == GameObjectState.WAITING)
         {
             State = GameObjectState.IDLE;
             return;
@@ -130,6 +137,27 @@ public partial class Player : Animal
             SetNextState();
         }
     }
+
+    public async Task DoWork(BuildItem buildItem)
+    {
+        State = GameObjectState.WORKING;
+        AnimatedSprite2D n = buildItem.GetNode<AnimatedSprite2D>("SpriteWorking");
+        n.Visible = true;
+        n.Play("default");
+
+        await ToSignal(GetTree().CreateTimer(5.0f), SceneTreeTimer.SignalName.Timeout);
+        State = GameObjectState.WAITING;
+
+        Vector2I coords = WorldMain.Instance.Map.GetCoords(buildItem.Position);
+
+        WorldMap map = WorldMain.Instance.Map;
+        Chunk chunk = map.GetChunk(coords);
+        chunk.BuildItems.Remove(buildItem);
+
+        WorldMain.Instance.Map.ObjectLayer.SetCell(coords, 2, buildItem.AtlasCoords, 0);
+        buildItem.QueueFree();
+    }
+
 
     public void SetSearch(string search)
     {
@@ -202,20 +230,16 @@ public partial class Player : Animal
             && ((WorldMain.SelectedPlayer == this && Input.IsActionJustPressed("attack"))
                     || State == GameObjectState.FIGHTING))
         {
-            Vector2 direction = (((Node2D)Target).GlobalPosition - GlobalPosition).Normalized();
-            Velocity = direction;
-            UpdateAnimation();
-
             Weapon.Show();
             Animator.Play("attack_" + Direction);
             AnimatorShadow.Play("attack_" + Direction);
             Weapon.CollisionShape.Disabled = false;
+            ActionTimer.WaitTime = TIMES.FIGHT;
             ActionTimer.Start();
             action = true;
             PlaySound([SOUNDS.HIT_1, SOUNDS.HIT_2, SOUNDS.HIT_3, SOUNDS.HIT_4]);
         }
     }
-
 
     public int Collect(InventoryItem item, int amount = 1)
     {
@@ -257,7 +281,6 @@ public partial class Player : Animal
 
     public override void Movement()
     {
-        Velocity = Vector2.Zero;
         bool moving = false;
 
         //TODO: Only in first Person
@@ -307,7 +330,7 @@ public partial class Player : Animal
 
         if(State == GameObjectState.WORKING)
         {
-            animationName = "attack_" + Direction;
+            animationName = "working";
             PlaySoundBackground([SOUNDS.BUILD_1, SOUNDS.BUILD_2, SOUNDS.BUILD_3]);
         }
         else if (Velocity == Vector2.Zero)

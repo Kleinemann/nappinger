@@ -134,6 +134,14 @@ region = Rect2(180, 120, 90, 120)
 atlas = ExtResource("7_8kbi3")
 region = Rect2(270, 120, 90, 120)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nseec"]
+atlas = ExtResource("7_8kbi3")
+region = Rect2(540, 0, 90, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jabc"]
+atlas = ExtResource("7_8kbi3")
+region = Rect2(270, 360, 90, 120)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3bsk1"]
 animations = [{
 "frames": [{
@@ -279,6 +287,17 @@ animations = [{
 "loop": true,
 "name": &"walk_u",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nseec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jabc")
+}],
+"loop": true,
+"name": &"working",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5stuu"]
@@ -329,8 +348,8 @@ z_index = 1
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_3bsk1")
-animation = &"attack_u"
-frame_progress = 0.7735157
+animation = &"working"
+frame_progress = 0.6847093
 offset = Vector2(0, -16)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1555219098]

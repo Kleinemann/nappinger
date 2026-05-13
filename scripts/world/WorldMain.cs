@@ -95,12 +95,7 @@ public partial class WorldMain : Node2D
             GD.Print("WORLD CLICK");
             WorldMain.SelectedObject = null;
 
-            if (BuildMenu.SelectedItem != null)
-            {
-                BuildItem item = BuildItem.CreateBuildItem();
-                item.Position = Map.GetMouseCoords() * Chunk.TileSize;
-                WorldMain.Instance.AddChild(item);
-            }
+            BuildMenu.Instance?.CreateBuildItem();
         }
 
         //targeting

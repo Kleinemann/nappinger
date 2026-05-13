@@ -13,6 +13,8 @@ public partial class Chunk : GodotObject
     public Vector2I Coords;
     public int CellIndex;
 
+
+    public List<BuildItem> BuildItems = new List<BuildItem>();
     public WorldMap Map => WorldMain.Instance.Map;
 
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
@@ -50,6 +52,7 @@ public partial class Chunk : GodotObject
     {
  
     }
+
 
     public Vector2I[] GetTileCoords()
     {

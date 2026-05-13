@@ -1,9 +1,10 @@
 using Godot;
-using System;
+using System.Numerics;
 
 public partial class BuildItem : Area2D
 {
     DropItem Drop;
+    public Vector2I AtlasCoords;
 
     public override void _Ready()
     {
@@ -26,20 +27,24 @@ public partial class BuildItem : Area2D
             int rest = player.Inventory.Remove(Drop.Item, costs);
             if (rest == 0)
             {
-                player.State = GameObjectState.WORKING;
-                player.action = true;
-                Vector2I coords = WorldMain.Instance.Map.GetCoords(Position);
-
-                WorldMain.Instance.Map.ObjectLayer.SetCell(coords, 2, new Vector2I(0, 0), 0);
-                QueueFree();
+                _ = player.DoWork(this);
             }
         }
     }
 
-    public static BuildItem CreateBuildItem()
+    public static BuildItem CreateBuildItem(Button btnBuild)
     {
+        Vector2I atlasCoords = (Vector2I)btnBuild.GetMeta("Atlas");
+
+        if(atlasCoords == new Vector2I(-1, -1))
+            return null;
+
         PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/BuildItem.tscn");
         BuildItem item = scene.Instantiate<BuildItem>();
+        item.AtlasCoords = atlasCoords;
+
+        Sprite2D sprite = item.GetNode<Sprite2D>("Sprite2D");
+        sprite.Texture = btnBuild.Icon;
 
         return item;
     }

@@ -56,6 +56,7 @@ public partial class Weapon : Node2D
         if (death)
         {
             Animal animal = GetParent<Animal>();
+            animal.Target = null;
             animal.State = GameObjectState.WAITING;
         }
     }

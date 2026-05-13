@@ -1,45 +1,85 @@
 using Godot;
+using System;
 
 public partial class BuildMenu : Panel
 {
     Button btn1;
     Button btn2;
+    Button btn3;
 
-    public static Button SelectedItem;
+    public static Button SelectedButton;
+    public static BuildMenu Instance;
 
     public override void _Ready()
     {
         btn1 = GetNode<Button>("HFlowContainer/BtnFloor1");
         btn2 = GetNode<Button>("HFlowContainer/BtnFloor2");
+        btn3 = GetNode<Button>("HFlowContainer/BtnFloorDel");
 
         btn1.Pressed += () => Btn_Pressed(btn1);
-        btn2.Pressed += () => Btn_Pressed(btn1);
+        btn2.Pressed += () => Btn_Pressed(btn2);
+        btn3.Pressed += () => Btn_Pressed(btn3);
+
+        SelectedButton = btn1;
 
         Hidden += BuildMenu_Hidden;
     }
 
     private void BuildMenu_Hidden()
     {
-        SelectedItem = null;
+        SelectedButton = null;
     }
 
     private void Btn_Pressed(Button button)
     {
-        SelectedItem = button;
+        SelectedButton = button;
     }
 
     public void ShowBuildMenu()
     {
-        if (btn1.ButtonPressed)
-            SelectedItem = btn1;
-        else
-            SelectedItem = btn2;
+        Instance = this;        
         Show();
     }
 
     public void HideBuildMenu()
     {
-        SelectedItem = null;
+        Instance = null;
         Hide();
+    }
+
+    internal void CreateBuildItem()
+    {
+        Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
+
+        if(coords.X % 2 == 1)
+            coords.X -= 1;
+
+        if(coords.Y % 2 == 1)
+            coords.Y -= 1;
+
+        WorldMap map = WorldMain.Instance.Map;
+        Chunk chunk = map.GetChunk(WorldMain.Instance.Map.GetMouseCoords());
+
+        BuildItem item = BuildItem.CreateBuildItem(SelectedButton);
+
+        foreach (BuildItem bi in chunk.BuildItems)
+        {
+            if (bi.Position == coords)
+            {
+                if (item == null)
+                {
+                    chunk.BuildItems.Remove(bi);
+                    bi.QueueFree();
+                }
+                return;
+            }
+        }
+
+        if(item == null)
+            return;
+
+        item.Position = map.GetMouseCoords() * Chunk.TileSize;
+        WorldMain.Instance.AddChild(item);
+        chunk.BuildItems.Add(item);
     }
 }

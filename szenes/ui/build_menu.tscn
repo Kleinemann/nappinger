@@ -48,6 +48,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_ia52a")
 icon = ExtResource("2_62gpy")
 icon_alignment = 1
+metadata/Atlas = Vector2i(0, 0)
 
 [node name="BtnFloor2" type="Button" parent="HFlowContainer" unique_id=29788949]
 custom_minimum_size = Vector2(72, 72)
@@ -57,3 +58,14 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_ia52a")
 icon = ExtResource("5_8d4a6")
 icon_alignment = 1
+metadata/Atlas = Vector2i(2, 0)
+
+[node name="BtnFloorDel" type="Button" parent="HFlowContainer" unique_id=2040218198]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme = ExtResource("2_nqbdb")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ia52a")
+text = "X"
+icon_alignment = 1
+metadata/Atlas = Vector2i(-1, -1)

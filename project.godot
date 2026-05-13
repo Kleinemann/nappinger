@@ -38,6 +38,7 @@ R_Stone=""
 R_Wood=""
 R_Ore=""
 R_Metal=""
+Working=""
 
 [input]
 
