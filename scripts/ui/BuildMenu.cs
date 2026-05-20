@@ -51,11 +51,10 @@ public partial class BuildMenu : Panel
     {
         Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
 
-        if(coords.X % 2 == 1)
-            coords.X -= 1;
+        coords.X -= coords.X % (Chunk.TileSize * 2);
+        coords.Y -= coords.Y % (Chunk.TileSize * 2);
 
-        if(coords.Y % 2 == 1)
-            coords.Y -= 1;
+        GD.Print(coords);
 
         WorldMap map = WorldMain.Instance.Map;
         Chunk chunk = map.GetChunk(WorldMain.Instance.Map.GetMouseCoords());
@@ -78,7 +77,7 @@ public partial class BuildMenu : Panel
         if(item == null)
             return;
 
-        item.Position = map.GetMouseCoords() * Chunk.TileSize;
+        item.Position = coords;
         WorldMain.Instance.AddChild(item);
         chunk.BuildItems.Add(item);
     }
