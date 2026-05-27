@@ -4,6 +4,10 @@ using System.Text.RegularExpressions;
 
 public partial class WorldMain : Node2D
 {
+    [Export]
+    public bool UseStartPosition = false;
+    [Export]
+    public Vector2 StartPosition;
     public static WorldMain Instance;
     public CameraScroll Camera;
     public WorldMap Map;
@@ -30,7 +34,8 @@ public partial class WorldMain : Node2D
         Camera = GetNode<CameraScroll>("Camera2D");
         SoundPlayer = GetNode<AudioStreamPlayer>("SoundPlayer");
 
-        Vector2 v2 = TOOLS.GetGeoLocation();
+        Vector2 v2 = UseStartPosition ? StartPosition : TOOLS.GetGeoLocation();
+
         Vector2I coord = new Vector2I((int)v2.X * 10, (int)v2.Y * 10);
         Camera.Position = Map.CoordsToPosition(coord);
 
