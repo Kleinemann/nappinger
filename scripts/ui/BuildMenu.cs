@@ -47,38 +47,48 @@ public partial class BuildMenu : Panel
         Hide();
     }
 
-    internal void CreateBuildItem()
+    public void CreateBuildItem()
     {
-        Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
-
-        coords.X -= coords.X % (Chunk.TileSize * 2);
-        coords.Y -= coords.Y % (Chunk.TileSize * 2);
-
-        GD.Print(coords);
-
         WorldMap map = WorldMain.Instance.Map;
-        Chunk chunk = map.GetChunk(WorldMain.Instance.Map.GetMouseCoords());
 
-        BuildItem item = BuildItem.CreateBuildItem(SelectedButton);
+        Vector2 gMouse = GetGlobalMousePosition() * WorldMain.Instance.Camera.Scale;
+        Vector2I mouseCoords = map.BuildingFloor.LocalToMap(gMouse);
 
-        foreach (BuildItem bi in chunk.BuildItems)
+
+        if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
         {
-            if (bi.Position == coords)
-            {
-                if (item == null)
-                {
-                    chunk.BuildItems.Remove(bi);
-                    bi.QueueFree();
-                }
-                return;
-            }
+            map.BuildingFloor.SetCell(mouseCoords, 1, new Vector2I(0, 0), 0); 
         }
+        //Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
 
-        if(item == null)
-            return;
+        //coords.X -= coords.X % (Chunk.TileSize * 2);
+        //coords.Y -= coords.Y % (Chunk.TileSize * 2);
 
-        item.Position = coords;
-        WorldMain.Instance.AddChild(item);
-        chunk.BuildItems.Add(item);
+        //GD.Print(coords);
+
+        //WorldMap map = WorldMain.Instance.Map;
+        //Chunk chunk = map.GetChunk(WorldMain.Instance.Map.GetMouseCoords());
+
+        //BuildItem item = BuildItem.CreateBuildItem(SelectedButton);
+
+        //foreach (BuildItem bi in chunk.BuildItems)
+        //{
+        //    if (bi.Position == coords)
+        //    {
+        //        if (item == null)
+        //        {
+        //            chunk.BuildItems.Remove(bi);
+        //            bi.QueueFree();
+        //        }
+        //        return;
+        //    }
+        //}
+
+        //if(item == null)
+        //    return;
+
+        //item.Position = coords;
+        //WorldMain.Instance.AddChild(item);
+        //chunk.BuildItems.Add(item);
     }
 }

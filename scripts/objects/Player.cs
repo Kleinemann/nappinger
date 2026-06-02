@@ -273,26 +273,6 @@ public partial class Player : Animal
     {
         bool moving = false;
 
-//        if (State != GameObjectState.FIGHTING && State != GameObjectState.WORKING)
-
-/*
- * 
-        //Turn to target direction
-        if (Target is Node2D targetNode)
-        {
-            Vector2 direction = (targetNode.GlobalPosition - GlobalPosition).Normalized();
-            Velocity = direction;
-
-            if (Velocity == Vector2.Zero)
-                Direction = "d";
-            else if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
-                Direction = Velocity.X > 0 ? "r" : "l";
-            else
-                Direction = Velocity.Y > 0 ? "d" : "u";
-        }
-*/
-
-
         //TODO: Only in first Person
         if (WorldMain.SelectedPlayer == this && State != GameObjectState.WALKING)
         {

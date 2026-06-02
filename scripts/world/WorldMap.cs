@@ -26,6 +26,10 @@ public partial class WorldMap : Node2D
     public TileMapLayer WorldLayer;
     public TileMapLayer ObjectLayer;
 
+    public TileMapLayer BuildingFloor;
+    public TileMapLayer BuildingWalls;
+    public TileMapLayer BuildingRoof;    
+
     WorldMain World => WorldMain.Instance;
     int ChunkRange => Chunk.ChunkRange;
     Vector2I CurrentChunk = Vector2I.MinValue;
@@ -37,6 +41,9 @@ public partial class WorldMap : Node2D
         OffsetLayer = GetNode<TileMapLayer>("OffsetGrid");
         WorldLayer = GetNode<TileMapLayer>("WorldGrid");
         ObjectLayer = GetNode<TileMapLayer>("ObjectGrid");
+        BuildingFloor = GetNode<TileMapLayer>("BuildingFloor");
+        BuildingWalls = GetNode<TileMapLayer>("BuildingWalls");
+        BuildingRoof = GetNode<TileMapLayer>("BuildingRoof");
     }
 
     public void UpdateMap()
