@@ -135,7 +135,7 @@ public partial class Player : Animal
         n.Visible = true;
         n.Play("default");
 
-        await ToSignal(GetTree().CreateTimer(5.0f), SceneTreeTimer.SignalName.Timeout);
+        await ToSignal(GetTree().CreateTimer(0.1f), SceneTreeTimer.SignalName.Timeout);
         State = GameObjectState.WAITING;
 
         Vector2I coords = WorldMain.Instance.Map.GetCoords(buildItem.Position);
@@ -144,7 +144,8 @@ public partial class Player : Animal
         Chunk chunk = map.GetChunk(coords);
         chunk.BuildItems.Remove(buildItem);
 
-        WorldMain.Instance.Map.ObjectLayer.SetCell(coords, 2, buildItem.AtlasCoords, 0);
+        WorldMain.Instance.Map.BuildingFloor.SetCell(buildItem.WorldCoords, 0, buildItem.AtlasCoords, 0);
+        WorldMain.Instance.Map.BuildingWalls.SetCellsTerrainConnect([buildItem.WorldCoords], 0, 0);
         buildItem.QueueFree();
     }
 

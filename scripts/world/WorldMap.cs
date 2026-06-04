@@ -55,10 +55,6 @@ public partial class WorldMap : Node2D
         Vector2I p2 = (Vector2I)(p1 / new Vector2(Chunk.ChunkSize, Chunk.ChunkSize));
         Vector2I ChunkCoord = p2;
 
-        //Vector2I cMouse = GetMouseCoords();
-        //Vector2I ChunkCoord2 = GetChunkCoords(cMouse);
-        //GD.Print("Mouse POS: " + ChunkCoord2 + " Chunk: " + ChunkCoord);
-
         //kein Update wenn selber Chunk
         if (ChunkCoord == CurrentChunk)
         {

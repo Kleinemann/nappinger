@@ -51,14 +51,20 @@ public partial class BuildMenu : Panel
     {
         WorldMap map = WorldMain.Instance.Map;
 
-        Vector2 gMouse = GetGlobalMousePosition() * WorldMain.Instance.Camera.Scale;
-        Vector2I mouseCoords = map.BuildingFloor.LocalToMap(gMouse);
-
+        Vector2I mouseCoords = map.BuildingFloor.LocalToMap(WorldMain.Instance.Camera.GetGlobalMousePosition());
 
         if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
         {
-            map.BuildingFloor.SetCell(mouseCoords, 1, new Vector2I(0, 0), 0); 
+            map.BuildingFloor.SetCell(mouseCoords, 1, new Vector2I(0, 0), 0);
+
+            BuildItem item = BuildItem.CreateBuildItem(SelectedButton, mouseCoords);
+            item.Position = map.BuildingFloor.MapToLocal(mouseCoords);
+            WorldMain.Instance.AddChild(item);
         }
+
+
+
+
         //Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
 
         //coords.X -= coords.X % (Chunk.TileSize * 2);

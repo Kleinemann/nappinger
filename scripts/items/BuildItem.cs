@@ -5,6 +5,7 @@ public partial class BuildItem : Area2D
 {
     DropItem Drop;
     public Vector2I AtlasCoords;
+    public Vector2I WorldCoords;
 
     public override void _Ready()
     {
@@ -32,7 +33,7 @@ public partial class BuildItem : Area2D
         }
     }
 
-    public static BuildItem CreateBuildItem(Button btnBuild)
+    public static BuildItem CreateBuildItem(Button btnBuild, Vector2I wordCoords)
     {
         Vector2I atlasCoords = (Vector2I)btnBuild.GetMeta("Atlas");
 
@@ -42,10 +43,7 @@ public partial class BuildItem : Area2D
         PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/BuildItem.tscn");
         BuildItem item = scene.Instantiate<BuildItem>();
         item.AtlasCoords = atlasCoords;
-
-        Sprite2D sprite = item.GetNode<Sprite2D>("Sprite2D");
-        sprite.Texture = btnBuild.Icon;
-
+        item.WorldCoords = wordCoords;
         return item;
     }
 }
