@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://rnp4thajomvd" path="res://assets/tiles/floorTilesPlan.png" id="10_1d8lm"]
 [ext_resource type="Texture2D" uid="uid://bkbesvd7yrn4m" path="res://assets/tiles/wallTiles.png" id="10_f8u5v"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
+[ext_resource type="Texture2D" uid="uid://b2ghepunrm306" path="res://assets/tiles/buildings/door.png" id="12_o3lj0"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm8jy"]
@@ -530,6 +531,11 @@ texture_region_size = Vector2i(64, 64)
 1:1/0/terrains_peering_bit/top_side = 0
 1:1/0/terrains_peering_bit/top_right_corner = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2xwxs"]
+texture = ExtResource("12_o3lj0")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_2xwxs"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
@@ -537,6 +543,7 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Walls"
 terrain_set_0/terrain_0/color = Color(0.5019608, 0.34509805, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_ckhle")
+sources/1 = SubResource("TileSetAtlasSource_2xwxs")
 
 [node name="World" type="Node2D" unique_id=1278773746]
 script = ExtResource("1_tgi5o")

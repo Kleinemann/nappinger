@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dctx3m6gyl1vy" path="res://assets/tiles/buildings/floor1.png" id="2_62gpy"]
 [ext_resource type="Theme" uid="uid://b6lf2o4pwadqv" path="res://assets/theme.tres" id="2_nqbdb"]
 [ext_resource type="Texture2D" uid="uid://cs1aqn2uda8m2" path="res://assets/tiles/buildings/floor2.png" id="5_8d4a6"]
+[ext_resource type="Texture2D" uid="uid://b2ghepunrm306" path="res://assets/tiles/buildings/door.png" id="5_hjgcx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjgcx"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -69,3 +70,28 @@ button_group = SubResource("ButtonGroup_ia52a")
 text = "X"
 icon_alignment = 1
 metadata/Atlas = Vector2i(-1, -1)
+
+[node name="Label2" type="Label" parent="." unique_id=1472596706]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 100.0
+offset_right = 45.0
+offset_bottom = 123.0
+text = "Tür:"
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="." unique_id=1042226548]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 122.0
+offset_right = 78.0
+offset_bottom = 194.0
+
+[node name="BtnDoor1" type="Button" parent="HFlowContainer2" unique_id=763042609]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme = ExtResource("2_nqbdb")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ia52a")
+icon = ExtResource("5_hjgcx")
+icon_alignment = 1
+metadata/Atlas = Vector2i(0, 0)

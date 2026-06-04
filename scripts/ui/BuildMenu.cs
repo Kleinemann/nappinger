@@ -6,6 +6,7 @@ public partial class BuildMenu : Panel
     Button btn1;
     Button btn2;
     Button btn3;
+    Button btn4;
 
     public static Button SelectedButton;
     public static BuildMenu Instance;
@@ -15,10 +16,12 @@ public partial class BuildMenu : Panel
         btn1 = GetNode<Button>("HFlowContainer/BtnFloor1");
         btn2 = GetNode<Button>("HFlowContainer/BtnFloor2");
         btn3 = GetNode<Button>("HFlowContainer/BtnFloorDel");
+        btn4 = GetNode<Button>("HFlowContainer2/BtnDoor1");
 
         btn1.Pressed += () => Btn_Pressed(btn1);
         btn2.Pressed += () => Btn_Pressed(btn2);
         btn3.Pressed += () => Btn_Pressed(btn3);
+        btn4.Pressed += () => Btn_Pressed(btn4);
 
         SelectedButton = btn1;
 
@@ -63,7 +66,14 @@ public partial class BuildMenu : Panel
         WorldMap map = WorldMain.Instance.Map;
         Vector2I mouseCoords = map.BuildingFloor.LocalToMap(WorldMain.Instance.Camera.GetGlobalMousePosition());
 
-        if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
+        if(SelectedButton == btn4)
+        {
+            if(map.BuildingWalls.GetCellAtlasCoords(mouseCoords) != new Vector2I(-1, -1) && map.BuildingWalls.GetCellSourceId(mouseCoords) == 0)
+            {
+                map.BuildingWalls.SetCell(mouseCoords, 1, new Vector2I(0,0), 0);
+            }
+        }
+        else if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
         {
             map.BuildingFloor.SetCell(mouseCoords, 1, atlasCoords, 0);
 
