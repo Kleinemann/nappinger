@@ -33,7 +33,7 @@ public partial class BuildItem : Area2D
         }
     }
 
-    public static BuildItem CreateBuildItem(Button btnBuild, Vector2I wordCoords)
+    public static BuildItem CreateBuildItem(Button btnBuild, Vector2I worldCoords)
     {
         Vector2I atlasCoords = (Vector2I)btnBuild.GetMeta("Atlas");
 
@@ -43,7 +43,7 @@ public partial class BuildItem : Area2D
         PackedScene scene = GD.Load<PackedScene>("res://szenes/objects/BuildItem.tscn");
         BuildItem item = scene.Instantiate<BuildItem>();
         item.AtlasCoords = atlasCoords;
-        item.WorldCoords = wordCoords;
+        item.WorldCoords = worldCoords;
         return item;
     }
 }

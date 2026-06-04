@@ -49,52 +49,55 @@ public partial class BuildMenu : Panel
 
     public void CreateBuildItem()
     {
-        WorldMap map = WorldMain.Instance.Map;
+        if (SelectedButton == null)
+            return;
 
+        Vector2I atlasCoords = (Vector2I)SelectedButton.GetMeta("Atlas");
+
+        if (atlasCoords == new Vector2I(-1, -1))
+        {
+            DeleteBuildItem();
+            return;
+        }
+
+        WorldMap map = WorldMain.Instance.Map;
         Vector2I mouseCoords = map.BuildingFloor.LocalToMap(WorldMain.Instance.Camera.GetGlobalMousePosition());
 
         if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
         {
-            map.BuildingFloor.SetCell(mouseCoords, 1, new Vector2I(0, 0), 0);
+            map.BuildingFloor.SetCell(mouseCoords, 1, atlasCoords, 0);
 
             BuildItem item = BuildItem.CreateBuildItem(SelectedButton, mouseCoords);
             item.Position = map.BuildingFloor.MapToLocal(mouseCoords);
             WorldMain.Instance.AddChild(item);
         }
+    }
 
+    public void DeleteBuildItem()
+    {
+        WorldMap map = WorldMain.Instance.Map;
+        Vector2I mouseCoords = map.BuildingFloor.LocalToMap(WorldMain.Instance.Camera.GetGlobalMousePosition());
 
+        if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) != new Vector2I(-1, -1) && map.BuildingFloor.GetCellSourceId(mouseCoords) == 1)
+        {
+            map.BuildingFloor.EraseCell(mouseCoords);
+            map.BuildingWalls.EraseCell(mouseCoords);
 
+            BuildItem item = null;
+            foreach(Node node in GetTree().GetNodesInGroup("Working"))
+            {
+                if(node is BuildItem buildItem)
+                {
+                    if (buildItem.WorldCoords == mouseCoords)
+                    {
+                        item = buildItem;
+                        break;
+                    }
+                }
+            }
 
-        //Vector2I coords = WorldMain.Instance.Map.GetMouseCoords() * Chunk.TileSize;
-
-        //coords.X -= coords.X % (Chunk.TileSize * 2);
-        //coords.Y -= coords.Y % (Chunk.TileSize * 2);
-
-        //GD.Print(coords);
-
-        //WorldMap map = WorldMain.Instance.Map;
-        //Chunk chunk = map.GetChunk(WorldMain.Instance.Map.GetMouseCoords());
-
-        //BuildItem item = BuildItem.CreateBuildItem(SelectedButton);
-
-        //foreach (BuildItem bi in chunk.BuildItems)
-        //{
-        //    if (bi.Position == coords)
-        //    {
-        //        if (item == null)
-        //        {
-        //            chunk.BuildItems.Remove(bi);
-        //            bi.QueueFree();
-        //        }
-        //        return;
-        //    }
-        //}
-
-        //if(item == null)
-        //    return;
-
-        //item.Position = coords;
-        //WorldMain.Instance.AddChild(item);
-        //chunk.BuildItems.Add(item);
+            if (item != null)
+                item.QueueFree();
+        }
     }
 }
