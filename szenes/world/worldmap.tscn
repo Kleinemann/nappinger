@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://rnp4thajomvd" path="res://assets/tiles/floorTilesPlan.png" id="10_1d8lm"]
 [ext_resource type="Texture2D" uid="uid://bkbesvd7yrn4m" path="res://assets/tiles/wallTiles.png" id="10_f8u5v"]
 [ext_resource type="AudioStream" uid="uid://bultg3na8d5hs" path="res://assets/sounds/Cute RPG - Adorable Adventures (Loopable).mp3" id="10_x812f"]
-[ext_resource type="Texture2D" uid="uid://b2ghepunrm306" path="res://assets/tiles/buildings/door.png" id="12_o3lj0"]
+[ext_resource type="Texture2D" uid="uid://cirms6to0k722" path="res://assets/tiles/doorTiles.png" id="12_o3lj0"]
 [ext_resource type="PackedScene" uid="uid://wu647omd2idc" path="res://szenes/ui/hud.tscn" id="12_s58pj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm8jy"]
@@ -535,6 +535,11 @@ texture_region_size = Vector2i(64, 64)
 texture = ExtResource("12_o3lj0")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0.5644722, -16.087505, 0.5644722, -15.523033, 32, -32, 32)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(16.087502, 1.1289482, 32, 1.6934204, 32, 32, 16.651978, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -16.087505, -32, -16.651978, 1.1289482, -32, 0)
+1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(16.651978, -32, 32, -32, 32, -0.564476, 16.087502, 0)
 
 [sub_resource type="TileSet" id="TileSet_2xwxs"]
 tile_size = Vector2i(64, 64)

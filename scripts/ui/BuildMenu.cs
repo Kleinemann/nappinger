@@ -1,5 +1,7 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Runtime.CompilerServices;
 
 public partial class BuildMenu : Panel
 {
@@ -66,13 +68,24 @@ public partial class BuildMenu : Panel
         WorldMap map = WorldMain.Instance.Map;
         Vector2I mouseCoords = map.BuildingFloor.LocalToMap(WorldMain.Instance.Camera.GetGlobalMousePosition());
 
+        //Tür
         if(SelectedButton == btn4)
         {
             if(map.BuildingWalls.GetCellAtlasCoords(mouseCoords) != new Vector2I(-1, -1) && map.BuildingWalls.GetCellSourceId(mouseCoords) == 0)
             {
-                map.BuildingWalls.SetCell(mouseCoords, 1, new Vector2I(0,0), 0);
+                Vector2I atlasCell = map.BuildingWalls.GetCellAtlasCoords(mouseCoords);
+                Vector2I cellTop = new Vector2I(1, 0);
+                Vector2I cellBot = new Vector2I(1, 2);
+
+                if (atlasCell == cellTop || atlasCell == cellBot)
+                {
+                    if(atlasCell == cellTop)
+                        map.BuildingWalls.SetCell(mouseCoords, 1, new Vector2I(1, 0), 0);
+                    else
+                        map.BuildingWalls.SetCell(mouseCoords, 1, new Vector2I(0, 0), 0);
+                }
             }
-        }
+        }//Alle anderen
         else if (map.BuildingFloor.GetCellAtlasCoords(mouseCoords) == new Vector2I(-1, -1))
         {
             map.BuildingFloor.SetCell(mouseCoords, 1, atlasCoords, 0);
