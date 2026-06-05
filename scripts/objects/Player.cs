@@ -146,6 +146,7 @@ public partial class Player : Animal
 
         WorldMain.Instance.Map.BuildingFloor.SetCell(buildItem.WorldCoords, 0, buildItem.AtlasCoords, 0);
         WorldMain.Instance.Map.BuildingWalls.SetCellsTerrainConnect([buildItem.WorldCoords], 0, 0);
+        WorldMain.Instance.Map.BuildingRoof.SetCellsTerrainConnect([buildItem.WorldCoords], 0, 0);
         buildItem.QueueFree();
     }
 
@@ -313,6 +314,14 @@ public partial class Player : Animal
 
             Velocity *= Speed;
             MoveAndSlide();
+
+            Vector2I RoofTile = WorldMain.Instance.Map.BuildingRoof.LocalToMap(Position);
+            int id = WorldMain.Instance.Map.BuildingRoof.GetCellSourceId(RoofTile);
+
+            if (id == -1)
+                WorldMain.Instance.Map.BuildingRoof.Visible = true;
+            else
+                WorldMain.Instance.Map.BuildingRoof.Visible = false;
         }
     }
 
