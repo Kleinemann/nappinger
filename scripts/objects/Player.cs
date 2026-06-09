@@ -142,7 +142,6 @@ public partial class Player : Animal
 
         WorldMap map = WorldMain.Instance.Map;
         Chunk chunk = map.GetChunk(coords);
-        chunk.BuildItems.Remove(buildItem);
 
         WorldMain.Instance.Map.BuildingFloor.SetCell(buildItem.WorldCoords, 0, buildItem.AtlasCoords, 0);
         WorldMain.Instance.Map.BuildingWalls.SetCellsTerrainConnect([buildItem.WorldCoords], 0, 0);

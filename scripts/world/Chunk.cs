@@ -13,8 +13,6 @@ public partial class Chunk : GodotObject
     public Vector2I Coords;
     public int CellIndex;
 
-
-    public List<BuildItem> BuildItems = new List<BuildItem>();
     public WorldMap Map => WorldMain.Instance.Map;
 
     readonly Vector2I[] NEIGHBOURS = new Vector2I[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
@@ -236,7 +234,39 @@ public partial class Chunk : GodotObject
         {
             Map.WorldLayer.EraseCell(tileCoord);
             Map.ObjectLayer.EraseCell(tileCoord);
+            Map.BuildingFloor.EraseCell(tileCoord);
+            Map.BuildingWalls.EraseCell(tileCoord);
+            Map.BuildingRoof.EraseCell(tileCoord);
             RefreshOffset(tileCoord);
         }
+
+        //Nodes löschen
+        List<Node2D> del = GetNodesInChunk();
+        foreach (Node2D node in del)
+        {
+            GD.Print($"Delete Node {node.Name} in Chunk {Coords}");
+            node.QueueFree();
+        }
+    }
+
+    public List<Node2D> GetNodesInChunk()
+    {
+        List<Node2D> nodes = new List<Node2D>();
+        Rect2 region = new Rect2(Coords * ChunkSize * TileSize, new Vector2(ChunkSize * TileSize, ChunkSize * TileSize));
+
+        foreach (Node2D node in Map.GetChildren())
+        {
+            if(node is TileMapLayer)
+            {
+                continue;
+            }
+
+            if (region.HasPoint(node.Position))
+            {
+                nodes.Add(node);
+            }
+        }
+
+        return nodes;
     }
 }
