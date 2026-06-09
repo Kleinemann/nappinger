@@ -241,30 +241,35 @@ public partial class Chunk : GodotObject
         }
 
         //Nodes löschen
-        List<Node2D> del = GetNodesInChunk();
-        foreach (Node2D node in del)
+        List<Node> del = GetNodesInChunk();
+        foreach (Node node in del)
         {
             GD.Print($"Delete Node {node.Name} in Chunk {Coords}");
             node.QueueFree();
         }
     }
 
-    public List<Node2D> GetNodesInChunk()
+    public List<Node> GetNodesInChunk()
     {
-        List<Node2D> nodes = new List<Node2D>();
+        List<Node> nodes = new List<Node>();
         Rect2 region = new Rect2(Coords * ChunkSize * TileSize, new Vector2(ChunkSize * TileSize, ChunkSize * TileSize));
 
-        foreach (Node2D node in Map.GetChildren())
+        foreach(Node node in Map.GetChildren())
         {
-            if(node is TileMapLayer)
-            {
+            if (node is TileMapLayer)
                 continue;
-            }
 
-            if (region.HasPoint(node.Position))
+            if(node is Area2D || node is Node2D)
             {
                 nodes.Add(node);
             }
+
+            /*
+            if (region.HasPoint(node.Position))
+            {
+                GD.Print($"Node {node.Name} in Chunk {Coords}");
+                nodes.Add(node);
+            }*/
         }
 
         return nodes;
