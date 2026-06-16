@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using static WorldMap;
 
 public partial class Chunk : GodotObject
@@ -116,7 +117,7 @@ public partial class Chunk : GodotObject
 
                 DropItem item = DropItem.CreateDropItem(resourceName, amount);
                 item.Position = tileCoord * TileSize;
-                WorldMain.Instance.AddChild(item);
+                WorldMain.Instance.Map.AddChild(item);
             }
 
             //add Big Tree / Rock
@@ -229,14 +230,25 @@ public partial class Chunk : GodotObject
 
     public void Clean()
     {
+        TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
+
         //Karte Löschen
         foreach (Vector2I tileCoord in GetTileCoords())
         {
-            Map.WorldLayer.EraseCell(tileCoord);
-            Map.ObjectLayer.EraseCell(tileCoord);
-            Map.BuildingFloor.EraseCell(tileCoord);
-            Map.BuildingWalls.EraseCell(tileCoord);
-            Map.BuildingRoof.EraseCell(tileCoord);
+            for(int l = 0; l < layers.Length; l++)
+            {
+                TileMapLayer layer = layers[l];
+
+                TileDataCell dataCell = new TileDataCell()
+                {
+                    LayerId = l,
+                    Coords = tileCoord,
+                    AtlasCoords = layer.GetCellAtlasCoords(tileCoord),
+                    AtlasIndex = layer.GetCellSourceId(tileCoord)
+                };
+
+                layer.EraseCell(tileCoord);
+            }
             RefreshOffset(tileCoord);
         }
 
@@ -244,7 +256,7 @@ public partial class Chunk : GodotObject
         List<Node> del = GetNodesInChunk();
         foreach (Node node in del)
         {
-            GD.Print($"Delete Node {node.Name} in Chunk {Coords}");
+            //GD.Print($"Delete Node {node.Name} in Chunk {Coords}");
             node.QueueFree();
         }
     }
@@ -259,17 +271,22 @@ public partial class Chunk : GodotObject
             if (node is TileMapLayer)
                 continue;
 
-            if(node is Area2D || node is Node2D)
+            if (node is Area2D || node is Node2D)
             {
                 nodes.Add(node);
             }
 
-            /*
-            if (region.HasPoint(node.Position))
+            if(node is Area2D a2)
             {
-                GD.Print($"Node {node.Name} in Chunk {Coords}");
-                nodes.Add(node);
-            }*/
+                if (region.HasPoint(a2.Position))
+                    nodes.Add(node);
+            }
+
+            if(node is Node2D n2)
+            {
+                if(region.HasPoint(n2.Position))
+                    nodes.Add(node);
+            }
         }
 
         return nodes;

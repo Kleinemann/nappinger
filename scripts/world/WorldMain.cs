@@ -94,7 +94,13 @@ public partial class WorldMain : Node2D
             Camera.SwitchFocus();
         }
 
-        //Deselect 
+        //Show Position
+        if (Input.IsMouseButtonPressed(MouseButton.Middle))
+        {
+            GD.Print("Mouse Position: " + WorldMain.Instance.Camera.GetGlobalMousePosition());
+        }
+
+            //Deselect 
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
             GD.Print("WORLD CLICK");
