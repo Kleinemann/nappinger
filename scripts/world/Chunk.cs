@@ -1,8 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+using System.Text.Json;
 using static WorldMap;
 
 public partial class Chunk : GodotObject
@@ -232,25 +231,52 @@ public partial class Chunk : GodotObject
     {
         TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
 
+        ChunkData chunkData = new ChunkData()
+        {
+            Coords = Coords
+        };
+
         //Karte Löschen
         foreach (Vector2I tileCoord in GetTileCoords())
         {
-            for(int l = 0; l < layers.Length; l++)
+            for (int l = 0; l < layers.Length; l++)
             {
                 TileMapLayer layer = layers[l];
 
+                Vector2I atlasCoords = layer.GetCellAtlasCoords(tileCoord);
+
                 TileDataCell dataCell = new TileDataCell()
                 {
-                    LayerId = l,
-                    Coords = tileCoord,
-                    AtlasCoords = layer.GetCellAtlasCoords(tileCoord),
+                    Coords = new V2i(tileCoord.X, tileCoord.Y),
+                    AtlasCoords = new V2i(atlasCoords.X, atlasCoords.Y),
                     AtlasIndex = layer.GetCellSourceId(tileCoord)
                 };
 
+                if (chunkData.Layers[l] == null)
+                    chunkData.Layers[l] = new LayerData()
+                    {
+                        LayerId = l
+                    };
+
+                chunkData.Layers[l].TileDataCells.Add(dataCell);
+
                 layer.EraseCell(tileCoord);
             }
+
             RefreshOffset(tileCoord);
         }
+
+        FileAccess file = FileAccess.Open($"user://Chunks//chunk_{Coords.X}_{Coords.Y}.dat", FileAccess.ModeFlags.Write);
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            WriteIndented = true,
+            IncludeFields = true
+        };
+
+        string json = JsonSerializer.Serialize(chunkData, options);
+        //JsonSerializer.Deserialize<ChunkData>(json, JsonOptions);
+        file.StoreLine(json);
 
         //Nodes löschen
         List<Node> del = GetNodesInChunk();
