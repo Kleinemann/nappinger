@@ -92,7 +92,6 @@ public partial class WorldMap : Node2D
             {
                 //GD.Print("Add Chunk: " + c);
                 Chunk chunk = new Chunk(c);
-                chunk.Paint();
                 Chunks.Add(c, chunk);
             }
             else

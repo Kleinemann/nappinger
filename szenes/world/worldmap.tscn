@@ -127,23 +127,11 @@ resource_name = "Animals"
 scenes/1/scene = ExtResource("6_qw1xo")
 scenes/2/scene = ExtResource("7_pm8jy")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8u5v"]
-resource_name = "Floor"
-texture = ExtResource("9_s58pj")
-texture_region_size = Vector2i(32, 32)
-0:0/size_in_atlas = Vector2i(2, 2)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(16, 16)
-2:0/size_in_atlas = Vector2i(2, 2)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(16, 16)
-
 [sub_resource type="TileSet" id="TileSet_2fbf8"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_qw1xo")
 sources/1 = SubResource("TileSetScenesCollectionSource_pm8jy")
-sources/2 = SubResource("TileSetAtlasSource_f8u5v")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1d8lm"]
 texture = ExtResource("9_s58pj")

@@ -44,6 +44,10 @@ public partial class Chunk : GodotObject
     public Chunk(Vector2I coords)
     {
         Coords = coords;
+        if (FileAccess.FileExists($"user://Chunks//chunk_{Coords.X}_{Coords.Y}.dat"))
+            LoadChunk();
+        else
+            Paint();
     }
 
     public void Process()
@@ -229,6 +233,32 @@ public partial class Chunk : GodotObject
 
     public void Clean()
     {
+        SaveChunk();
+
+        TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
+
+        //Karte Löschen
+        foreach (Vector2I tileCoord in GetTileCoords())
+        {
+            foreach(TileMapLayer layer in layers)
+            {
+                layer.EraseCell(tileCoord);
+            }
+
+            RefreshOffset(tileCoord);
+        }
+
+        //Nodes löschen
+        List<Node> del = GetNodesInChunk();
+        foreach (Node node in del)
+        {
+            node.QueueFree();
+        }
+    }
+
+
+    public void SaveChunk()
+    {
         TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
 
         ChunkData chunkData = new ChunkData()
@@ -275,17 +305,37 @@ public partial class Chunk : GodotObject
         };
 
         string json = JsonSerializer.Serialize(chunkData, options);
-        //JsonSerializer.Deserialize<ChunkData>(json, JsonOptions);
         file.StoreLine(json);
+    }
 
-        //Nodes löschen
-        List<Node> del = GetNodesInChunk();
-        foreach (Node node in del)
+    public void LoadChunk()
+    {
+        FileAccess file = FileAccess.Open($"user://Chunks//chunk_{Coords.X}_{Coords.Y}.dat", FileAccess.ModeFlags.Read);
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
         {
-            //GD.Print($"Delete Node {node.Name} in Chunk {Coords}");
-            node.QueueFree();
+            WriteIndented = true,
+            IncludeFields = true
+        };
+
+        ChunkData chunkData = JsonSerializer.Deserialize<ChunkData>(file.GetAsText(), options);
+
+        TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
+
+        foreach (LayerData layerData in chunkData.Layers)
+        {
+            foreach (TileDataCell dataCell in layerData.TileDataCells)
+            {
+                layers[layerData.LayerId].SetCell(dataCell.Coords.ToVector2I(), dataCell.AtlasIndex, dataCell.AtlasCoords.ToVector2I(), 0);
+            }
+        }
+
+        foreach (Vector2I tileCoord in GetTileCoords())
+        {
+            RefreshOffset(tileCoord);
         }
     }
+
 
     public List<Node> GetNodesInChunk()
     {
