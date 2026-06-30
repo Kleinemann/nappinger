@@ -27,7 +27,8 @@ public class V2i
 public class ChunkData
 {
     public Vector2I Coords;
-    public LayerData[] Layers = new LayerData[5];
+    public List<TileDataCell> Map = new List<TileDataCell>();
+    public List<TileDataCell> Object = new List<TileDataCell>();
 
     public ChunkData() { }
 }
@@ -45,6 +46,17 @@ public class TileDataCell
     public V2i Coords;
     public V2i AtlasCoords;
     public int AtlasIndex;
+    public int Atlasalternative;
 
     public TileDataCell() { }
+
+    public TileDataCell(TileMapLayer tileLayer, Vector2I tileCoord)
+    {
+        Vector2I atlasCoords = tileLayer.GetCellAtlasCoords(tileCoord);
+
+        Coords = new V2i(tileCoord.X, tileCoord.Y);
+        AtlasCoords = new V2i(atlasCoords.X, atlasCoords.Y);
+        AtlasIndex = tileLayer.GetCellSourceId(tileCoord);
+        Atlasalternative = tileLayer.GetCellAlternativeTile(tileCoord);
+    }
 }

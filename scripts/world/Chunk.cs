@@ -259,42 +259,20 @@ public partial class Chunk : GodotObject
 
     public void SaveChunk()
     {
-        TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
+         ChunkData chunkData = new ChunkData();
 
-        ChunkData chunkData = new ChunkData()
-        {
-            Coords = Coords
-        };
-
-        //Karte Löschen
         foreach (Vector2I tileCoord in GetTileCoords())
         {
-            for (int l = 0; l < layers.Length; l++)
+            chunkData.Map.Add(new TileDataCell(Map.WorldLayer, tileCoord));
+
+
+            TileDataCell objectCell = new TileDataCell(Map.ObjectLayer, tileCoord);
+            if(objectCell.AtlasCoords.X > -1)
             {
-                TileMapLayer layer = layers[l];
-
-                Vector2I atlasCoords = layer.GetCellAtlasCoords(tileCoord);
-
-                TileDataCell dataCell = new TileDataCell()
-                {
-                    Coords = new V2i(tileCoord.X, tileCoord.Y),
-                    AtlasCoords = new V2i(atlasCoords.X, atlasCoords.Y),
-                    AtlasIndex = layer.GetCellSourceId(tileCoord)
-                };
-
-                if (chunkData.Layers[l] == null)
-                    chunkData.Layers[l] = new LayerData()
-                    {
-                        LayerId = l
-                    };
-
-                chunkData.Layers[l].TileDataCells.Add(dataCell);
-
-                layer.EraseCell(tileCoord);
+                chunkData.Object.Add(objectCell);
             }
-
-            RefreshOffset(tileCoord);
         }
+
 
         FileAccess file = FileAccess.Open($"user://Chunks//chunk_{Coords.X}_{Coords.Y}.dat", FileAccess.ModeFlags.Write);
 
@@ -320,19 +298,15 @@ public partial class Chunk : GodotObject
 
         ChunkData chunkData = JsonSerializer.Deserialize<ChunkData>(file.GetAsText(), options);
 
-        TileMapLayer[] layers = new TileMapLayer[] { Map.WorldLayer, Map.ObjectLayer, Map.BuildingFloor, Map.BuildingWalls, Map.BuildingRoof };
-
-        foreach (LayerData layerData in chunkData.Layers)
+        foreach(TileDataCell cell in chunkData.Map)
         {
-            foreach (TileDataCell dataCell in layerData.TileDataCells)
-            {
-                layers[layerData.LayerId].SetCell(dataCell.Coords.ToVector2I(), dataCell.AtlasIndex, dataCell.AtlasCoords.ToVector2I(), 0);
-            }
+            Map.WorldLayer.SetCell(cell.Coords.ToVector2I(), cell.AtlasIndex, cell.AtlasCoords.ToVector2I(), cell.Atlasalternative);
+            RefreshOffset(cell.Coords.ToVector2I());
         }
 
-        foreach (Vector2I tileCoord in GetTileCoords())
+        foreach (TileDataCell cell in chunkData.Object)
         {
-            RefreshOffset(tileCoord);
+            Map.ObjectLayer.SetCell(cell.Coords.ToVector2I(), cell.AtlasIndex, cell.AtlasCoords.ToVector2I(), cell.Atlasalternative);
         }
     }
 
