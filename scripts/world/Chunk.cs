@@ -263,13 +263,29 @@ public partial class Chunk : GodotObject
 
         foreach (Vector2I tileCoord in GetTileCoords())
         {
+            //Map
             chunkData.Map.Add(new TileDataCell(Map.WorldLayer, tileCoord));
 
-
+            //Objects
             TileDataCell objectCell = new TileDataCell(Map.ObjectLayer, tileCoord);
             if(objectCell.AtlasCoords.X > -1)
             {
-                chunkData.Object.Add(objectCell);
+                chunkData.Objects.Add(objectCell);
+            }
+
+            //Buildings
+            TileDataCell floorCell = new TileDataCell(Map.ObjectLayer, tileCoord);
+            TileDataCell wallCell = new TileDataCell(Map.ObjectLayer, tileCoord);
+            TileDataCell roofCell = new TileDataCell(Map.ObjectLayer, tileCoord);
+            if(floorCell.AtlasCoords.X > -1)
+            {
+                BuildingTileData buildingTileData = new BuildingTileData()
+                {
+                    Floor = floorCell,
+                    Wall = wallCell,
+                    Roof = roofCell
+                };
+                chunkData.Buildings.Add(buildingTileData);
             }
         }
 
@@ -304,9 +320,16 @@ public partial class Chunk : GodotObject
             RefreshOffset(cell.Coords.ToVector2I());
         }
 
-        foreach (TileDataCell cell in chunkData.Object)
+        foreach (TileDataCell cell in chunkData.Objects)
         {
             Map.ObjectLayer.SetCell(cell.Coords.ToVector2I(), cell.AtlasIndex, cell.AtlasCoords.ToVector2I(), cell.Atlasalternative);
+        }
+
+        foreach(BuildingTileData cell in chunkData.Buildings)
+        {
+            Map.BuildingFloor.SetCell(cell.Floor.Coords.ToVector2I(), cell.Floor.AtlasIndex, cell.Floor.AtlasCoords.ToVector2I(), cell.Floor.Atlasalternative);
+            Map.BuildingWalls.SetCell(cell.Wall.Coords.ToVector2I(), cell.Wall.AtlasIndex, cell.Wall.AtlasCoords.ToVector2I(), cell.Wall.Atlasalternative);
+            Map.BuildingRoof.SetCell(cell.Roof.Coords.ToVector2I(), cell.Roof.AtlasIndex, cell.Roof.AtlasCoords.ToVector2I(), cell.Roof.Atlasalternative);
         }
     }
 

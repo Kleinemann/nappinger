@@ -28,7 +28,8 @@ public class ChunkData
 {
     public Vector2I Coords;
     public List<TileDataCell> Map = new List<TileDataCell>();
-    public List<TileDataCell> Object = new List<TileDataCell>();
+    public List<TileDataCell> Objects = new List<TileDataCell>();
+    public List<BuildingTileData> Buildings = new List<BuildingTileData>();
 
     public ChunkData() { }
 }
@@ -40,6 +41,15 @@ public class LayerData
 
     public LayerData() { }
 }
+
+
+public class BuildingTileData
+{
+    public TileDataCell Floor;
+    public TileDataCell Wall;
+    public TileDataCell Roof;
+}
+
 
 public class TileDataCell
 {    
