@@ -274,9 +274,9 @@ public partial class Chunk : GodotObject
             }
 
             //Buildings
-            TileDataCell floorCell = new TileDataCell(Map.ObjectLayer, tileCoord);
-            TileDataCell wallCell = new TileDataCell(Map.ObjectLayer, tileCoord);
-            TileDataCell roofCell = new TileDataCell(Map.ObjectLayer, tileCoord);
+            TileDataCell floorCell = new TileDataCell(Map.BuildingFloor, tileCoord);
+            TileDataCell wallCell = new TileDataCell(Map.BuildingWalls, tileCoord);
+            TileDataCell roofCell = new TileDataCell(Map.BuildingRoof, tileCoord);
             if(floorCell.AtlasCoords.X > -1)
             {
                 BuildingTileData buildingTileData = new BuildingTileData()
@@ -287,6 +287,12 @@ public partial class Chunk : GodotObject
                 };
                 chunkData.Buildings.Add(buildingTileData);
             }
+        }
+
+        List<Node> nodes = GetNodesInChunk();
+        foreach(Node node in nodes)
+        {
+            GD.Print($"Saving Node: {node.Name} at ");
         }
 
 

@@ -97,7 +97,12 @@ public partial class WorldMain : Node2D
         //Show Position
         if (Input.IsMouseButtonPressed(MouseButton.Middle))
         {
-            GD.Print("Mouse Position: " + WorldMain.Instance.Camera.GetGlobalMousePosition());
+            Vector2 posMouse = WorldMain.Instance.Camera.GetGlobalMousePosition();
+            Vector2I posWorld = Map.WorldLayer.LocalToMap(posMouse);
+            Vector2I posBuilding = Map.BuildingFloor.LocalToMap(posMouse);
+            GD.Print("Mouse Position: " + posMouse);
+            GD.Print("World Position: " + posWorld);
+            GD.Print("Build Position: " + posBuilding);
         }
 
             //Deselect 
