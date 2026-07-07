@@ -249,7 +249,7 @@ public partial class Chunk : GodotObject
         }
 
         //Nodes löschen
-        List<Node> del = GetNodesInChunk();
+        List<DropItem> del = GetDropItemsInChunk();
         foreach (Node node in del)
         {
             node.QueueFree();
@@ -289,12 +289,17 @@ public partial class Chunk : GodotObject
             }
         }
 
-        List<Node> nodes = GetNodesInChunk();
-        foreach(Node node in nodes)
+        List<DropItem> nodes = GetDropItemsInChunk();
+        foreach (DropItem item in nodes)
         {
-            GD.Print($"Saving Node: {node.Name} at ");
+            DropItemData dropItemData = new DropItemData()
+            {
+                Coords = new V2i((int)item.Position.X, (int)item.Position.Y),
+                ResourceName = item.Item.GroupName,
+                Amount = item.Amount
+            };
+            chunkData.DropItems.Add(dropItemData);
         }
-
 
         FileAccess file = FileAccess.Open($"user://Chunks//chunk_{Coords.X}_{Coords.Y}.dat", FileAccess.ModeFlags.Write);
 
@@ -337,37 +342,51 @@ public partial class Chunk : GodotObject
             Map.BuildingWalls.SetCell(cell.Wall.Coords.ToVector2I(), cell.Wall.AtlasIndex, cell.Wall.AtlasCoords.ToVector2I(), cell.Wall.Atlasalternative);
             Map.BuildingRoof.SetCell(cell.Roof.Coords.ToVector2I(), cell.Roof.AtlasIndex, cell.Roof.AtlasCoords.ToVector2I(), cell.Roof.Atlasalternative);
         }
+
+        foreach (DropItemData item in chunkData.DropItems)
+        {
+            DropItem dropItem = DropItem.CreateDropItem(item.ResourceName, item.Amount);
+            dropItem.Position = item.Coords.ToVector2I();
+            Map.AddChild(dropItem);
+        }
     }
 
 
-    public List<Node> GetNodesInChunk()
+    public List<DropItem> GetDropItemsInChunk()
     {
-        List<Node> nodes = new List<Node>();
+        List<DropItem> items = new List<DropItem>();
         Rect2 region = new Rect2(Coords * ChunkSize * TileSize, new Vector2(ChunkSize * TileSize, ChunkSize * TileSize));
-
-        foreach(Node node in Map.GetChildren())
+        foreach (Node item in Map.GetChildren())
         {
-            if (node is TileMapLayer)
-                continue;
-
-            if (node is Area2D || node is Node2D)
+            if (item is DropItem di)
             {
-                nodes.Add(node);
-            }
-
-            if(node is Area2D a2)
-            {
-                if (region.HasPoint(a2.Position))
-                    nodes.Add(node);
-            }
-
-            if(node is Node2D n2)
-            {
-                if(region.HasPoint(n2.Position))
-                    nodes.Add(node);
+                if (region.HasPoint(di.Position))
+                    items.Add(di);
             }
         }
-
-        return nodes;
+        return items;
     }
+
+    //public Dictionary<Type, List<Node2D>> GetNodesInChunk()
+    //{
+    //    Dictionary<Type, List<Node2D>> nodes = new Dictionary<Type, List<Node2D>>();
+    //    Rect2 region = new Rect2(Coords * ChunkSize * TileSize, new Vector2(ChunkSize * TileSize, ChunkSize * TileSize));
+
+    //    foreach(Node2D node in Map.GetChildren())
+    //    {
+    //        if (node is TileMapLayer)
+    //            continue;
+
+    //        if(!region.HasPoint(node.Position))
+    //            continue;
+
+    //        Type t = node.GetType();
+    //        if(!nodes.ContainsKey(t))
+    //            nodes.Add(t, new List<Node2D>());
+
+    //        nodes[t].Add(node);
+    //    }
+
+    //    return nodes;
+    //}
 }

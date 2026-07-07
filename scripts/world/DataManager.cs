@@ -31,15 +31,17 @@ public class ChunkData
     public List<TileDataCell> Objects = new List<TileDataCell>();
     public List<BuildingTileData> Buildings = new List<BuildingTileData>();
 
+    public List<DropItemData> DropItems = new List<DropItemData>();
+
     public ChunkData() { }
 }
 
-public class LayerData
-{
-    public int LayerId;
-    public List<TileDataCell> TileDataCells = new List<TileDataCell>();
 
-    public LayerData() { }
+public class DropItemData
+{
+    public V2i Coords;
+    public string ResourceName;
+    public int Amount;
 }
 
 
