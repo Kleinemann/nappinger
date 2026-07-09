@@ -5,24 +5,15 @@ public static class DataManager
 {
 }
 
-public class V2i
+
+public class PlayerData
 {
-    public int X;
-    public int Y;
+    public PlayerData() { }
 
-    public V2i() { }
-
-    public V2i(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
-    public Vector2I ToVector2I()
-    {
-        return new Vector2I(X, Y);
-    }
+    public List<PlayerAnimalData> Players = new List<PlayerAnimalData>();
+    public List<StoreData> Stores = new List<StoreData>();
 }
+
 
 public class ChunkData
 {
@@ -36,10 +27,40 @@ public class ChunkData
     public ChunkData() { }
 }
 
+public class PlayerAnimalData
+{
+    public string ObjectName;
+    public Vector2 Position;
+    public string IconPath;
+    public float Speed;
+    public int Healt;
+    public int MaxHealt;
+    public GameObjectState State;
+    public string MissionString;
+
+    public List<InvetoryItemData> Inventory = new List<InvetoryItemData>();
+
+    public PlayerAnimalData() { }
+}
+
+public class StoreData
+{
+    public Vector2I Coords;
+    public string SceneFilePath;
+    public List<InvetoryItemData> Inventory = new List<InvetoryItemData>();
+}
+
+
+public class InvetoryItemData
+{
+    public string ResourceName;
+    public int Amount;
+}
+
 
 public class DropItemData
 {
-    public V2i Coords;
+    public Vector2I Coords;
     public string ResourceName;
     public int Amount;
 }
@@ -55,8 +76,8 @@ public class BuildingTileData
 
 public class TileDataCell
 {    
-    public V2i Coords;
-    public V2i AtlasCoords;
+    public Vector2I Coords;
+    public Vector2I AtlasCoords;
     public int AtlasIndex;
     public int Atlasalternative;
 
@@ -66,8 +87,8 @@ public class TileDataCell
     {
         Vector2I atlasCoords = tileLayer.GetCellAtlasCoords(tileCoord);
 
-        Coords = new V2i(tileCoord.X, tileCoord.Y);
-        AtlasCoords = new V2i(atlasCoords.X, atlasCoords.Y);
+        Coords = tileCoord;
+        AtlasCoords = atlasCoords;
         AtlasIndex = tileLayer.GetCellSourceId(tileCoord);
         Atlasalternative = tileLayer.GetCellAlternativeTile(tileCoord);
     }

@@ -294,7 +294,7 @@ public partial class Chunk : GodotObject
         {
             DropItemData dropItemData = new DropItemData()
             {
-                Coords = new V2i((int)item.Position.X, (int)item.Position.Y),
+                Coords = (Vector2I)item.Position,// new V2i((int)item.Position.X, (int)item.Position.Y),
                 ResourceName = item.Item.GroupName,
                 Amount = item.Amount
             };
@@ -323,30 +323,32 @@ public partial class Chunk : GodotObject
             IncludeFields = true
         };
 
-        ChunkData chunkData = JsonSerializer.Deserialize<ChunkData>(file.GetAsText(), options);
+        string data = file.GetAsText();
+
+        ChunkData chunkData = JsonSerializer.Deserialize<ChunkData>(data, options);
 
         foreach(TileDataCell cell in chunkData.Map)
         {
-            Map.WorldLayer.SetCell(cell.Coords.ToVector2I(), cell.AtlasIndex, cell.AtlasCoords.ToVector2I(), cell.Atlasalternative);
-            RefreshOffset(cell.Coords.ToVector2I());
+            Map.WorldLayer.SetCell(cell.Coords, cell.AtlasIndex, cell.AtlasCoords, cell.Atlasalternative);
+            RefreshOffset(cell.Coords);
         }
 
         foreach (TileDataCell cell in chunkData.Objects)
         {
-            Map.ObjectLayer.SetCell(cell.Coords.ToVector2I(), cell.AtlasIndex, cell.AtlasCoords.ToVector2I(), cell.Atlasalternative);
+            Map.ObjectLayer.SetCell(cell.Coords, cell.AtlasIndex, cell.AtlasCoords, cell.Atlasalternative);
         }
 
         foreach(BuildingTileData cell in chunkData.Buildings)
         {
-            Map.BuildingFloor.SetCell(cell.Floor.Coords.ToVector2I(), cell.Floor.AtlasIndex, cell.Floor.AtlasCoords.ToVector2I(), cell.Floor.Atlasalternative);
-            Map.BuildingWalls.SetCell(cell.Wall.Coords.ToVector2I(), cell.Wall.AtlasIndex, cell.Wall.AtlasCoords.ToVector2I(), cell.Wall.Atlasalternative);
-            Map.BuildingRoof.SetCell(cell.Roof.Coords.ToVector2I(), cell.Roof.AtlasIndex, cell.Roof.AtlasCoords.ToVector2I(), cell.Roof.Atlasalternative);
+            Map.BuildingFloor.SetCell(cell.Floor.Coords, cell.Floor.AtlasIndex, cell.Floor.AtlasCoords, cell.Floor.Atlasalternative);
+            Map.BuildingWalls.SetCell(cell.Wall.Coords, cell.Wall.AtlasIndex, cell.Wall.AtlasCoords, cell.Wall.Atlasalternative);
+            Map.BuildingRoof.SetCell(cell.Roof.Coords, cell.Roof.AtlasIndex, cell.Roof.AtlasCoords, cell.Roof.Atlasalternative);
         }
 
         foreach (DropItemData item in chunkData.DropItems)
         {
             DropItem dropItem = DropItem.CreateDropItem(item.ResourceName, item.Amount);
-            dropItem.Position = item.Coords.ToVector2I();
+            dropItem.Position = item.Coords;
             Map.AddChild(dropItem);
         }
     }
@@ -366,27 +368,4 @@ public partial class Chunk : GodotObject
         }
         return items;
     }
-
-    //public Dictionary<Type, List<Node2D>> GetNodesInChunk()
-    //{
-    //    Dictionary<Type, List<Node2D>> nodes = new Dictionary<Type, List<Node2D>>();
-    //    Rect2 region = new Rect2(Coords * ChunkSize * TileSize, new Vector2(ChunkSize * TileSize, ChunkSize * TileSize));
-
-    //    foreach(Node2D node in Map.GetChildren())
-    //    {
-    //        if (node is TileMapLayer)
-    //            continue;
-
-    //        if(!region.HasPoint(node.Position))
-    //            continue;
-
-    //        Type t = node.GetType();
-    //        if(!nodes.ContainsKey(t))
-    //            nodes.Add(t, new List<Node2D>());
-
-    //        nodes[t].Add(node);
-    //    }
-
-    //    return nodes;
-    //}
 }

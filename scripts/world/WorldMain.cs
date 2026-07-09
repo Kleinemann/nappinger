@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 public partial class WorldMain : Node2D
@@ -46,6 +49,12 @@ public partial class WorldMain : Node2D
 
     public void InitPlayerStartup()
     {
+        if (FileAccess.FileExists($"user://Player//save.dat"))
+        {
+            LoadPlayer();
+            return;
+        }
+
         PackedScene scene = GD.Load<PackedScene>("res://szenes/buildings/camp.tscn");
         Store camp = scene.Instantiate<Store>();
 
@@ -61,6 +70,176 @@ public partial class WorldMain : Node2D
 
         //select first player
         SelectedObject = Player.GetNextPlayer();
+    }
+
+
+    public void LoadPlayer()
+    {
+        FileAccess file = FileAccess.Open($"user://Player//save.dat", FileAccess.ModeFlags.Read);
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            WriteIndented = true,
+            IncludeFields = true
+        };
+
+        string data = file.GetAsText();
+
+        PlayerData playerData = JsonSerializer.Deserialize<PlayerData>(data, options);
+        Store first = null;
+
+        foreach(StoreData storeData in playerData.Stores)
+        {
+            PackedScene scene = GD.Load<PackedScene>(storeData.SceneFilePath);
+            Store store = scene.Instantiate<Store>();
+
+            foreach(InvetoryItemData iid in storeData.Inventory)
+            {
+                InventoryItem item = InventoryItem.CreateInventoryItem(iid.ResourceName);
+                store.Inventory.Insert(item, iid.Amount);
+            }
+
+            store.Position = (Vector2)storeData.Coords;
+            Map.AddChild(store);
+
+            if (first == null)
+            {
+                first = store;
+                Camera.Position = store.Position;
+            }
+        }
+
+        foreach (PlayerAnimalData playerDataItem in playerData.Players)
+        {
+            PackedScene scene = GD.Load<PackedScene>("res://szenes/character/player.tscn");
+            Player player = scene.Instantiate<Player>();
+            player.ObjectName = playerDataItem.ObjectName;
+            player.Position = playerDataItem.Position;
+            player.Icon = GD.Load<Texture2D>(playerDataItem.IconPath);
+            player.Speed = playerDataItem.Speed;
+            player.Healt = playerDataItem.Healt;
+            player.MaxHealt = playerDataItem.MaxHealt;
+            
+            if(playerDataItem.MissionString != null)
+                player.Mission = new Mission(GameObjectState.FARMING, playerDataItem.MissionString);
+
+            foreach (InvetoryItemData iid in playerDataItem.Inventory)
+            {
+                InventoryItem item = InventoryItem.CreateInventoryItem(iid.ResourceName);
+                player.Inventory.Insert(item, iid.Amount);
+            }
+            Map.AddChild(player);
+        }
+
+        SelectedObject = Player.GetNextPlayer();
+    }
+
+
+    public void SavePlayer()
+    {
+        Dictionary<Type, List<Node2D>> nodes = GetNodesInChunk(new Type[] { typeof(Player), typeof(Store) });
+
+        PlayerData playerData = new PlayerData();
+
+        foreach (Type t in nodes.Keys)
+        {
+            //Stores
+            if(t == typeof(Store))
+            {
+                foreach (Store store in nodes[t])
+                {
+                    StoreData data = new StoreData()
+                    {
+                        Coords = (Vector2I)store.Position,
+                        SceneFilePath = store.SceneFilePath,
+                    };
+
+                    foreach (InventorySlot slot in store.Inventory.Slots)
+                    {
+                        if (slot.Item != null && slot.Amount > 0)
+                        {
+                            InvetoryItemData itemData = new InvetoryItemData()
+                            {
+                                ResourceName = slot.Item.GroupName,
+                                Amount = slot.Amount
+                            };
+                            data.Inventory.Add(itemData);
+                        }
+                    }
+                    playerData.Stores.Add(data);
+                }
+            }            
+            //PlayerCharakters
+            else if(t == typeof(Player))
+            {
+                foreach (Player player in nodes[t])
+                {
+                    PlayerAnimalData p = new PlayerAnimalData()
+                    {
+                        ObjectName = player.ObjectName,
+                        Position = player.Position,
+                        IconPath = player.Icon.ResourcePath,
+                        Speed = player.Speed,
+                        Healt = player.Healt,
+                        MaxHealt = player.MaxHealt,
+                        State = GameObjectState.IDLE,
+                        MissionString = player.Mission.State == GameObjectState.FARMING ? (string)player.Mission.Target : null
+                    };
+
+                    foreach (InventorySlot slot in player.Inventory.Slots)
+                    {
+                        if (slot.Item != null && slot.Amount > 0)
+                        {
+                            InvetoryItemData itemData = new InvetoryItemData()
+                            {
+                                ResourceName = slot.Item.GroupName,
+                                Amount = slot.Amount
+                            };
+                            p.Inventory.Add (itemData);
+                        }
+                    }
+                    playerData.Players.Add(p);
+                }
+            }
+            // Wrong type
+            else
+            {
+                GD.PrintErr("Unknown Type: " + t);
+            }
+        }
+
+        FileAccess file = FileAccess.Open($"user://Player//save.dat", FileAccess.ModeFlags.Write);
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            WriteIndented = true,
+            IncludeFields = true
+        };
+
+        string json = JsonSerializer.Serialize(playerData, options);
+        file.StoreLine(json);
+
+        GD.Print("Saving Player Data");
+    }
+
+
+    public Dictionary<Type, List<Node2D>> GetNodesInChunk(Type[] types)
+    {
+        Dictionary<Type, List<Node2D>> nodes = new Dictionary<Type, List<Node2D>>();
+
+        foreach (Node2D node in Map.GetChildren())
+        {
+            if (!types.Contains(node.GetType()))
+                continue;
+
+            Type t = node.GetType();
+            if (!nodes.ContainsKey(t))
+                nodes.Add(t, new List<Node2D>());
+
+            nodes[t].Add(node);
+        }
+
+        return nodes;
     }
 
 
@@ -85,6 +264,7 @@ public partial class WorldMain : Node2D
         //Quit
         if (@event.IsActionPressed("ui_cancel"))
         {
+            SavePlayer();
             GetTree().Quit();
         }
 
