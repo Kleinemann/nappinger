@@ -75,6 +75,33 @@ public partial class Chunk : GodotObject
         return coords;
     }
 
+
+    public Vector2I[] GetTileCoordsBorder()
+    {
+        Vector2I[] coords = new Vector2I[ChunkSize * ChunkSize];
+        Vector2I start = (Coords * ChunkSize);
+        Vector2I end = start + new Vector2I(ChunkSize - 1, ChunkSize - 1);
+
+        start -= new Vector2I(1, 1);
+        end += new Vector2I(1,1);
+
+        int index = 0;
+        for (var x = start.X; x <= end.X; x++)
+        {
+            for (var y = start.Y; y <= end.Y; y++)
+            {
+                if (x == start.X || x == end.X || y == start.Y || y == end.Y)
+                {
+                    Vector2I tileCoord = new Vector2I(x, y);
+                    coords[index] = tileCoord;
+                    index++;
+                }
+            }
+        }
+        return coords;
+    }
+
+
     float GetNoise(Vector2I tileCoord)
     {
         return GetNoise(tileCoord.X, tileCoord.Y);
@@ -248,6 +275,11 @@ public partial class Chunk : GodotObject
             RefreshOffset(tileCoord);
         }
 
+        foreach(Vector2I tileCoord in GetTileCoordsBorder())
+        {
+            RefreshOffset(tileCoord);
+        }
+
         //Nodes löschen
         List<DropItem> del = GetDropItemsInChunk();
         foreach (Node node in del)
@@ -331,6 +363,11 @@ public partial class Chunk : GodotObject
         {
             Map.WorldLayer.SetCell(cell.Coords, cell.AtlasIndex, cell.AtlasCoords, cell.Atlasalternative);
             RefreshOffset(cell.Coords);
+        }
+
+        foreach (Vector2I tileCoord in GetTileCoordsBorder())
+        {
+            RefreshOffset(tileCoord);
         }
 
         foreach (TileDataCell cell in chunkData.Objects)
