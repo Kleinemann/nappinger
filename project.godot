@@ -18,7 +18,7 @@ config/name="Nappinger"
 config/description="idle open world sandbox game"
 config/version="0.0.1"
 run/main_scene="uid://b3322irhb3pmu"
-config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 boot_splash/image="res://assets/Download.png"
 config/icon="res://assets/icon.svg"
 
