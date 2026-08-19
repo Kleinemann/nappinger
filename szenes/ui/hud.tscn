@@ -5,6 +5,31 @@
 [ext_resource type="PackedScene" uid="uid://k65rhelc7y7j" path="res://szenes/ui/inventory_ui.tscn" id="3_n5vxs"]
 [ext_resource type="PackedScene" uid="uid://tfcym24ohlbm" path="res://szenes/ui/player_control_center.tscn" id="4_n5vxs"]
 [ext_resource type="PackedScene" uid="uid://bsyhwhmxdiqak" path="res://szenes/ui/build_menu.tscn" id="5_ahw6c"]
+[ext_resource type="Texture2D" uid="uid://cwajjgl33gtvo" path="res://assets/objects/camp_icon.png" id="7_e87vi"]
+[ext_resource type="Texture2D" uid="uid://b2ghepunrm306" path="res://assets/tiles/buildings/door.png" id="8_tv37e"]
+[ext_resource type="Texture2D" uid="uid://x6c6d05lhqxx" path="res://assets/objects/beerybush.png" id="9_t7soj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y61vb"]
+bg_color = Color(0, 0, 0, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmk17"]
+bg_color = Color(1, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_aa4ug"]
+resource_name = "MenuSwitch"
+allow_unpress = true
 
 [node name="HUD" type="Control" unique_id=140401685]
 layout_mode = 3
@@ -57,3 +82,48 @@ offset_left = 24.0
 offset_top = 146.0
 offset_right = 274.0
 offset_bottom = 489.0
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=116575589]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -180.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BtnCamp" type="Button" parent="GridContainer" unique_id=439597630]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_y61vb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hmk17")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_aa4ug")
+icon = ExtResource("7_e87vi")
+expand_icon = true
+
+[node name="BtnBuild" type="Button" parent="GridContainer" unique_id=709930987]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_y61vb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hmk17")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_aa4ug")
+icon = ExtResource("8_tv37e")
+expand_icon = true
+
+[node name="BtnPlant" type="Button" parent="GridContainer" unique_id=1722912117]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_y61vb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hmk17")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_aa4ug")
+icon = ExtResource("9_t7soj")
+expand_icon = true

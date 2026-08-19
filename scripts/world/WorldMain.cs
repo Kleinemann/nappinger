@@ -323,17 +323,17 @@ public partial class WorldMain : Node2D
 
         if(@event.IsActionPressed("ControlCenter"))
         {
-            var nodes = GetTree().GetNodesInGroup("Storable");
-            //TODO: dound the nearest
-            if (nodes.Count > 0)
-                WorldMain.SelectedObject = (Node2D)nodes[0];
-
-            Hud.Instance.SwitchPlayerControlCenter();
+            Hud.Instance.BtnCamp.ButtonPressed = !Hud.Instance.BtnCamp.ButtonPressed;
         }
 
         if(@event.IsActionPressed("build_menu"))
         {
-            Hud.Instance.SwitchBuildMenu();
+            Hud.Instance.BtnBuild.ButtonPressed = !Hud.Instance.BtnBuild.ButtonPressed;
+        }
+
+        if (@event.IsActionPressed("plant_menu"))
+        {
+            Hud.Instance.BtnPlant.ButtonPressed = !Hud.Instance.BtnPlant.ButtonPressed;
         }
 
         @event.Dispose();        
