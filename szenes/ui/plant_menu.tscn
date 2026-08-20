@@ -1,13 +1,19 @@
 [gd_scene format=3 uid="uid://cl183w4u67fga"]
 
+[ext_resource type="Script" uid="uid://ci1pwipqrlbb6" path="res://scripts/ui/PlantMenu.cs" id="1_2rghu"]
 [ext_resource type="Texture2D" uid="uid://78xxnnlq8q8j" path="res://assets/tiles/BaseWater.png" id="1_rpmar"]
 [ext_resource type="Texture2D" uid="uid://dio4jm5m044n7" path="res://assets/tiles/BaseSand.png" id="2_2rghu"]
+[ext_resource type="Theme" uid="uid://b6lf2o4pwadqv" path="res://assets/theme.tres" id="2_mhurv"]
 [ext_resource type="Texture2D" uid="uid://by58i5e7ff7le" path="res://assets/tiles/BaseGras.png" id="3_mhurv"]
 [ext_resource type="Texture2D" uid="uid://cmpgf643vrfxb" path="res://assets/tiles/BaseDirt.png" id="4_bw8wy"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_2rghu"]
+resource_name = "PlanGroup"
+
 [node name="PlantMenu" type="Panel" unique_id=1156454113]
-offset_right = 182.0
+offset_right = 190.0
 offset_bottom = 246.0
+script = ExtResource("1_2rghu")
 
 [node name="Label" type="Label" parent="." unique_id=1745635614]
 layout_mode = 0
@@ -17,22 +23,40 @@ text = "Boden:"
 
 [node name="HFlowContainer" type="HFlowContainer" parent="." unique_id=1462449020]
 layout_mode = 0
+offset_left = 5.0
 offset_top = 23.0
-offset_right = 178.0
+offset_right = 181.0
 offset_bottom = 63.0
 
 [node name="BtnWater" type="Button" parent="HFlowContainer" unique_id=91820962]
 layout_mode = 2
+theme = ExtResource("2_mhurv")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2rghu")
 icon = ExtResource("1_rpmar")
+metadata/Atlas = Vector2i(2, 1)
 
 [node name="BtnSand" type="Button" parent="HFlowContainer" unique_id=1700719577]
 layout_mode = 2
+theme = ExtResource("2_mhurv")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2rghu")
 icon = ExtResource("2_2rghu")
+metadata/Atlas = Vector2i(6, 1)
 
 [node name="BtnGras" type="Button" parent="HFlowContainer" unique_id=2008529738]
 layout_mode = 2
+theme = ExtResource("2_mhurv")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2rghu")
 icon = ExtResource("3_mhurv")
+metadata/Atlas = Vector2i(10, 1)
 
 [node name="BtnDirt" type="Button" parent="HFlowContainer" unique_id=166584220]
 layout_mode = 2
+theme = ExtResource("2_mhurv")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_2rghu")
 icon = ExtResource("4_bw8wy")
+metadata/Atlas = Vector2i(14, 1)

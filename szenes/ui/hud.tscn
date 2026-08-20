@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://k65rhelc7y7j" path="res://szenes/ui/inventory_ui.tscn" id="3_n5vxs"]
 [ext_resource type="PackedScene" uid="uid://tfcym24ohlbm" path="res://szenes/ui/player_control_center.tscn" id="4_n5vxs"]
 [ext_resource type="PackedScene" uid="uid://bsyhwhmxdiqak" path="res://szenes/ui/build_menu.tscn" id="5_ahw6c"]
+[ext_resource type="PackedScene" uid="uid://cl183w4u67fga" path="res://szenes/ui/plant_menu.tscn" id="6_bd6tm"]
 [ext_resource type="Texture2D" uid="uid://cwajjgl33gtvo" path="res://assets/objects/camp_icon.png" id="7_e87vi"]
 [ext_resource type="Texture2D" uid="uid://b2ghepunrm306" path="res://assets/tiles/buildings/door.png" id="8_tv37e"]
 [ext_resource type="Texture2D" uid="uid://x6c6d05lhqxx" path="res://assets/objects/beerybush.png" id="9_t7soj"]
@@ -82,6 +83,14 @@ offset_left = 24.0
 offset_top = 146.0
 offset_right = 274.0
 offset_bottom = 489.0
+
+[node name="PlantMenu" parent="." unique_id=1156454113 instance=ExtResource("6_bd6tm")]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 146.0
+offset_right = 206.0
+offset_bottom = 392.0
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=116575589]
 layout_mode = 1

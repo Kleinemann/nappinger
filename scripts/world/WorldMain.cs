@@ -292,6 +292,7 @@ public partial class WorldMain : Node2D
             WorldMain.SelectedObject = null;
 
             BuildMenu.Instance?.CreateBuildItem();
+            PlantMenu.Instance?.CreatePlantItem();
         }
 
         //targeting

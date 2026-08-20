@@ -7,7 +7,7 @@ public partial class Hud : Control
     InventoryUi InventoryUi;
     PlayerControlCenter PlayerControlCenter;
     BuildMenu BuildMenu;
-
+    PlantMenu PlantMenu;
     public Button BtnCamp;
     public Button BtnBuild;
     public Button BtnPlant;
@@ -21,6 +21,7 @@ public partial class Hud : Control
         InventoryUi = GetNode<InventoryUi>("InventoryUI");
         PlayerControlCenter = GetNode<PlayerControlCenter>("PlayerControlCenter");
         BuildMenu = GetNode<BuildMenu>("BuildMenu");
+        PlantMenu = GetNode<PlantMenu>("PlantMenu");
 
         BtnCamp = GetNode<Button>("GridContainer/BtnCamp");
         BtnBuild = GetNode<Button>("GridContainer/BtnBuild");
@@ -62,10 +63,11 @@ public partial class Hud : Control
     {
         if (toggledOn)
         {
-
+            PlantMenu.ShowPlantMenu();
         }
         else
         {
+            PlantMenu.HidePlantMenu();
         }
     }
 
